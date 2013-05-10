@@ -6,5 +6,6 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
 
-# Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
+# Empirical studies have shown that these settings are optimal key repeat values
+defaults write -g InitialKeyRepeat -int 14
+defaults write -g KeyRepeat -int 2
