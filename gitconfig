@@ -1,0 +1,8 @@
+[user]
+name = Joakim Erelt
+email = joakim.erelt@gmail.com
+
+[alias]
+co = checkout
+st = status
+dog = log --decorate --oneline --graph --all
