@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>enabled</key>
+	<true/>
+	<key>value</key>
+	<dict>
+		<key>parameters</key>
+		<array>
+			<integer>167</integer>
+			<integer>10</integer>
+			<integer>1048576</integer>
+		</array>
+		<key>type</key>
+		<string>standard</string>
+	</dict>
+</dict>
+</plist>
