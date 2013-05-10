@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Install the theme (Tomorrow Night)
+/usr/libexec/PlistBuddy -c "Delete :'Custom Color Presets':'Tomorrow Night'" ~/Library/Preferences/com.googlecode.iterm2.plist
 /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'Tomorrow Night' dict" ~/Library/Preferences/com.googlecode.iterm2.plist
 /usr/libexec/PlistBuddy -c "Merge 'Tomorrow Night.itermcolors' :'Custom Color Presets':'Tomorrow Night'" ~/Library/Preferences/com.googlecode.iterm2.plist
 
