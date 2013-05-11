@@ -6,4 +6,5 @@
 ./keyboard.sh
 ./pckeyboardhacks.sh
 ./symbolichotkey.sh
+./systemsound.sh
 ./misc.sh
