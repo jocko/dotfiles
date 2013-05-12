@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # Trackpad: enable tap to click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool TRUE
+defaults -currentHost write -g com.apple.mouse.tapBehavior -int 1
+#defaults write -g com.apple.mouse.tapBehavior -int 1 
 
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
