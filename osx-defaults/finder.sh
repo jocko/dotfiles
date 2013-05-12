@@ -15,3 +15,6 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Use column view in all Finder windows by default
 # Four-letter codes for all view modes: `Nlsv`, `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
+# New Finder window show: Home directory
+defaults write com.apple.finder NewWindowTarget PfHm
