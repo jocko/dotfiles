@@ -1,3 +1,5 @@
 {
-	"color_scheme": "Packages/Tomorrow Color Scheme/Tomorrow-Night.tmTheme"
+	"color_scheme": "Packages/Tomorrow Color Scheme/Tomorrow-Night.tmTheme",
+	"word_wrap": false,
+	"translate_tabs_to_spaces": true
 }
