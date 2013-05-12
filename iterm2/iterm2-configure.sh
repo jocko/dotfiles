@@ -1,7 +1,19 @@
 #!/usr/bin/env bash
 
+iterm2_plist=~/Library/Preferences/com.googlecode.iterm2.plist
+
+if [ ! -f $iterm2_plist ]; then
+	echo "No plist file found for iTerm2"
+	exit 1
+fi
+
+# No confirmation when quitting
+defaults write com.googlecode.iterm2 PromptOnQuit -int 0
+defaults write com.googlecode.iterm2 PromptOnClose -int 0
+
 # Install the theme (Tomorrow Night)
-/usr/libexec/PlistBuddy -c "Delete :'Custom Color Presets':'Tomorrow Night'" ~/Library/Preferences/com.googlecode.iterm2.plist
+/usr/libexec/PlistBuddy -c "Delete :'Custom Color Presets':'Tomorrow Night'" $iterm2_plist 2>/dev/null
+set -e
 /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'Tomorrow Night' dict" ~/Library/Preferences/com.googlecode.iterm2.plist
 /usr/libexec/PlistBuddy -c "Merge 'Tomorrow Night.itermcolors' :'Custom Color Presets':'Tomorrow Night'" ~/Library/Preferences/com.googlecode.iterm2.plist
 
