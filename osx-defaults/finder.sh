@@ -18,3 +18,6 @@ defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
 # New Finder window show: Home directory
 defaults write com.apple.finder NewWindowTarget PfHm
+
+# Icon size: 44 x 44
+/usr/libexec/PlistBuddy -c "Set ':DesktopViewSettings:IconViewSettings:iconSize' 44" ~/Library/Preferences/com.apple.finder.plist
