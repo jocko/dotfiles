@@ -8,3 +8,6 @@
 # might obviously differ between different computers. The vendor and product id for your 
 # keyboard can be obtained via ioreg -n IOHIDKeyboard -r'.
 defaults -currentHost write -g com.apple.keyboard.modifiermapping.1452-595-0 -array '<dict><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer><key>HIDKeyboardModifierMappingDst</key><integer>-1</integer></dict>'
+
+# Use all F1, F2, etc. keys as standard function keys
+defaults write -g com.apple.keyboard.fnState -boolean true
