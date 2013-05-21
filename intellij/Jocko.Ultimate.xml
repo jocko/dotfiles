@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <keymap version="1" name="Jocko.Ultimate">
+  <action id="EditorDown">
+    <keyboard-shortcut first-keystroke="DOWN" />
+  </action>
+  <action id="EditorLeft">
+    <keyboard-shortcut first-keystroke="LEFT" />
+  </action>
+  <action id="EditorRight">
+    <keyboard-shortcut first-keystroke="RIGHT" />
+  </action>
+  <action id="EditorUp">
+    <keyboard-shortcut first-keystroke="UP" />
+  </action>
   <action id="SwitchApply">
     <keyboard-shortcut first-keystroke="control alt ENTER" />
   </action>
