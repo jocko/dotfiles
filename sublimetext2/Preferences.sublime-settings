@@ -1,5 +1,9 @@
 {
 	"color_scheme": "Packages/Tomorrow Color Scheme/Tomorrow-Night.tmTheme",
-	"word_wrap": false,
-	"translate_tabs_to_spaces": true
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"translate_tabs_to_spaces": true,
+	"word_wrap": false
 }

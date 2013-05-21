@@ -15,6 +15,12 @@
   <action id="EditorUp">
     <keyboard-shortcut first-keystroke="UP" />
   </action>
+  <action id="GotoClass">
+    <keyboard-shortcut first-keystroke="meta O" />
+  </action>
+  <action id="GotoFile">
+    <keyboard-shortcut first-keystroke="shift meta O" />
+  </action>
   <action id="SwitchApply">
     <keyboard-shortcut first-keystroke="control alt ENTER" />
   </action>
