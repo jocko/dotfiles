@@ -6,11 +6,17 @@
   <action id="EditorDown">
     <keyboard-shortcut first-keystroke="DOWN" />
   </action>
+  <action id="EditorEnter">
+    <keyboard-shortcut first-keystroke="ENTER" />
+  </action>
   <action id="EditorLeft">
     <keyboard-shortcut first-keystroke="LEFT" />
   </action>
   <action id="EditorRight">
     <keyboard-shortcut first-keystroke="RIGHT" />
+  </action>
+  <action id="EditorTab">
+    <keyboard-shortcut first-keystroke="TAB" />
   </action>
   <action id="EditorUp">
     <keyboard-shortcut first-keystroke="UP" />
