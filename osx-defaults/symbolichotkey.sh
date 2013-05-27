@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
 # Disable: Mission Control, ctrl+up arrow
-#/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:32:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:32:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:34:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+
+# Disable: Application Windows, ctrl+down arrow
+/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:33:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:35:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
 
 # Disable: Show Help menu, shift+cmd+/
 /usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:98:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist > /dev/null 2>&1 || /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:98:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
