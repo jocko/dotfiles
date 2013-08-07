@@ -52,3 +52,4 @@ unsetopt beep
 
 alias psa="ps aux"
 alias df='df -h'
+alias curl='noglob curl'
