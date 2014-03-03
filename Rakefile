@@ -141,7 +141,7 @@ namespace :backup do
 end
 
 def github_clone(source, directory = nil)
-  git_clone "https://github.com/#{source}.git", directory
+  git_clone "git@github.com:#{source}.git", directory
 end
 
 def git_clone(repository, directory = nil)
