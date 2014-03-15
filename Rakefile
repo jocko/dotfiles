@@ -1,21 +1,161 @@
+# TODO
+#
+# gem install lunchy
+# rubymine settings: camelhumps, confirm exit
+# gem install bundler
+# sizeup
+## Start SizeUp at login
+#defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true
+#
+## Don’t show the preferences window on next start
+#defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
 require 'rake'
 require 'pathname'
+
+module Homebrew
+  class << self
+    def need_install?(formula)
+      !installed?(formula)
+    end
+
+    def installed?(formula)
+      Kernel.system("brew list #{formula} > /dev/null 2>&1")
+    end
+
+    def install(formula)
+      system "brew install #{formula}" unless installed?(formula)
+      yield if block_given?
+    end
+
+    def install_homebrew
+      if !Kernel.system 'which brew > /dev/null'
+        system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
+
+        # TODO Ideally, yield to task and perform this there
+        system 'brew tap phinze/cask'
+        system 'brew install brew-cask'
+      end
+    end
+  end
+end
+
+module Cask
+  class << self
+    def installed?(cask)
+      Kernel.system("brew cask list #{cask} > /dev/null 2>&1")
+    end
+
+    def install(cask)
+      sh "brew cask install #{cask}" unless cask_installed?(cask)
+    end
+  end
+end
+
+task :install_homebrew do
+  Homebrew.install_homebrew
+end
+
+# Install a Homebrew formula.
+#
+# Example: brew_install :wget
+def brew_install(*args, &block)
+  Rake::Task.define_task(*args) do |task|
+    formula = task.name
+    Homebrew.install(formula) { block.call if block } unless Homebrew.installed?(formula)
+  end.enhance([:install_homebrew])
+end
+
+# TODO Fix *args
+def cask_install(cask, &block)
+  Rake::Task.define_task(cask) do
+    Cask.install(cask) { block.call if block } unless Cask.installed?(cask)
+  end.enhance([:install_homebrew])
+end
+
+brew_install :rbenv
+brew_install 'ruby-build'
+brew_install 'rbenv-binstubs'
+
+def rbenv_install(name, version, use = false)
+  Rake::Task.define_task(name) do
+    system 'rbenv', 'install', version unless ruby_installed?(version)
+    system 'rbenv', 'global', version if use
+  end.enhance(['ruby-build_formula'])
+end
+
+rbenv_install :ruby_2_1, '2.1.1', true
+rbenv_install :ruby_2_0, '2.0.0-p451'
+
+#task :rbenv => :homebrew do
+#  brew_install 'rbenv'
+#  brew_install 'rbenv-binstubs'
+#  brew_install 'ruby-build'
+#
+#  rubies = ['2.1.1']
+#  rubies.each { |v| system 'rbenv', 'install', v unless ruby_installed?(v) }
+#  system 'rbenv', 'global', rubies.first
+#end
+
+class Defaults
+  def initialize(domain)
+    @domain = domain
+  end
+
+  def write(key, value)
+    #puts "defaults write #{@domain} #{key} #{Defaults.to_value(value)}"
+    `defaults write #{@domain} #{key} #{to_value(value)}`
+  end
+
+  def to_value(o)
+    case o
+      when Fixnum
+        "-int #{o}"
+      when TrueClass
+        '-bool true'
+      when FalseClass
+        '-bool false'
+      when Hash
+        [].tap do |d|
+          d << '-dict'
+          o.each_pair do |k, v|
+            d << k
+            d << to_value(v)
+          end
+        end.join(' ')
+      when String
+        "-string '#{o}'"
+      when Float
+        "-float #{o}"
+      else
+        fail "Unsupported type: #{o.class}"
+    end
+  end
+end
+
+def defaults(domain, &block)
+  Defaults.new(domain).instance_eval(&block)
+end
+
+def defaults_global(&block)
+  defaults 'NSGlobalDomain', &block
+end
 
 DOTFILES_DIR = Pathname.new(Dir.home) + '.dotfiles'
 
 namespace :install do
-  task :homebrew do
-    if !Kernel.system 'which brew > /dev/null'
-      system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
+  #task :homebrew do
+  #  if !Kernel.system 'which brew > /dev/null'
+  #    system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
+  #
+  #    system 'brew tap phinze/cask'
+  #    system 'brew install brew-cask'
+  #  end
+  #end
 
-      system 'brew tap phinze/cask'
-      system 'brew install brew-cask'
-    end
-  end
+  brew_install :wget
+  brew_install :the_silver_searcher
 
-  task :git => :homebrew do
-    brew_install 'git'
-
+  brew_install :git do
     git_config_global('user.email', 'joakim.erelt@gmail.com')
     git_config_global('user.name', 'Joakim Erelt')
     git_config_global('alias.st', 'status')
@@ -36,42 +176,44 @@ namespace :install do
     mkdir_p home + 'Library/Vim'
   end
 
-  task :dropbox do
-    #brew_cask_install 'dropbox'
-  end
-
   task :iterm => :homebrew do
     brew_cask_install 'iterm2'
+
+    # Install pretty iTerm colors
+    #open "${HOME}/init/Mathias.itermcolors"
+
+    # Don’t display the annoying prompt when quitting iTerm
+#    defaults write com.googlecode.iterm2 PromptOnQuit -bool false
   end
 
   task :sublime => :homebrew do
     brew_cask_install 'sublime-text'
+    #http://zanshin.net/2013/01/21/sublime-text-2-dotfiles-simplified/
   end
 
   task :pckh => :homebrew do
     brew_cask_install 'pckeyboardhack'
+
+    # Disable the caps lock key
+    #
+    # Caveat:
+    # The last part of the modifiermapping key below consist of the vendor id (1452 is Apple)
+    # and product id of the keyboard (595 is 'Apple Internal Keyboard / Trackpad' and 592 is
+    # 'Apple Keyboard'). These values can be obtained via `ioreg -n IOHIDKeyboard -r'`.
+    `defaults -currentHost write -g com.apple.keyboard.modifiermapping.1452-595-0 -array '<dict><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer><key>HIDKeyboardModifierMappingDst</key><integer>-1</integer></dict>'`
+    `defaults -currentHost write -g com.apple.keyboard.modifiermapping.1452-592-0 -array '<dict><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer><key>HIDKeyboardModifierMappingDst</key><integer>-1</integer></dict>'`
+
+    # Map caps lock to escape
+    defaults 'org.pqrs.PCKeyboardHack' do
+       write 'sysctl', { 'enable_capslock' => true, 'keycode_capslock' => 53 }
+    end
   end
 
-  # TODO Move to :misc?
-  task :casks => :homebrew do
-    #brew_cask_install 'sourcetree'
-    #brew_cask_install 'sizeup'
-    #brew_cask_install 'virtualbox'
-    #brew_cask_install 'kaleidoscope'
-    #brew_cask_install 'cyberduck'
-    #brew_cask_install 'the-unarchiver'
-    brew_cask_install 'hex-fiend'
-    #brew_cask_install 'airmail'
-    #brew_cask_install 'skype'
-    #brew_cask_install 'google-chrome'
+  cask_install :rubymine do
+    # TODO Would be nice to configure RubyMine as well!
   end
 
-  task :dotfiles do
-    Dir.chdir(Dir.home) { github_clone 'jocko/dotfiles', dotfiles_dir }
-  end
-
-  task :zsh => [:homebrew, :dotfiles] do
-    brew_install 'zsh'
+  brew_install :zsh do
     Dir.chdir(Dir.home) { github_clone 'robbyrussell/oh-my-zsh', Pathname.new(Dir.home) + '.oh-my-zsh' }
     make_symlink 'zshrc'
     system 'chsh -s /bin/zsh' unless `echo $SHELL`.strip == '/bin/zsh'
@@ -88,13 +230,184 @@ namespace :install do
     system 'rbenv', 'global', rubies.first
   end
 
-  task :misc => :homebrew do
+  task :misc => :install_homebrew do
     mkdir_p home + 'Repos'
 
-    brew_install 'mongodb'
-    brew_install 'node'
+    #brew_install 'mongodb'
+    #brew_install 'node'
+
+    brew_cask_install 'spotify'
+    brew_cask_install 'sourcetree'
+    brew_cask_install 'sizeup'
+    #brew_cask_install 'virtualbox'
+    #brew_cask_install 'kaleidoscope'
+    brew_cask_install 'cyberduck'
+    brew_cask_install 'the-unarchiver'
+    brew_cask_install 'hex-fiend'
+    #brew_cask_install 'airmail'
+    #brew_cask_install 'skype'
+    brew_cask_install 'google-chrome'
+
+    defaults 'com.apple.dashboard' do
+      # Disable Dashboard
+      write 'mcx-disabled', true
+    end
+
+    defaults_global do
+      write 'InitialKeyRepeat', 14
+      write 'KeyRepeat', 2
+
+      write 'com.apple.sound.beep.feedback', 0
+    end
+
+    defaults 'NSGlobalDomain' do
+      # Disable Resume system-wide
+      write 'NSQuitAlwaysKeepsWindows', false
+    end
+
+    defaults 'com.apple.menuextra.clock' do
+      # Use a 24-hour clock
+      write 'DateFormat', 'EEE HH:mm'
+    end
+
+    # Disable Notification Center and remove the menu bar icon
+    system 'launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null'
+
+
+    defaults 'com.apple.systemsound' do
+      write 'com.apple.sound.beep.volume', 0.0
+    end
   end
 
+  task :dock do
+    defaults 'com.apple.dock' do
+      # Hot corners
+      # Possible values:
+      #  0: no-op
+      #  2: Mission Control
+      #  3: Show application windows
+      #  4: Desktop
+      #  5: Start screen saver
+      #  6: Disable screen saver
+      #  7: Dashboard
+      # 10: Put display to sleep
+      # 11: Launchpad
+      # 12: Notification Center
+
+      # Top left screen corner => Start screen saver
+      write 'wvous-tl-corner', 5
+      write 'wvous-tl-modifier', 0
+
+      # Bottom right screen corner => Desktop
+      write 'wvous-br-corner', 4
+      write 'wvous-br-modifier', 0
+
+      # Bottom left screen corner => Mission Control
+      write 'wvous-bl-corner', 2
+      write 'wvous-bl-modifier', 0
+
+      # Automatically hide and show the Dock
+      write 'autohide', true
+    end
+  end
+
+  task :sound do
+    defaults 'com.apple.systemsound' do
+      write 'com.apple.sound.beep.volume', 0.0
+    end
+
+    defaults_global do
+      write 'com.apple.sound.beep.feedback', 0
+    end
+  end
+
+  task :safari do
+    defaults 'com.apple.Safari' do
+      # New tabs open with empty page
+      write 'NewTabBehavior', 1
+
+      # Set Safari’s home page
+      write 'HomePage', 'www.google.com'
+
+      # Prevent Safari from opening ‘safe’ files automatically after downloading
+      write 'AutoOpenSafeDownloads', false
+
+      # Enable Safari’s debug menu
+      write 'IncludeInternalDebugMenu', true
+
+      # Enable the Develop menu and the Web Inspector in Safari
+      write 'IncludeDevelopMenu', true
+      write 'WebKitDeveloperExtrasEnabledPreferenceKey', true
+      write 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled', true
+
+      # Show status bar
+      write 'ShowStatusBar', true
+
+      write 'NSQuitAlwaysKeepsWindows', true
+    end
+  end
+
+  task :trackpad do
+    defaults_global do
+      # TODO Check if I actually need this
+      #write 'com.apple.mouse.tapBehavior', 1, current_host: true
+    end
+
+    # Trackpad
+    defaults 'com.apple.driver.AppleBluetoothMultitouch.trackpad' do
+      # Enable tap to click
+      write 'Clicking', true
+      # Enable three finger drag
+      write 'TrackpadThreeFingerDrag', true
+    end
+  end
+
+  task :keyboard do
+    defaults_global do
+      # Use all F1, F2, etc. keys as standard function keys
+      write 'com.apple.keyboard.fnState', true
+      # Disable press-and-hold for keys in favor of key repeat
+      write 'ApplePressAndHoldEnabled', false
+    end
+  end
+
+  task :finder do
+    defaults 'com.apple.finder' do
+      # Show status bar
+      write 'ShowStatusBar', true
+      # When performing a search, search the current folder by default
+      write 'FXDefaultSearchScope', 'SCcf'
+      # Disable the warning when changing a file extension
+      write 'FXEnableExtensionChangeWarning', false
+      # Use column view in all Finder windows by default
+      # Four-letter codes for all view modes: `Nlsv`, `icnv`, `clmv`, `Flwv`
+      write 'FXPreferredViewStyle', 'clmv'
+      # New Finder window show: Home directory
+      write 'NewWindowTarget', 'PfHm'
+      # Show path bar
+      write 'ShowPathbar', true
+    end
+
+    # Icon size: 44 x 44
+    system "/usr/libexec/PlistBuddy -c \"Set ':DesktopViewSettings:IconViewSettings:iconSize' 44\" ~/Library/Preferences/com.apple.finder.plist"
+  end
+
+  task :symbolichotkeys do
+    # Disable: Mission Control, ctrl+up arrow
+    #/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:32:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+    #/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:34:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+
+    # Disable: Application Windows, ctrl+down arrow
+    #/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:33:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+    #/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:35:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+
+    # Disable: Show Help menu, shift+cmd+/
+    #/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:98:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist > /dev/null 2>&1 || /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:98:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+
+    #/usr/libexec/PlistBuddy -c 'Print :AppleSymbolicHotKeys:27:value:parameters' ~/Library/Preferences/com.apple.symbolichotkeys.plist
+  end
+
+  # TODO sudo -v
   task :all => [:rbenv, :zsh, :git, :misc] do end
 
   def dotfiles_dir
@@ -181,21 +494,29 @@ def git_config_global(name, value)
 end
 
 def ruby_installed?(version)
-   0 != system('rbenv versions --bare | grep ^2.1.1$ > /dev/null')
+   Kernel.system("rbenv versions --bare | grep ^#{version}$ > /dev/null")
+end
+
+def rbenv_rehash
+  system 'rbenv', 'rehash'
 end
 
 def system(*args)
   abort "Error executing: #{args}" unless Kernel.system(*args)
 end
 
-def formula_installed?(formula)
-  Kernel.system("brew list #{formula} > /dev/null 2>&1")
-end
+#def formula_installed?(formula)
+#  Kernel.system("brew list #{formula} > /dev/null 2>&1")
+#end
+#
+#def brew_install(formula)
+#  system "brew install #{formula}" unless formula_installed?(formula)
+#end
 
-def brew_install(formula)
-  system "brew install #{formula}" unless formula_installed?(formula)
+def cask_installed?(cask)
+  Kernel.system("brew cask list #{cask} > /dev/null 2>&1")
 end
 
 def brew_cask_install(cask)
-  sh "brew cask install #{cask}"
+  sh "brew cask install #{cask}" unless cask_installed?(cask)
 end
