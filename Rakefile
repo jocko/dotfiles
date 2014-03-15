@@ -9,6 +9,8 @@
 #
 ## Don’t show the preferences window on next start
 #defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
+#
+# configuration like wrapper around plist domains, finder, safari etc?
 require 'rake'
 require 'pathname'
 
@@ -393,18 +395,20 @@ namespace :install do
   end
 
   task :symbolichotkeys do
-    # Disable: Mission Control, ctrl+up arrow
-    #/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:32:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
-    #/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:34:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+    # Mission Control, ctrl+up arrow
+    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:32:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
+    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:34:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
 
-    # Disable: Application Windows, ctrl+down arrow
-    #/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:33:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
-    #/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:35:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+    # Application Windows, ctrl+down arrow
+    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:33:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
+    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:35:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
 
-    # Disable: Show Help menu, shift+cmd+/
-    #/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:98:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist > /dev/null 2>&1 || /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:98:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+    # Show Help menu, shift+cmd+/
+    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:98:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
 
-    #/usr/libexec/PlistBuddy -c 'Print :AppleSymbolicHotKeys:27:value:parameters' ~/Library/Preferences/com.apple.symbolichotkeys.plist
+    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:27:value:parameters:0 167" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
+    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:27:value:parameters:1 10" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
+    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:27:value:parameters:2 1048576" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
   end
 
   # TODO sudo -v
