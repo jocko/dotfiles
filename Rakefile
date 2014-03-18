@@ -283,9 +283,17 @@ namespace :install do
 #    defaults write com.googlecode.iterm2 PromptOnQuit -bool false
   end
 
-  task :sublime => :homebrew do
-    brew_cask_install 'sublime-text'
-    #http://zanshin.net/2013/01/21/sublime-text-2-dotfiles-simplified/
+  #task :sublime => :homebrew do
+  #  brew_cask_install 'sublime-text'
+  #  #http://zanshin.net/2013/01/21/sublime-text-2-dotfiles-simplified/
+  #end
+
+  cask_install 'sublime-text' do
+    sublime_user_dir = home('Library/Application Support/Sublime Text 2/Packages/User')
+    rm_r sublime_user_dir if FileTest.directory?(sublime_user_dir)
+    ln_s dotfiles_dir.join('sublimetext2'), sublime_user_dir
+    # TODO Tomorrow Night Theme
+    # TODO Hide Minimap
   end
 
   task :pckh => :homebrew do
@@ -508,7 +516,7 @@ namespace :install do
   task :all => [:rbenv, :zsh, :git, :misc] do end
 
   def dotfiles_dir
-    Pathname.new(Dir.home) + '.dotfiles'
+    home('.dotfiles')
   end
 end
 
@@ -568,8 +576,8 @@ def make_symlink(dotfile)
   ln_s dotfiles_dir + dotfile, target unless target.exist?
 end
 
-def home
-  Pathname.new(Dir.home)
+def home(target = nil)
+  Pathname.new(Dir.home).join(*[target])
 end
 
 def sudo *args
