@@ -2,7 +2,6 @@
 #
 # gem install lunchy
 # rubymine settings: camelhumps, confirm exit, code style, line numbering, ^R should map to rename
-# gem install bundler
 # sizeup
 ## Start SizeUp at login
 #defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true
@@ -180,16 +179,6 @@ def rbenv_install(name, version, use = false)
   end.enhance(%w(ruby-build rbenv-binstubs)) #
 end
 
-#task :rbenv => :homebrew do
-#  brew_install 'rbenv'
-#  brew_install 'rbenv-binstubs'
-#  brew_install 'ruby-build'
-#
-#  rubies = ['2.1.1']
-#  rubies.each { |v| system 'rbenv', 'install', v unless ruby_installed?(v) }
-#  system 'rbenv', 'global', rubies.first
-#end
-
 class Defaults
   def initialize(domain)
     @domain = domain
@@ -241,14 +230,6 @@ end
 DOTFILES_DIR = Pathname.new(Dir.home) + '.dotfiles'
 
 namespace :install do
-  #task :homebrew do
-  #  if !Kernel.system 'which brew > /dev/null'
-  #    system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
-  #
-  #    system 'brew tap phinze/cask'
-  #    system 'brew install brew-cask'
-  #  end
-  #end
   rbenv_install :ruby_2_1, '2.1.1', true
   rbenv_install :ruby_2_0, '2.0.0-p451'
 
@@ -282,11 +263,6 @@ namespace :install do
     # Don’t display the annoying prompt when quitting iTerm
 #    defaults write com.googlecode.iterm2 PromptOnQuit -bool false
   end
-
-  #task :sublime => :homebrew do
-  #  brew_cask_install 'sublime-text'
-  #  #http://zanshin.net/2013/01/21/sublime-text-2-dotfiles-simplified/
-  #end
 
   cask_install 'sublime-text' do
     sublime_user_dir = home('Library/Application Support/Sublime Text 2/Packages/User')
@@ -324,16 +300,6 @@ namespace :install do
     system 'chsh -s /bin/zsh' unless `echo $SHELL`.strip == '/bin/zsh'
     # TODO add to /etc/shells
   end
-
-  #task :rbenv => :homebrew do
-  #  brew_install 'rbenv'
-  #  brew_install 'rbenv-binstubs'
-  #  brew_install 'ruby-build'
-  #
-  #  rubies = ['2.1.1']
-  #  rubies.each { |v| system 'rbenv', 'install', v unless ruby_installed?(v) }
-  #  system 'rbenv', 'global', rubies.first
-  #end
 
   task :misc => :install_homebrew do
     mkdir_p home + 'Repos'
@@ -602,26 +568,16 @@ def ruby_installed?(version)
    Kernel.system("rbenv versions --bare | grep ^#{version}$ > /dev/null")
 end
 
-def rbenv_rehash
-  system 'rbenv', 'rehash'
-end
-
 def system(*args)
   abort "Error executing: #{args}" unless Kernel.system(*args)
 end
 
-#def formula_installed?(formula)
-#  Kernel.system("brew list #{formula} > /dev/null 2>&1")
-#end
-#
-#def brew_install(formula)
-#  system "brew install #{formula}" unless formula_installed?(formula)
-#end
-
+# TODO Remove
 def cask_installed?(cask)
   Kernel.system("brew cask list #{cask} > /dev/null 2>&1")
 end
 
+# TODO Remove
 def brew_cask_install(cask)
   sh "brew cask install #{cask}" unless cask_installed?(cask)
 end
