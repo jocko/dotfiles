@@ -1,7 +1,7 @@
 # TODO
 #
 # gem install lunchy
-# rubymine settings: camelhumps, confirm exit
+# rubymine settings: camelhumps, confirm exit, code style, line numbering, ^R should map to rename
 # gem install bundler
 # sizeup
 ## Start SizeUp at login
@@ -11,8 +11,103 @@
 #defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
 #
 # configuration like wrapper around plist domains, finder, safari etc?
+# wallpapers
 require 'rake'
 require 'pathname'
+
+module Finder
+  def self.configure
+    (@configuration ||= Configuration.new).tap { |cfg| yield(cfg) }
+  end
+
+  class Configuration
+    attr_accessor :show_status_bar, :show_path_bar, :extension_change_warning, :show_all_files, :show_all_extensions, :icon_size
+    # Possible values: :current_folder, :this_mac, :use_previous
+    attr_accessor :default_search_scope
+    # Possible values: :icon, :list, :column, :coverflow
+    attr_accessor :preferred_view_style
+    # Possible values: :computer, :volume, :home, :desktop, :documents, :all_files
+    attr_accessor :new_window_target
+
+    def initialize
+      @show_status_bar = false
+      @show_path_bar = false
+      @default_search_scope = :this_mac
+      @extension_change_warning = true
+      @preferred_view_style = :icon
+      @show_all_files = false
+      @show_all_extensions = false
+      @new_window_target = :all_files
+      @icon_size = 64
+    end
+
+    def persist
+      defaults('com.apple.finder').tap do |d|
+        d.write 'ShowStatusBar', show_status_bar
+        d.write 'FXDefaultSearchScope', dss_to_s
+        d.write 'FXEnableExtensionChangeWarning', extension_change_warning
+        d.write 'FXPreferredViewStyle', pvs_to_s
+        d.write 'NewWindowTarget', nwt_to_s
+        d.write 'ShowPathbar', show_path_bar
+      end
+
+      defaults_global.tap do |d|
+        d.write 'AppleShowAllExtensions', show_all_extensions
+      end
+
+      system "/usr/libexec/PlistBuddy -c 'Set :DesktopViewSettings:IconViewSettings:iconSize #{icon_size}' ~/Library/Preferences/com.apple.finder.plist"
+    end
+
+    def nwt_to_s
+      {computer: 'PfCm', volume: 'PfVo', home: 'PfHm', desktop: 'PfDe', documents: 'PfDo', all_files: 'PfAF'}.fetch(@new_window_target)
+    end
+
+    def dss_to_s
+      {current_folder: 'SCcf', this_mac: 'SCev', use_previous: 'SCsp'}.fetch(@default_search_scope)
+    end
+
+    def pvs_to_s
+      {icon: 'icnv', list: 'Nlsv', column: 'clmv', coverflow: 'Flwv'}.fetch(@preferred_view_style)
+    end
+  end
+end
+
+def configure(*args, &block)
+  Rake::Task.define_task(*args) do
+    domain = Rake.application.resolve_args(args).first
+    Kernel.const_get(domain.capitalize).configure { |cfg| block.call(cfg) }.persist
+  end
+end
+
+class SymbolicHotKey
+  attr_accessor :key, :enabled, :parameters
+
+  def initialize(key, parameters, enabled)
+    @key = key
+    @parameters = parameters
+    @enabled = enabled
+  end
+
+  def write
+    system "/usr/libexec/PlistBuddy -c 'Delete :AppleSymbolicHotKeys:#{key}' ~/Library/Preferences/com.apple.symbolichotkeys.plist"
+    system "/usr/libexec/PlistBuddy -c 'Add :AppleSymbolicHotKeys:#{key}:enabled bool #{enabled}' ~/Library/Preferences/com.apple.symbolichotkeys.plist"
+    if enabled
+      system "/usr/libexec/PlistBuddy -c 'Add :AppleSymbolicHotKeys:#{key}:value:type string standard' ~/Library/Preferences/com.apple.symbolichotkeys.plist"
+      system "/usr/libexec/PlistBuddy -c 'Add :AppleSymbolicHotKeys:#{key}:value:parameters array' ~/Library/Preferences/com.apple.symbolichotkeys.plist"
+      system "/usr/libexec/PlistBuddy -c 'Add :AppleSymbolicHotKeys:#{key}:value:parameters:0 integer #{parameters[0]}' ~/Library/Preferences/com.apple.symbolichotkeys.plist"
+      system "/usr/libexec/PlistBuddy -c 'Add :AppleSymbolicHotKeys:#{key}:value:parameters:1 integer #{parameters[1]}' ~/Library/Preferences/com.apple.symbolichotkeys.plist"
+      system "/usr/libexec/PlistBuddy -c 'Add :AppleSymbolicHotKeys:#{key}:value:parameters:2 integer #{parameters[2]}' ~/Library/Preferences/com.apple.symbolichotkeys.plist"
+    end
+  end
+
+  def self.enable(key, parameters)
+    SymbolicHotKey.new(key, parameters, true).tap(&:write)
+  end
+
+  def self.disable(key)
+    SymbolicHotKey.new(key, [], false).tap(&:write)
+  end
+end
 
 module Homebrew
   class << self
@@ -61,20 +156,20 @@ end
 #
 # Example: brew_install :wget
 def brew_install(*args, &block)
-  Rake::Task.define_task(*args) do |task|
-    formula = task.name
+  Rake::Task.define_task(*args) do
+    formula = Rake.application.resolve_args(args).first
     Homebrew.install(formula) { block.call if block } unless Homebrew.installed?(formula)
   end.enhance([:install_homebrew])
 end
 
-# TODO Fix *args
-def cask_install(cask, &block)
-  Rake::Task.define_task(cask) do
+def cask_install(*args, &block)
+  Rake::Task.define_task(*args) do
+    cask = Rake.application.resolve_args(args).first
     Cask.install(cask) { block.call if block } unless Cask.installed?(cask)
   end.enhance([:install_homebrew])
 end
 
-brew_install :rbenv
+#brew_install :rbenv
 brew_install 'ruby-build'
 brew_install 'rbenv-binstubs'
 
@@ -82,11 +177,8 @@ def rbenv_install(name, version, use = false)
   Rake::Task.define_task(name) do
     system 'rbenv', 'install', version unless ruby_installed?(version)
     system 'rbenv', 'global', version if use
-  end.enhance(['ruby-build_formula'])
+  end.enhance(%w(ruby-build rbenv-binstubs)) #
 end
-
-rbenv_install :ruby_2_1, '2.1.1', true
-rbenv_install :ruby_2_0, '2.0.0-p451'
 
 #task :rbenv => :homebrew do
 #  brew_install 'rbenv'
@@ -135,7 +227,11 @@ class Defaults
 end
 
 def defaults(domain, &block)
-  Defaults.new(domain).instance_eval(&block)
+  if block_given?
+    Defaults.new(domain).instance_exec(&block)
+  else
+    Defaults.new(domain)
+  end
 end
 
 def defaults_global(&block)
@@ -153,9 +249,8 @@ namespace :install do
   #    system 'brew install brew-cask'
   #  end
   #end
-
-  brew_install :wget
-  brew_install :the_silver_searcher
+  rbenv_install :ruby_2_1, '2.1.1', true
+  rbenv_install :ruby_2_0, '2.0.0-p451'
 
   brew_install :git do
     git_config_global('user.email', 'joakim.erelt@gmail.com')
@@ -222,21 +317,23 @@ namespace :install do
     # TODO add to /etc/shells
   end
 
-  task :rbenv => :homebrew do
-    brew_install 'rbenv'
-    brew_install 'rbenv-binstubs'
-    brew_install 'ruby-build'
-
-    rubies = ['2.1.1']
-    rubies.each { |v| system 'rbenv', 'install', v unless ruby_installed?(v) }
-    system 'rbenv', 'global', rubies.first
-  end
+  #task :rbenv => :homebrew do
+  #  brew_install 'rbenv'
+  #  brew_install 'rbenv-binstubs'
+  #  brew_install 'ruby-build'
+  #
+  #  rubies = ['2.1.1']
+  #  rubies.each { |v| system 'rbenv', 'install', v unless ruby_installed?(v) }
+  #  system 'rbenv', 'global', rubies.first
+  #end
 
   task :misc => :install_homebrew do
     mkdir_p home + 'Repos'
 
     #brew_install 'mongodb'
     #brew_install 'node'
+    brew_install :wget
+    brew_install :the_silver_searcher
 
     brew_cask_install 'spotify'
     brew_cask_install 'sourcetree'
@@ -373,42 +470,38 @@ namespace :install do
     end
   end
 
-  task :finder do
-    defaults 'com.apple.finder' do
-      # Show status bar
-      write 'ShowStatusBar', true
-      # When performing a search, search the current folder by default
-      write 'FXDefaultSearchScope', 'SCcf'
-      # Disable the warning when changing a file extension
-      write 'FXEnableExtensionChangeWarning', false
-      # Use column view in all Finder windows by default
-      # Four-letter codes for all view modes: `Nlsv`, `icnv`, `clmv`, `Flwv`
-      write 'FXPreferredViewStyle', 'clmv'
-      # New Finder window show: Home directory
-      write 'NewWindowTarget', 'PfHm'
-      # Show path bar
-      write 'ShowPathbar', true
-    end
-
-    # Icon size: 44 x 44
-    system "/usr/libexec/PlistBuddy -c \"Set ':DesktopViewSettings:IconViewSettings:iconSize' 44\" ~/Library/Preferences/com.apple.finder.plist"
+  configure :finder do |prefs|
+    prefs.show_status_bar = true
+    prefs.show_path_bar = true
+    prefs.default_search_scope = :current_folder
+    prefs.extension_change_warning = false
+    prefs.preferred_view_style = :column
+    prefs.new_window_target = :home
+    prefs.icon_size = 44
   end
 
   task :symbolichotkeys do
-    # Mission Control, ctrl+up arrow
-    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:32:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
-    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:34:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
+    # Mission Control: Mission Control => ^↑
+    SymbolicHotKey.disable(32)
+    SymbolicHotKey.disable(34)
+    # Mission Control: Application Windows => ^↓
+    SymbolicHotKey.disable(33)
+    SymbolicHotKey.disable(35)
+    # Mission Control: Move left a space => ^←
+    SymbolicHotKey.disable(79)
+    # Mission Control: Move right a space => ^→
+    SymbolicHotKey.disable(81)
 
-    # Application Windows, ctrl+down arrow
-    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:33:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
-    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:35:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
+    # Accessibility: Turn VoiceOver on or off => ⌘F5
+    SymbolicHotKey.disable(59)
+    # Accessibility: Show Accessibility controls => ⌥⌘F5
+    SymbolicHotKey.disable(162)
 
-    # Show Help menu, shift+cmd+/
-    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:98:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
+    # App Shortcuts: Show Help menu => ⇧⌘/
+    SymbolicHotKey.disable(98)
 
-    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:27:value:parameters:0 167" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
-    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:27:value:parameters:1 10" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
-    system '/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:27:value:parameters:2 1048576" ~/Library/Preferences/com.apple.symbolichotkeys.plist'
+    # Keyboard: Move focus to next window => ⌘§
+    SymbolicHotKey.enable(27, [167, 10, 1048576])
   end
 
   # TODO sudo -v

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keymap version="1" name="Jocko Mine Mac" parent="Mac OS X 10.5+">
+  <action id="FileStructurePopup">
+    <keyboard-shortcut first-keystroke="meta M" />
+  </action>
+  <action id="MinimizeCurrentWindow" />
+  <action id="RenameElement">
+    <keyboard-shortcut first-keystroke="meta R" />
+  </action>
+  <action id="Replace" />
+  <action id="ReplaceInPath" />
+  <action id="Rerun" />
+  <action id="SwitchApply">
+    <keyboard-shortcut first-keystroke="control alt ENTER" />
+  </action>
+  <action id="SwitchDown">
+    <keyboard-shortcut first-keystroke="control alt DOWN" />
+  </action>
+  <action id="SwitchLeft">
+    <keyboard-shortcut first-keystroke="control alt LEFT" />
+  </action>
+  <action id="SwitchRight">
+    <keyboard-shortcut first-keystroke="control alt RIGHT" />
+  </action>
+  <action id="SwitchUp">
+    <keyboard-shortcut first-keystroke="control alt UP" />
+  </action>
+</keymap>
+
