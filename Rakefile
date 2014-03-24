@@ -13,6 +13,168 @@
 # wallpapers
 require 'rake'
 require 'pathname'
+require 'erb'
+
+module ITerm
+  def self.install_theme(name, colors)
+    template = <<END
+defaults write
+-app iTerm
+'Custom Color Presets'
+-dict-add '<%= name %>'
+'{
+  "Ansi 0 Color" = {
+    "Red Component" = "<%= colors[:ansi_0_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_0_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_0_color][:blue] %>";
+  };
+  "Ansi 1 Color" = {
+    "Red Component" = "<%= colors[:ansi_1_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_1_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_1_color][:blue] %>";
+  };
+  "Ansi 2 Color" = {
+    "Red Component" = "<%= colors[:ansi_2_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_2_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_2_color][:blue] %>";
+  };
+  "Ansi 3 Color" = {
+    "Red Component" = "<%= colors[:ansi_3_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_3_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_3_color][:blue] %>";
+  };
+  "Ansi 4 Color" = {
+    "Red Component" = "<%= colors[:ansi_4_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_4_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_4_color][:blue] %>";
+  };
+  "Ansi 5 Color" = {
+    "Red Component" = "<%= colors[:ansi_5_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_5_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_5_color][:blue] %>";
+  };
+  "Ansi 6 Color" = {
+    "Red Component" = "<%= colors[:ansi_6_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_6_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_6_color][:blue] %>";
+  };
+  "Ansi 7 Color" = {
+    "Red Component" = "<%= colors[:ansi_7_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_7_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_7_color][:blue] %>";
+  };
+  "Ansi 8 Color" = {
+    "Red Component" = "<%= colors[:ansi_8_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_8_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_8_color][:blue] %>";
+  };
+  "Ansi 9 Color" = {
+    "Red Component" = "<%= colors[:ansi_9_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_9_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_9_color][:blue] %>";
+  };
+  "Ansi 10 Color" = {
+    "Red Component" = "<%= colors[:ansi_10_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_10_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_10_color][:blue] %>";
+  };
+  "Ansi 11 Color" = {
+    "Red Component" = "<%= colors[:ansi_11_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_11_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_11_color][:blue] %>";
+  };
+  "Ansi 12 Color" = {
+    "Red Component" = "<%= colors[:ansi_12_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_12_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_12_color][:blue] %>";
+  };
+  "Ansi 13 Color" = {
+    "Red Component" = "<%= colors[:ansi_13_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_13_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_13_color][:blue] %>";
+  };
+  "Ansi 14 Color" = {
+    "Red Component" = "<%= colors[:ansi_14_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_14_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_14_color][:blue] %>";
+  };
+  "Ansi 15 Color" = {
+    "Red Component" = "<%= colors[:ansi_15_color][:red] %>";
+    "Green Component" = "<%= colors[:ansi_15_color][:green] %>";
+    "Blue Component" = "<%= colors[:ansi_15_color][:blue] %>";
+  };
+  "Background Color" = {
+    "Red Component" = "<%= colors[:background_color][:red] %>";
+    "Green Component" = "<%= colors[:background_color][:green] %>";
+    "Blue Component" = "<%= colors[:background_color][:blue] %>";
+  };
+  "Bold Color" = {
+    "Red Component" = "<%= colors[:bold_color][:red] %>";
+    "Green Component" = "<%= colors[:bold_color][:green] %>";
+    "Blue Component" = "<%= colors[:bold_color][:blue] %>";
+  };
+  "Cursor Color" = {
+    "Red Component" = "<%= colors[:cursor_color][:red] %>";
+    "Green Component" = "<%= colors[:cursor_color][:green] %>";
+    "Blue Component" = "<%= colors[:cursor_color][:blue] %>";
+  };
+  "Cursor Text Color" = {
+    "Red Component" = "<%= colors[:cursor_text_color][:red] %>";
+    "Green Component" = "<%= colors[:cursor_text_color][:green] %>";
+    "Blue Component" = "<%= colors[:cursor_text_color][:blue] %>";
+  };
+  "Foreground Color" = {
+    "Red Component" = "<%= colors[:foreground_color][:red] %>";
+    "Green Component" = "<%= colors[:foreground_color][:green] %>";
+    "Blue Component" = "<%= colors[:foreground_color][:blue] %>";
+  };
+  "Selected Text Color" = {
+    "Red Component" = "<%= colors[:selected_text_color][:red] %>";
+    "Green Component" = "<%= colors[:selected_text_color][:green] %>";
+    "Blue Component" = "<%= colors[:selected_text_color][:blue] %>";
+  };
+  "Selection Color" = {
+    "Red Component" = "<%= colors[:selection_color][:red] %>";
+    "Green Component" = "<%= colors[:selection_color][:green] %>";
+    "Blue Component" = "<%= colors[:selection_color][:blue] %>";
+  };
+}'
+END
+
+    `#{ERB.new(template).result(OpenStruct.new({name: name, colors: colors}).instance_eval { binding }).gsub("\n", ' ')}`
+  end
+end
+
+task :twilight do
+  name = 'Twilight'
+  colors = {
+      ansi_0_color: {red: '0.078830234706401825', green: '0.07883714884519577', blue: '0.078821629285812378'},
+      ansi_1_color: {red: '0.7543104887008667', green: '0.42739877104759216', blue: '0.26590591669082642'},
+      ansi_10_color: {red: '0.79963678121566772', green: '0.84882640838623047', blue: '0.55018079280853271'},
+      ansi_11_color: {red: '0.88534402847290039', green: '0.76867014169692993', blue: '0.49316486716270447'},
+      ansi_12_color: {red: '0.35298055410385132', green: '0.36815744638442993', blue: '0.38419744372367859'},
+      ansi_13_color: {red: '0.81614553928375244', green: '0.86099404096603394', blue: '0.55795210599899292'},
+      ansi_14_color: {red: '0.54136258363723755', green: '0.59707218408584595', blue: '0.60617965459823608'},
+      ansi_15_color: {red: '0.99986904859542847', green: '1', blue: '0.83107829093933105'},
+      ansi_2_color: {red: '0.68779230117797852', green: '0.72692984342575073', blue: '0.47654882073402405'},
+      ansi_3_color: {red: '0.76260745525360107', green: '0.66052716970443726', blue: '0.42418986558914185'},
+      ansi_4_color: {red: '0.26757293939590454', green: '0.27791988849639893', blue: '0.28883245587348938'},
+      ansi_5_color: {red: '0.70590567588806152', green: '0.74553430080413818', blue: '0.4848540723323822'},
+      ansi_6_color: {red: '0.46818926930427551', green: '0.51336991786956787', blue: '0.52099674940109253'},
+      ansi_7_color: {red: '0.99986904859542847', green: '1', blue: '0.83107829093933105'},
+      ansi_8_color: {red: '0.15055373311042786', green: '0.15056693553924561', blue: '0.15053729712963104'},
+      ansi_9_color: {red: '0.86878842115402222', green: '0.48694252967834473', blue: '0.29907804727554321'},
+      background_color: {red: '0.078830234706401825', green: '0.07883714884519577', blue: '0.078821629285812378'},
+      bold_color: {red: '0.99986904859542847', green: '1', blue: '0.83107829093933105'},
+      cursor_color: {red: '1', green: '1', blue: '1'},
+      cursor_text_color: {red: '0.0', green: '0.0', blue: '0.0'},
+      foreground_color: {red: '0.99986904859542847', green: '1', blue: '0.83107829093933105'},
+      selected_text_color: {red: '0.99986904859542847', green: '1', blue: '0.83107829093933105'},
+      selection_color: {red: '0.19196827709674835', green: '0.1919851154088974', blue: '0.1919473260641098'},
+  }
+
+  ITerm.install_theme(name, colors)
+end
 
 module Finder
   def self.configure
