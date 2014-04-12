@@ -18,5 +18,5 @@ tags
 /tmp
 
 /.bundle
-
 /.idea
+.rake_tasks
