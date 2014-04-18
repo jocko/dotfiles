@@ -665,8 +665,6 @@ namespace :backup do
     rsync_a('~/Movies')
     rsync_a('~/Documents')
     rsync_a('~/Pictures/Photo\ Booth\ Library')
-
-    system "rsync -aP ~/Repos #{target_dir}"
   end
 
   task :archive => :check do
