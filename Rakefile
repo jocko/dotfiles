@@ -451,6 +451,7 @@ namespace :install do
     end
   end
 
+  desc 'Install RubyMine'
   cask_install :rubymine do
     # TODO Would be nice to configure RubyMine as well!
   end
@@ -475,9 +476,11 @@ namespace :install do
   cask_install :skype
   cask_install 'google-chrome'
 
+  desc 'Install nice-to-have stuff'
   task :extras => [:wget, :the_silver_searcher, :spotify, :sourcetree, :sizeup, 'the-unarchiver', 'hex-fiend']
 
-  task :all => [:bootstrap, :git, :vim, 'sublime-text', :pckeyboardhack]
+  desc 'Install basic stuff'
+  task :default => [:bootstrap, :git, :vim, 'sublime-text', :pckeyboardhack]
 
   def dotfiles_dir
     home('.dotfiles')
@@ -485,7 +488,7 @@ namespace :install do
 end
 
 namespace :osx do
-  desc 'Set sensible config for OS X stuff (sound, trackpad, keyboard etc)'
+  desc 'Configure OS X'
   task :configure => [:dock, :sound, :safari, :trackpad, :keyboard, :finder, :symbolichotkeys, :misc]
 
   task :dock do
