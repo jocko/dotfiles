@@ -250,7 +250,7 @@ class SymbolicHotKey
   end
 
   def write
-    system "/usr/libexec/PlistBuddy -c 'Delete :AppleSymbolicHotKeys:#{key}' ~/Library/Preferences/com.apple.symbolichotkeys.plist"
+    system "/usr/libexec/PlistBuddy -c 'Delete :AppleSymbolicHotKeys:#{key}' ~/Library/Preferences/com.apple.symbolichotkeys.plist" rescue nil
     system "/usr/libexec/PlistBuddy -c 'Add :AppleSymbolicHotKeys:#{key}:enabled bool #{enabled}' ~/Library/Preferences/com.apple.symbolichotkeys.plist"
     if enabled
       system "/usr/libexec/PlistBuddy -c 'Add :AppleSymbolicHotKeys:#{key}:value:type string standard' ~/Library/Preferences/com.apple.symbolichotkeys.plist"
@@ -346,9 +346,9 @@ class Defaults
     @domain = domain
   end
 
-  def write(key, value)
+  def write(key, value, current_host: false)
     #puts "defaults write #{@domain} #{key} #{Defaults.to_value(value)}"
-    `defaults write #{@domain} #{key} #{to_value(value)}`
+    `defaults #{current_host ? '-currentHost' : ''} write #{@domain} #{key} #{to_value(value)}`
   end
 
   def to_value(o)
@@ -392,6 +392,8 @@ end
 DOTFILES_DIR = Pathname.new(Dir.home) + '.dotfiles'
 
 namespace :install do
+  task :bootstrap => [:ruby_2_0, :iterm2, :zsh]
+
   rbenv_install :ruby_2_1, '2.1.1', true
   rbenv_install :ruby_2_0, '2.0.0-p451'
 
@@ -416,9 +418,7 @@ namespace :install do
     mkdir_p home + 'Library/Vim'
   end
 
-  task :iterm => :homebrew do
-    brew_cask_install 'iterm2'
-
+  cask_install :iterm2 do
     # Install pretty iTerm colors
     #open "${HOME}/init/Mathias.itermcolors"
 
@@ -514,6 +514,17 @@ namespace :install do
     end
   end
 
+  # TODO sudo -v
+  task :all => [:rbenv, :zsh, :git, :misc] do end
+
+  def dotfiles_dir
+    home('.dotfiles')
+  end
+end
+
+namespace :configure do
+  task :osx => [:dock, :sound, :safari, :trackpad, :keyboard, :finder, :symbolichotkeys]
+
   task :dock do
     defaults 'com.apple.dock' do
       # Hot corners
@@ -585,7 +596,7 @@ namespace :install do
   task :trackpad do
     defaults_global do
       # TODO Check if I actually need this
-      #write 'com.apple.mouse.tapBehavior', 1, current_host: true
+      write 'com.apple.mouse.tapBehavior', 1, current_host: true
     end
 
     # Trackpad
@@ -640,12 +651,6 @@ namespace :install do
     SymbolicHotKey.enable(27, [167, 10, 1048576])
   end
 
-  # TODO sudo -v
-  task :all => [:rbenv, :zsh, :git, :misc] do end
-
-  def dotfiles_dir
-    home('.dotfiles')
-  end
 end
 
 namespace :backup do
@@ -703,7 +708,7 @@ def make_symlink(dotfile)
 end
 
 def home(target = nil)
-  Pathname.new(Dir.home).join(*[target])
+  Pathname.new(Dir.home).join(target || '')
 end
 
 def sudo *args
@@ -729,7 +734,7 @@ def ruby_installed?(version)
 end
 
 def system(*args)
-  abort "Error executing: #{args}" unless Kernel.system(*args)
+  raise "Error executing: #{args}" unless Kernel.system(*args)
 end
 
 # TODO Remove
