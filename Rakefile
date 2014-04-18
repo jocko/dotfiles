@@ -629,9 +629,8 @@ namespace :osx do
       write 'KeyRepeat', 2
     end
 
-    defaults 'NSGlobalDomain' do
-      # Disable Resume system-wide
-      write 'NSQuitAlwaysKeepsWindows', false
+    defaults 'com.apple.loginwindow' do
+      write 'TALLogoutSavesState', false
     end
 
     defaults 'com.apple.menuextra.clock' do
