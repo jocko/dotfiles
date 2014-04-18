@@ -305,6 +305,7 @@ module Cask
 
     def install(cask)
       sh "brew cask install #{cask}" unless cask_installed?(cask)
+      yield if block_given?
     end
   end
 end
