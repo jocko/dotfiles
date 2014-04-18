@@ -389,13 +389,14 @@ def defaults_global(&block)
   defaults 'NSGlobalDomain', &block
 end
 
-DOTFILES_DIR = Pathname.new(Dir.home) + '.dotfiles'
-
 namespace :install do
-  task :bootstrap => [:ruby_2_0, :iterm2, :zsh]
+  desc 'Install essential stuff'
+  task :bootstrap => [:ruby_2_0, :iterm2, :zsh] do
+    mkdir_p home('Repos')
+  end
 
-  rbenv_install :ruby_2_1, '2.1.1', true
-  rbenv_install :ruby_2_0, '2.0.0-p451'
+  rbenv_install :ruby_2_1, '2.1.1'
+  rbenv_install :ruby_2_0, '2.0.0-p451', true
 
   brew_install :git do
     git_config_global('user.email', 'joakim.erelt@gmail.com')
@@ -434,9 +435,7 @@ namespace :install do
     # TODO Hide Minimap
   end
 
-  task :pckh => :homebrew do
-    brew_cask_install 'pckeyboardhack'
-
+  cask_install :pckeyboardhack do
     # Disable the caps lock key
     #
     # Caveat:
@@ -460,70 +459,34 @@ namespace :install do
     Dir.chdir(Dir.home) { github_clone 'robbyrussell/oh-my-zsh', Pathname.new(Dir.home) + '.oh-my-zsh' }
     make_symlink 'zshrc'
     system 'chsh -s /bin/zsh' unless `echo $SHELL`.strip == '/bin/zsh'
-    # TODO add to /etc/shells
   end
 
-  task :misc => :install_homebrew do
-    mkdir_p home + 'Repos'
+  brew_install :wget
+  brew_install :the_silver_searcher
+  cask_install :spotify
+  cask_install :sourcetree
+  cask_install :sizeup
+  cask_install :virtualbox
+  cask_install :kaleidoscope
+  cask_install :cyberduck
+  cask_install 'the-unarchiver'
+  cask_install 'hex-fiend'
+  cask_install :airmail
+  cask_install :skype
+  cask_install 'google-chrome'
 
-    #brew_install 'mongodb'
-    #brew_install 'node'
-    brew_install :wget
-    brew_install :the_silver_searcher
+  task :extras => [:wget, :the_silver_searcher, :spotify, :sourcetree, :sizeup, 'the-unarchiver', 'hex-fiend']
 
-    brew_cask_install 'spotify'
-    brew_cask_install 'sourcetree'
-    brew_cask_install 'sizeup'
-    #brew_cask_install 'virtualbox'
-    #brew_cask_install 'kaleidoscope'
-    brew_cask_install 'cyberduck'
-    brew_cask_install 'the-unarchiver'
-    brew_cask_install 'hex-fiend'
-    #brew_cask_install 'airmail'
-    #brew_cask_install 'skype'
-    brew_cask_install 'google-chrome'
-
-    defaults 'com.apple.dashboard' do
-      # Disable Dashboard
-      write 'mcx-disabled', true
-    end
-
-    defaults_global do
-      write 'InitialKeyRepeat', 14
-      write 'KeyRepeat', 2
-
-      write 'com.apple.sound.beep.feedback', 0
-    end
-
-    defaults 'NSGlobalDomain' do
-      # Disable Resume system-wide
-      write 'NSQuitAlwaysKeepsWindows', false
-    end
-
-    defaults 'com.apple.menuextra.clock' do
-      # Use a 24-hour clock
-      write 'DateFormat', 'EEE HH:mm'
-    end
-
-    # Disable Notification Center and remove the menu bar icon
-    system 'launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null'
-
-
-    defaults 'com.apple.systemsound' do
-      write 'com.apple.sound.beep.volume', 0.0
-    end
-  end
-
-  # TODO sudo -v
-  task :all => [:rbenv, :zsh, :git, :misc] do end
+  task :all => [:bootstrap, :git, :vim, 'sublime-text', :pckeyboardhack]
 
   def dotfiles_dir
     home('.dotfiles')
   end
 end
 
-namespace :configure do
-  task :osx => [:dock, :sound, :safari, :trackpad, :keyboard, :finder, :symbolichotkeys]
+namespace :osx do
+  desc 'Set sensible config for OS X stuff (sound, trackpad, keyboard etc)'
+  task :configure => [:dock, :sound, :safari, :trackpad, :keyboard, :finder, :symbolichotkeys, :misc]
 
   task :dock do
     defaults 'com.apple.dock' do
@@ -594,12 +557,13 @@ namespace :configure do
   end
 
   task :trackpad do
+    # Internal trackpad
     defaults_global do
-      # TODO Check if I actually need this
+      # Enable tap to click
       write 'com.apple.mouse.tapBehavior', 1, current_host: true
     end
 
-    # Trackpad
+    # Bluetooth trackpad
     defaults 'com.apple.driver.AppleBluetoothMultitouch.trackpad' do
       # Enable tap to click
       write 'Clicking', true
@@ -651,6 +615,30 @@ namespace :configure do
     SymbolicHotKey.enable(27, [167, 10, 1048576])
   end
 
+  task :misc do
+    defaults 'com.apple.dashboard' do
+      # Disable Dashboard
+      write 'mcx-disabled', true
+    end
+
+    defaults_global do
+      write 'InitialKeyRepeat', 14
+      write 'KeyRepeat', 2
+    end
+
+    defaults 'NSGlobalDomain' do
+      # Disable Resume system-wide
+      write 'NSQuitAlwaysKeepsWindows', false
+    end
+
+    defaults 'com.apple.menuextra.clock' do
+      # Use a 24-hour clock
+      write 'DateFormat', 'EEE HH:mm'
+    end
+
+    # Disable Notification Center and remove the menu bar icon
+    system 'launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null'
+  end
 end
 
 namespace :backup do
