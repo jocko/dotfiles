@@ -487,28 +487,12 @@ namespace :iterm2 do
   end
 
   task :import_config do
-    system "defaults import com.googlecode.iterm2 #{File.expand_path('../iterm2/com.googlecode.iterm2.plist', __FILE__)}"
+    #system "defaults import com.googlecode.iterm2 #{File.expand_path('../iterm2/com.googlecode.iterm2.plist', __FILE__)}"
   end
 
   task :export_config do
     system "/usr/libexec/PlistBuddy -x -c \"Print\" ~/Library/Preferences/com.googlecode.iterm2.plist > #{File.expand_path('../iterm2/com.googlecode.iterm2.plist', __FILE__)}"
   end
-
-  #cask_install 'iterm2-beta' do
-    #Dir[File.expand_path('../iterm2/*.itermcolors', __FILE__)].each do |theme_file|
-    #  theme_name = File.basename(theme_file, '.itermcolors')
-    #  system "/usr/libexec/PlistBuddy -c \"Delete :'Custom Color Presets':'#{theme_name}'\" ~/Library/Preferences/com.googlecode.iterm2.plist" rescue nil
-    #  system "/usr/libexec/PlistBuddy -c \"Add :'Custom Color Presets':'#{theme_name}' dict\" ~/Library/Preferences/com.googlecode.iterm2.plist"
-    #  system "/usr/libexec/PlistBuddy -c \"Merge '#{theme_file}' :'Custom Color Presets':'#{theme_name}'\" ~/Library/Preferences/com.googlecode.iterm2.plist"
-    #end
-    #
-    #system "/usr/libexec/PlistBuddy -c \"Add :'New Bookmarks':0 dict\" ~/Library/Preferences/com.googlecode.iterm2.plist" rescue nil
-    #["Ansi 0 Color", "Ansi 1 Color", "Ansi 2 Color", "Ansi 3 Color", "Ansi 4 Color", "Ansi 5 Color", "Ansi 6 Color", "Ansi 7 Color", "Ansi 8 Color", "Ansi 9 Color", "Ansi 10 Color", "Ansi 11 Color", "Ansi 12 Color", "Ansi 13 Color", "Ansi 14 Color", "Ansi 15 Color", "Background Color", "Bold Color", "Cursor Color", "Cursor Text Color", "Foreground Color", "Selected Text Color", "Selection Color"].each do |color|
-    #  system "/usr/libexec/PlistBuddy -c \"Delete :'New Bookmarks':0:'#{color}'\" ~/Library/Preferences/com.googlecode.iterm2.plist" rescue nil
-    #end
-    #
-    #system "/usr/libexec/PlistBuddy -c \"Merge '#{File.expand_path('../iterm2/Twilight.itermcolors', __FILE__)}' :'New Bookmarks':0\" ~/Library/Preferences/com.googlecode.iterm2.plist"
-  #end
 
   task :wipe do
     system 'killall iTerm' rescue nil
