@@ -487,7 +487,7 @@ namespace :iterm2 do
   end
 
   task :import_config do
-    #system "defaults import com.googlecode.iterm2 #{File.expand_path('../iterm2/com.googlecode.iterm2.plist', __FILE__)}"
+    system "defaults import com.googlecode.iterm2 #{File.expand_path('../iterm2/com.googlecode.iterm2.plist', __FILE__)}"
   end
 
   task :export_config do
