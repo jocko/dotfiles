@@ -551,6 +551,8 @@ namespace :osx do
 
   task :safari do
     defaults 'com.apple.Safari' do
+      # New windows open with home page
+      write 'NewWindowBehavior', 0
       # New tabs open with empty page
       write 'NewTabBehavior', 1
 
