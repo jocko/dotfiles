@@ -267,7 +267,7 @@ namespace :install do
   end
 
   cask_install 'sublime-text' do
-    sublime_user_dir = home('Library/Application Support/Sublime Text 2/Packages/User')
+    sublime_user_dir = "'#{home('Library/Application Support/Sublime Text 2/Packages/User')}'"
     mkdir_p sublime_user_dir
     ln_s dotfiles_dir.join('sublimetext2'), sublime_user_dir
     # TODO Hide Minimap
