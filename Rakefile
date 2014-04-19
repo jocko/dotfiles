@@ -170,14 +170,19 @@ def cask_install(*args, &block)
   end.enhance([:install_homebrew])
 end
 
-brew_install 'readline'
+task 'readline' do
+  # Readline 6.3 broke compatibility with ruby build, use 6.2 version instead.
+   system 'brew install https://raw.githubusercontent.com/Homebrew/homebrew/0181c8a1633353affefabe257c170edbd6d7c008/Library/Formula/readline.rb'
+   system 'brew pin readline'
+end
+
 brew_install 'ruby-build'
 brew_install 'rbenv-binstubs'
 brew_install 'rbenv-gemset'
 
 def rbenv_install(name, version, use = false)
   Rake::Task.define_task(name) do
-    system({ 'RUBY_CONFIGURE_OPTS' => "--with-readline-dir=#{`brew --prefix readline`}" }, "rbenv install #{version}") unless ruby_installed?(version)
+    system({ 'RUBY_CONFIGURE_OPTS' => "--with-readline-dir=#{`brew --prefix readline`.strip}" }, "rbenv install #{version}") unless ruby_installed?(version)
     system 'rbenv', 'rehash'
     system 'rbenv', 'global', version if use
   end.enhance(%w(ruby-build rbenv-binstubs rbenv-gemset readline)) #
