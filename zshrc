@@ -51,6 +51,8 @@ unsetopt beep
 # Put Homebrew stuff first in path
 PATH=/usr/local/bin:$PATH
 
+export LANG=en_US.UTF-8
+
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 alias psa="ps aux"
