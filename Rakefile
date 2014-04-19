@@ -292,6 +292,7 @@ module Homebrew
         # TODO Ideally, yield to task and perform this there
         system 'brew tap phinze/cask'
         system 'brew install brew-cask'
+        system 'brew tap caskroom/versions'
       end
     end
   end
@@ -304,7 +305,7 @@ module Cask
     end
 
     def install(cask)
-      sh "brew cask install #{cask}" unless cask_installed?(cask)
+      sh "brew cask install #{cask}" unless installed?(cask)
       yield if block_given?
     end
   end
@@ -392,7 +393,7 @@ end
 
 namespace :install do
   desc 'Install essential stuff'
-  task :bootstrap => [:ruby_2_0, :iterm2, :zsh] do
+  task :bootstrap => [:ruby_2_0, 'iterm2:install', :zsh] do
     mkdir_p home('Repos')
   end
 
@@ -418,14 +419,6 @@ namespace :install do
     make_symlink 'vim'
     make_symlink 'vimrc'
     mkdir_p home + 'Library/Vim'
-  end
-
-  cask_install :iterm2 do
-    # Install pretty iTerm colors
-    #open "${HOME}/init/Mathias.itermcolors"
-
-    # Don’t display the annoying prompt when quitting iTerm
-#    defaults write com.googlecode.iterm2 PromptOnQuit -bool false
   end
 
   cask_install 'sublime-text' do
@@ -483,8 +476,46 @@ namespace :install do
   desc 'Install basic stuff'
   task :default => [:bootstrap, :git, :vim, 'sublime-text', :pckeyboardhack]
 
-  def dotfiles_dir
-    home('.dotfiles')
+  def dotfiles_dir(*args)
+    home('.dotfiles', *args)
+  end
+end
+
+namespace :iterm2 do
+  task :install => :import_config do
+    Cask.install 'iterm2-beta'
+  end
+
+  task :import_config do
+    system "defaults import com.googlecode.iterm2 #{File.expand_path('../iterm2/com.googlecode.iterm2.plist', __FILE__)}"
+  end
+
+  task :export_config do
+    system "/usr/libexec/PlistBuddy -x -c \"Print\" ~/Library/Preferences/com.googlecode.iterm2.plist > #{File.expand_path('../iterm2/com.googlecode.iterm2.plist', __FILE__)}"
+  end
+
+  #cask_install 'iterm2-beta' do
+    #Dir[File.expand_path('../iterm2/*.itermcolors', __FILE__)].each do |theme_file|
+    #  theme_name = File.basename(theme_file, '.itermcolors')
+    #  system "/usr/libexec/PlistBuddy -c \"Delete :'Custom Color Presets':'#{theme_name}'\" ~/Library/Preferences/com.googlecode.iterm2.plist" rescue nil
+    #  system "/usr/libexec/PlistBuddy -c \"Add :'Custom Color Presets':'#{theme_name}' dict\" ~/Library/Preferences/com.googlecode.iterm2.plist"
+    #  system "/usr/libexec/PlistBuddy -c \"Merge '#{theme_file}' :'Custom Color Presets':'#{theme_name}'\" ~/Library/Preferences/com.googlecode.iterm2.plist"
+    #end
+    #
+    #system "/usr/libexec/PlistBuddy -c \"Add :'New Bookmarks':0 dict\" ~/Library/Preferences/com.googlecode.iterm2.plist" rescue nil
+    #["Ansi 0 Color", "Ansi 1 Color", "Ansi 2 Color", "Ansi 3 Color", "Ansi 4 Color", "Ansi 5 Color", "Ansi 6 Color", "Ansi 7 Color", "Ansi 8 Color", "Ansi 9 Color", "Ansi 10 Color", "Ansi 11 Color", "Ansi 12 Color", "Ansi 13 Color", "Ansi 14 Color", "Ansi 15 Color", "Background Color", "Bold Color", "Cursor Color", "Cursor Text Color", "Foreground Color", "Selected Text Color", "Selection Color"].each do |color|
+    #  system "/usr/libexec/PlistBuddy -c \"Delete :'New Bookmarks':0:'#{color}'\" ~/Library/Preferences/com.googlecode.iterm2.plist" rescue nil
+    #end
+    #
+    #system "/usr/libexec/PlistBuddy -c \"Merge '#{File.expand_path('../iterm2/Twilight.itermcolors', __FILE__)}' :'New Bookmarks':0\" ~/Library/Preferences/com.googlecode.iterm2.plist"
+  #end
+
+  task :wipe do
+    system 'killall iTerm' rescue nil
+    system 'brew cask remove iterm2-beta' rescue nil
+    rm_rf home('Library/Caches/com.googlecode.iterm2')
+    rm_rf home('Library/Application Support/iTerm')
+    rm_f home('Library/Preferences/com.googlecode.iterm2.plist')
   end
 end
 
@@ -698,8 +729,8 @@ def make_symlink(dotfile)
   ln_s dotfiles_dir + dotfile, target unless target.exist?
 end
 
-def home(target = nil)
-  Pathname.new(Dir.home).join(target || '')
+def home(*args)
+  Pathname.new(Dir.home).join(*args)
 end
 
 def sudo *args
@@ -725,7 +756,7 @@ def ruby_installed?(version)
 end
 
 def system(*args)
-  raise "Error executing: #{args}" unless Kernel.system(*args)
+  raise "Error executing: #{args.join(' ')}" unless Kernel.system(*args)
 end
 
 # TODO Remove
