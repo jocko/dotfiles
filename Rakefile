@@ -351,7 +351,7 @@ end
 
 namespace :osx do
   desc 'Configure OS X'
-  task :configure => [:dock, :sound, :safari, :trackpad, :keyboard, :finder, :symbolichotkeys, :input_sources, :misc]
+  task :configure => [:dock, :sound, :safari, :trackpad, :keyboard, :finder, :symbolichotkeys, :misc]
 
   task :dock do
     defaults 'com.apple.dock' do
@@ -486,20 +486,6 @@ namespace :osx do
 
     # Spotlight: Show spotlight window => ⌥⌘Space
     SymbolicHotKey.disable(65)
-  end
-
-  task :input_sources do
-    system "/usr/libexec/PlistBuddy -c \"Delete :AppleEnabledInputSources\" ~/Library/Preferences/com.apple.HIToolbox.plist" rescue nil
-
-    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:0 dict\" ~/Library/Preferences/com.apple.HIToolbox.plist"
-    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:0:InputSourceKind string 'Keyboard Layout'\" ~/Library/Preferences/com.apple.HIToolbox.plist"
-    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:0:'KeyboardLayout Name' string U.S.\" ~/Library/Preferences/com.apple.HIToolbox.plist"
-    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:0:'KeyboardLayout ID' integer 0\" ~/Library/Preferences/com.apple.HIToolbox.plist"
-
-    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:1 dict\" ~/Library/Preferences/com.apple.HIToolbox.plist"
-    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:1:InputSourceKind string 'Keyboard Layout'\" ~/Library/Preferences/com.apple.HIToolbox.plist"
-    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:1:'KeyboardLayout Name' string Swedish\" ~/Library/Preferences/com.apple.HIToolbox.plist"
-    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:1:'KeyboardLayout ID' integer 224\" ~/Library/Preferences/com.apple.HIToolbox.plist"
   end
 
   task :misc do
