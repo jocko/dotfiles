@@ -218,6 +218,8 @@ class Defaults
         "-string '#{o}'"
       when Float
         "-float #{o}"
+      when Array
+        "-array #{o.map { |i| "'#{i}'" }.join(' ')}"
       else
         fail "Unsupported type: #{o.class}"
     end
@@ -349,7 +351,7 @@ end
 
 namespace :osx do
   desc 'Configure OS X'
-  task :configure => [:dock, :sound, :safari, :trackpad, :keyboard, :finder, :symbolichotkeys, :misc]
+  task :configure => [:dock, :sound, :safari, :trackpad, :keyboard, :finder, :symbolichotkeys, :input_sources, :misc]
 
   task :dock do
     defaults 'com.apple.dock' do
@@ -478,6 +480,24 @@ namespace :osx do
 
     # Keyboard: Move focus to next window => ⌘§
     SymbolicHotKey.enable(27, [167, 10, 1048576])
+
+    # Input Sources: Select next source in Input menu => ⌥⌘Space
+    SymbolicHotKey.enable(61, [65535, 49, 1572864])
+
+    # Spotlight: Show spotlight window => ⌥⌘Space
+    SymbolicHotKey.disable(65)
+  end
+
+  task :input_sources do
+    system "/usr/libexec/PlistBuddy -c \"Set :AppleEnabledInputSources:1:InputSourceKind 'Keyboard Layout'\" ~/Library/Preferences/com.apple.HIToolbox.plist"
+    system "/usr/libexec/PlistBuddy -c \"Set :AppleEnabledInputSources:1:'KeyboardLayout Name' U.S.\" ~/Library/Preferences/com.apple.HIToolbox.plist"
+    system "/usr/libexec/PlistBuddy -c \"Set :AppleEnabledInputSources:1:'KeyboardLayout ID' 0\" ~/Library/Preferences/com.apple.HIToolbox.plist"
+
+    system "/usr/libexec/PlistBuddy -c \"Delete :AppleEnabledInputSources:2\" ~/Library/Preferences/com.apple.HIToolbox.plist" rescue nil
+    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:2 dict\" ~/Library/Preferences/com.apple.HIToolbox.plist"
+    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:2:InputSourceKind string 'Keyboard Layout'\" ~/Library/Preferences/com.apple.HIToolbox.plist"
+    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:2:'KeyboardLayout Name' string Swedish\" ~/Library/Preferences/com.apple.HIToolbox.plist"
+    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:2:'KeyboardLayout ID' integer 224\" ~/Library/Preferences/com.apple.HIToolbox.plist"
   end
 
   task :misc do
@@ -502,6 +522,16 @@ namespace :osx do
 
     # Disable Notification Center and remove the menu bar icon
     system 'launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null'
+
+    defaults 'com.apple.systemuiserver' do
+      write 'menuExtras', [
+        '/System/Library/CoreServices/Menu Extras/Bluetooth.menu',
+        '/System/Library/CoreServices/Menu Extras/AirPort.menu',
+        '/System/Library/CoreServices/Menu Extras/Volume.menu',
+        '/System/Library/CoreServices/Menu Extras/TextInput.menu',
+        '/System/Library/CoreServices/Menu Extras/Battery.menu',
+        '/System/Library/CoreServices/Menu Extras/Clock.menu']
+    end
   end
 end
 
