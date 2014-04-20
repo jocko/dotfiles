@@ -489,9 +489,11 @@ namespace :osx do
   end
 
   task :input_sources do
-    system "/usr/libexec/PlistBuddy -c \"Set :AppleEnabledInputSources:1:InputSourceKind 'Keyboard Layout'\" ~/Library/Preferences/com.apple.HIToolbox.plist"
-    system "/usr/libexec/PlistBuddy -c \"Set :AppleEnabledInputSources:1:'KeyboardLayout Name' U.S.\" ~/Library/Preferences/com.apple.HIToolbox.plist"
-    system "/usr/libexec/PlistBuddy -c \"Set :AppleEnabledInputSources:1:'KeyboardLayout ID' 0\" ~/Library/Preferences/com.apple.HIToolbox.plist"
+    system "/usr/libexec/PlistBuddy -c \"Delete :AppleEnabledInputSources:1\" ~/Library/Preferences/com.apple.HIToolbox.plist" rescue nil
+    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:1 dict\" ~/Library/Preferences/com.apple.HIToolbox.plist"
+    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:1:InputSourceKind string 'Keyboard Layout'\" ~/Library/Preferences/com.apple.HIToolbox.plist"
+    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:1:'KeyboardLayout Name' string U.S.\" ~/Library/Preferences/com.apple.HIToolbox.plist"
+    system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:1:'KeyboardLayout ID' integer 0\" ~/Library/Preferences/com.apple.HIToolbox.plist"
 
     system "/usr/libexec/PlistBuddy -c \"Delete :AppleEnabledInputSources:2\" ~/Library/Preferences/com.apple.HIToolbox.plist" rescue nil
     system "/usr/libexec/PlistBuddy -c \"Add :AppleEnabledInputSources:2 dict\" ~/Library/Preferences/com.apple.HIToolbox.plist"
