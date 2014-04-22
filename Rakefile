@@ -183,14 +183,13 @@ end
 
 brew_install 'ruby-build'
 brew_install 'rbenv-binstubs'
-brew_install 'rbenv-gemset'
 
 def rbenv_install(name, version, use = false)
   Rake::Task.define_task(name) do
     system({ 'RUBY_CONFIGURE_OPTS' => "--with-readline-dir=#{`brew --prefix readline`.strip}" }, "rbenv install #{version}") unless ruby_installed?(version)
     system 'rbenv', 'rehash'
     system 'rbenv', 'global', version if use
-  end.enhance(%w(ruby-build rbenv-binstubs rbenv-gemset readline)) #
+  end.enhance(%w(ruby-build rbenv-binstubs readline)) #
 end
 
 class Defaults

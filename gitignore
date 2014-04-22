@@ -20,6 +20,3 @@ tags
 /.bundle
 /.idea
 .rake_tasks
-
-.rbenv-gemsets
-.gems
