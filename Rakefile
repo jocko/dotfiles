@@ -268,6 +268,10 @@ namespace :install do
     mkdir_p home + 'Library/Vim'
   end
 
+  task :rubygems do
+    make_symlink 'gemrc'
+  end
+
   cask_install 'sublime-text' do
     sublime_user_dir = "'#{home('Library/Application Support/Sublime Text 2/Packages/User')}'"
     mkdir_p sublime_user_dir
