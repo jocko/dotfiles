@@ -5,12 +5,17 @@
 # sizeup
 ## Start SizeUp at login
 #defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true
-#
+# set privacy access
+# partitions
 ## Don’t show the preferences window on next start
 #defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
 #
 # configuration like wrapper around plist domains, finder, safari etc?
-# wallpapers
+# wallpapers & screensaver
+#
+# iterm numpad keys, always show tab (messes up sizeup otherwise)
+#
+# column view in open dialog
 require 'rake'
 require 'pathname'
 
