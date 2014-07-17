@@ -251,18 +251,8 @@ namespace :install do
   rbenv_install :ruby_2_0, '2.0.0-p481', true
 
   brew_install :git do
-    git_config_global('user.email', 'joakim.erelt@gmail.com')
-    git_config_global('user.name', 'Joakim Erelt')
-    git_config_global('alias.st', 'status')
-    git_config_global('alias.co', 'checkout')
-    git_config_global('alias.dog', 'log --decorate --oneline --graph --all')
-    git_config_global('alias.punch', 'push --force')
-    git_config_global('color.ui', 'true')
-    git_config_global('core.autocrlf', 'input')
-    git_config_global('push.default', 'simple')
-
     make_symlink 'gitignore'
-    git_config_global('core.excludesfile', (home + '.gitignore'))
+    make_symlink 'gitconfig'
   end
 
   task :vim do
