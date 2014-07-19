@@ -1,6 +1,9 @@
 # TODO
 #
-# gem install lunchy
+# Set /usr/local/bin first in path (/etc/paths)
+# Ctags: brew install ctags, ...
+# Install Inconsolata font and use in iTerm (14 pt)
+# Colorschemes: gruvbox
 # rubymine settings: camelhumps, confirm exit, code style, line numbering, ^R should map to rename
 # sizeup
 ## Start SizeUp at login
@@ -10,7 +13,6 @@
 ## Don’t show the preferences window on next start
 #defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
 #
-# configuration like wrapper around plist domains, finder, safari etc?
 # wallpapers & screensaver
 #
 # iterm numpad keys, always show tab (messes up sizeup otherwise)
