@@ -133,9 +133,8 @@ module Homebrew
         system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
 
         # TODO Ideally, yield to task and perform this there
-        system 'brew tap phinze/cask'
+        system 'brew tap caskrom/cask'
         system 'brew install brew-cask'
-        system 'brew tap caskroom/versions'
       end
     end
   end
@@ -176,9 +175,7 @@ def cask_install(*args, &block)
 end
 
 task 'readline' do
-  # Readline 6.3 broke compatibility with ruby build, use 6.2 version instead.
-   system 'brew install https://raw.githubusercontent.com/Homebrew/homebrew/0181c8a1633353affefabe257c170edbd6d7c008/Library/Formula/readline.rb'
-   system 'brew pin readline'
+   system 'brew install readline'
 end
 
 brew_install 'ruby-build'
@@ -248,8 +245,8 @@ namespace :install do
     mkdir_p home('Repos')
   end
 
-  rbenv_install :ruby_2_1, '2.1.1'
-  rbenv_install :ruby_2_0, '2.0.0-p451', true
+  rbenv_install :ruby_2_1, '2.1.2'
+  rbenv_install :ruby_2_0, '2.0.0-p481', true
 
   brew_install :git do
     git_config_global('user.email', 'joakim.erelt@gmail.com')
@@ -279,11 +276,12 @@ namespace :install do
   cask_install 'sublime-text' do
     sublime_user_dir = home('Library/Application Support/Sublime Text 2/Packages/User')
     rm_rf sublime_user_dir
+    mkdir_p home('Library/Application Support/Sublime Text 2/Packages')
     ln_sf dotfiles_dir.join('sublimetext2'), sublime_user_dir
     # TODO Hide Minimap
   end
 
-  cask_install :pckeyboardhack do
+  cask_install :seil do
     # Disable the caps lock key
     #
     # Caveat:
@@ -294,7 +292,7 @@ namespace :install do
     `defaults -currentHost write -g com.apple.keyboard.modifiermapping.1452-592-0 -array '<dict><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer><key>HIDKeyboardModifierMappingDst</key><integer>-1</integer></dict>'`
 
     # Map caps lock to escape
-    defaults 'org.pqrs.PCKeyboardHack' do
+    defaults 'org.pqrs.Seil' do
        write 'sysctl', { 'enable_capslock' => true, 'keycode_capslock' => 53 }
     end
   end
@@ -328,7 +326,7 @@ namespace :install do
   task :extras => [:wget, :the_silver_searcher, :spotify, :sourcetree, :sizeup, 'the-unarchiver', 'hex-fiend']
 
   desc 'Install basic stuff'
-  task :default => [:bootstrap, :git, :vim, 'sublime-text', :pckeyboardhack]
+  task :default => [:bootstrap, :git, :vim, 'sublime-text', :seil]
 
   def dotfiles_dir(*args)
     home('.dotfiles', *args)
