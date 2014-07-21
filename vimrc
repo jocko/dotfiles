@@ -1,4 +1,5 @@
-execute pathogen#infect()
+call pathogen#infect()
+call pathogen#helptags()
 
 set tabstop=2 shiftwidth=2
 set expandtab 
