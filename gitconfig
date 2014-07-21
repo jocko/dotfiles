@@ -6,3 +6,7 @@ email = joakim.erelt@gmail.com
 co = checkout
 st = status
 dog = log --decorate --oneline --graph --all
+ctags = !.git/hooks/ctags
+
+[init]
+templatedir = ~/.dotfiles/git-template
