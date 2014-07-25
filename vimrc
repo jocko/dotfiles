@@ -8,7 +8,8 @@ let mapleader=" "
 
 set number
 
-set hlsearch 
+" Cannot get ctrl-l to work correctly. It is set by sensible but have stopped working for some reason.
+" set hlsearch 
 set incsearch
 set ignorecase
 set smartcase 
