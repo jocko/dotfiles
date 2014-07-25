@@ -20,3 +20,6 @@
 [submodule "vim/bundle/neocomplete.vim"]
 	path = vim/bundle/neocomplete.vim
 	url = git@github.com:Shougo/neocomplete.vim.git
+[submodule "vim/bundle/Command-T"]
+	path = vim/bundle/Command-T
+	url = git@github.com:wincent/Command-T.git
