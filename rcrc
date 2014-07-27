@@ -1,0 +1,3 @@
+EXCLUDES="sublimetext2 rubymine iterm2"
+SYMLINK_DIRS="vim"
+
