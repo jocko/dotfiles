@@ -2,17 +2,19 @@ call pathogen#infect()
 call pathogen#helptags()
 
 set tabstop=2 shiftwidth=2
-set expandtab 
- 
+set expandtab
+
 let mapleader=" "
 
 set number
 
-" Cannot get ctrl-l to work correctly. It is set by sensible but have stopped working for some reason.
-" set hlsearch 
+" Show invisibles
+set list
+set listchars=tab:▸\ ,eol:¬
+
 set incsearch
 set ignorecase
-set smartcase 
+set smartcase
 
 " Theme
 if !has("gui_running")
@@ -22,10 +24,10 @@ colorscheme gruvbox
 set background=dark
 
 " Split navigation, ctrl-j, ctrl-k, etc
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
