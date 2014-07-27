@@ -56,3 +56,5 @@ alias psa="ps aux"
 alias df='df -h'
 alias curl='noglob curl'
 alias copy="tr -d '\n' | pbcopy"
+alias b='bundle'
+
