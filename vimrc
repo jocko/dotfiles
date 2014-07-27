@@ -23,11 +23,10 @@ endif
 colorscheme gruvbox
 set background=dark
 
-" Split navigation, ctrl-j, ctrl-k, etc
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
+" Make active vertical split bigger than the others
+set winheight=11
+set winminheight=11
+set winheight=999
 
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
