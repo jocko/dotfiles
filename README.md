@@ -1,1 +1,1 @@
-xcode-select --install # Install command line tools
+```bash$ curl -fsSL https://raw.github.com/jocko/dotfiles/bootstrap/go.sh```
