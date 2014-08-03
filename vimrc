@@ -12,6 +12,8 @@ set number
 set list
 set listchars=tab:▸\ ,eol:¬
 
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
 set incsearch
 set ignorecase
 set smartcase
