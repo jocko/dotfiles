@@ -25,11 +25,6 @@ endif
 colorscheme gruvbox
 set background=dark
 
-" Make active vertical split bigger than the others
-set winheight=11
-set winminheight=11
-set winheight=999
-
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
