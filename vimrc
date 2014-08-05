@@ -22,6 +22,8 @@ set tabstop=2 shiftwidth=2
 set expandtab
 set smarttab
 set backspace=indent,eol,start
+set ttimeout
+set ttimeoutlen=100
 set number
 set hidden
 set autoindent
