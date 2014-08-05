@@ -46,8 +46,6 @@ nnoremap <leader><leader> <c-^>
 nnoremap <CR> :nohlsearch<cr>
 map <leader>y "*y
 
-" 
-" " Neocomplete
-" let g:neocomplete#enable_at_startup = 1
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" 
+let g:neocomplete#enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
