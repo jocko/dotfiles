@@ -1,9 +1,6 @@
 [submodule "vim/bundle/gruvbox"]
 	path = vim/bundle/gruvbox
 	url = git@github.com:morhetz/gruvbox.git
-[submodule "vim/bundle/vim-sensible"]
-	path = vim/bundle/vim-sensible
-	url = git@github.com:tpope/vim-sensible.git
 [submodule "vim/bundle/vim-tmux-navigator"]
 	path = vim/bundle/vim-tmux-navigator
 	url = git@github.com:christoomey/vim-tmux-navigator.git
