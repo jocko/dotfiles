@@ -8,10 +8,13 @@ let mapleader=" "
 
 set number
 
+" Edit the alternate file
+nnoremap <leader><leader> <c-^>
+
 " Show invisibles
 set list
 set listchars=tab:▸\ ,eol:¬
-
+" Show trailing ws
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
 set incsearch
