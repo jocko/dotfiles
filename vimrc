@@ -1,33 +1,53 @@
+set nocompatible
+
 call pathogen#infect()
 call pathogen#helptags()
 
-set tabstop=2 shiftwidth=2
-set expandtab
-
-let mapleader=" "
-
-set number
-
-" Edit the alternate file
-nnoremap <leader><leader> <c-^>
-
-" Show invisibles
-set list
-set listchars=tab:▸\ ,eol:¬
-" Show trailing ws
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-
-set incsearch
-set ignorecase
-set smartcase
-
-" Theme
 if !has("gui_running")
   let g:gruvbox_italic=0
 endif
-colorscheme gruvbox
 set background=dark
+color gruvbox
 
-" Neocomplete
-let g:neocomplete#enable_at_startup = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+if has('autocmd')
+  filetype plugin indent on
+endif
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
+
+let mapleader=" "
+
+set tabstop=2 shiftwidth=2
+set expandtab
+set smarttab
+set backspace=indent,eol,start
+set number
+set hidden
+set autoindent
+set nrformats-=octal
+set laststatus=2
+set ruler
+set showcmd
+set wildmenu
+set wildmode=longest:full
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set splitbelow
+set splitright
+
+set list
+set listchars=tab:▸\ ,eol:¬
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
+nnoremap <leader><leader> <c-^>
+nnoremap <CR> :nohlsearch<cr>
+map <leader>y "*y
+
+" 
+" " Neocomplete
+" let g:neocomplete#enable_at_startup = 1
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" 
