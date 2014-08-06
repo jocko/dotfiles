@@ -48,3 +48,7 @@ nnoremap <leader><leader> <c-^>
 nnoremap <CR> :nohlsearch<cr>
 map <leader>y "*y
 
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
+
