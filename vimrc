@@ -56,6 +56,7 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 endif
 
 " Experimental stuff
+let g:loaded_golden_ratio = 1
 map <leader>o :CtrlP<CR>
 nnoremap <leader>w :w<CR>
 map <leader>gl :CtrlP lib<cr>
@@ -71,4 +72,6 @@ autocmd FileType ruby
       \ elseif !exists('b:dispatch') |
       \   let b:dispatch = 'ruby -wc %' |
       \ endif
+nnoremap <silent> + :resize +5<CR>
+nnoremap <silent> - :resize -5<CR>
 
