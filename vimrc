@@ -48,6 +48,8 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 nnoremap <leader><leader> <c-^>
 nnoremap <CR> :nohlsearch<cr>
 map <leader>y "*y
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
