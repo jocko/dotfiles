@@ -38,8 +38,6 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-set splitbelow
-set splitright
 
 set list
 set listchars=tab:▸\ ,eol:¬
@@ -74,4 +72,8 @@ autocmd FileType ruby
       \ endif
 nnoremap <silent> + :resize +5<CR>
 nnoremap <silent> - :resize -5<CR>
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
+" Does not play well with fugitive
+"set splitbelow
+"set splitright
