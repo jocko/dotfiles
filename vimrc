@@ -51,14 +51,24 @@ map <leader>y "*y
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
+
 " Experimental stuff
 map <leader>o :CtrlP<CR>
 nnoremap <leader>w :w<CR>
 map <leader>gl :CtrlP lib<cr>
 map <leader>gs :CtrlP spec<cr>
 set scrolloff=4
-
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
+autocmd FileType ruby compiler ruby
+autocmd FileType ruby
+      \ let b:start = executable('pry') ? 'pry -r "%:p"' : 'irb -r "%:p"' |
+      \ if expand('%') =~# '_test\.rb$' |
+      \   let b:dispatch = 'testrb %' |
+      \ elseif expand('%') =~# '_spec\.rb$' |
+      \   let b:dispatch = 'rspec %' |
+      \ elseif !exists('b:dispatch') |
+      \   let b:dispatch = 'ruby -wc %' |
+      \ endif
 
