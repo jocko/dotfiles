@@ -6,6 +6,7 @@ call pathogen#helptags()
 if !has("gui_running")
   let g:gruvbox_italic=0
 endif
+let g:gruvbox_termcolors=16
 set background=dark
 color gruvbox
 
