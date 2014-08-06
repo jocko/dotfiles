@@ -51,6 +51,13 @@ map <leader>y "*y
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
+" Experimental stuff
+map <leader>o :CtrlP<CR>
+nnoremap <leader>w :w<CR>
+map <leader>gl :CtrlP lib<cr>
+map <leader>gs :CtrlP spec<cr>
+set scrolloff=4
+
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
