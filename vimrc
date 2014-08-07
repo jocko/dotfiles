@@ -40,13 +40,17 @@ set ignorecase
 set smartcase
 
 set list
-set listchars=tab:▸\ ,eol:¬
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+set listchars=tab:▸\ ,eol:¬,trail:·
+augroup trailing
+  au!
+  au InsertEnter * :set listchars-=trail:·
+  au InsertLeave * :set listchars+=trail:·
+augroup END
 
 nnoremap <leader><leader> <c-^>
 nnoremap <CR> :nohlsearch<cr>
 map <leader>y "*y
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>ev :belowright split $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
@@ -57,23 +61,37 @@ endif
 let g:loaded_golden_ratio = 1
 map <leader>o :CtrlP<CR>
 nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>x :x<CR>
 map <leader>gl :CtrlP lib<cr>
 map <leader>gs :CtrlP spec<cr>
 set scrolloff=4
-autocmd FileType ruby compiler ruby
-autocmd FileType ruby
-      \ let b:start = executable('pry') ? 'pry -r "%:p"' : 'irb -r "%:p"' |
-      \ if expand('%') =~# '_test\.rb$' |
-      \   let b:dispatch = 'testrb %' |
-      \ elseif expand('%') =~# '_spec\.rb$' |
-      \   let b:dispatch = 'rspec %' |
-      \ elseif !exists('b:dispatch') |
-      \   let b:dispatch = 'ruby -wc %' |
-      \ endif
+"autocmd FileType ruby compiler ruby
+"autocmd FileType ruby
+"      \ let b:start = executable('pry') ? 'pry -r "%:p"' : 'irb -r "%:p"' |
+"      \ if expand('%') =~# '_test\.rb$' |
+"      \   let b:dispatch = 'testrb %' |
+"      \ elseif expand('%') =~# '_spec\.rb$' |
+"      \   let b:dispatch = 'rspec %' |
+"      \ elseif !exists('b:dispatch') |
+"      \   let b:dispatch = 'ruby -wc %' |
+"      \ endif
 nnoremap <silent> + :resize +5<CR>
 nnoremap <silent> - :resize -5<CR>
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-" Does not play well with fugitive
-"set splitbelow
-"set splitright
+function! s:StripWhitespace( line1, line2 )
+  " Save the current search and cursor position
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+
+  " Strip the whitespace
+  silent! execute ':' . a:line1 . ',' . a:line2 . 's/\s\+$//e'
+
+  " Restore the saved search and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+command! -range=% StripWhitespace call <SID>StripWhitespace( <line1>, <line2>)
+
