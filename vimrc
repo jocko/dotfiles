@@ -3,6 +3,9 @@ set nocompatible
 call pathogen#infect()
 call pathogen#helptags()
 
+set autoread
+autocmd FocusGained,BufEnter * checktime
+
 if !has("gui_running")
   let g:gruvbox_italic=0
 endif
