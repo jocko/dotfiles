@@ -112,6 +112,7 @@ let mapleader=" "
 
 nnoremap <leader>w :w<CR>
 nnoremap q :q<CR>
+nnoremap <leader>q :Bdelete<CR>
 "nnoremap Q :qa<CR>
 "nnoremap <leader>x :x<CR>
 
