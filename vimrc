@@ -137,6 +137,7 @@ nnoremap <leader>ra :call RunAllSpecs()<CR> "all
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gc :Gcommit<CR>
 
 "nnoremap <leader><leader> <c-^>
 "nnoremap <CR> :nohlsearch<cr>
