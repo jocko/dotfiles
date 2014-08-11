@@ -64,8 +64,8 @@ set scrolloff=4
 "      \ elseif !exists('b:dispatch') |
 "      \   let b:dispatch = 'ruby -wc %' |
 "      \ endif
-nnoremap <silent> + :resize +5<CR>
-nnoremap <silent> - :resize -5<CR>
+"nnoremap <silent> + :resize +5<CR>
+"nnoremap <silent> - :resize -5<CR>
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 function! s:StripWhitespace( line1, line2 )
