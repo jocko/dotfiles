@@ -37,3 +37,6 @@
 [submodule "vim/bundle/vim-rspec"]
 	path = vim/bundle/vim-rspec
 	url = git@github.com:thoughtbot/vim-rspec.git
+[submodule "vim/bundle/vim-projectionist"]
+	path = vim/bundle/vim-projectionist
+	url = git@github.com:tpope/vim-projectionist.git
