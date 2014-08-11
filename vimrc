@@ -67,6 +67,7 @@ set scrolloff=4
 "nnoremap <silent> + :resize +5<CR>
 "nnoremap <silent> - :resize -5<CR>
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+set undofile
 
 function! s:StripWhitespace( line1, line2 )
   " Save the current search and cursor position
@@ -82,7 +83,6 @@ function! s:StripWhitespace( line1, line2 )
   call cursor(l, c)
 endfunction
 command! -range=% StripWhitespace call <SID>StripWhitespace( <line1>, <line2>)
-set undofile
 
 function! My_TabComplete()
   let line = getline('.')                         " curline
