@@ -52,20 +52,7 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 endif
 
 " Experimental stuff
-let g:loaded_golden_ratio = 1
-set scrolloff=4
-"autocmd FileType ruby compiler ruby
-"autocmd FileType ruby
-"      \ let b:start = executable('pry') ? 'pry -r "%:p"' : 'irb -r "%:p"' |
-"      \ if expand('%') =~# '_test\.rb$' |
-"      \   let b:dispatch = 'testrb %' |
-"      \ elseif expand('%') =~# '_spec\.rb$' |
-"      \   let b:dispatch = 'rspec %' |
-"      \ elseif !exists('b:dispatch') |
-"      \   let b:dispatch = 'ruby -wc %' |
-"      \ endif
-"nnoremap <silent> + :resize +5<CR>
-"nnoremap <silent> - :resize -5<CR>
+set scrolloff=5
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set undofile
 
@@ -113,11 +100,8 @@ let mapleader=" "
 nnoremap <leader>w :w<CR>
 nnoremap q :q<CR>
 nnoremap <leader>q :Bdelete<CR>
-"nnoremap Q :qa<CR>
-"nnoremap <leader>x :x<CR>
 
 " Easy motion
-" TODO Consider mapping these directly to f, t, / etc.
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
