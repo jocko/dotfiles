@@ -143,6 +143,10 @@ nnoremap <leader>gb :Gblame<CR>
 "map <leader>y "*y
 "nmap <silent> <leader>ev :belowright split $MYVIMRC<CR>
 "nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <leader>sh :leftabove vnew<CR>
+nnoremap <leader>sl :rightbelow vnew<CR>
+nnoremap <leader>sk :leftabove new<CR>
+nnoremap <leader>sj :rightbelow new<CR>
 
 map <leader>o :CtrlP<CR>
 map <leader>O :CtrlPBuffer<CR>
