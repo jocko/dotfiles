@@ -31,3 +31,6 @@
 [submodule "vim/bundle/vim-easymotion"]
 	path = vim/bundle/vim-easymotion
 	url = git@github.com:Lokaltog/vim-easymotion.git
+[submodule "vim/bundle/vim-rake"]
+	path = vim/bundle/vim-rake
+	url = git@github.com:tpope/vim-rake.git
