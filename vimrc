@@ -20,8 +20,6 @@ if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
 
-let mapleader=" "
-
 set tabstop=2 shiftwidth=2
 set expandtab
 set smarttab
@@ -36,8 +34,7 @@ set laststatus=2
 set ruler
 set showcmd
 set wildmenu
-set wildmode=longest:full
-set hlsearch
+set wildmode=longest,full
 set incsearch
 set ignorecase
 set smartcase
@@ -50,24 +47,12 @@ augroup trailing
   au InsertLeave * :set listchars+=trail:·
 augroup END
 
-nnoremap <leader><leader> <c-^>
-nnoremap <CR> :nohlsearch<cr>
-map <leader>y "*y
-nmap <silent> <leader>ev :belowright split $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
 " Experimental stuff
 let g:loaded_golden_ratio = 1
-map <leader>o :CtrlP<CR>
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q<CR>
-nnoremap <leader>x :x<CR>
-map <leader>gl :CtrlP lib<cr>
-map <leader>gs :CtrlP spec<cr>
 set scrolloff=4
 "autocmd FileType ruby compiler ruby
 "autocmd FileType ruby
@@ -97,4 +82,69 @@ function! s:StripWhitespace( line1, line2 )
   call cursor(l, c)
 endfunction
 command! -range=% StripWhitespace call <SID>StripWhitespace( <line1>, <line2>)
+set undofile
 
+function! My_TabComplete()
+  let line = getline('.')                         " curline
+  let substr = strpart(line, -1, col('.')+1)      " from start to cursor
+  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return "\<tab>"
+  endif
+  let bool = match(substr, '\.')                  " position of period, if any  
+  if (bool==-1)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  else
+    return "\<C-X>\<C-U>"                         " plugin matching 
+  endif
+endfunction
+"inoremap <C-k> <C-R>=My_TabComplete()<CR>
+"let g:rspec_command = "Dispatch bundle exec rspec -f d -c {spec}"
+let g:rspec_command = "w | Dispatch rspec {spec}"
+
+let g:toggle_list_no_mappings = 1
+"nmap <script> <silent> <leader>z :call ToggleQuickfixList()<CR>
+
+let g:EasyMotion_do_mapping = 0
+
+" Leader bindings
+let mapleader=" "
+
+nnoremap <leader>w :w<CR>
+nnoremap q :q<CR>
+"nnoremap Q :qa<CR>
+"nnoremap <leader>x :x<CR>
+
+" Easy motion
+" TODO Consider mapping these directly to f, t, / etc.
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+let g:EasyMotion_startofline = 1
+
+" Rspec
+nnoremap <leader>rs :call RunCurrentSpecFile()<CR> "spec
+nnoremap <leader>re :call RunNearestSpec()<CR> "example
+nnoremap <leader>rr :call RunLastSpec()<CR> "rerun
+nnoremap <leader>ra :call RunAllSpecs()<CR> "all
+
+" Git
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gb :Gblame<CR>
+
+"nnoremap <leader><leader> <c-^>
+"nnoremap <CR> :nohlsearch<cr>
+"map <leader>y "*y
+"nmap <silent> <leader>ev :belowright split $MYVIMRC<CR>
+"nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+map <leader>o :CtrlP<CR>
+map <leader>O :CtrlPBuffer<CR>
+"map <leader>gl :CtrlP lib<cr>
+"map <leader>gs :CtrlP spec<cr>
