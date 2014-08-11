@@ -91,11 +91,11 @@ function! My_TabComplete()
   if (strlen(substr)==0)                          " nothing to match on empty string
     return "\<tab>"
   endif
-  let bool = match(substr, '\.')                  " position of period, if any  
+  let bool = match(substr, '\.')                  " position of period, if any
   if (bool==-1)
     return "\<C-X>\<C-P>"                         " existing text matching
   else
-    return "\<C-X>\<C-U>"                         " plugin matching 
+    return "\<C-X>\<C-U>"                         " plugin matching
   endif
 endfunction
 "inoremap <C-k> <C-R>=My_TabComplete()<CR>
