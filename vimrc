@@ -127,8 +127,8 @@ nnoremap <leader>gc :Gcommit<CR>
 "nnoremap <leader><leader> <c-^>
 "nnoremap <CR> :nohlsearch<cr>
 "map <leader>y "*y
-"nmap <silent> <leader>ev :belowright split $MYVIMRC<CR>
-"nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" Splits
 nnoremap <leader>sh :leftabove vnew<CR>
 nnoremap <leader>sl :rightbelow vnew<CR>
 nnoremap <leader>sk :leftabove new<CR>
@@ -138,6 +138,9 @@ map <leader>o :CtrlP<CR>
 map <leader>O :CtrlPBuffer<CR>
 "map <leader>gl :CtrlP lib<cr>
 "map <leader>gs :CtrlP spec<cr>
+
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 noremap H ^
 noremap L g_
