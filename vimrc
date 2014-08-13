@@ -113,10 +113,10 @@ map <Leader>h <Plug>(easymotion-linebackward)
 let g:EasyMotion_startofline = 1
 
 " Rspec
-nnoremap <leader>rs :call RunCurrentSpecFile()<CR> "spec
-nnoremap <leader>re :call RunNearestSpec()<CR> "example
-nnoremap <leader>rr :call RunLastSpec()<CR> "rerun
-nnoremap <leader>ra :call RunAllSpecs()<CR> "all
+nnoremap <leader>rs :call RunCurrentSpecFile()<CR>
+nnoremap <leader>re :call RunNearestSpec()<CR>
+nnoremap <leader>rr :call RunLastSpec()<CR>
+nnoremap <leader>ra :call RunAllSpecs()<CR>
 
 " Git
 nnoremap <leader>gd :Gdiff<CR>
