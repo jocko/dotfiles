@@ -138,3 +138,7 @@ map <leader>o :CtrlP<CR>
 map <leader>O :CtrlPBuffer<CR>
 "map <leader>gl :CtrlP lib<cr>
 "map <leader>gs :CtrlP spec<cr>
+
+noremap H ^
+noremap L g_
+
