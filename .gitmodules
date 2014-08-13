@@ -46,3 +46,6 @@
 [submodule "vim/bundle/vim-sorcerer"]
 	path = vim/bundle/vim-sorcerer
 	url = git@github.com:adlawson/vim-sorcerer.git
+[submodule "vim/bundle/vim-tags"]
+	path = vim/bundle/vim-tags
+	url = git@github.com:szw/vim-tags.git
