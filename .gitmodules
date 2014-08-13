@@ -49,3 +49,6 @@
 [submodule "vim/bundle/vim-tags"]
 	path = vim/bundle/vim-tags
 	url = git@github.com:szw/vim-tags.git
+[submodule "vim/bundle/Apprentice"]
+	path = vim/bundle/Apprentice
+	url = git@github.com:romainl/Apprentice.git
