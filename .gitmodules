@@ -52,3 +52,6 @@
 [submodule "vim/bundle/Apprentice"]
 	path = vim/bundle/Apprentice
 	url = git@github.com:romainl/Apprentice.git
+[submodule "vim/bundle/vim-startify"]
+	path = vim/bundle/vim-startify
+	url = git@github.com:mhinz/vim-startify.git
