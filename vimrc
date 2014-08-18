@@ -145,3 +145,16 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 noremap H ^
 noremap L g_
 
+let g:startify_custom_header = [ 
+      \ "               _|\\ _/|_,      ",
+      \ "             ,((\\\\``-\\\\\\\\_    ",
+      \ "           ,(())      `))\\    ",
+      \ "         ,(()))       ,_ \\    ",
+      \ "        ((())'   |        \\   ",
+      \ "        )))))     >.__     \\  ",
+      \ "        ((('     /    `-. .c| ",
+      \ "                /        `-`' ",
+      \ "",
+      \]
+
+let g:ctrlp_reuse_window  = 'startify'
