@@ -53,7 +53,7 @@ endif
 
 " Experimental stuff
 set scrolloff=5
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set undofile
 
 function! s:StripWhitespace( line1, line2 )
@@ -145,7 +145,7 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 noremap H ^
 noremap L g_
 
-let g:startify_custom_header = [ 
+let g:startify_custom_header = [
       \ "               _|\\ _/|_,      ",
       \ "             ,((\\\\``-\\\\\\\\_    ",
       \ "           ,(())      `))\\    ",
@@ -158,3 +158,17 @@ let g:startify_custom_header = [
       \]
 
 let g:ctrlp_reuse_window  = 'startify'
+
+highlight OverLength ctermbg=red ctermfg=white
+match OverLength /\%120v.\+/
+
+" TODO This does not restore cursor to previous position
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
