@@ -126,7 +126,7 @@ nnoremap <leader>gc :Gcommit<CR>
 
 "nnoremap <leader><leader> <c-^>
 "nnoremap <CR> :nohlsearch<cr>
-"map <leader>y "*y
+map <leader>y "*y
 
 " Splits
 nnoremap <leader>sh :leftabove vnew<CR>
