@@ -57,4 +57,4 @@ alias df='df -h'
 alias curl='noglob curl'
 alias copy="tr -d '\n' | pbcopy"
 alias b='bundle'
-
+alias which="which -a"
