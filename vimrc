@@ -51,6 +51,8 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
+let mapleader=" "
+
 " Experimental stuff
 set scrolloff=5
 "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
@@ -89,55 +91,98 @@ endfunction
 "let g:rspec_command = "Dispatch bundle exec rspec -f d -c {spec}"
 let g:rspec_command = "w | Dispatch rspec {spec}"
 
-let g:toggle_list_no_mappings = 1
-"nmap <script> <silent> <leader>z :call ToggleQuickfixList()<CR>
+augroup ft_vim
+  au!
+  au FileType vim setlocal foldmethod=marker
+augroup END
 
+" EasyMotion {{{
+
+" Disable default mappings
 let g:EasyMotion_do_mapping = 0
 
-" Leader bindings
-let mapleader=" "
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+" Note to self: cl is equivalent to s, and cc to S.
+" nmap s <Plug>(easymotion-s)
+" map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+" map <Leader>h <Plug>(easymotion-linebackward)
+
+" }}}
+
+" The Silver Searcher {{{
+
+if executable('ag')
+  " CtrlP, meet ag.
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " Disable cache when using ag, because apparently ag is fast as a space fart.
+  let g:ctrlp_use_caching = 0
+
+  " TODO I think I want to do some leader mappings starting with 'a'
+endif
+
+" }}}
+
+" Sneak {{{
+
+" TODO
+
+" }}}
+
+"nnoremap <leader><leader> <c-^>
+" Copy to system clipboard
+map <leader>y "*y
 
 nnoremap <leader>w :w<CR>
 nnoremap q :q<CR>
 nnoremap <leader>q :Bdelete<CR>
 
-" Easy motion
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
-let g:EasyMotion_startofline = 1
+" Rspec {{{
 
-" Rspec
 nnoremap <leader>rs :call RunCurrentSpecFile()<CR>
 nnoremap <leader>re :call RunNearestSpec()<CR>
 nnoremap <leader>rr :call RunLastSpec()<CR>
 nnoremap <leader>ra :call RunAllSpecs()<CR>
 
-" Git
+" }}}
+" Git {{{
+
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
 
-"nnoremap <leader><leader> <c-^>
-"nnoremap <CR> :nohlsearch<cr>
-map <leader>y "*y
+" }}}
+" Creating splits {{{
 
-" Splits
 nnoremap <leader>sh :leftabove vnew<CR>
 nnoremap <leader>sl :rightbelow vnew<CR>
 nnoremap <leader>sk :leftabove new<CR>
 nnoremap <leader>sj :rightbelow new<CR>
 
+" }}}
+" CtrlP {{{
+
+" TODO I want an outline of the current file, and grepping
+
+" TODO Not entirely happy with these
 map <leader>o :CtrlP<CR>
 map <leader>O :CtrlPBuffer<CR>
 "map <leader>gl :CtrlP lib<cr>
 "map <leader>gs :CtrlP spec<cr>
+
+" Do not open stuff in my startify window
+let g:ctrlp_reuse_window  = 'startify'
+
+" Always open files in a new window
+let g:ctrlp_switch_buffer = 0
+
+" }}}
 
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
@@ -156,8 +201,6 @@ let g:startify_custom_header = [
       \ "                /        `-`' ",
       \ "",
       \]
-
-let g:ctrlp_reuse_window  = 'startify'
 
 highlight OverLength ctermbg=red ctermfg=white
 match OverLength /\%120v.\+/
