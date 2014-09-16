@@ -73,3 +73,6 @@
 [submodule "vim/bundle/twilight256.vim"]
 	path = vim/bundle/twilight256.vim
 	url = git@github.com:vim-scripts/twilight256.vim.git
+[submodule "vim/bundle/vim-eunuch"]
+	path = vim/bundle/vim-eunuch
+	url = git@github.com:tpope/vim-eunuch.git
