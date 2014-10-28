@@ -11,7 +11,7 @@ if !has("gui_running")
 endif
 let g:gruvbox_termcolors=16
 set background=dark
-color gruvbox
+color twilight256
 
 if has('autocmd')
   filetype plugin indent on
