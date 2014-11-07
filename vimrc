@@ -58,6 +58,8 @@ set scrolloff=5
 "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set undofile
 
+au FileType Dockerfile set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+
 function! s:StripWhitespace( line1, line2 )
   " Save the current search and cursor position
   let _s=@/
