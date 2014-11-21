@@ -51,6 +51,7 @@ unsetopt beep
 export LANG=en_US.UTF-8
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+source /usr/local/share/zsh/site-functions/_aws
 
 alias psa="ps aux"
 alias df='df -h'
