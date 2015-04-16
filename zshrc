@@ -60,5 +60,7 @@ alias curl='noglob curl'
 alias copy="tr -d '\n' | pbcopy"
 alias b='bundle'
 alias which="which -a"
+alias glog="git log --graph --decorate --oneline"
+alias gloga="git log --graph --decorate --oneline --all"
 
 export PATH="/usr/local/sbin:$PATH"
