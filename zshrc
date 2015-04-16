@@ -64,3 +64,7 @@ alias glog="git log --graph --decorate --oneline"
 alias gloga="git log --graph --decorate --oneline --all"
 
 export PATH="/usr/local/sbin:$PATH"
+
+function mcd() {
+  mkdir -p "$1" && cd "$1";
+}
