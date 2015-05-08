@@ -60,3 +60,5 @@ alias curl='noglob curl'
 alias copy="tr -d '\n' | pbcopy"
 alias b='bundle'
 alias which="which -a"
+
+export PATH="/usr/local/sbin:$PATH"
