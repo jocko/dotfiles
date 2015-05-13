@@ -36,6 +36,7 @@ set showcmd
 set wildmenu
 set wildmode=longest,full
 set incsearch
+set hlsearch
 set ignorecase
 set smartcase
 
@@ -103,10 +104,10 @@ augroup END
 " Disable default mappings
 let g:EasyMotion_do_mapping = 0
 
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)
 " Note to self: cl is equivalent to s, and cc to S.
 " nmap s <Plug>(easymotion-s)
 " map <Leader>l <Plug>(easymotion-lineforward)
