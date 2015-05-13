@@ -62,9 +62,19 @@ alias b='bundle'
 alias which="which -a"
 alias glog="git log --graph --decorate --oneline"
 alias gloga="git log --graph --decorate --oneline --all"
+alias fig="docker-compose"
 
 export PATH="/usr/local/sbin:$PATH"
 
 function mcd() {
   mkdir -p "$1" && cd "$1";
 }
+
+_direnv_hook() {
+  eval "$(direnv export zsh)";
+}
+typeset -ag precmd_functions
+if [[ -z $precmd_functions[(r)_direnv_hook] ]]; then
+  precmd_functions+=_direnv_hook;
+fi
+
