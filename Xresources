@@ -1,0 +1,7 @@
+xterm*faceName:           Hack Regular:size=12
+!xterm*faceName:           xft:hack:medium:style=regular:size=12
+!xterm*font:           -*-hack-medium-r-*-*-12-*-*-*-*-*-*-*
+!xterm*font:              -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
+!xterm*faceName: -misc-fixed-medium-r-semicondensed-*-17-120-*-*-*-*-*-*
+URxvt.font: xft:Terminus:size=12
+URxvt.letterSpace: -5
