@@ -1,0 +1,26 @@
+[user]
+    email = joakim.erelt@gmail.com
+    name = Joakim Erelt
+[alias]
+    co = checkout
+    st = status
+    dog = log --decorate --oneline --graph --all
+    ctags = !.git/hooks/ctags
+    st = status
+    co = checkout
+    dog = log --decorate --oneline --graph --all
+    punch = push --force
+[color]
+    ui = true
+[core]
+    autocrlf = input
+    editor = vim
+    excludesfile = ~/.gitignore
+[push]
+    default = simple
+[difftool]
+    prompt = false
+[mergetool]
+    prompt = false
+[diff]
+  tool = vimdiff
