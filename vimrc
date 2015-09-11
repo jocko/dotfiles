@@ -7,7 +7,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim'
-Plugin 'rking/ag.vim'
+Plugin 'dyng/ctrlsf.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'vim-ruby/vim-ruby'
@@ -15,6 +15,9 @@ Plugin 'moll/vim-bbye'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-vinegar'
 Plugin 'mbbill/undotree'
+Plugin 'tpope/vim-commentary'
+Plugin 'sjl/vitality.vim'
+Plugin 'szw/vim-tags'
 
 call vundle#end()
 filetype plugin indent on
@@ -36,10 +39,13 @@ set ttimeoutlen=100
 set hidden
 set laststatus=2
 set wildmenu
-set wildmode=longest:full
+set wildmode=longest:full,full
 set scrolloff=5
 set undodir=$HOME/.vim/undo
 set undofile
+set backspace=indent,eol,start
+set incsearch
+set hlsearch
 
 set list
 set listchars=tab:▸\ ,eol:¬,trail:·
@@ -83,3 +89,19 @@ map <leader>o :CtrlP<CR>
 map <leader>O :CtrlPBuffer<CR>
 " Always open files in a new window
 let g:ctrlp_switch_buffer = 0
+
+" Ag
+
+" CtrlP, meet ag.
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" Disable cache when using ag, because apparently ag is fast as a space fart.
+let g:ctrlp_use_caching = 0
+
+"nmap     <C-F>f <Plug>CtrlSFPrompt
+"vmap     <C-F>f <Plug>CtrlSFVwordPath
+"vmap     <C-F>F <Plug>CtrlSFVwordExec
+nmap     <C-F>n <Plug>CtrlSFCwordExec
+"nmap     <C-F>p <Plug>CtrlSFPwordPath
+"nnoremap <C-F>o :CtrlSFOpen<CR>
+"nnoremap <C-F>t :CtrlSFToggle<CR>
+"inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
