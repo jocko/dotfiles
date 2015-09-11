@@ -51,6 +51,8 @@ PROMPT="%{$fg[yellow]%}[%*] %{$fg[green]%}[%~]
 %{$fg[blue]%}-> %{$fg[white]%}%# %{$reset_color%}"
 
 setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_find_no_dups
 setopt share_history
 #setopt extendedglob
 #unsetopt autocd beep
