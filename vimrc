@@ -12,11 +12,12 @@ Plugin 'morhetz/gruvbox'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'moll/vim-bbye'
-Plugin 'bling/vim-airline'
+" Plugin 'bling/vim-airline'
+" Plugin 'itchyny/lightline.vim'
 Plugin 'tpope/vim-vinegar'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-commentary'
-Plugin 'sjl/vitality.vim'
+" Plugin 'sjl/vitality.vim'
 Plugin 'szw/vim-tags'
 
 call vundle#end()
@@ -62,6 +63,9 @@ noremap H ^
 " End of line
 noremap L g_
 
+nnoremap j gj
+nnoremap k gk
+
 " EasyMotion
 
 " Disable default mappings
@@ -105,3 +109,14 @@ nmap     <C-F>n <Plug>CtrlSFCwordExec
 "nnoremap <C-F>o :CtrlSFOpen<CR>
 "nnoremap <C-F>t :CtrlSFToggle<CR>
 "inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+let g:lightline.active = {
+      \ 'left': [ [ 'paste' ],
+      \           [ 'readonly', 'filename', 'modified' ] ],
+      \ 'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ],
+      \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+
