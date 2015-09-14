@@ -19,6 +19,8 @@ Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-commentary'
 " Plugin 'sjl/vitality.vim'
 Plugin 'szw/vim-tags'
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
 
 call vundle#end()
 filetype plugin indent on
@@ -113,13 +115,15 @@ nmap     <C-F>n <Plug>CtrlSFCwordExec
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
-let g:lightline.active = {
-      \ 'left': [ [ 'paste' ],
-      \           [ 'readonly', 'filename', 'modified' ] ],
-      \ 'right': [ [ 'lineinfo' ],
-      \            [ 'percent' ],
-      \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+runtime! macros/matchit.vim
+
+" let g:lightline = {
+"       \ 'colorscheme': 'wombat',
+"       \ }
+" let g:lightline.active = {
+"       \ 'left': [ [ 'paste' ],
+"       \           [ 'readonly', 'filename', 'modified' ] ],
+"       \ 'right': [ [ 'lineinfo' ],
+"       \            [ 'percent' ],
+"       \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
 
