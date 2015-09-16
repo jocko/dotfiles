@@ -110,6 +110,9 @@ nmap     <C-F>n <Plug>CtrlSFCwordExec
 "nnoremap <C-F>t :CtrlSFToggle<CR>
 "inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 
+nnoremap <c-]> g<c-]>
+vnoremap <c-]> g<c-]>
+
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
