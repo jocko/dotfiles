@@ -20,7 +20,8 @@ Plugin 'tpope/vim-commentary'
 " Plugin 'sjl/vitality.vim'
 Plugin 'szw/vim-tags'
 Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
+" Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'rhysd/vim-textobj-ruby'
 
 call vundle#end()
 filetype plugin indent on
@@ -103,7 +104,7 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " Disable cache when using ag, because apparently ag is fast as a space fart.
 let g:ctrlp_use_caching = 0
 
-"nmap     <C-F>f <Plug>CtrlSFPrompt
+nmap     <C-F>f <Plug>CtrlSFPrompt
 "vmap     <C-F>f <Plug>CtrlSFVwordPath
 "vmap     <C-F>F <Plug>CtrlSFVwordExec
 nmap     <C-F>n <Plug>CtrlSFCwordExec
