@@ -28,6 +28,9 @@ re-downloaded in order to locate PACKAGE."
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
@@ -53,10 +56,33 @@ re-downloaded in order to locate PACKAGE."
 
 (global-set-key "\C-w" 'backward-kill-word)
 
-(after-load 'ruby-mode
-            (add-hook 'ruby-mode-hook (lambda () (subword-mode 1))))
+(setq ruby-use-smie nil)
+(add-hook 'ruby-mode-hook 'subword-mode)
 
 (require-package 'ace-jump-mode)
+
+(require-package 'expand-region)
+(require 'expand-region)
+
+(require-package 'ido-vertical-mode)
+(require 'ido-vertical-mode)
+(ido-vertical-mode 1)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
+(require-package 'projectile)
+(require 'projectile)
+(projectile-global-mode)
+; (add-hook 'ruby-mode-hook 'projectile-mode)
+
+(require-package 'diminish)
+(require 'diminish)
+(after-load 'diminish (diminish 'projectile-mode))
+(after-load 'undo-tree (diminish 'undo-tree-mode))
+
+(setq evil-want-C-u-scroll t
+      evil-want-C-w-in-emacs-state t)
 
 (require-package 'evil)
 
@@ -64,10 +90,16 @@ re-downloaded in order to locate PACKAGE."
 (global-evil-leader-mode 1)
 
 (evil-leader/set-leader "SPC")
-
-(evil-set-initial-state 'fundamental-mode 'emacs)
+(evil-leader/set-key
+  "b" 'switch-to-buffer
+  "f" 'find-file
+  "j" 'ace-jump-mode
+  "o" 'projectile-find-file
+  "w" 'save-buffer)
 
 (evil-mode t)
+
+(evil-set-initial-state 'fundamental-mode 'emacs)
 
 ; (setq inhibit-startup-screen t
 ;       initial-scratch-message nil)
