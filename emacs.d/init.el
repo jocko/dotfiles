@@ -81,12 +81,19 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'expand-region)
 (require 'expand-region)
 
+(require-package 'flx-ido)
+(require 'flx-ido)
+
 (require-package 'ido-vertical-mode)
 (require 'ido-vertical-mode)
 (ido-vertical-mode 1)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
+(flx-ido-mode 1)
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+
 
 (require-package 'projectile)
 (require 'projectile)
