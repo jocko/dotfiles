@@ -125,6 +125,9 @@ re-downloaded in order to locate PACKAGE."
   "o" 'projectile-find-file
   "w" 'save-buffer)
 
+(require-package 'evil-commentary)
+(evil-commentary-mode)
+
 (evil-mode t)
 
 (evil-set-initial-state 'fundamental-mode 'emacs)
