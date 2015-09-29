@@ -98,6 +98,18 @@ re-downloaded in order to locate PACKAGE."
 (after-load 'diminish (diminish 'projectile-mode))
 (after-load 'undo-tree (diminish 'undo-tree-mode))
 
+(require-package 'yaml-mode)
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+; (setq evil-snipe-repeat-keys t)
+(setq evil-snipe-scope 'visible)
+(setq evil-snipe-repeat-scope 'whole-visible)
+(require-package 'evil-snipe)
+(require 'evil-snipe)
+(evil-snipe-mode 1)
+(evil-snipe-override-mode 1)
+
 (require-package 'evil-smartparens)
 (require 'evil-smartparens)
 (smartparens-global-mode t)
