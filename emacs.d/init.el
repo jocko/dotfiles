@@ -17,6 +17,11 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
+(setq evil-want-C-u-scroll t
+      evil-want-C-w-in-emacs-state t)
+
+(require-package 'evil)
+
 (global-unset-key (kbd "C-x m"))
 (global-unset-key (kbd "M-x"))
 (global-set-key (kbd "C-x m") 'execute-extended-command)
@@ -30,6 +35,18 @@ re-downloaded in order to locate PACKAGE."
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+(setq scroll-margin 5)
+      ; scroll-preserve-screen-position 1)
+
+; (require-package 'tags-table)
+; (require 'tags-table)
+
+(setq tags-revert-without-query 1)
+
+(require-package 'ctags-update)
+(require 'ctags-update)
+(add-hook 'ruby-mode-hook  'turn-on-ctags-auto-update-mode)
+; (ctags-update-minor-mode 1)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -41,8 +58,8 @@ re-downloaded in order to locate PACKAGE."
 
 (defmacro rename-modeline (package-name mode new-name)
   `(eval-after-load ,package-name
-                    '(defadvice ,mode (after rename-modeline activate)
-                                (setq mode-name ,new-name))))
+     '(defadvice ,mode (after rename-modeline activate)
+	(setq mode-name ,new-name))))
 ; (rename-modeline "clojure-mode" clojure-mode "Clj")
 
 (defmacro after-load (feature &rest body)
@@ -81,10 +98,9 @@ re-downloaded in order to locate PACKAGE."
 (after-load 'diminish (diminish 'projectile-mode))
 (after-load 'undo-tree (diminish 'undo-tree-mode))
 
-(setq evil-want-C-u-scroll t
-      evil-want-C-w-in-emacs-state t)
-
-(require-package 'evil)
+(require-package 'evil-smartparens)
+(require 'evil-smartparens)
+(smartparens-global-mode t)
 
 (require-package 'evil-leader)
 (global-evil-leader-mode 1)
