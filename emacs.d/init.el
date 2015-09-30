@@ -73,13 +73,15 @@ re-downloaded in order to locate PACKAGE."
 
 (global-set-key "\C-w" 'backward-kill-word)
 
-(setq ruby-use-smie nil)
+; (setq ruby-use-smie nil)
+; (setq ruby-use-smie t)
 (add-hook 'ruby-mode-hook 'subword-mode)
 
 (require-package 'ace-jump-mode)
 
 (require-package 'expand-region)
 (require 'expand-region)
+(require 'ruby-mode-expansions)
 
 (require-package 'flx-ido)
 (require 'flx-ido)
@@ -104,6 +106,8 @@ re-downloaded in order to locate PACKAGE."
 (require 'diminish)
 (after-load 'diminish (diminish 'projectile-mode))
 (after-load 'undo-tree (diminish 'undo-tree-mode))
+(after-load 'ctags-update (diminish 'ctags-auto-update-mode))
+(after-load 'smartparens (diminish 'smartparens-mode))
 
 (require-package 'yaml-mode)
 (require 'yaml-mode)
