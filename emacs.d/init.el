@@ -93,6 +93,7 @@ re-downloaded in order to locate PACKAGE."
 ; (add-hook 'enh-ruby-mode-hook 'bw/turn-on-subword-mode)
 (add-hook 'enh-ruby-mode-hook 'enh-ruby-mode-faces)
 
+(add-hook 'enh-ruby-mode-hook  'turn-on-ctags-auto-update-mode)
 ; (setq ruby-use-smie nil)
 ; (setq ruby-use-smie t)
 (add-hook 'ruby-mode-hook 'subword-mode)
@@ -158,7 +159,7 @@ re-downloaded in order to locate PACKAGE."
 (evil-leader/set-key
   "b" 'switch-to-buffer
   "f" 'find-file
-  "j" 'ace-jump-mode
+  "j" 'projectile-find-tag
   "o" 'projectile-find-file
   "O" 'projectile-find-file-other-window
   "w" 'save-buffer)
