@@ -73,6 +73,23 @@ re-downloaded in order to locate PACKAGE."
 
 (global-set-key "\C-w" 'backward-kill-word)
 
+(require-package 'enh-ruby-mode)
+(autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
+(add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . enh-ruby-mode))
+(add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+(defun enh-ruby-mode-faces ()
+  "Lazily set faces"
+  ; (set-face-attribute 'erm-syn-errline nil :box nil)
+  ; (set-face-attribute 'erm-syn-warnline nil :box nil)
+  (set-face-attribute 'enh-ruby-op-face nil :foreground "white" :inherit 'default))
+  ; (set-face-attribute 'enh-ruby-string-delimiter-face nil :foreground "#dc322f" :background nil)
+  ; (set-face-attribute 'enh-ruby-regexp-delimiter-face nil :foreground "#dc322f" :background nil)
+  ; (set-face-attribute 'enh-ruby-heredoc-delimiter-face nil :foreground "#dc322f" :background nil))
+
+; (add-hook 'enh-ruby-mode-hook 'bw/turn-on-subword-mode)
+(add-hook 'enh-ruby-mode-hook 'enh-ruby-mode-faces)
+
 ; (setq ruby-use-smie nil)
 ; (setq ruby-use-smie t)
 (add-hook 'ruby-mode-hook 'subword-mode)
@@ -123,6 +140,10 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'evil-smartparens)
 (require 'evil-smartparens)
 (smartparens-global-mode t)
+
+; (require-package 'evil-matchit)
+; (require 'evil-matchit)
+; (global-evil-matchit-mode 1)
 
 (require-package 'evil-leader)
 (global-evil-leader-mode 1)
