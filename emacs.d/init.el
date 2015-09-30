@@ -109,13 +109,12 @@ re-downloaded in order to locate PACKAGE."
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
-; (setq evil-snipe-repeat-keys t)
-(setq evil-snipe-scope 'visible)
-(setq evil-snipe-repeat-scope 'whole-visible)
-(require-package 'evil-snipe)
-(require 'evil-snipe)
-(evil-snipe-mode 1)
-(evil-snipe-override-mode 1)
+; (setq evil-snipe-scope 'visible)
+; (setq evil-snipe-repeat-scope 'whole-visible)
+; (require-package 'evil-snipe)
+; (require 'evil-snipe)
+; (evil-snipe-mode 1)
+; (evil-snipe-override-mode 1)
 
 (require-package 'evil-smartparens)
 (require 'evil-smartparens)
@@ -138,6 +137,8 @@ re-downloaded in order to locate PACKAGE."
 (evil-mode t)
 
 (evil-set-initial-state 'fundamental-mode 'emacs)
+
+(define-key evil-normal-state-map (kbd "s") 'ace-jump-mode)
 
 ; (setq inhibit-startup-screen t
 ;       initial-scratch-message nil)
