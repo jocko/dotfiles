@@ -160,6 +160,7 @@ re-downloaded in order to locate PACKAGE."
   "f" 'find-file
   "j" 'ace-jump-mode
   "o" 'projectile-find-file
+  "O" 'projectile-find-file-other-window
   "w" 'save-buffer)
 
 (require-package 'evil-commentary)
@@ -173,8 +174,8 @@ re-downloaded in order to locate PACKAGE."
 
 ; (setq inhibit-startup-screen t
 ;       initial-scratch-message nil)
-; (setq split-height-threshold nil)
-; (setq split-width-threshold 0)
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
 ; ;; (setq split-height-threshold 0)
 ; ;; (setq split-width-threshold nil)
 ; (menu-bar-mode -1)
