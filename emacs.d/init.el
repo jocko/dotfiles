@@ -33,6 +33,9 @@ re-downloaded in order to locate PACKAGE."
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(setq linum-format "%d ")
+(global-linum-mode t)
+
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq scroll-margin 5)
@@ -117,7 +120,7 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'projectile)
 (require 'projectile)
 (projectile-global-mode)
-; (add-hook 'ruby-mode-hook 'projectile-mode)
+(add-hook 'ruby-mode-hook 'projectile-mode)
 
 (require-package 'diminish)
 (require 'diminish)
@@ -125,6 +128,9 @@ re-downloaded in order to locate PACKAGE."
 (after-load 'undo-tree (diminish 'undo-tree-mode))
 (after-load 'ctags-update (diminish 'ctags-auto-update-mode))
 (after-load 'smartparens (diminish 'smartparens-mode))
+(after-load 'evil-commentary (diminish 'evil-commentary-mode))
+(diminish 'abbrev-mode)
+(rename-modeline "enh-ruby-mode" enh-ruby-mode "Ruby")
 
 (require-package 'yaml-mode)
 (require 'yaml-mode)
