@@ -17,6 +17,13 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
+(require-package 'clojure-mode)
+(require-package 'cider)
+
+(set-default 'tags-case-fold-search nil)
+
+(global-auto-revert-mode t)
+
 (setq evil-want-C-u-scroll t
       evil-want-C-w-in-emacs-state t)
 
@@ -80,6 +87,7 @@ re-downloaded in order to locate PACKAGE."
 (autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
 (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . enh-ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
 (defun enh-ruby-mode-faces ()
   "Lazily set faces"
@@ -146,7 +154,12 @@ re-downloaded in order to locate PACKAGE."
 
 (require-package 'evil-smartparens)
 (require 'evil-smartparens)
-(smartparens-global-mode t)
+(add-hook 'clojure-mode-hook #'smartparens-strict-mode)
+; (smartparens-global-mode t)
+(require 'smartparens-config)
+
+(require-package 'rainbow-delimiters)
+(add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
 
 ; (require-package 'evil-matchit)
 ; (require 'evil-matchit)
