@@ -183,6 +183,7 @@ re-downloaded in order to locate PACKAGE."
 (evil-mode t)
 
 (evil-set-initial-state 'fundamental-mode 'emacs)
+(evil-set-initial-state 'cider-repl-mode 'emacs)
 
 (define-key evil-normal-state-map (kbd "s") 'ace-jump-mode)
 
