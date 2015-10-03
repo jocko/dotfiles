@@ -1,7 +1,43 @@
-xterm*faceName:           Hack Regular:size=12
-!xterm*faceName:           xft:hack:medium:style=regular:size=12
-!xterm*font:           -*-hack-medium-r-*-*-12-*-*-*-*-*-*-*
-!xterm*font:              -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
-!xterm*faceName: -misc-fixed-medium-r-semicondensed-*-17-120-*-*-*-*-*-*
-URxvt.font: xft:Terminus:size=12
-URxvt.letterSpace: -5
+xterm*loginShell: true
+! -----------------------------------------------------------------------------
+! File: gruvbox-dark.xresources
+! Description: Retro groove colorscheme generalized
+! Author: morhetz <morhetz@gmail.com>
+! Source: https://github.com/morhetz/gruvbox-generalized
+! Last Modified: 6 Sep 2014
+! -----------------------------------------------------------------------------
+! hard contrast: *background: #1d2021
+xterm*background: #282828
+! soft contrast: *background: #32302f
+xterm*foreground: #ebdbb2
+! Black + DarkGrey
+xterm*color0:  #282828
+xterm*color8:  #928374
+! DarkRed + Red
+xterm*color1:  #cc241d
+xterm*color9:  #fb4934
+! DarkGreen + Green
+xterm*color2:  #98971a
+xterm*color10: #b8bb26
+! DarkYellow + Yellow
+xterm*color3:  #d79921
+xterm*color11: #fabd2f
+! DarkBlue + Blue
+xterm*color4:  #458588
+xterm*color12: #83a598
+! DarkMagenta + Magenta
+xterm*color5:  #b16286
+xterm*color13: #d3869b
+! DarkCyan + Cyan
+xterm*color6:  #689d6a
+xterm*color14: #8ec07c
+! LightGrey + White
+xterm*color7:  #a89984
+xterm*color15: #ebdbb2
+
+xterm*faceName:    xft:Hack:size=12
+!xterm*faceName:           Hack
+!xterm*faceSize: 6
+!xterm*faceSize: 14
+URxvt.font: xft:Hack:size=10
+!URxvt.letterSpace: -1
