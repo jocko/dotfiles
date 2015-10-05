@@ -189,8 +189,10 @@ re-downloaded in order to locate PACKAGE."
 
 ; (setq inhibit-startup-screen t
 ;       initial-scratch-message nil)
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
+
+; (setq split-height-threshold nil)
+; (setq split-width-threshold 0)
+
 ; ;; (setq split-height-threshold 0)
 ; ;; (setq split-width-threshold nil)
 ; (menu-bar-mode -1)
