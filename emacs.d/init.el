@@ -17,6 +17,12 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
+(require-package 'dockerfile-mode)
+(require 'dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+
+(blink-cursor-mode -1)
+
 (require-package 'clojure-mode)
 (require-package 'cider)
 
@@ -83,6 +89,7 @@ re-downloaded in order to locate PACKAGE."
 
 (global-set-key "\C-w" 'backward-kill-word)
 
+(setq enh-ruby-check-syntax nil)
 (require-package 'enh-ruby-mode)
 (autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
 (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
