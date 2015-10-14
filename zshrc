@@ -2,7 +2,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-fpath=(/usr/local/share/zsh-completions $fpath)
+[ -d /usr/local/share/zsh-completions ] && fpath=(/usr/local/share/zsh-completions $fpath)
 
 export EDITOR="vim"
 export CLICOLOR=1
@@ -64,9 +64,6 @@ bindkey -e
 #autoload -Uz compinit
 #compinit
 # End of lines added by compinstall
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
-chruby ruby-2.1.7
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -80,7 +77,5 @@ chruby ruby-2.1.7
 #   fi
 # }
 
-export DOCKER_TLS_VERIFY="1"
-export DOCKER_HOST="tcp://192.168.99.100:2376"
-export DOCKER_CERT_PATH="/Users/jocko/.docker/machine/machines/default"
-export DOCKER_MACHINE_NAME="default"
+[ -f ~/.zshrc.after ] && source ~/.zshrc.after
+
