@@ -90,6 +90,7 @@ re-downloaded in order to locate PACKAGE."
 (global-set-key "\C-w" 'backward-kill-word)
 
 (setq enh-ruby-check-syntax nil)
+(setq enh-ruby-deep-indent-paren nil)
 (require-package 'enh-ruby-mode)
 (autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
 (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
