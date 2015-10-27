@@ -22,6 +22,7 @@ re-downloaded in order to locate PACKAGE."
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
 (blink-cursor-mode -1)
+(setq evil-operator-state-cursor '(box "white"))
 
 (require-package 'clojure-mode)
 (require-package 'cider)
