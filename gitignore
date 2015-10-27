@@ -20,3 +20,4 @@ tags
 /.bundle
 /.idea
 .rake_tasks
+.ruby-version
