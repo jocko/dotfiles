@@ -9,8 +9,8 @@ export CLICOLOR=1
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-alias ls="ls -F"
-alias ll="ls -lh"
+alias ls="ls -F --color"
+alias ll="ls -lh --color"
 alias psa="ps aux"
 alias curl='noglob curl'
 alias b='bundle'
