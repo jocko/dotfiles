@@ -120,6 +120,7 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'expand-region)
 (require 'expand-region)
 (require 'ruby-mode-expansions)
+(global-set-key (kbd "C-=") 'er/expand-region)
 
 (require-package 'flx-ido)
 (require 'flx-ido)
