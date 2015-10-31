@@ -27,6 +27,9 @@ re-downloaded in order to locate PACKAGE."
 (blink-cursor-mode -1)
 (setq evil-operator-state-cursor '(box "white"))
 
+(require-package 'haskell-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
 (require-package 'clojure-mode)
 (require-package 'cider)
 
