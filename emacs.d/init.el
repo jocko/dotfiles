@@ -17,6 +17,9 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
+(require-package 'ag)
+(require 'ag)
+
 (require-package 'dockerfile-mode)
 (require 'dockerfile-mode)
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
