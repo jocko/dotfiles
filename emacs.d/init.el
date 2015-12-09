@@ -20,6 +20,9 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'ag)
 (require 'ag)
 
+(require-package 'alchemist)
+(require 'alchemist)
+
 (require-package 'dockerfile-mode)
 (require 'dockerfile-mode)
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
@@ -168,6 +171,10 @@ re-downloaded in order to locate PACKAGE."
 ; (evil-snipe-mode 1)
 ; (evil-snipe-override-mode 1)
 
+(require-package 'evil-surround)
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+
 (require-package 'evil-smartparens)
 (require 'evil-smartparens)
 (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
@@ -200,6 +207,8 @@ re-downloaded in order to locate PACKAGE."
 
 (evil-set-initial-state 'fundamental-mode 'emacs)
 (evil-set-initial-state 'cider-repl-mode 'emacs)
+(evil-set-initial-state 'cider-stacktrace-mode 'emacs)
+(evil-set-initial-state 'dired-mode 'emacs)
 
 (define-key evil-normal-state-map (kbd "s") 'ace-jump-mode)
 
