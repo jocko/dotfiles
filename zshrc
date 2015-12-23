@@ -27,6 +27,7 @@ alias gloga="git log --graph --decorate --oneline --all"
 alias gst="git status"
 alias gp="git push"
 alias fig="docker-compose"
+alias tmux="tmux -2"
 
 #alias yain='yaourt -S'
 #alias pacupg="sudo pacman -Syu"
@@ -65,6 +66,8 @@ bindkey -e
 #compinit
 # End of lines added by compinstall
 
+FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_OPTS="--exact"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # . `brew --prefix`/etc/profile.d/z.sh
