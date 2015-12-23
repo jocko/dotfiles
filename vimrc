@@ -9,6 +9,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'morhetz/gruvbox'
+Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'moll/vim-bbye'
@@ -27,6 +28,7 @@ call vundle#end()
 filetype plugin indent on
 syntax enable
 
+" let g:gruvbox_termcolors=16
 set background=dark
 color gruvbox
 
