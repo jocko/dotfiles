@@ -21,3 +21,4 @@ tags
 /.idea
 .rake_tasks
 .ruby-version
+.pryrc
