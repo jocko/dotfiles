@@ -17,6 +17,11 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
+(require-package 'haml-mode)
+(require 'haml-mode)
+
+(require-package 'ws-butler)
+
 (require-package 'ag)
 (require 'ag)
 
