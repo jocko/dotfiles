@@ -73,6 +73,9 @@ noremap L g_
 nnoremap j gj
 nnoremap k gk
 
+autocmd FileType erlang setlocal expandtab shiftwidth=4
+autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
+
 " EasyMotion
 
 " Disable default mappings
