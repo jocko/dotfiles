@@ -23,6 +23,8 @@ Plugin 'szw/vim-tags'
 Plugin 'kana/vim-textobj-user'
 " Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'rhysd/vim-textobj-ruby'
+Plugin 'rking/ag.vim'
+Plugin 'tpope/vim-eunuch'
 
 call vundle#end()
 filetype plugin indent on
@@ -95,7 +97,7 @@ map <C-l> <C-W>l
 " CtrlP
 
 map <leader>o :CtrlP<CR>
-map <leader>O :CtrlPBuffer<CR>
+map <leader>b :CtrlPBuffer<CR>
 " Always open files in a new window
 let g:ctrlp_switch_buffer = 0
 
