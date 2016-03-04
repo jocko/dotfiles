@@ -25,6 +25,7 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'rhysd/vim-textobj-ruby'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-eunuch'
+Plugin 'pangloss/vim-javascript'
 
 call vundle#end()
 filetype plugin indent on
@@ -81,8 +82,11 @@ autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
 " Disable default mappings
 let g:EasyMotion_do_mapping = 0
 " Navigation up/down
+map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+nmap s <Plug>(easymotion-s)
 
 nnoremap <leader>w :w<CR>
 nnoremap q :q<CR>
