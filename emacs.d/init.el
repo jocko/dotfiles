@@ -17,6 +17,11 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
+(require-package 'erlang)
+(add-hook 'erlang-mode-hook '(lambda() (setq indent-tabs-mode nil)))
+
+(setq x-select-enable-clipboard t)
+
 (require-package 'haml-mode)
 (require 'haml-mode)
 
@@ -108,6 +113,7 @@ re-downloaded in order to locate PACKAGE."
 (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.pryrc$" . enh-ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
 (defun enh-ruby-mode-faces ()
   "Lazily set faces"
