@@ -12,6 +12,7 @@ export LC_ALL=en_US.UTF-8
 alias ls="ls -F"
 alias ll="ls -lh"
 alias psa="ps aux"
+alias psg="ps aux | grep "
 alias curl='noglob curl'
 alias b='bundle'
 alias which="which -a"
@@ -30,10 +31,17 @@ alias gup="git pull --rebase"
 alias gp="git push"
 alias fig="docker-compose"
 alias tmux="tmux -2"
+alias df="df -h"
+alias du="du -h -d 0"
+alias grep="grep --color=auto"
+alias md="mkdir -p"
+alias ip="curl icanhazip.com"
+alias pyserv="python -m SimpleHTTPServer"
+alias xx="atool -x"
 
-#alias yain='yaourt -S'
-#alias pacupg="sudo pacman -Syu"
-#alias pacin="sudo pacman -S"
+function mkcd() {
+  mkdir -p "$1" && cd "$1";
+}
 
 LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
 export LS_COLORS
