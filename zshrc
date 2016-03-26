@@ -9,8 +9,16 @@ export CLICOLOR=1
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-alias ls="ls -F"
-alias ll="ls -lh"
+case $(uname) in
+  Linux)
+    alias ll='ls -alh --color=auto'
+    alias ls='ls --color=auto'
+    ;;
+  Darwin)
+    alias ll='ls -alGh'
+    alias ls='ls -Gh'
+    ;;
+esac
 alias psa="ps aux"
 alias psg="ps aux | grep "
 alias curl='noglob curl'
