@@ -26,6 +26,8 @@ Plugin 'rhysd/vim-textobj-ruby'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-eunuch'
 Plugin 'pangloss/vim-javascript'
+Plugin 'tpope/vim-fugitive'
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()
 filetype plugin indent on
@@ -66,10 +68,11 @@ augroup END
 
 let mapleader=" "
 
+" Do I use this?
 " Start of line
-noremap H ^
+" noremap H ^
 " End of line
-noremap L g_
+" noremap L g_
 
 nnoremap j gj
 nnoremap k gk
@@ -93,13 +96,15 @@ nnoremap q :q<CR>
 nnoremap <leader>q :Bdelete<CR>
 
 " Creating splits
-nnoremap <leader>sh :leftabove vnew<CR>
-nnoremap <leader>sl :rightbelow vnew<CR>
+" Do I use this?
+" nnoremap <leader>sh :leftabove vnew<CR>
+" nnoremap <leader>sl :rightbelow vnew<CR>
 " Navigating splits
-map <C-h> <C-W>h
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-l> <C-W>l
+" Do I use this?
+" map <C-h> <C-W>h
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-l> <C-W>l
 
 " CtrlP
 
@@ -112,7 +117,7 @@ let g:ctrlp_switch_buffer = 0
 
 " CtrlP, meet ag.
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" Disable cache when using ag, because apparently ag is fast as a space fart.
+" Disable cache when using ag
 let g:ctrlp_use_caching = 0
 
 nmap     <C-F>f <Plug>CtrlSFPrompt
