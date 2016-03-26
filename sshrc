@@ -1,9 +1,8 @@
-alias ll="ls -alh --color=auto"
-alias ls="ls --color=auto"
-alias psa="ps aux"
-alias psg="ps aux | grep "
+alias ll='ls -alh --color=auto'
+alias ls='ls --color=auto'
+alias curl='noglob curl'
+alias b='bundle'
 alias which="which -a"
-
 alias g="git"
 alias ga="git add"
 alias gc="git commit -v"
@@ -17,10 +16,14 @@ alias gloga="git log --graph --decorate --oneline --all"
 alias gst="git status"
 alias gup="git pull --rebase"
 alias gp="git push"
-
+alias fig="docker-compose"
+alias tmux="tmux -2"
 alias df="df -h"
 alias du="du -h -d 0"
 alias grep="grep --color=auto"
 alias md="mkdir -p"
+alias ip="curl icanhazip.com"
+alias pyserv="python -m SimpleHTTPServer"
 alias xx="atool -x"
 alias t="tail -f"
+

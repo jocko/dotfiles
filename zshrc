@@ -4,23 +4,15 @@ SAVEHIST=1000
 
 [ -d /usr/local/share/zsh-completions ] && fpath=(/usr/local/share/zsh-completions $fpath)
 
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
 export EDITOR="vim"
 export CLICOLOR=1
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-case $(uname) in
-  Linux)
-    alias ll='ls -alh --color=auto'
-    alias ls='ls --color=auto'
-    ;;
-  Darwin)
-    alias ll='ls -alGh'
-    alias ls='ls -Gh'
-    ;;
-esac
-alias psa="ps aux"
-alias psg="ps aux | grep "
+alias ll='ls -alh --color=auto'
+alias ls='ls --color=auto'
 alias curl='noglob curl'
 alias b='bundle'
 alias which="which -a"
@@ -50,6 +42,10 @@ alias t="tail -f"
 
 function mkcd() {
   mkdir -p "$1" && cd "$1";
+}
+
+function psg() {
+  ps x | grep $1 | grep -v grep
 }
 
 LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
