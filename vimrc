@@ -13,18 +13,15 @@ Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'moll/vim-bbye'
-" Plugin 'bling/vim-airline'
-" Plugin 'itchyny/lightline.vim'
 Plugin 'tpope/vim-vinegar'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-commentary'
-" Plugin 'sjl/vitality.vim'
 Plugin 'szw/vim-tags'
 Plugin 'kana/vim-textobj-user'
-" Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'rhysd/vim-textobj-ruby'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-surround'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-fugitive'
 Plugin 'terryma/vim-multiple-cursors'
@@ -33,7 +30,6 @@ call vundle#end()
 filetype plugin indent on
 syntax enable
 
-" let g:gruvbox_termcolors=16
 set background=dark
 color gruvbox
 
@@ -68,12 +64,6 @@ augroup END
 
 let mapleader=" "
 
-" Do I use this?
-" Start of line
-" noremap H ^
-" End of line
-" noremap L g_
-
 nnoremap j gj
 nnoremap k gk
 
@@ -94,17 +84,6 @@ nmap s <Plug>(easymotion-s)
 nnoremap <leader>w :w<CR>
 nnoremap q :q<CR>
 nnoremap <leader>q :Bdelete<CR>
-
-" Creating splits
-" Do I use this?
-" nnoremap <leader>sh :leftabove vnew<CR>
-" nnoremap <leader>sl :rightbelow vnew<CR>
-" Navigating splits
-" Do I use this?
-" map <C-h> <C-W>h
-" map <C-j> <C-W>j
-" map <C-k> <C-W>k
-" map <C-l> <C-W>l
 
 " CtrlP
 
@@ -133,14 +112,4 @@ nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
 runtime! macros/matchit.vim
-
-" let g:lightline = {
-"       \ 'colorscheme': 'wombat',
-"       \ }
-" let g:lightline.active = {
-"       \ 'left': [ [ 'paste' ],
-"       \           [ 'readonly', 'filename', 'modified' ] ],
-"       \ 'right': [ [ 'lineinfo' ],
-"       \            [ 'percent' ],
-"       \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
 
