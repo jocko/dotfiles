@@ -81,9 +81,9 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 nmap s <Plug>(easymotion-s)
 
-nnoremap <leader>w :w<CR>
-nnoremap q :q<CR>
-nnoremap <leader>q :Bdelete<CR>
+" nnoremap <leader>w :w<CR>
+" nnoremap q :q<CR>
+" nnoremap <leader>q :Bdelete<CR>
 
 " CtrlP
 
