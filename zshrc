@@ -37,6 +37,7 @@ alias ip="curl icanhazip.com"
 alias pyserv="python -m SimpleHTTPServer"
 alias xx="atool -x"
 alias t="tail -f"
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
 function mkcd() {
   mkdir -p "$1" && cd "$1";
