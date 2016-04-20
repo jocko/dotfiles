@@ -4,8 +4,6 @@ SAVEHIST=1000
 
 [ -d /usr/local/share/zsh-completions ] && fpath=(/usr/local/share/zsh-completions $fpath)
 
-PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-
 export EDITOR="vim"
 export CLICOLOR=1
 export LANG=en_US.UTF-8
