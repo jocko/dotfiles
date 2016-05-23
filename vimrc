@@ -25,6 +25,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-fugitive'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'ekalinin/Dockerfile.vim'
 
 call vundle#end()
 filetype plugin indent on
