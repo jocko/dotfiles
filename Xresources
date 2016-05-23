@@ -1,5 +1,6 @@
 !xterm*loginShell: true
 xterm*ScrollBar: false
+xterm*metaSendsEscape: true
 
 ! -----------------------------------------------------------------------------
 ! File: gruvbox-dark.xresources
