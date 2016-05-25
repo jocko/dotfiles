@@ -30,14 +30,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-# eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-# export SSH_AUTH_SOCK
-# export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
+# /etc/pam.d/login
+# ----------------
+# session    optional     pam_gnome_keyring.so
+export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
 
-# twm &
-# xclock -geometry 50x50-1+1 &
-# xterm -geometry 80x50+494+51 &
-# xterm -geometry 80x20+494-0 &
-# exec xterm -geometry 80x66+0+0 -name login
 exec i3
-# exec cinnamon-session
