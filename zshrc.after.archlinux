@@ -1,0 +1,16 @@
+[ -f /usr/share/chruby/chruby.sh ] && source /usr/share/chruby/chruby.sh
+[ -f /usr/share/chruby/auto.sh ] && source /usr/share/chruby/auto.sh
+
+eval "$(direnv hook zsh)"
+
+case $TERM in
+  xterm*)
+    precmd () {print -Pn "\e]0;%1d\a"}
+    ;;
+esac
+
+alias yofind="yaourt -Ss"
+alias yoi="yaourt -S --noconfirm"
+alias youp="yaourt -Syua"
+
+export ERL_LIBS=~/erlang
