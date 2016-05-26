@@ -73,8 +73,8 @@ zstyle ':completion:*:*:kill:*' insert-ids single
 autoload -U colors
 colors
 
-vim_ins_mode="%{$fg[yellow]%}[INS]%{$reset_color%}"
-vim_cmd_mode="%{$fg[yellow]%}[CMD]%{$reset_color%}"
+vim_ins_mode="%{$fg[yellow]%}%{$reset_color%}"
+vim_cmd_mode="%{$fg[yellow]%}-- CMD --%{$reset_color%}"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
@@ -112,9 +112,9 @@ function TRAPINT() {
 # zle -N zle-line-init
 
 setopt prompt_subst
-PROMPT='%{$fg[yellow]%}${vim_mode} %{$fg[green]%}[%~]
+PROMPT='%{$fg[yellow]%}%{$fg[green]%}[%~]
 %{$fg[blue]%}-> %{$fg[white]%}%# %{$reset_color%}'
-# RPROMPT='${vim_mode}'
+RPROMPT='%{$(echotc UP 1)%}${vim_mode}%{$(echotc DO 1)%}'
 
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
