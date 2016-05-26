@@ -73,8 +73,48 @@ zstyle ':completion:*:*:kill:*' insert-ids single
 autoload -U colors
 colors
 
-PROMPT="%{$fg[yellow]%}[%*] %{$fg[green]%}[%~]
-%{$fg[blue]%}-> %{$fg[white]%}%# %{$reset_color%}"
+vim_ins_mode="%{$fg[yellow]%}[INS]%{$reset_color%}"
+vim_cmd_mode="%{$fg[yellow]%}[CMD]%{$reset_color%}"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+function zle-line-finish {
+  vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
+
+# Fix a bug when you C-c in CMD mode and you'd be prompted with CMD mode indicator, while in fact you would be in INS mode
+# Fixed by catching SIGINT (C-c), set vim_mode to INS and then repropagate the SIGINT, so if anything else depends on it, we will not break it
+# Thanks Ron! (see comments)
+function TRAPINT() {
+  vim_mode=$vim_ins_mode
+  return $(( 128 + $1 ))
+} 
+
+# function zle-line-init zle-keymap-select {
+# }
+# function zle-keymap-select() {
+#   case $KEYMAP in
+#     vicmd) print -n '\e]12;#98971a\a';;
+#     viins|main) print -n '\e]12;#ebdbb2\a';;
+#   esac
+# }
+# function zle-line-init() {
+#   zle-keymap-select
+# }
+
+# zle -N zle-keymap-select
+# zle -N zle-line-init
+
+setopt prompt_subst
+PROMPT='%{$fg[yellow]%}${vim_mode} %{$fg[green]%}[%~]
+%{$fg[blue]%}-> %{$fg[white]%}%# %{$reset_color%}'
+# RPROMPT='${vim_mode}'
 
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
@@ -82,7 +122,9 @@ setopt hist_find_no_dups
 setopt share_history
 #setopt extendedglob
 #unsetopt autocd beep
-bindkey -e
+# bindkey -e
+bindkey -v
+KEYTIMEOUT=1
 #zstyle :compinstall filename '/home/jocko/.zshrc'
 #autoload -Uz compinit
 #compinit
