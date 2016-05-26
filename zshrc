@@ -34,7 +34,7 @@ alias du="du -h -d 0"
 alias grep="grep --color=auto"
 alias md="mkdir -p"
 alias ip="curl icanhazip.com"
-alias pyserv="python -m SimpleHTTPServer"
+alias pyserv="python2 -m SimpleHTTPServer"
 alias xx="atool -x"
 alias t="tail -f"
 alias urlencode='python2 -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
@@ -102,5 +102,5 @@ export FZF_DEFAULT_OPTS="--exact"
 #   fi
 # }
 
-[ -f ~/.zshrc.after ] && source ~/.zshrc.after
+[ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 
