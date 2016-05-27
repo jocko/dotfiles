@@ -96,21 +96,6 @@ function TRAPINT() {
   return $(( 128 + $1 ))
 } 
 
-# function zle-line-init zle-keymap-select {
-# }
-# function zle-keymap-select() {
-#   case $KEYMAP in
-#     vicmd) print -n '\e]12;#98971a\a';;
-#     viins|main) print -n '\e]12;#ebdbb2\a';;
-#   esac
-# }
-# function zle-line-init() {
-#   zle-keymap-select
-# }
-
-# zle -N zle-keymap-select
-# zle -N zle-line-init
-
 setopt prompt_subst
 PROMPT='%{$fg[yellow]%}%{$fg[green]%}[%~]
 %{$fg[blue]%}-> %{$fg[white]%}%# %{$reset_color%}'
@@ -125,6 +110,9 @@ setopt share_history
 # bindkey -e
 bindkey -v
 KEYTIMEOUT=1
+bindkey '^w' backward-kill-word
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
 #zstyle :compinstall filename '/home/jocko/.zshrc'
 #autoload -Uz compinit
 #compinit
