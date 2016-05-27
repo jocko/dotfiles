@@ -26,6 +26,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-fugitive'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'junegunn/vim-easy-align'
 
 call vundle#end()
 filetype plugin indent on
@@ -70,6 +71,12 @@ nnoremap k gk
 
 autocmd FileType erlang setlocal expandtab shiftwidth=4
 autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " EasyMotion
 
