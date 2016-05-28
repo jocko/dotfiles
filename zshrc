@@ -96,6 +96,9 @@ function TRAPINT() {
   return $(( 128 + $1 ))
 } 
 
+REPORTTIME=15
+TIMEFMT="$fg[magenta]'%J'$reset_color time: $fg[green]%*Es$reset_color, cpu: $fg[green]%P$reset_color"
+
 setopt prompt_subst
 PROMPT='%{$fg[yellow]%}%{$fg[green]%}[%~]
 %{$fg[blue]%}-> %{$fg[white]%}%# %{$reset_color%}'
