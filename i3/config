@@ -33,6 +33,9 @@ floating_modifier $mod
 
 focus_follows_mouse no
 
+# Toggle between us and se keymap
+bindsym $mod+Shift+i exec "(setxkbmap -query | grep -q 'layout:\s\+us') && setxkbmap se || setxkbmap us && pkill -RTMIN+1 i3blocks"
+
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 xset r rate 200 30
-setxkbmap us,se +option grp:shifts_toggle
+# setxkbmap us,se +option grp:shifts_toggle
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
