@@ -96,8 +96,21 @@ function TRAPINT() {
   return $(( 128 + $1 ))
 } 
 
-REPORTTIME=15
-TIMEFMT="$fg[magenta]'%J'$reset_color time: $fg[green]%*Es$reset_color, cpu: $fg[green]%P$reset_color"
+zmodload zsh/datetime
+
+function precmd() {
+  ((cmd_duration = $EPOCHSECONDS - ${cmd_start:-$EPOCHSECONDS}))
+  if (($cmd_duration > 15)); then
+    print "$fg[yellow]${cmd_duration}s$reset_color"
+  fi
+}
+
+function preexec() {
+  cmd_start=$EPOCHSECONDS
+}
+
+# REPORTTIME=15
+# TIMEFMT="$fg[magenta]'%J'$reset_color time: $fg[green]%*Es$reset_color, cpu: $fg[green]%P$reset_color"
 
 setopt prompt_subst
 PROMPT='%{$fg[yellow]%}%{$fg[green]%}[%~]
