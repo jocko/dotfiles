@@ -69,6 +69,8 @@ let mapleader=" "
 nnoremap j gj
 nnoremap k gk
 
+map <leader>y "*y
+
 autocmd FileType erlang setlocal expandtab shiftwidth=4
 autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
 
