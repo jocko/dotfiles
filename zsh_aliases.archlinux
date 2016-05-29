@@ -5,7 +5,7 @@ eval "$(direnv hook zsh)"
 
 case $TERM in
   xterm*)
-    precmd () {print -Pn "\e]0;%1d\a"}
+    # precmd () {print -Pn "\e]0;%1d\a"}
     ;;
 esac
 

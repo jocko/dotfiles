@@ -99,13 +99,21 @@ function TRAPINT() {
 zmodload zsh/datetime
 
 function precmd() {
+  print_title "%~"
+
   ((cmd_duration = $EPOCHSECONDS - ${cmd_start:-$EPOCHSECONDS}))
   if (($cmd_duration > 15)); then
     print "$fg[yellow]${cmd_duration}s$reset_color"
   fi
 }
 
+function print_title() {
+  print -Pn '\e]0;$1\a'
+}
+
 function preexec() {
+  print_title "$PWD:t: $2"
+
   cmd_start=$EPOCHSECONDS
 }
 
