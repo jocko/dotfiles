@@ -105,6 +105,7 @@ function precmd() {
   if (($cmd_duration > 15)); then
     print "$fg[yellow]${cmd_duration}s$reset_color"
   fi
+  unset cmd_start
 }
 
 function print_title() {
