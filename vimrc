@@ -89,25 +89,23 @@ map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
-nmap s <Plug>(easymotion-s)
+map <Leader>s <Plug>(easymotion-s)
 
 nnoremap <leader>w :w<CR>
 nnoremap q :q<CR>
 nnoremap <leader>q :Bdelete<CR>
 
 " CtrlP
-
 map <leader>o :CtrlP<CR>
 map <leader>b :CtrlPBuffer<CR>
 " Always open files in a new window
 let g:ctrlp_switch_buffer = 0
 
-" Ag
-
-" CtrlP, meet ag.
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" Disable cache when using ag
-let g:ctrlp_use_caching = 0
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " We can disable cache when using ag
+  let g:ctrlp_use_caching = 0
+endif
 
 nmap     <C-F>f <Plug>CtrlSFPrompt
 "vmap     <C-F>f <Plug>CtrlSFVwordPath
