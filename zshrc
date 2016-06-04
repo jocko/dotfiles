@@ -120,7 +120,7 @@ function preexec() {
 # REPORTTIME=15
 # TIMEFMT="$fg[magenta]'%J'$reset_color time: $fg[green]%*Es$reset_color, cpu: $fg[green]%P$reset_color"
 
-function nudge() {
+function ding() {
   notify-send "$history[$HISTCMD]"
 }
 
