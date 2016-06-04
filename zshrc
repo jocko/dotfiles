@@ -134,6 +134,7 @@ setopt share_history
 # bindkey -e
 bindkey -v
 KEYTIMEOUT=1
+bindkey "^?" backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
