@@ -92,7 +92,7 @@ map <Leader>h <Plug>(easymotion-linebackward)
 map <Leader>s <Plug>(easymotion-s)
 
 nnoremap <leader>w :w<CR>
-nnoremap q :q<CR>
+" nnoremap q :q<CR>
 nnoremap <leader>q :Bdelete<CR>
 
 " CtrlP
@@ -121,3 +121,5 @@ vnoremap <c-]> g<c-]>
 
 runtime! macros/matchit.vim
 
+" Mark occurrences
+"nmap <Leader>n :let @/ = expand("<cword>")<CR>:let &hlsearch = &hlsearch<CR>
