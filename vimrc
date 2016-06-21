@@ -106,6 +106,7 @@ if executable('ag')
   " We can disable cache when using ag
   let g:ctrlp_use_caching = 0
 endif
+nnoremap <leader>a :Ag! ""<Left>
 
 nmap     <C-F>f <Plug>CtrlSFPrompt
 "vmap     <C-F>f <Plug>CtrlSFVwordPath
