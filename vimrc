@@ -24,9 +24,11 @@ Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-fugitive'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'junegunn/vim-easy-align'
+Plugin 'tkhren/vim-textobj-numeral'
+Plugin 'Julian/vim-textobj-variable-segment'
+Plugin 'wellle/targets.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -122,5 +124,9 @@ vnoremap <c-]> g<c-]>
 
 runtime! macros/matchit.vim
 
+let g:textobj_numeral_no_default_key_mappings = 1
+
+vmap an <Plug>(textobj-numeral-a)
+omap an <Plug>(textobj-numeral-a)
 " Mark occurrences
 "nmap <Leader>n :let @/ = expand("<cword>")<CR>:let &hlsearch = &hlsearch<CR>
