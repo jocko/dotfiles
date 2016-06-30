@@ -17,3 +17,7 @@ alias lup="grep 'starting full system upgrade' /var/log/pacman.log | tail -1 | c
 alias open="xdg-open"
 
 export ERL_LIBS=~/erlang
+export GOPATH=~/go
+path=($path $GOPATH/bin)
+
+. ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
