@@ -3,15 +3,11 @@
 
 eval "$(direnv hook zsh)"
 
-case $TERM in
-  xterm*)
-    # precmd () {print -Pn "\e]0;%1d\a"}
-    ;;
-esac
+[ -f ~/.dircolors ] && eval "$(dircolors ~/.dircolors)"
 
 alias yofind="yaourt -Ss"
 alias yoi="yaourt -S --noconfirm"
-alias youp="yaourt -Syua"
+alias youp="yaourt -Syua --noconfirm"
 alias lup="grep 'starting full system upgrade' /var/log/pacman.log | tail -1 | cut -c2-17"
 
 alias open="xdg-open"
