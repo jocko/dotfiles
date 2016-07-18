@@ -29,6 +29,7 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'tkhren/vim-textobj-numeral'
 Plugin 'Julian/vim-textobj-variable-segment'
 Plugin 'wellle/targets.vim'
+Plugin 'jpalardy/vim-slime'
 
 call vundle#end()
 filetype plugin indent on
@@ -91,7 +92,7 @@ map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
-map <Leader>s <Plug>(easymotion-s)
+" map <Leader>s <Plug>(easymotion-s)
 
 nnoremap <leader>w :w<CR>
 " nnoremap q :q<CR>
@@ -130,3 +131,13 @@ vmap an <Plug>(textobj-numeral-a)
 omap an <Plug>(textobj-numeral-a)
 " Mark occurrences
 "nmap <Leader>n :let @/ = expand("<cword>")<CR>:let &hlsearch = &hlsearch<CR>
+
+" nnoremap <Leader>u :UndotreeToggle<CR>
+nnoremap U :UndotreeToggle<CR>
+let g:undotree_SetFocusWhenToggle=1
+
+let g:slime_python_ipython = 1
+let g:slime_target = "tmux"
+
+vmap <Leader>fs :!sqlformat -r -kupper -<CR>
+
