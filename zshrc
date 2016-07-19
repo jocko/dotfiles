@@ -124,7 +124,7 @@ function ding() {
 
 setopt prompt_subst
 PROMPT='%{$fg[yellow]%}%{$fg[green]%}[%~]
-%{$fg[blue]%}-> %{$fg[white]%}%# %{$reset_color%}'
+%{$fg[blue]%}-> %{$fg[default]%}%# %{$reset_color%}'
 RPROMPT='%{$(echotc UP 1)%}${vim_mode}%{$(echotc DO 1)%}'
 
 setopt hist_ignore_dups
