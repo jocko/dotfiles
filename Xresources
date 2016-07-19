@@ -2,41 +2,56 @@
 xterm*ScrollBar: false
 xterm*metaSendsEscape: true
 
-! -----------------------------------------------------------------------------
-! File: gruvbox-dark.xresources
-! Description: Retro groove colorscheme generalized
-! Author: morhetz <morhetz@gmail.com>
-! Source: https://github.com/morhetz/gruvbox-generalized
-! Last Modified: 6 Sep 2014
-! -----------------------------------------------------------------------------
-! hard contrast: *background: #1d2021
-xterm*background: #282828
-! soft contrast: *background: #32302f
-xterm*foreground: #ebdbb2
-! Black + DarkGrey
-xterm*color0:  #282828
-xterm*color8:  #928374
-! DarkRed + Red
-xterm*color1:  #cc241d
-xterm*color9:  #fb4934
-! DarkGreen + Green
-xterm*color2:  #98971a
-xterm*color10: #b8bb26
-! DarkYellow + Yellow
-xterm*color3:  #d79921
-xterm*color11: #fabd2f
-! DarkBlue + Blue
-xterm*color4:  #458588
-xterm*color12: #83a598
-! DarkMagenta + Magenta
-xterm*color5:  #b16286
-xterm*color13: #d3869b
-! DarkCyan + Cyan
-xterm*color6:  #689d6a
-xterm*color14: #8ec07c
-! LightGrey + White
-xterm*color7:  #a89984
-xterm*color15: #ebdbb2
+!TomorrowNight
+#define t_background        #1d1f21
+#define t_current_line      #282a2e
+#define t_selection      	#373b41
+#define t_foreground      	#c5c8c6
+#define t_comment	     	#969896
+#define t_red		     	#cc6666
+#define t_orange	     	#de935f
+#define t_yellow        	#f0c674
+#define t_green	        	#b5bd68
+#define t_aqua	        	#8abeb7
+#define t_blue	        	#81a2be
+#define t_purple        	#b294bb
+
+
+*.foreground:   t_foreground
+*.background:   t_background
+*.cursorColor:  #aeafad
+
+! Black / Grey
+*.color0:       #000000
+*.color8:       #666666
+
+! Red / Bright Red
+*.color1:       t_red
+*.color9:       #FF3334
+
+! Green + Bright Green
+*.color2:       t_green
+*.color10:      #9ec400
+
+! Yellow (Orange) + Bright Yellow (Yellow)
+*.color3:       t_orange
+*.color11:      t_yellow
+
+! Blue + Bright Blue
+*.color4:       t_blue
+*.color12:      t_blue
+
+! Magenta (Purple) + Bright Magenta
+*.color5:       t_purple
+*.color13:      #b777e0
+
+! Cyan (Aqua) + Bright Cyan
+*.color6:       t_aqua
+*.color14:      #54ced6
+
+! Light Grey (Selection) + White (Current Line)
+*.color7:       t_selection
+*.color15:      t_current_line
 
 xterm*faceName:    xft:Hack:size=12
 !xterm*faceName:           Hack

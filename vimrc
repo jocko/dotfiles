@@ -36,7 +36,7 @@ filetype plugin indent on
 syntax enable
 
 set background=dark
-color gruvbox
+color Tomorrow-Night
 
 set autoread
 autocmd FocusGained,BufEnter * checktime
