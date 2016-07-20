@@ -12,6 +12,7 @@ export LC_ALL=en_US.UTF-8
 alias ll='ls -alh --color=auto'
 alias ls='ls --color=auto'
 alias curl='noglob curl'
+alias http='noglob http'
 alias b='bundle'
 alias which="which -a"
 alias g="git"
@@ -38,6 +39,7 @@ alias pyserv="python2 -m SimpleHTTPServer"
 alias xx="atool -x"
 alias t="tail -f"
 alias urlencode='python2 -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+alias rsync-cp='rsync -avzh --progress'
 
 function mkcd() {
   mkdir -p "$1" && cd "$1";
@@ -119,7 +121,7 @@ function preexec() {
 # TIMEFMT="$fg[magenta]'%J'$reset_color time: $fg[green]%*Es$reset_color, cpu: $fg[green]%P$reset_color"
 
 function ding() {
-  notify-send "$history[$HISTCMD]"
+  notify-send -u critical "$history[$HISTCMD]"
 }
 
 setopt prompt_subst
