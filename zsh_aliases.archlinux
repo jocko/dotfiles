@@ -17,3 +17,5 @@ export GOPATH=~/go
 path=($path $GOPATH/bin)
 
 . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+[ -f /usr/bin/aws_zsh_completer.sh ] && source /usr/bin/aws_zsh_completer.sh
