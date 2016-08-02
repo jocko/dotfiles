@@ -121,7 +121,7 @@ function preexec() {
 # TIMEFMT="$fg[magenta]'%J'$reset_color time: $fg[green]%*Es$reset_color, cpu: $fg[green]%P$reset_color"
 
 function ding() {
-  notify-send -u critical "$history[$HISTCMD]"
+  notify-send -a "><(((('>" -u critical "$history[$HISTCMD]"
 }
 
 setopt prompt_subst
