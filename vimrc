@@ -30,6 +30,8 @@ Plugin 'tkhren/vim-textobj-numeral'
 Plugin 'Julian/vim-textobj-variable-segment'
 Plugin 'wellle/targets.vim'
 Plugin 'jpalardy/vim-slime'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
 
 call vundle#end()
 filetype plugin indent on
@@ -141,3 +143,4 @@ let g:slime_target = "tmux"
 
 vmap <Leader>fs :!sqlformat -r -kupper -<CR>
 
+let g:pandoc#modules#disabled = ["folding"]
