@@ -69,6 +69,9 @@ augroup trailing
   au InsertLeave * :set listchars+=trail:·
 augroup END
 
+set t_ZH=[3m
+set t_ZR=[23m
+
 let mapleader=" "
 
 nnoremap j gj
