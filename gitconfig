@@ -12,6 +12,9 @@
     punch = push --force
 [color]
     ui = true
+[color "decorate"]
+    head = blue
+    branch = green
 [core]
     autocrlf = input
     editor = vim
