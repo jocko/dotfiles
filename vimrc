@@ -74,6 +74,7 @@ set t_ZH=[3m
 set t_ZR=[23m
 
 let mapleader=" "
+let maplocalleader=","
 
 nnoremap j gj
 nnoremap k gk
