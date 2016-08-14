@@ -39,7 +39,7 @@ filetype plugin indent on
 syntax enable
 
 set background=dark
-color gruvbox
+color base16-default-dark
 
 set autoread
 autocmd FocusGained,BufEnter * checktime
