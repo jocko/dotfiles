@@ -19,7 +19,7 @@ Plugin 'tpope/vim-commentary'
 " Plugin 'szw/vim-tags'
 Plugin 'kana/vim-textobj-user'
 Plugin 'rhysd/vim-textobj-ruby'
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
 " Plugin 'pangloss/vim-javascript'
@@ -83,6 +83,11 @@ map <leader>y "*y
 autocmd FileType erlang setlocal expandtab shiftwidth=4
 autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
 
+autocmd FileType ruby abbr <buffer> pry! require 'pry'; binding.pry
+autocmd FileType ruby nnoremap <buffer> <LocalLeader>gd :Ack! 'def (self\.)?<cword>\('<CR>
+
+autocmd FileType gitcommit setlocal spell
+
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
@@ -114,8 +119,9 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   " We can disable cache when using ag
   let g:ctrlp_use_caching = 0
+  let g:ackprg = 'ag --vimgrep --smart-case' 
 endif
-nnoremap <leader>a :Ag! ""<Left>
+nnoremap <leader>a :Ack! ""<Left>
 
 nmap     <C-F>f <Plug>CtrlSFPrompt
 "vmap     <C-F>f <Plug>CtrlSFVwordPath
