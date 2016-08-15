@@ -32,14 +32,13 @@ Plugin 'wellle/targets.vim'
 Plugin 'jpalardy/vim-slime'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'chriskempson/base16-vim'
 
 call vundle#end()
 filetype plugin indent on
 syntax enable
 
 set background=dark
-color base16-default-dark
+color gruvbox
 
 set autoread
 autocmd FocusGained,BufEnter * checktime
