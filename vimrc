@@ -32,6 +32,8 @@ Plugin 'wellle/targets.vim'
 Plugin 'jpalardy/vim-slime'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-repeat'
 
 call vundle#end()
 filetype plugin indent on
