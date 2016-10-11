@@ -17,8 +17,10 @@ tags
 /log/*.log
 /tmp
 
+.envrc
 /.bundle
 /.idea
 .rake_tasks
 .ruby-version
 .pryrc
+venv
