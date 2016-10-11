@@ -34,6 +34,9 @@ fi
 # /etc/pam.d/login
 # ----------------
 # session    optional     pam_gnome_keyring.so
-export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
+# export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
+eval $(ssh-agent)
+ssh-add
 
 exec i3
+ssh-agent -k
