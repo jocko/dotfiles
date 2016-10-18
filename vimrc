@@ -34,6 +34,11 @@ Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-repeat'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+Plugin 'guns/vim-sexp'
+Plugin 'junegunn/rainbow_parentheses.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -69,6 +74,11 @@ augroup trailing
   au!
   au InsertEnter * :set listchars-=trail:·
   au InsertLeave * :set listchars+=trail:·
+augroup END
+
+augroup rainbow_lisp
+  autocmd!
+  autocmd FileType lisp,clojure,scheme RainbowParentheses
 augroup END
 
 set t_ZH=[3m
