@@ -24,3 +24,5 @@ tags
 .ruby-version
 .pryrc
 venv
+.vagrant/
+target/
