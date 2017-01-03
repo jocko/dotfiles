@@ -25,13 +25,12 @@ Plugin 'tpope/vim-surround'
 " Plugin 'pangloss/vim-javascript'
 " Plugin 'tpope/vim-fugitive'
 Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'junegunn/vim-easy-align'
+Plugin 'godlygeek/tabular'
 Plugin 'tkhren/vim-textobj-numeral'
 Plugin 'Julian/vim-textobj-variable-segment'
 Plugin 'wellle/targets.vim'
 Plugin 'jpalardy/vim-slime'
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-repeat'
 Plugin 'elixir-lang/vim-elixir'
@@ -165,4 +164,4 @@ let g:slime_target = "tmux"
 
 vmap <Leader>fs :!sqlformat -r -kupper -<CR>
 
-let g:pandoc#modules#disabled = ["folding"]
+let g:vim_markdown_folding_disabled = 1
