@@ -27,3 +27,5 @@
     prompt = false
 [diff]
   tool = meld
+[merge]
+  tool = meld
