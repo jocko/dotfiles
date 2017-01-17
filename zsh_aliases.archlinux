@@ -7,8 +7,7 @@ eval "$(direnv hook zsh)"
 
 alias yos="yaourt -Ss"
 alias yoi="yaourt -S --noconfirm"
-alias youp="yaourt -Syua"
-alias yolo="pacman -Qtdq"
+alias yolo="yaourt -Syua"
 alias yoro='sudo pacman -Rns $(pacman -Qtdq)'
 alias lup="grep 'starting full system upgrade' /var/log/pacman.log | tail -1 | cut -c2-17"
 
