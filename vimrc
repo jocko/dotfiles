@@ -7,23 +7,20 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim'
-" Plugin 'dyng/ctrlsf.vim'
-Plugin 'morhetz/gruvbox'
-" Plugin 'chriskempson/vim-tomorrow-theme'
+" Plugin 'morhetz/gruvbox'
+Plugin 'vim-scripts/twilight'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'chriskempson/base16-vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'vim-ruby/vim-ruby'
-" Plugin 'moll/vim-bbye'
 Plugin 'tpope/vim-vinegar'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-commentary'
-" Plugin 'szw/vim-tags'
 Plugin 'kana/vim-textobj-user'
 Plugin 'rhysd/vim-textobj-ruby'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
-" Plugin 'pangloss/vim-javascript'
-" Plugin 'tpope/vim-fugitive'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'tkhren/vim-textobj-numeral'
@@ -38,13 +35,22 @@ Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'guns/vim-sexp'
 Plugin 'junegunn/rainbow_parentheses.vim'
+Plugin 'python-mode/python-mode'
 
 call vundle#end()
 filetype plugin indent on
 syntax enable
 
+" set background=dark
+" color gruvbox
+
 set background=dark
-color gruvbox
+color base16-tomorrow-night
+
+" XXX Sprinkle fairy dust
+if has("termguicolors")
+  set termguicolors
+endif
 
 set autoread
 autocmd FocusGained,BufEnter * checktime
@@ -79,6 +85,8 @@ augroup rainbow_lisp
   autocmd!
   autocmd FileType lisp,clojure,scheme RainbowParentheses
 augroup END
+
+autocmd FileType clojure setlocal lispwords+=go-loop
 
 set t_ZH=[3m
 set t_ZR=[23m
@@ -165,3 +173,9 @@ let g:slime_target = "tmux"
 vmap <Leader>fs :!sqlformat -r -kupper -<CR>
 
 let g:vim_markdown_folding_disabled = 1
+
+let g:pymode_folding = 0
+let g:pymode_lint_ignore = "E501"
+let g:pymode_run = 0
+let g:pymode_breakpoint = 0
+set completeopt=menu
