@@ -36,6 +36,8 @@ Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'guns/vim-sexp'
 Plugin 'junegunn/rainbow_parentheses.vim'
 Plugin 'python-mode/python-mode'
+Plugin 'tpope/vim-fugitive'
+Plugin 'guns/vim-clojure-static'
 
 call vundle#end()
 filetype plugin indent on
@@ -66,6 +68,8 @@ set hidden
 set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
+" TODO Would be nice to read in gitignore
+set wildignore+=venv,.git
 set scrolloff=5
 set undodir=$HOME/.vim/undo
 set undofile
@@ -182,4 +186,4 @@ set completeopt=menu
 
 
 set relativenumber
-
+set path=**
