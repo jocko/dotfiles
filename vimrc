@@ -68,14 +68,14 @@ set hidden
 set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
-" TODO Would be nice to read in gitignore
-set wildignore+=venv,.git
+set wildignore+=venv,.git,*.orig
 set scrolloff=5
-set undodir=$HOME/.vim/undo
 set undofile
 set backspace=indent,eol,start
 set incsearch
 set hlsearch
+set relativenumber
+set completeopt=longest,menu,preview
 
 set list
 set listchars=tab:▸\ ,eol:¬,trail:·
@@ -84,6 +84,11 @@ augroup trailing
   au InsertEnter * :set listchars-=trail:·
   au InsertLeave * :set listchars+=trail:·
 augroup END
+
+set undodir=$HOME/.vim/undo
+if !isdirectory(expand(&undodir))
+  call mkdir(expand(&undodir), "p")
+endif
 
 augroup rainbow_lisp
   autocmd!
@@ -182,8 +187,3 @@ let g:pymode_folding = 0
 let g:pymode_lint_ignore = "E501"
 let g:pymode_run = 0
 let g:pymode_breakpoint = 0
-set completeopt=menu
-
-
-set relativenumber
-set path=**
