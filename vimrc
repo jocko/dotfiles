@@ -60,8 +60,8 @@ autocmd FocusGained,BufEnter * checktime
 set tabstop=2 shiftwidth=2
 set number
 set expandtab
-set ignorecase
-set smartcase
+" set ignorecase
+" set smartcase
 set ttimeout
 set ttimeoutlen=100
 set hidden
@@ -72,7 +72,7 @@ set wildignore+=venv,.git,*.orig
 set scrolloff=5
 set undofile
 set backspace=indent,eol,start
-set incsearch
+" set incsearch
 set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
