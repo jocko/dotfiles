@@ -76,6 +76,7 @@ set backspace=indent,eol,start
 set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
+set lazyredraw
 
 set list
 set listchars=tab:▸\ ,eol:¬,trail:·
