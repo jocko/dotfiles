@@ -7,10 +7,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim'
-" Plugin 'morhetz/gruvbox'
+Plugin 'morhetz/gruvbox'
 " Plugin 'vim-scripts/twilight'
 " Plugin 'w0ng/vim-hybrid'
-Plugin 'chriskempson/base16-vim'
+" Plugin 'chriskempson/base16-vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-vinegar'
 Plugin 'mbbill/undotree'
@@ -43,11 +43,11 @@ call vundle#end()
 filetype plugin indent on
 syntax enable
 
-" set background=dark
-" color gruvbox
-
 set background=dark
-color base16-tomorrow-night
+color gruvbox
+
+" set background=dark
+" color base16-tomorrow-night
 
 " XXX Sprinkle fairy dust
 if has("termguicolors")
