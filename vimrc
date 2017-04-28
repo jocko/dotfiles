@@ -8,8 +8,8 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim'
 " Plugin 'morhetz/gruvbox'
-Plugin 'vim-scripts/twilight'
-Plugin 'w0ng/vim-hybrid'
+" Plugin 'vim-scripts/twilight'
+" Plugin 'w0ng/vim-hybrid'
 Plugin 'chriskempson/base16-vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-vinegar'
@@ -104,7 +104,7 @@ set t_ZR=[23m
 
 let mapleader=" "
 " TODO Find another localleader
-" let maplocalleader=","
+let maplocalleader=","
 
 nnoremap j gj
 nnoremap k gk
