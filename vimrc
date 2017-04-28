@@ -11,7 +11,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'vim-scripts/twilight'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'chriskempson/base16-vim'
-Plugin 'easymotion/vim-easymotion'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-vinegar'
 Plugin 'mbbill/undotree'
@@ -23,9 +22,10 @@ Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'godlygeek/tabular'
-Plugin 'tkhren/vim-textobj-numeral'
-Plugin 'Julian/vim-textobj-variable-segment'
-Plugin 'wellle/targets.vim'
+" TODO These three plugins, not sure if I'm using
+" Plugin 'tkhren/vim-textobj-numeral'
+" Plugin 'Julian/vim-textobj-variable-segment'
+" Plugin 'wellle/targets.vim'
 Plugin 'jpalardy/vim-slime'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-abolish'
@@ -35,7 +35,7 @@ Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'guns/vim-sexp'
 Plugin 'junegunn/rainbow_parentheses.vim'
-Plugin 'python-mode/python-mode'
+" Plugin 'python-mode/python-mode'
 Plugin 'tpope/vim-fugitive'
 Plugin 'guns/vim-clojure-static'
 
@@ -76,6 +76,7 @@ set backspace=indent,eol,start
 set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
+set nowrap
 set lazyredraw
 
 set list
@@ -102,7 +103,8 @@ set t_ZH=[3m
 set t_ZR=[23m
 
 let mapleader=" "
-let maplocalleader=","
+" TODO Find another localleader
+" let maplocalleader=","
 
 nnoremap j gj
 nnoremap k gk
@@ -113,30 +115,11 @@ autocmd FileType erlang setlocal expandtab shiftwidth=4
 autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
 
 autocmd FileType ruby abbr <buffer> pry! require 'pry'; binding.pry
-autocmd FileType ruby nnoremap <buffer> <LocalLeader>gd :Ack! 'def (self\.)?<cword>\('<CR>
+" autocmd FileType ruby nnoremap <buffer> <LocalLeader>gd :Ack! 'def (self\.)?<cword>\('<CR>
 
 autocmd FileType gitcommit setlocal spell
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" EasyMotion
-
-" Disable default mappings
-let g:EasyMotion_do_mapping = 0
-" Navigation up/down
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
-" map <Leader>s <Plug>(easymotion-s)
-
 nnoremap <leader>w :w<CR>
-" nnoremap q :q<CR>
-nnoremap <leader>q :Bdelete<CR>
 
 " CtrlP
 map <leader>o :CtrlP<CR>
@@ -152,15 +135,7 @@ if executable('ag')
 endif
 nnoremap <leader>a :Ack! ""<Left>
 
-nmap     <C-F>f <Plug>CtrlSFPrompt
-"vmap     <C-F>f <Plug>CtrlSFVwordPath
-"vmap     <C-F>F <Plug>CtrlSFVwordExec
-nmap     <C-F>n <Plug>CtrlSFCwordExec
-"nmap     <C-F>p <Plug>CtrlSFPwordPath
-"nnoremap <C-F>o :CtrlSFOpen<CR>
-"nnoremap <C-F>t :CtrlSFToggle<CR>
-"inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
-
+" TODO What is this?
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
@@ -170,8 +145,8 @@ let g:textobj_numeral_no_default_key_mappings = 1
 
 vmap an <Plug>(textobj-numeral-a)
 omap an <Plug>(textobj-numeral-a)
-" Mark occurrences
-"nmap <Leader>n :let @/ = expand("<cword>")<CR>:let &hlsearch = &hlsearch<CR>
+" Mark occurrences (note: <raise>-f => *)
+nmap <Leader>f :let @/ = expand("<cword>")<CR>:let &hlsearch = &hlsearch<CR>
 
 " nnoremap <Leader>u :UndotreeToggle<CR>
 nnoremap U :UndotreeToggle<CR>
