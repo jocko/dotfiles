@@ -146,7 +146,8 @@ let g:textobj_numeral_no_default_key_mappings = 1
 vmap an <Plug>(textobj-numeral-a)
 omap an <Plug>(textobj-numeral-a)
 " Mark occurrences (note: <raise>-f => *)
-nmap <Leader>f :let @/ = expand("<cword>")<CR>:let &hlsearch = &hlsearch<CR>
+" nmap <Leader>f :let @/ = expand("<cword>")<CR>:let &hlsearch = &hlsearch<CR>
+nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
 " nnoremap <Leader>u :UndotreeToggle<CR>
 nnoremap U :UndotreeToggle<CR>
