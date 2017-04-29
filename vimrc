@@ -27,7 +27,7 @@ Plugin 'godlygeek/tabular'
 " Plugin 'Julian/vim-textobj-variable-segment'
 " Plugin 'wellle/targets.vim'
 Plugin 'jpalardy/vim-slime'
-Plugin 'plasticboy/vim-markdown'
+" Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-repeat'
 Plugin 'elixir-lang/vim-elixir'
@@ -106,14 +106,16 @@ let mapleader=" "
 " TODO Find another localleader
 let maplocalleader=","
 
-nnoremap j gj
-nnoremap k gk
+" gj/gk operates on display lines (useful when 'wrap' is on)
+" nnoremap j gj
+" nnoremap k gk
 
 map <leader>y "*y
 
 autocmd FileType erlang setlocal expandtab shiftwidth=4
 autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
 
+let g:ruby_indent_block_style = 'do'
 autocmd FileType ruby abbr <buffer> pry! require 'pry'; binding.pry
 " autocmd FileType ruby nnoremap <buffer> <LocalLeader>gd :Ack! 'def (self\.)?<cword>\('<CR>
 
@@ -158,7 +160,7 @@ let g:slime_target = "tmux"
 
 vmap <Leader>fs :!sqlformat -r -kupper -<CR>
 
-let g:vim_markdown_folding_disabled = 1
+" let g:vim_markdown_folding_disabled = 1
 
 let g:pymode_folding = 0
 let g:pymode_lint_ignore = "E501"
