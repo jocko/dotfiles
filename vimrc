@@ -72,7 +72,7 @@ set wildignore+=venv,.git,*.orig
 set scrolloff=5
 set undofile
 set backspace=indent,eol,start
-" set incsearch
+set incsearch
 set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
