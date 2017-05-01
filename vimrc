@@ -38,6 +38,8 @@ Plugin 'junegunn/rainbow_parentheses.vim'
 " Plugin 'python-mode/python-mode'
 Plugin 'tpope/vim-fugitive'
 Plugin 'guns/vim-clojure-static'
+Plugin 'tpope/vim-endwise.git'
+Plugin 'tpope/vim-unimpaired'
 
 call vundle#end()
 filetype plugin indent on
