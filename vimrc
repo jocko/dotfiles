@@ -22,7 +22,7 @@ Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'godlygeek/tabular'
-" TODO These three plugins, not sure if I'm using
+" TODO These three plugins, not sure if I'm using.
 " Plugin 'tkhren/vim-textobj-numeral'
 " Plugin 'Julian/vim-textobj-variable-segment'
 " Plugin 'wellle/targets.vim'
@@ -143,7 +143,7 @@ if executable('ag')
 endif
 nnoremap <leader>a :Ack! ""<Left>
 
-" TODO What is this?
+" Jump to tag, show list if multiple tags
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
@@ -153,8 +153,8 @@ let g:textobj_numeral_no_default_key_mappings = 1
 
 vmap an <Plug>(textobj-numeral-a)
 omap an <Plug>(textobj-numeral-a)
+
 " Mark occurrences (note: <raise>-f => *)
-" nmap <Leader>f :let @/ = expand("<cword>")<CR>:let &hlsearch = &hlsearch<CR>
 nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
 " nnoremap <Leader>u :UndotreeToggle<CR>
@@ -164,7 +164,7 @@ let g:undotree_SetFocusWhenToggle=1
 let g:slime_python_ipython = 1
 let g:slime_target = "tmux"
 
-vmap <Leader>fs :!sqlformat -r -kupper -<CR>
+" vmap <Leader>fs :!sqlformat -r -kupper -<CR>
 
 " let g:vim_markdown_folding_disabled = 1
 
