@@ -78,7 +78,7 @@ set incsearch
 set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
-set nowrap
+set wrap
 set lazyredraw
 
 set list
