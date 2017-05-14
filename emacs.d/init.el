@@ -81,6 +81,8 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'evil)
 (evil-mode t)
 
+(evil-set-initial-state 'cider-repl-mode 'emacs)
+
 ; (require-package 'erlang)
 ; (add-hook 'erlang-mode-hook '(lambda() (setq indent-tabs-mode nil)))
 
