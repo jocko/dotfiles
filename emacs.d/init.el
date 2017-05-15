@@ -39,21 +39,33 @@ re-downloaded in order to locate PACKAGE."
 ;; Current line displays absolute line number
 (setq linum-relative-current-symbol "")
 
-(require-package 'projectile)
-(setq projectile-completion-system 'ivy)
+; (require-package 'projectile)
+; (setq projectile-completion-system 'ivy)
 
 (global-set-key (kbd "C-x p") 'projectile-switch-project)
 
 (require-package 'counsel)
 (ivy-mode 1)
+
+;; this makes swiper behave more like vim search
+(setq swiper-goto-start-of-match t)
+
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+
 ; (global-set-key (kbd "M-x") 'counsel-M-x)
 
-(require-package 'avy)
-(global-set-key (kbd "C-:") 'avy-goto-char)
+; (require-package 'avy)
+; (global-set-key (kbd "C-:") 'avy-goto-char)
 
 ; (require-package 'yasnippet)
 ; (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
 ; (yas-global-mode 1)
+
+(require-package 'find-file-in-project)
+(global-set-key (kbd "C-x o") 'find-file-in-project)
+
+(global-set-key (kbd "C-w") 'backward-kill-word)
 
 (require-package 'paredit)
 
