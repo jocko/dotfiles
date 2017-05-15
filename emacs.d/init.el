@@ -42,7 +42,7 @@ re-downloaded in order to locate PACKAGE."
 ; (require-package 'projectile)
 ; (setq projectile-completion-system 'ivy)
 
-(global-set-key (kbd "C-x p") 'projectile-switch-project)
+; (global-set-key (kbd "C-x p") 'projectile-switch-project)
 
 (require-package 'counsel)
 (ivy-mode 1)
@@ -77,7 +77,7 @@ re-downloaded in order to locate PACKAGE."
 
 (defun my-clojure-mode-hook ()
   (clj-refactor-mode 1)
-  (projectile-mode)
+  ; (projectile-mode)
   (linum-relative-mode)
   (paredit-mode)
   (rainbow-delimiters-mode)
@@ -98,11 +98,24 @@ re-downloaded in order to locate PACKAGE."
   ;; TODO Maybe an emacs binding for these two instead
   "j" 'evil-avy-goto-word-1-below
   "k" 'evil-avy-goto-word-1-above
-  "o" 'projectile-find-file
-  "O" 'projectile-find-file-other-window
+  ; "o" 'projectile-find-file
+  ; "O" 'projectile-find-file-other-window
   "w" 'save-buffer
   ; "x" 'counsel-M-x
   )
+
+(require-package 'diminish)
+(eval-after-load "paredit" '(diminish 'paredit-mode))
+(eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
+(eval-after-load "ivy" '(diminish 'ivy-mode))
+(eval-after-load "linum-relative" '(diminish 'linum-relative-mode))
+(eval-after-load "clj-refactor" '(diminish 'clj-refactor-mode))
+
+(defmacro rename-modeline (package-name mode new-name)
+  `(eval-after-load ,package-name
+                    '(defadvice ,mode (after rename-modeline activate)
+                                (setq mode-name ,new-name))))
+(rename-modeline "clojure-mode" clojure-mode  "Clj")
 
 (require-package 'evil)
 (evil-mode t)
