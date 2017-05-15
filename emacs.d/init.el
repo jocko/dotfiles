@@ -16,14 +16,21 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
-(require-package 'solarized-theme)
-(load-theme 'solarized-light t)
+(require-package 'spacegray-theme)
+(load-theme 'spacegray t)
 
 (setq inhibit-startup-screen t)
 
 (blink-cursor-mode 0)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Disable tool bar, menu bar, scroll bar and tool tips.
+(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode tooltip-mode))
+  (when (fboundp mode) (funcall mode -1)))
+
+;; F5 is mapped to "meta tap" on my keyboard
+(global-set-key (kbd "<f5>") 'counsel-M-x)
 
 ; DISABLED getting this weird behaviour when doing c-g when in m-x, the next time i do m-x the text is clipped and offset to the right
 (require-package 'linum-relative)
@@ -34,6 +41,8 @@ re-downloaded in order to locate PACKAGE."
 
 (require-package 'projectile)
 (setq projectile-completion-system 'ivy)
+
+(global-set-key (kbd "C-x p") 'projectile-switch-project)
 
 (require-package 'counsel)
 (ivy-mode 1)
@@ -52,11 +61,14 @@ re-downloaded in order to locate PACKAGE."
 
 (require-package 'clj-refactor)
 
+(require-package 'rainbow-delimiters)
+
 (defun my-clojure-mode-hook ()
   (clj-refactor-mode 1)
   (projectile-mode)
   (linum-relative-mode)
   (paredit-mode)
+  (rainbow-delimiters-mode)
   (linum-mode))
 
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
@@ -68,20 +80,24 @@ re-downloaded in order to locate PACKAGE."
 
 (evil-leader/set-leader "SPC")
 (evil-leader/set-key
-  ; "b" 'switch-to-buffer
+  "b" 'switch-to-buffer
   ; "f" 'find-file
   ; "j" 'projectile-find-tag
+  ;; TODO Maybe an emacs binding for these two instead
   "j" 'evil-avy-goto-word-1-below
   "k" 'evil-avy-goto-word-1-above
   "o" 'projectile-find-file
   "O" 'projectile-find-file-other-window
   "w" 'save-buffer
-  "x" 'counsel-M-x)
+  ; "x" 'counsel-M-x
+  )
 
 (require-package 'evil)
 (evil-mode t)
 
+(evil-set-initial-state 'fundamental-mode 'emacs)
 (evil-set-initial-state 'cider-repl-mode 'emacs)
+(evil-set-initial-state 'cider-stacktrace-mode 'emacs)
 
 ; (require-package 'erlang)
 ; (add-hook 'erlang-mode-hook '(lambda() (setq indent-tabs-mode nil)))
@@ -286,3 +302,5 @@ re-downloaded in order to locate PACKAGE."
 
 ; (define-key evil-normal-state-map (kbd "s") 'ace-jump-mode)
 
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
