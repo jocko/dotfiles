@@ -40,6 +40,9 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-endwise.git'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 
 call vundle#end()
 filetype plugin indent on
@@ -122,7 +125,7 @@ autocmd FileType erlang setlocal expandtab shiftwidth=4
 autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
 
 let g:ruby_indent_block_style = 'do'
-autocmd FileType ruby abbr <buffer> pry! require 'pry'; binding.pry
+" autocmd FileType ruby abbr <buffer> pry! require 'pry'; binding.pry
 " autocmd FileType ruby nnoremap <buffer> <LocalLeader>gd :Ack! 'def (self\.)?<cword>\('<CR>
 
 autocmd FileType gitcommit setlocal spell
