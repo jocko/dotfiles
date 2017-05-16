@@ -16,8 +16,12 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
+(require-package 'spacemacs-theme)
 (require-package 'spacegray-theme)
-(load-theme 'spacegray t)
+(require-package 'dracula-theme)
+(load-theme 'spacemacs-dark t)
+; (load-theme 'spacegray t)
+; (load-theme 'dracula t)
 
 (setq inhibit-startup-screen t)
 
@@ -26,6 +30,17 @@ re-downloaded in order to locate PACKAGE."
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (cd "~/Repos")
+
+(require-package 'spaceline)
+(require 'spaceline-config)
+(spaceline-spacemacs-theme)
+(spaceline-toggle-buffer-position-off)
+(spaceline-toggle-buffer-encoding-abbrev-off)
+(spaceline-toggle-version-control-off)
+(spaceline-toggle-buffer-size-off)
+(spaceline-toggle-line-column-off)
+(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+(setq powerline-default-separator 'nil)
 
 ;; Disable tool bar, menu bar, scroll bar and tool tips.
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode tooltip-mode))
