@@ -25,6 +25,8 @@ re-downloaded in order to locate PACKAGE."
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(cd "~/Repos")
+
 ;; Disable tool bar, menu bar, scroll bar and tool tips.
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode tooltip-mode))
   (when (fboundp mode) (funcall mode -1)))
