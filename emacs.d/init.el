@@ -41,6 +41,7 @@ re-downloaded in order to locate PACKAGE."
 (spaceline-toggle-line-column-off)
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
 (setq powerline-default-separator 'nil)
+(spaceline-compile)
 
 ;; Disable tool bar, menu bar, scroll bar and tool tips.
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode tooltip-mode))
