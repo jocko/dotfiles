@@ -81,7 +81,8 @@ re-downloaded in order to locate PACKAGE."
 ; (yas-global-mode 1)
 
 (require-package 'find-file-in-project)
-(global-set-key (kbd "C-x o") 'find-file-in-project)
+;; TODO Ambivalent about this...
+; (global-set-key (kbd "C-x o") 'find-file-in-project)
 
 (global-set-key (kbd "C-w") 'backward-kill-word)
 
@@ -116,6 +117,7 @@ re-downloaded in order to locate PACKAGE."
   ;; TODO Maybe an emacs binding for these two instead
   "j" 'evil-avy-goto-word-1-below
   "k" 'evil-avy-goto-word-1-above
+  "o" 'find-file-in-project
   ; "o" 'projectile-find-file
   ; "O" 'projectile-find-file-other-window
   "w" 'save-buffer
@@ -141,6 +143,8 @@ re-downloaded in order to locate PACKAGE."
 (evil-set-initial-state 'fundamental-mode 'emacs)
 (evil-set-initial-state 'cider-repl-mode 'emacs)
 (evil-set-initial-state 'cider-stacktrace-mode 'emacs)
+;; Unsure about this
+; (evil-set-initial-state 'lisp-interaction-mode 'emacs)
 
 ; (require-package 'erlang)
 ; (add-hook 'erlang-mode-hook '(lambda() (setq indent-tabs-mode nil)))
