@@ -65,6 +65,13 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'counsel)
 (ivy-mode 1)
 
+;; TODO
+(defun foo-action (file)
+  (find-file-other-window (cdr file)))
+(ivy-set-actions
+ 'find-file-in-project
+ '(("j" foo-action "other window")))
+
 ;; this makes swiper behave more like vim search
 (setq swiper-goto-start-of-match t)
 
@@ -136,6 +143,8 @@ re-downloaded in order to locate PACKAGE."
                     '(defadvice ,mode (after rename-modeline activate)
                                 (setq mode-name ,new-name))))
 (rename-modeline "clojure-mode" clojure-mode  "Clj")
+
+(setq evil-want-C-u-scroll t)
 
 (require-package 'evil)
 (evil-mode t)
