@@ -48,7 +48,8 @@ re-downloaded in order to locate PACKAGE."
   (when (fboundp mode) (funcall mode -1)))
 
 ;; F5 is mapped to "meta tap" on my keyboard
-(global-set-key (kbd "<f5>") 'counsel-M-x)
+;; Not needed anymore, meta-tap now maps to Menu
+; (global-set-key (kbd "<f5>") 'counsel-M-x)
 
 ; DISABLED getting this weird behaviour when doing c-g when in m-x, the next time i do m-x the text is clipped and offset to the right
 (require-package 'linum-relative)
