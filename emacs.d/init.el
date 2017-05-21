@@ -141,13 +141,13 @@ re-downloaded in order to locate PACKAGE."
 
 (defun my-clojure-mode-hook ()
   (clj-refactor-mode 1)
-  ; (projectile-mode)
+  ;; Check out nlinum (supposedly faster)
+  (linum-mode)
   (linum-relative-mode)
   ;; (paredit-mode)
   (lispy-mode)
   (rainbow-delimiters-mode)
-  (highlight-parentheses-mode)
-  (linum-mode))
+  (highlight-parentheses-mode))
 
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
 
@@ -159,34 +159,66 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'evil-commentary)
 (evil-commentary-mode)
 
-(require-package 'evil-leader)
-(global-evil-leader-mode 1)
+(require-package 'general)
 
-(evil-leader/set-leader "SPC")
-(evil-leader/set-key
-  "b" 'switch-to-buffer
-  ; "f" 'find-file
-  ; "j" 'projectile-find-tag
-  ;; TODO Maybe an emacs binding for these two instead
-  "j" 'evil-avy-goto-word-1-below
-  "k" 'evil-avy-goto-word-1-above
-  "o" 'find-file-in-project
-  ; "o" 'projectile-find-file
-  ; "O" 'projectile-find-file-other-window
-  "w" 'save-buffer
-  ; "x" 'counsel-M-x
-  )
+(setq general-default-keymaps 'evil-normal-state-map)
+(setq my-leader "SPC")
 
-(evil-leader/set-key-for-mode 'clojure-mode
-  ;; TODO e => eval sexp
-  ;;      f => eval defn
-  "e" 'cider-eval-last-sexp
-  "f" 'cider-eval-defun-at-point
-  "n" 'cider-eval-ns-form
-  ;; Note to self: "m" is for major mode
-  ;; "mr?" 'cljr-describe-refactoring
-  "ril" 'cljr-introduce-let
-  "rel" 'cljr-expand-let)
+(general-define-key :prefix my-leader
+		    "b" 'switch-to-buffer
+		    "j" 'evil-avy-goto-word-1-below
+		    "k" 'evil-avy-goto-word-1-above
+		    "o" 'find-file-in-project
+		    "w" 'save-buffer)
+
+;; Seems like I need to unbind comma before it can be used as "local leader"
+(eval-after-load "evil-maps"
+  (define-key evil-motion-state-map "," nil))
+(setq my-localleader ",")
+
+(general-define-key :prefix my-localleader
+		    :keymaps 'clojure-mode-map
+		    "e" 'cider-eval-last-sexp
+		    "f" 'cider-eval-defun-at-point
+		    "n" 'cider-eval-ns-form
+		    "v" 'cider-eval-sexp-at-point
+		    "da" 'cider-apropos
+		    "dd" 'cider-doc
+		    "df" 'cider-apropos-documentation)
+
+;; (eval-after-load "evil-maps"
+;;   (define-key evil-motion-state-map "K" nil))
+;; (general-define-key :keymaps 'clojure-mode-map
+;; 		    "K" 'cider-doc)
+
+;; (require-package 'evil-leader)
+;; (global-evil-leader-mode 1)
+
+;; (evil-leader/set-leader "SPC")
+;; (evil-leader/set-key
+;;   "b" 'switch-to-buffer
+;;   ; "f" 'find-file
+;;   ; "j" 'projectile-find-tag
+;;   ;; TODO Maybe an emacs binding for these two instead
+;;   "j" 'evil-avy-goto-word-1-below
+;;   "k" 'evil-avy-goto-word-1-above
+;;   "o" 'find-file-in-project
+;;   ; "o" 'projectile-find-file
+;;   ; "O" 'projectile-find-file-other-window
+;;   "w" 'save-buffer
+;;   ; "x" 'counsel-M-x
+;;   )
+
+;; (evil-leader/set-key-for-mode 'clojure-mode
+;;   ;; TODO e => eval sexp
+;;   ;;      f => eval defn
+;;   "e" 'cider-eval-last-sexp
+;;   "f" 'cider-eval-defun-at-point
+;;   "n" 'cider-eval-ns-form
+;;   ;; Note to self: "m" is for major mode
+;;   ;; "mr?" 'cljr-describe-refactoring
+;;   "ril" 'cljr-introduce-let
+;;   "rel" 'cljr-expand-let)
 
 (require-package 'diminish)
 (eval-after-load "paredit" '(diminish 'paredit-mode))
@@ -232,6 +264,7 @@ re-downloaded in order to locate PACKAGE."
 (evil-set-initial-state 'fundamental-mode 'emacs)
 (evil-set-initial-state 'cider-repl-mode 'emacs)
 (evil-set-initial-state 'cider-stacktrace-mode 'emacs)
+(evil-set-initial-state 'cider-docview-mode 'motion)
 ;; Unsure about this
 ; (evil-set-initial-state 'lisp-interaction-mode 'emacs)
 
