@@ -119,9 +119,11 @@ re-downloaded in order to locate PACKAGE."
 
 (require-package 'highlight-parentheses)
 
-(require-package 'lispy)
+(require-package 'paredit)
+;; (require-package 'lispy)
 (require-package 'evil-cleverparens)
-(add-hook 'lispy-mode-hook #'evil-cleverparens-mode)
+;; (add-hook 'lispy-mode-hook #'evil-cleverparens-mode)
+(add-hook 'paredit-mode-hook #'evil-cleverparens-mode)
 ;; (setq evil-cleverparens-use-additional-movement-keys nil)
 ;; (require-package 'lispyville)
 ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
@@ -135,7 +137,8 @@ re-downloaded in order to locate PACKAGE."
   (linum-mode)
   (rainbow-delimiters-mode)
   (highlight-parentheses-mode)
-  (lispy-mode))
+  ;; (lispy-mode)
+  (paredit-mode))
 
 (add-hook 'emacs-lisp-mode-hook #'my-emacs-lisp-mode-hook)
 
@@ -144,8 +147,8 @@ re-downloaded in order to locate PACKAGE."
   ;; Check out nlinum (supposedly faster)
   (linum-mode)
   (linum-relative-mode)
-  ;; (paredit-mode)
-  (lispy-mode)
+  (paredit-mode)
+  ;; (lispy-mode)
   (rainbow-delimiters-mode)
   (highlight-parentheses-mode))
 
@@ -159,32 +162,6 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'evil-commentary)
 (evil-commentary-mode)
 
-(require-package 'general)
-
-(setq general-default-keymaps 'evil-normal-state-map)
-(setq my-leader "SPC")
-
-(general-define-key :prefix my-leader
-		    "b" 'switch-to-buffer
-		    "j" 'evil-avy-goto-word-1-below
-		    "k" 'evil-avy-goto-word-1-above
-		    "o" 'find-file-in-project
-		    "w" 'save-buffer)
-
-;; Seems like I need to unbind comma before it can be used as "local leader"
-(eval-after-load "evil-maps"
-  (define-key evil-motion-state-map "," nil))
-(setq my-localleader ",")
-
-(general-define-key :prefix my-localleader
-		    :keymaps 'clojure-mode-map
-		    "e" 'cider-eval-last-sexp
-		    "f" 'cider-eval-defun-at-point
-		    "n" 'cider-eval-ns-form
-		    "v" 'cider-eval-sexp-at-point
-		    "da" 'cider-apropos
-		    "dd" 'cider-doc
-		    "df" 'cider-apropos-documentation)
 
 ;; (eval-after-load "evil-maps"
 ;;   (define-key evil-motion-state-map "K" nil))
@@ -250,6 +227,38 @@ re-downloaded in order to locate PACKAGE."
 
 (require-package 'evil)
 (evil-mode t)
+
+(require-package 'general)
+
+;; (setq general-default-keymaps 'evil-normal-state-map)
+;; (setq my-leader "SPC")
+
+(general-define-key :prefix "SPC"
+		    :keymaps '(normal motion dired-mode-map)
+		    ;; :states '(normal)
+		    "" nil
+		    "b" 'switch-to-buffer
+		    "j" 'evil-avy-goto-word-1-below
+		    "k" 'evil-avy-goto-word-1-above
+		    "o" 'find-file-in-project
+		    "w" 'save-buffer)
+
+;; Seems like I need to unbind comma before it can be used as "local leader"
+;; (eval-after-load "evil-maps"
+;;   (define-key evil-motion-state-map "," nil))
+;; (setq my-localleader ",")
+
+(general-define-key :prefix ","
+		    :keymaps 'clojure-mode-map
+		    :states '(normal visual motion)
+		    "" nil
+		    "e" 'cider-eval-last-sexp
+		    "f" 'cider-eval-defun-at-point
+		    "n" 'cider-eval-ns-form
+		    "v" 'cider-eval-sexp-at-point
+		    "da" 'cider-apropos
+		    "dd" 'cider-doc
+		    "df" 'cider-apropos-documentation)
 
 ;; XXX A failed experiment
 ;; (require-package 'evil-extra-operator)
