@@ -100,6 +100,9 @@ re-downloaded in order to locate PACKAGE."
 ;; TODO Ambivalent about this...
 ; (global-set-key (kbd "C-x o") 'find-file-in-project)
 
+(setq undo-tree-auto-save-history t)
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+
 (global-set-key (kbd "C-w") 'backward-kill-word)
 
 (setq evil-want-C-u-scroll t)
@@ -112,9 +115,12 @@ re-downloaded in order to locate PACKAGE."
 
 (require-package 'rainbow-delimiters)
 
+(require-package 'highlight-parentheses)
+
 (require-package 'lispy)
 (require-package 'evil-cleverparens)
 (add-hook 'lispy-mode-hook #'evil-cleverparens-mode)
+;; (setq evil-cleverparens-use-additional-movement-keys nil)
 ;; (require-package 'lispyville)
 ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
 ;; (with-eval-after-load 'lispyville
@@ -126,6 +132,7 @@ re-downloaded in order to locate PACKAGE."
   (linum-relative-mode)
   (linum-mode)
   (rainbow-delimiters-mode)
+  (highlight-parentheses-mode)
   (lispy-mode))
 
 (add-hook 'emacs-lisp-mode-hook #'my-emacs-lisp-mode-hook)
@@ -137,6 +144,7 @@ re-downloaded in order to locate PACKAGE."
   ;; (paredit-mode)
   (lispy-mode)
   (rainbow-delimiters-mode)
+  (highlight-parentheses-mode)
   (linum-mode))
 
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
@@ -167,6 +175,12 @@ re-downloaded in order to locate PACKAGE."
   ; "x" 'counsel-M-x
   )
 
+(evil-leader/set-key-for-mode 'clojure-mode
+  ;; Note to self: "m" is for major mode
+  ;; "mr?" 'cljr-describe-refactoring
+  "ril" 'cljr-introduce-let
+  "rel" 'cljr-expand-let)
+
 (require-package 'diminish)
 (eval-after-load "paredit" '(diminish 'paredit-mode))
 (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
@@ -177,6 +191,7 @@ re-downloaded in order to locate PACKAGE."
 ;; (eval-after-load "lispyville" '(diminish 'lispyville-mode))
 (eval-after-load "evil-commentary" '(diminish 'evil-commentary-mode))
 (eval-after-load "evil-cleverparens" '(diminish 'evil-cleverparens-mode))
+(eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
 
 (defmacro rename-modeline (package-name mode new-name)
   `(eval-after-load ,package-name
@@ -196,6 +211,10 @@ re-downloaded in order to locate PACKAGE."
 
 (require-package 'evil)
 (evil-mode t)
+
+(require-package 'evil-extra-operator)
+;; For lispy modes, evaluate movement/textobj
+(define-key evil-motion-state-map "gp" 'evil-operator-eval)
 
 (defun silence ()
   (interactive))
