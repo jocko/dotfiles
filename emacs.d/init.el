@@ -24,8 +24,13 @@ re-downloaded in order to locate PACKAGE."
 ; (load-theme 'dracula t)
 
 (setq inhibit-startup-screen t)
+(setq scroll-margin 5)
 
 (blink-cursor-mode 0)
+
+(set-face-attribute 'default nil
+		    :family "Hack"
+		    :height 120)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -46,6 +51,9 @@ re-downloaded in order to locate PACKAGE."
 ;; Disable tool bar, menu bar, scroll bar and tool tips.
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode tooltip-mode))
   (when (fboundp mode) (funcall mode -1)))
+
+(require 'saveplace)
+(save-place-mode 1)
 
 ;; F5 is mapped to "meta tap" on my keyboard
 ;; Not needed anymore, meta-tap now maps to Menu
@@ -94,6 +102,8 @@ re-downloaded in order to locate PACKAGE."
 
 (global-set-key (kbd "C-w") 'backward-kill-word)
 
+(setq evil-want-C-u-scroll t)
+
 (require-package 'paredit)
 
 (require-package 'clojure-mode)
@@ -102,17 +112,42 @@ re-downloaded in order to locate PACKAGE."
 
 (require-package 'rainbow-delimiters)
 
+(require-package 'lispy)
+(require-package 'evil-cleverparens)
+(add-hook 'lispy-mode-hook #'evil-cleverparens-mode)
+;; (require-package 'lispyville)
+;; (add-hook 'lispy-mode-hook #'lispyville-mode)
+;; (with-eval-after-load 'lispyville
+;;   (lispyville-set-key-theme '(operators
+;; 			      (slurp/barf-cp)
+;; 			      (additional-movement normal visual motion))))
+
+(defun my-emacs-lisp-mode-hook ()
+  (linum-relative-mode)
+  (linum-mode)
+  (rainbow-delimiters-mode)
+  (lispy-mode))
+
+(add-hook 'emacs-lisp-mode-hook #'my-emacs-lisp-mode-hook)
+
 (defun my-clojure-mode-hook ()
   (clj-refactor-mode 1)
   ; (projectile-mode)
   (linum-relative-mode)
-  (paredit-mode)
+  ;; (paredit-mode)
+  (lispy-mode)
   (rainbow-delimiters-mode)
   (linum-mode))
 
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
 
 ; (require-package 'cider)
+
+(require-package 'evil-surround)
+(global-evil-surround-mode 1)
+
+(require-package 'evil-commentary)
+(evil-commentary-mode)
 
 (require-package 'evil-leader)
 (global-evil-leader-mode 1)
@@ -138,6 +173,10 @@ re-downloaded in order to locate PACKAGE."
 (eval-after-load "ivy" '(diminish 'ivy-mode))
 (eval-after-load "linum-relative" '(diminish 'linum-relative-mode))
 (eval-after-load "clj-refactor" '(diminish 'clj-refactor-mode))
+(eval-after-load "lispy" '(diminish 'lispy-mode))
+;; (eval-after-load "lispyville" '(diminish 'lispyville-mode))
+(eval-after-load "evil-commentary" '(diminish 'evil-commentary-mode))
+(eval-after-load "evil-cleverparens" '(diminish 'evil-cleverparens-mode))
 
 (defmacro rename-modeline (package-name mode new-name)
   `(eval-after-load ,package-name
@@ -145,10 +184,23 @@ re-downloaded in order to locate PACKAGE."
                                 (setq mode-name ,new-name))))
 (rename-modeline "clojure-mode" clojure-mode  "Clj")
 
-(setq evil-want-C-u-scroll t)
+;; Do not change shape of cursor while in operator pending mode
+(setq evil-operator-state-cursor '(box "white"))
+
+;; This is a bit of a hack to make evil a bit more emacs
+;; compatible. For example, evaluating lisp code is typically done by
+;; positioning the cursor AFTER the closing paren of the form (which
+;; is obviously hard to do in vim if this paren happens to be the last
+;; char on the line)
+(setq evil-move-beyond-eol t)
 
 (require-package 'evil)
 (evil-mode t)
+
+(defun silence ()
+  (interactive))
+;; (define-key evil-motion-state-map [down-mouse-1] 'silence)
+;; (define-key evil-motion-state-map [mouse-1] 'silence)
 
 (evil-set-initial-state 'fundamental-mode 'emacs)
 (evil-set-initial-state 'cider-repl-mode 'emacs)
