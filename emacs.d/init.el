@@ -74,6 +74,8 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'counsel)
 (ivy-mode 1)
 
+(setq ivy-use-virtual-buffers t)
+
 ;; TODO
 (defun foo-action (file)
   (find-file-other-window (cdr file)))
@@ -92,9 +94,9 @@ re-downloaded in order to locate PACKAGE."
 ; (require-package 'avy)
 ; (global-set-key (kbd "C-:") 'avy-goto-char)
 
-; (require-package 'yasnippet)
-; (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-; (yas-global-mode 1)
+(require-package 'yasnippet)
+(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+(yas-global-mode 1)
 
 (require-package 'find-file-in-project)
 ;; TODO Ambivalent about this...
@@ -176,6 +178,11 @@ re-downloaded in order to locate PACKAGE."
   )
 
 (evil-leader/set-key-for-mode 'clojure-mode
+  ;; TODO e => eval sexp
+  ;;      f => eval defn
+  "e" 'cider-eval-last-sexp
+  "f" 'cider-eval-defun-at-point
+  "n" 'cider-eval-ns-form
   ;; Note to self: "m" is for major mode
   ;; "mr?" 'cljr-describe-refactoring
   "ril" 'cljr-introduce-let
@@ -212,9 +219,10 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'evil)
 (evil-mode t)
 
-(require-package 'evil-extra-operator)
+;; XXX A failed experiment
+;; (require-package 'evil-extra-operator)
 ;; For lispy modes, evaluate movement/textobj
-(define-key evil-motion-state-map "gp" 'evil-operator-eval)
+;; (define-key evil-motion-state-map "gp" 'evil-operator-eval)
 
 (defun silence ()
   (interactive))
