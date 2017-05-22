@@ -55,6 +55,8 @@ re-downloaded in order to locate PACKAGE."
 (require 'saveplace)
 (save-place-mode 1)
 
+(global-eldoc-mode -1)
+
 ;; F5 is mapped to "meta tap" on my keyboard
 ;; Not needed anymore, meta-tap now maps to Menu
 ; (global-set-key (kbd "<f5>") 'counsel-M-x)
@@ -96,7 +98,7 @@ re-downloaded in order to locate PACKAGE."
 
 (require-package 'yasnippet)
 (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-;; (yas-global-mode 1)
+(yas-global-mode 1)
 
 (require-package 'find-file-in-project)
 ;; TODO Ambivalent about this...
@@ -109,7 +111,7 @@ re-downloaded in order to locate PACKAGE."
 
 (setq evil-want-C-u-scroll t)
 
-(require-package 'paredit)
+;; (require-package 'paredit)
 
 (require-package 'clojure-mode)
 
@@ -119,11 +121,18 @@ re-downloaded in order to locate PACKAGE."
 
 (require-package 'highlight-parentheses)
 
-(require-package 'paredit)
+;; (require-package 'paredit)
 ;; (require-package 'lispy)
+(require-package 'smartparens)
+(require 'smartparens-config)
+;; (require-package 'evil-smartparens)
+;; (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
 (require-package 'evil-cleverparens)
+(add-hook 'smartparens-enabled-hook #'evil-cleverparens-mode)
+
+;; (require-package 'evil-cleverparens)
 ;; (add-hook 'lispy-mode-hook #'evil-cleverparens-mode)
-(add-hook 'paredit-mode-hook #'evil-cleverparens-mode)
+;; (add-hook 'paredit-mode-hook #'evil-cleverparens-mode)
 ;; (setq evil-cleverparens-use-additional-movement-keys nil)
 ;; (require-package 'lispyville)
 ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
@@ -137,19 +146,23 @@ re-downloaded in order to locate PACKAGE."
   (linum-mode)
   (rainbow-delimiters-mode)
   (highlight-parentheses-mode)
+  (smartparens-mode)
   ;; (lispy-mode)
-  (paredit-mode))
+  ;; (paredit-mode)
+  )
 
 (add-hook 'emacs-lisp-mode-hook #'my-emacs-lisp-mode-hook)
 
 (defun my-clojure-mode-hook ()
-  (yas-minor-mode)
+  ;; (yas-reload-all)
+  ;; (yas-minor-mode)
   (clj-refactor-mode 1)
   ;; Check out nlinum (supposedly faster)
   (linum-mode)
   (linum-relative-mode)
-  (paredit-mode)
+  ;; (paredit-mode)
   ;; (lispy-mode)
+  (smartparens-mode)
   (rainbow-delimiters-mode)
   (highlight-parentheses-mode))
 
@@ -205,7 +218,7 @@ re-downloaded in order to locate PACKAGE."
 (eval-after-load "linum-relative" '(diminish 'linum-relative-mode))
 (eval-after-load "clj-refactor" '(diminish 'clj-refactor-mode))
 (eval-after-load "lispy" '(diminish 'lispy-mode))
-;; (eval-after-load "lispyville" '(diminish 'lispyville-mode))
+(eval-after-load "lispyville" '(diminish 'lispyville-mode))
 (eval-after-load "evil-commentary" '(diminish 'evil-commentary-mode))
 (eval-after-load "evil-cleverparens" '(diminish 'evil-cleverparens-mode))
 (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
@@ -231,6 +244,10 @@ re-downloaded in order to locate PACKAGE."
 (evil-mode t)
 
 (require-package 'general)
+
+;; (evil-define-key 'normal smartparens-mode-map (kbd ">") 'paredit-forward-slurp-sexp)
+;; (evil-define-key 'normal smartparens-mode-map (kbd "[") 'sp-backward-sexp)
+;; (evil-define-key 'normal smartparens-mode-map (kbd "]") 'sp-forward-sexp)
 
 ;; (setq general-default-keymaps 'evil-normal-state-map)
 ;; (setq my-leader "SPC")
@@ -258,6 +275,7 @@ re-downloaded in order to locate PACKAGE."
 		    "f" 'cider-eval-defun-at-point
 		    "n" 'cider-eval-ns-form
 		    "v" 'cider-eval-sexp-at-point
+		    "k" 'cider-load-buffer
 		    "da" 'cider-apropos
 		    "dd" 'cider-doc
 		    "df" 'cider-apropos-documentation)
