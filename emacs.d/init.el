@@ -161,6 +161,9 @@ re-downloaded in order to locate PACKAGE."
 
 (add-hook 'emacs-lisp-mode-hook #'my-emacs-lisp-mode-hook)
 
+;; Skip prompt for interactive commands that require a symbol (e.g. cider-doc)
+(setq cider-prompt-for-symbol nil)
+
 (defun my-clojure-mode-hook ()
   ;; (yas-reload-all)
   ;; (yas-minor-mode)
