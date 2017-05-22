@@ -278,7 +278,9 @@ re-downloaded in order to locate PACKAGE."
 		    "k" 'cider-load-buffer
 		    "da" 'cider-apropos
 		    "dd" 'cider-doc
-		    "df" 'cider-apropos-documentation)
+		    "df" 'cider-apropos-documentation
+		    "ril" 'cljr-introduce-let
+		    "rel" 'cljr-expand-let)
 
 ;; XXX A failed experiment
 ;; (require-package 'evil-extra-operator)
