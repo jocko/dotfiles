@@ -96,7 +96,7 @@ re-downloaded in order to locate PACKAGE."
 
 (require-package 'yasnippet)
 (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-(yas-global-mode 1)
+;; (yas-global-mode 1)
 
 (require-package 'find-file-in-project)
 ;; TODO Ambivalent about this...
@@ -143,6 +143,7 @@ re-downloaded in order to locate PACKAGE."
 (add-hook 'emacs-lisp-mode-hook #'my-emacs-lisp-mode-hook)
 
 (defun my-clojure-mode-hook ()
+  (yas-minor-mode)
   (clj-refactor-mode 1)
   ;; Check out nlinum (supposedly faster)
   (linum-mode)
@@ -208,6 +209,7 @@ re-downloaded in order to locate PACKAGE."
 (eval-after-load "evil-commentary" '(diminish 'evil-commentary-mode))
 (eval-after-load "evil-cleverparens" '(diminish 'evil-cleverparens-mode))
 (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
+(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
 
 (defmacro rename-modeline (package-name mode new-name)
   `(eval-after-load ,package-name
