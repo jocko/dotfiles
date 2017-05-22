@@ -223,6 +223,7 @@ re-downloaded in order to locate PACKAGE."
 (eval-after-load "evil-cleverparens" '(diminish 'evil-cleverparens-mode))
 (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+(eval-after-load "smartparens" '(diminish 'smartparens-mode))
 
 (defmacro rename-modeline (package-name mode new-name)
   `(eval-after-load ,package-name
