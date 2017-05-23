@@ -22,9 +22,15 @@ re-downloaded in order to locate PACKAGE."
 (load-theme 'spacemacs-dark t)
 ; (load-theme 'spacegray t)
 ; (load-theme 'dracula t)
+;; I need more contrast for line numbers
+(custom-theme-set-faces 'spacemacs-dark
+                        '(linum ((t :inherit default
+                                    :foreground "#888888"))))
 
 (setq inhibit-startup-screen t)
 (setq scroll-margin 5)
+(setq make-backup-files nil)
+(setq auto-save-default nil)
 
 (blink-cursor-mode 0)
 
@@ -104,8 +110,9 @@ re-downloaded in order to locate PACKAGE."
 ;; TODO Ambivalent about this...
 ; (global-set-key (kbd "C-x o") 'find-file-in-project)
 
-(setq undo-tree-auto-save-history t)
-(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+;; XXX This seem to be broken. I sometimes get "unrecognized entry in undo list undo-tree-canary"
+;; (setq undo-tree-auto-save-history t)
+;; (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 
 (global-set-key (kbd "C-w") 'backward-kill-word)
 
@@ -145,7 +152,8 @@ re-downloaded in order to locate PACKAGE."
   (linum-relative-mode)
   (linum-mode)
   (rainbow-delimiters-mode)
-  (highlight-parentheses-mode)
+  ;; TODO This mode didn't work as I expected
+  ;; (highlight-parentheses-mode)
   (smartparens-mode)
   ;; (lispy-mode)
   ;; (paredit-mode)
@@ -164,11 +172,19 @@ re-downloaded in order to locate PACKAGE."
   ;; (lispy-mode)
   (smartparens-mode)
   (rainbow-delimiters-mode)
-  (highlight-parentheses-mode))
+  ;; TODO This mode didn't work as I expected
+  ;; (highlight-parentheses-mode)
+  )
 
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
 
 ; (require-package 'cider)
+
+;; Prevent cider-repl to steal focus when launched
+;; (setq cider-repl-pop-to-buffer-on-connect 'display-only)
+
+;; Do not show cider-repl on jack in
+(setq cider-repl-pop-to-buffer-on-connect nil)
 
 (require-package 'evil-surround)
 (global-evil-surround-mode 1)
@@ -274,22 +290,28 @@ re-downloaded in order to locate PACKAGE."
 		    "" nil
 		    "e" 'cider-eval-last-sexp
 		    "f" 'cider-eval-defun-at-point
+		    ;; XXX Probably not as useful as I first though
 		    "n" 'cider-eval-ns-form
 		    "v" 'cider-eval-sexp-at-point
 		    "k" 'cider-load-buffer
 		    "da" 'cider-apropos
 		    "dd" 'cider-doc
 		    "df" 'cider-apropos-documentation
+		    "rar" 'cljr-add-require-to-ns
+		    "ram" 'cljr-add-missing-libspec
+		    "rcn" 'cljr-clean-ns
 		    "ril" 'cljr-introduce-let
-		    "rel" 'cljr-expand-let)
+		    "rel" 'cljr-expand-let
+		    "rtf" 'cljr-thread-first-all
+		    "rtl" 'cljr-thread-last-all)
 
 ;; XXX A failed experiment
 ;; (require-package 'evil-extra-operator)
 ;; For lispy modes, evaluate movement/textobj
 ;; (define-key evil-motion-state-map "gp" 'evil-operator-eval)
 
-(defun silence ()
-  (interactive))
+;; (defun silence ()
+;;   (interactive))
 ;; (define-key evil-motion-state-map [down-mouse-1] 'silence)
 ;; (define-key evil-motion-state-map [mouse-1] 'silence)
 
@@ -300,77 +322,15 @@ re-downloaded in order to locate PACKAGE."
 ;; Unsure about this
 ; (evil-set-initial-state 'lisp-interaction-mode 'emacs)
 
-; (require-package 'erlang)
-; (add-hook 'erlang-mode-hook '(lambda() (setq indent-tabs-mode nil)))
+
+
+
+
+
 
 ; (setq x-select-enable-clipboard t)
 
-; (require-package 'haml-mode)
-; (require 'haml-mode)
-
-; (require-package 'ws-butler)
-
-; (require-package 'ag)
-; (require 'ag)
-
-; (require-package 'alchemist)
-; (require 'alchemist)
-
-; (require-package 'dockerfile-mode)
-; (require 'dockerfile-mode)
-; (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
-
-; (blink-cursor-mode -1)
-; (setq evil-operator-state-cursor '(box "white"))
-
-; (require-package 'clojure-mode)
-; (require-package 'cider)
-
-; (set-default 'tags-case-fold-search nil)
-
-; (global-auto-revert-mode t)
-
-; (setq evil-want-C-u-scroll t
-;       evil-want-C-w-in-emacs-state t)
-
-; (require-package 'evil)
-
-; (global-unset-key (kbd "C-x m"))
-; (global-unset-key (kbd "M-x"))
-; (global-set-key (kbd "C-x m") 'execute-extended-command)
-
-; (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
-;     (when (fboundp mode) (funcall mode -1)))
-
 ; (setq echo-keystrokes 0.1)
-
-; (defalias 'yes-or-no-p 'y-or-n-p)
-
-; (setq linum-format "%d ")
-; (global-linum-mode t)
-
-; (setq make-backup-files nil)
-; (setq auto-save-default nil)
-; (setq scroll-margin 5)
-;       ; scroll-preserve-screen-position 1)
-
-; ; (require-package 'tags-table)
-; ; (require 'tags-table)
-
-; (setq tags-revert-without-query 1)
-
-; (require-package 'ctags-update)
-; (require 'ctags-update)
-; (add-hook 'ruby-mode-hook  'turn-on-ctags-auto-update-mode)
-; ; (ctags-update-minor-mode 1)
-
-; (require 'uniquify)
-; (setq uniquify-buffer-name-style 'forward)
-
-; (require-package 'darktooth-theme)
-; (load-theme 'darktooth t)
-
-; (setq dired-use-ls-dired nil)
 
 ; (defmacro rename-modeline (package-name mode new-name)
 ;   `(eval-after-load ,package-name
@@ -383,125 +343,6 @@ re-downloaded in order to locate PACKAGE."
 ;   (declare (indent defun))
 ;   `(eval-after-load ,feature
 ;      '(progn ,@body)))
-
-; (require 'saveplace)
-;   (setq-default save-place t)
-
-; (global-set-key "\C-w" 'backward-kill-word)
-
-; (setq enh-ruby-check-syntax nil)
-; (setq enh-ruby-deep-indent-paren nil)
-; (require-package 'enh-ruby-mode)
-; (autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
-; (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
-; (add-to-list 'auto-mode-alist '("Rakefile$" . enh-ruby-mode))
-; (add-to-list 'auto-mode-alist '("Gemfile$" . enh-ruby-mode))
-; (add-to-list 'auto-mode-alist '("\\.pryrc$" . enh-ruby-mode))
-; (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
-; (defun enh-ruby-mode-faces ()
-;   "Lazily set faces"
-;   ; (set-face-attribute 'erm-syn-errline nil :box nil)
-;   ; (set-face-attribute 'erm-syn-warnline nil :box nil)
-;   (set-face-attribute 'enh-ruby-op-face nil :foreground "white" :inherit 'default))
-;   ; (set-face-attribute 'enh-ruby-string-delimiter-face nil :foreground "#dc322f" :background nil)
-;   ; (set-face-attribute 'enh-ruby-regexp-delimiter-face nil :foreground "#dc322f" :background nil)
-;   ; (set-face-attribute 'enh-ruby-heredoc-delimiter-face nil :foreground "#dc322f" :background nil))
-
-; ; (add-hook 'enh-ruby-mode-hook 'bw/turn-on-subword-mode)
-; (add-hook 'enh-ruby-mode-hook 'enh-ruby-mode-faces)
-
-; (add-hook 'enh-ruby-mode-hook  'turn-on-ctags-auto-update-mode)
-; ; (setq ruby-use-smie nil)
-; ; (setq ruby-use-smie t)
-; (add-hook 'ruby-mode-hook 'subword-mode)
-
-; (require-package 'ace-jump-mode)
-
-; (require-package 'expand-region)
-; (require 'expand-region)
-; (require 'ruby-mode-expansions)
-; (global-set-key (kbd "C-=") 'er/expand-region)
-
-; (require-package 'flx-ido)
-; (require 'flx-ido)
-
-; (require-package 'ido-vertical-mode)
-; (require 'ido-vertical-mode)
-; (ido-vertical-mode 1)
-; (setq ido-enable-flex-matching t)
-; (setq ido-everywhere t)
-; (ido-mode 1)
-; (flx-ido-mode 1)
-; (setq ido-enable-flex-matching t)
-; (setq ido-use-faces nil)
-
-
-; (require-package 'projectile)
-; (require 'projectile)
-; (projectile-global-mode)
-; (add-hook 'ruby-mode-hook 'projectile-mode)
-
-; (require-package 'diminish)
-; (require 'diminish)
-; (after-load 'diminish (diminish 'projectile-mode))
-; (after-load 'undo-tree (diminish 'undo-tree-mode))
-; (after-load 'ctags-update (diminish 'ctags-auto-update-mode))
-; (after-load 'smartparens (diminish 'smartparens-mode))
-; (after-load 'evil-commentary (diminish 'evil-commentary-mode))
-; (diminish 'abbrev-mode)
-; (rename-modeline "enh-ruby-mode" enh-ruby-mode "Ruby")
-
-; (require-package 'yaml-mode)
-; (require 'yaml-mode)
-; (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-
-; ; (setq evil-snipe-scope 'visible)
-; ; (setq evil-snipe-repeat-scope 'whole-visible)
-; ; (require-package 'evil-snipe)
-; ; (require 'evil-snipe)
-; ; (evil-snipe-mode 1)
-; ; (evil-snipe-override-mode 1)
-
-; (require-package 'evil-surround)
-; (require 'evil-surround)
-; (global-evil-surround-mode 1)
-
-; (require-package 'evil-smartparens)
-; (require 'evil-smartparens)
-; (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
-; ; (smartparens-global-mode t)
-; (require 'smartparens-config)
-
-; (require-package 'rainbow-delimiters)
-; (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
-
-; ; (require-package 'evil-matchit)
-; ; (require 'evil-matchit)
-; ; (global-evil-matchit-mode 1)
-
-; (require-package 'evil-leader)
-; (global-evil-leader-mode 1)
-
-; (evil-leader/set-leader "SPC")
-; (evil-leader/set-key
-;   "b" 'switch-to-buffer
-;   "f" 'find-file
-;   "j" 'projectile-find-tag
-;   "o" 'projectile-find-file
-;   "O" 'projectile-find-file-other-window
-;   "w" 'save-buffer)
-
-; (require-package 'evil-commentary)
-; (evil-commentary-mode)
-
-; (evil-mode t)
-
-; (evil-set-initial-state 'fundamental-mode 'emacs)
-; (evil-set-initial-state 'cider-repl-mode 'emacs)
-; (evil-set-initial-state 'cider-stacktrace-mode 'emacs)
-; (evil-set-initial-state 'dired-mode 'emacs)
-
-; (define-key evil-normal-state-map (kbd "s") 'ace-jump-mode)
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
