@@ -287,19 +287,29 @@ re-downloaded in order to locate PACKAGE."
 ;;   (define-key evil-motion-state-map "," nil))
 ;; (setq my-localleader ",")
 
+(evil-define-operator evil-cider-eval (beg end)
+  (cider-eval-region beg end))
+
+(require 'cl)
+(defun cider-eval-form (beg end)
+  (interactive "r")
+  (let ((region (evil-cp-a-form)))
+    (evil-cider-eval (first region) (second region))))
+
 (general-define-key :prefix ","
 		    :keymaps 'clojure-mode-map
 		    :states '(normal visual motion)
 		    "" nil
-		    "e" 'cider-eval-last-sexp
-		    "f" 'cider-eval-defun-at-point
+		    ;; "e" 'cider-eval-last-sexp
+		    "d" 'cider-eval-defun-at-point
+		    "f" 'cider-eval-form
 		    ;; XXX Probably not as useful as I first though
-		    "n" 'cider-eval-ns-form
-		    "v" 'cider-eval-sexp-at-point
+		    ;; "n" 'cider-eval-ns-form
+		    ;; "v" 'cider-eval-sexp-at-point
 		    "k" 'cider-load-buffer
-		    "da" 'cider-apropos
-		    "dd" 'cider-doc
-		    "df" 'cider-apropos-documentation
+		    "ca" 'cider-apropos
+		    "cd" 'cider-doc
+		    "cf" 'cider-apropos-documentation
 		    "rar" 'cljr-add-require-to-ns
 		    "ram" 'cljr-add-missing-libspec
 		    "rcn" 'cljr-clean-ns
