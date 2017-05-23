@@ -287,9 +287,13 @@ re-downloaded in order to locate PACKAGE."
 ;;   (define-key evil-motion-state-map "," nil))
 ;; (setq my-localleader ",")
 
+(evil-define-key 'normal clojure-mode-map
+  (kbd "K") 'cider-doc)
+
 (evil-define-operator evil-cider-eval (beg end)
   (cider-eval-region beg end))
 
+;; TODO Should make this work for elisp as well, it is awesome
 (require 'cl)
 (defun cider-eval-form (beg end)
   (interactive "r")
@@ -307,16 +311,18 @@ re-downloaded in order to locate PACKAGE."
 		    ;; "n" 'cider-eval-ns-form
 		    ;; "v" 'cider-eval-sexp-at-point
 		    "k" 'cider-load-buffer
-		    "ca" 'cider-apropos
-		    "cd" 'cider-doc
-		    "cf" 'cider-apropos-documentation
-		    "rar" 'cljr-add-require-to-ns
-		    "ram" 'cljr-add-missing-libspec
-		    "rcn" 'cljr-clean-ns
-		    "ril" 'cljr-introduce-let
-		    "rel" 'cljr-expand-let
-		    "rtf" 'cljr-thread-first-all
-		    "rtl" 'cljr-thread-last-all)
+		    ;; TODO Chose one of these two and map to... a?
+		    ;; "ca" 'cider-apropos
+		    "a" 'cider-apropos-documentation
+		    ;; TODO Would be nice to be able to shave off one keystroke here
+		    ;; EDIT: The double tap thing kind of works
+		    ",ar" 'cljr-add-require-to-ns
+		    ",am" 'cljr-add-missing-libspec
+		    ",cn" 'cljr-clean-ns
+		    ",il" 'cljr-introduce-let
+		    ",el" 'cljr-expand-let
+		    ",tf" 'cljr-thread-first-all
+		    ",tl" 'cljr-thread-last-all)
 
 ;; XXX A failed experiment
 ;; (require-package 'evil-extra-operator)
