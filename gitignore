@@ -27,3 +27,4 @@ venv
 .vagrant/
 target/
 .ropeproject/
+.dir-locals.el
