@@ -300,11 +300,13 @@ re-downloaded in order to locate PACKAGE."
   (let ((region (evil-cp-a-form)))
     (evil-cider-eval (first region) (second region))))
 
+;; "Local leader" mappings
 (general-define-key :prefix ","
 		    :keymaps 'clojure-mode-map
 		    :states '(normal visual motion)
 		    "" nil
 		    ;; "e" 'cider-eval-last-sexp
+		    ;; TODO Maybe have a "s" (i.e. eval sexp)?
 		    "d" 'cider-eval-defun-at-point
 		    "f" 'cider-eval-form
 		    ;; XXX Probably not as useful as I first though
