@@ -418,5 +418,7 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'which-key)
 (which-key-mode)
 
+(define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
+
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
