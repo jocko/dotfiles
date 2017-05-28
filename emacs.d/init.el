@@ -415,5 +415,8 @@ re-downloaded in order to locate PACKAGE."
 ;   `(eval-after-load ,feature
 ;      '(progn ,@body)))
 
+(require-package 'which-key)
+(which-key-mode)
+
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
