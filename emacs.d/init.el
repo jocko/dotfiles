@@ -31,6 +31,7 @@ re-downloaded in order to locate PACKAGE."
 (setq scroll-margin 5)
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+(setq echo-keystrokes 0.1)
 
 (blink-cursor-mode 0)
 
@@ -135,7 +136,21 @@ re-downloaded in order to locate PACKAGE."
 ;; (require-package 'evil-smartparens)
 ;; (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
 (require-package 'evil-cleverparens)
-(add-hook 'smartparens-enabled-hook #'evil-cleverparens-mode)
+
+(require 'evil-cleverparens-text-objects)
+(define-key evil-outer-text-objects-map "f" #'evil-cp-a-form)
+(define-key evil-inner-text-objects-map "f" #'evil-cp-inner-form)
+(define-key evil-outer-text-objects-map "c" #'evil-cp-a-comment)
+(define-key evil-inner-text-objects-map "c" #'evil-cp-inner-comment)
+(define-key evil-outer-text-objects-map "d" #'evil-cp-a-defun)
+(define-key evil-inner-text-objects-map "d" #'evil-cp-inner-defun)
+
+(require-package 'evil-smartparens)
+;; (add-hook 'smartparens-enabled-hook #'evil-cleverparens-mode)
+(add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+;; (setq evil-cleverparens-move-skip-delimiters nil)
+(setq evil-cleverparens-use-additional-movement-keys nil)
+;; (evil-define-key 'normal evil-cleverparens-mode-map "c" nil)
 
 ;; (require-package 'evil-cleverparens)
 ;; (add-hook 'lispy-mode-hook #'evil-cleverparens-mode)
@@ -152,9 +167,10 @@ re-downloaded in order to locate PACKAGE."
   (linum-relative-mode)
   (linum-mode)
   (rainbow-delimiters-mode)
+  (show-paren-mode)
   ;; TODO This mode didn't work as I expected
   ;; (highlight-parentheses-mode)
-  (smartparens-mode)
+  (smartparens-strict-mode)
   ;; (lispy-mode)
   ;; (paredit-mode)
   )
@@ -173,10 +189,11 @@ re-downloaded in order to locate PACKAGE."
   (linum-relative-mode)
   ;; (paredit-mode)
   ;; (lispy-mode)
-  (smartparens-mode)
+  (smartparens-strict-mode)
   (rainbow-delimiters-mode)
   ;; TODO This mode didn't work as I expected
   ;; (highlight-parentheses-mode)
+  (show-paren-mode)
   )
 
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
@@ -243,6 +260,7 @@ re-downloaded in order to locate PACKAGE."
 (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
+(eval-after-load "evil-smartparens" '(diminish 'evil-smartparens-mode))
 
 (defmacro rename-modeline (package-name mode new-name)
   `(eval-after-load ,package-name
@@ -289,26 +307,57 @@ re-downloaded in order to locate PACKAGE."
 
 (evil-define-key 'normal clojure-mode-map
   (kbd "K") 'cider-doc)
+(evil-define-key 'normal evil-smartparens-mode-map
+  "(" 'sp-backward-sexp)
+(evil-define-key 'normal evil-smartparens-mode-map
+  ")" 'sp-forward-sexp)
+(evil-define-key 'normal evil-smartparens-mode-map
+  "{" 'sp-backward-up-sexp)
+(evil-define-key 'normal evil-smartparens-mode-map
+  "}" 'sp-up-sexp)
+(evil-define-key 'normal evil-smartparens-mode-map
+  ">" 'sp-forward-slurp-sexp)
+(evil-define-key 'normal evil-smartparens-mode-map
+  "<" 'sp-forward-barf-sexp)
+;; (evil-define-key 'normal clojure-mode-map
+;;   (kbd "C-<") 'sp-backward-slurp-sexp)
+;; (evil-define-key 'normal clojure-mode-map
+;;   (kbd "C->") 'sp-backward-barf-sexp)
+
+(require-package 'evil-extra-operator)
+(defun my-eval-form ()
+  (interactive)
+  (let ((region (evil-cp-a-form)))
+    (evil-operator-eval (nth 0 region) (nth 1 region))))
 
 (evil-define-operator evil-cider-eval (beg end)
   (cider-eval-region beg end))
 
+;; TODO Maybe rename these two to something like my-cider-eval-sexp
+;; (defun cider-eval-sexp ()
+;;   (interactive)
+;;   (let ((ok (sp-get-sexp t)))
+;;     (sp-get ok (message "%s-%s %s" :beg :end :op))))
+
 ;; TODO Should make this work for elisp as well, it is awesome
-(require 'cl)
-(defun cider-eval-form (beg end)
-  (interactive "r")
+;; (require 'cl)
+(defun my-cider-eval-form ()
+  (interactive)
   (let ((region (evil-cp-a-form)))
-    (evil-cider-eval (first region) (second region))))
+    (evil-cider-eval (nth 0 region) (nth 1 region))))
 
 ;; "Local leader" mappings
-(general-define-key :prefix ","
+(setq my-local-leader ",")
+
+(general-define-key :prefix my-local-leader
 		    :keymaps 'clojure-mode-map
 		    :states '(normal visual motion)
 		    "" nil
 		    ;; "e" 'cider-eval-last-sexp
 		    ;; TODO Maybe have a "s" (i.e. eval sexp)?
 		    "d" 'cider-eval-defun-at-point
-		    "f" 'cider-eval-form
+		    "f" 'my-cider-eval-form
+		    ;; "s" 'cider-eval-sexp
 		    ;; XXX Probably not as useful as I first though
 		    ;; "n" 'cider-eval-ns-form
 		    ;; "v" 'cider-eval-sexp-at-point
@@ -323,9 +372,17 @@ re-downloaded in order to locate PACKAGE."
 		    ",cn" 'cljr-clean-ns
 		    ",il" 'cljr-introduce-let
 		    ",el" 'cljr-expand-let
-		    ",tf" 'cljr-thread-first-all
-		    ",tl" 'cljr-thread-last-all)
+		    ",tf" 'clojure-thread-first-all
+		    ",tl" 'clojure-thread-last-all
+		    "(" '(lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(")))
 
+
+(general-define-key :prefix ","
+		    :keymaps 'emacs-lisp-mode-map
+		    :states '(normal visual motion)
+		    "" nil
+		    ;; "d" 'cider-eval-defun-at-point
+		    "f" 'my-eval-form)
 ;; XXX A failed experiment
 ;; (require-package 'evil-extra-operator)
 ;; For lispy modes, evaluate movement/textobj
@@ -351,13 +408,6 @@ re-downloaded in order to locate PACKAGE."
 
 ; (setq x-select-enable-clipboard t)
 
-; (setq echo-keystrokes 0.1)
-
-; (defmacro rename-modeline (package-name mode new-name)
-;   `(eval-after-load ,package-name
-;      '(defadvice ,mode (after rename-modeline activate)
-; 	(setq mode-name ,new-name))))
-; ; (rename-modeline "clojure-mode" clojure-mode "Clj")
 
 ; (defmacro after-load (feature &rest body)
 ;   "After FEATURE is loaded, evaluate BODY."
