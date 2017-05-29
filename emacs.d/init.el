@@ -163,9 +163,12 @@ re-downloaded in order to locate PACKAGE."
 ;; 			      (slurp/barf-cp)
 ;; 			      (additional-movement normal visual motion))))
 
+(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook 'linum-relative-mode)
+
 (defun my-emacs-lisp-mode-hook ()
-  (linum-relative-mode)
-  (linum-mode)
+  ;; (linum-relative-mode)
+  ;; (linum-mode)
   (rainbow-delimiters-mode)
   (show-paren-mode)
   ;; TODO This mode didn't work as I expected
@@ -185,8 +188,8 @@ re-downloaded in order to locate PACKAGE."
   ;; (yas-minor-mode)
   (clj-refactor-mode 1)
   ;; Check out nlinum (supposedly faster)
-  (linum-mode)
-  (linum-relative-mode)
+  ;; (linum-mode)
+  ;; (linum-relative-mode)
   ;; (paredit-mode)
   ;; (lispy-mode)
   (smartparens-strict-mode)
@@ -247,6 +250,18 @@ re-downloaded in order to locate PACKAGE."
 ;;   "ril" 'cljr-introduce-let
 ;;   "rel" 'cljr-expand-let)
 
+; (require-package 'enh-ruby-mode)
+; (add-to-list 'load-path "(path-to)/Enhanced-Ruby-Mode") ; must be added after any path containing old ruby-mode
+; (autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
+; (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+; (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+; (remove-hook 'enh-ruby-mode-hook 'erm-define-faces)
+; (custom-theme-set-faces 'spacemacs-dark
+;                        '(enh-ruby-heredoc-delimiter-face ((t (:inherit font-lock-string-face)))))
+
+; (require-package 'robe)
+; (add-hook 'enh-ruby-mode-hook 'robe-mode)
+
 (require-package 'diminish)
 (eval-after-load "paredit" '(diminish 'paredit-mode))
 (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
@@ -261,12 +276,16 @@ re-downloaded in order to locate PACKAGE."
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
 (eval-after-load "evil-smartparens" '(diminish 'evil-smartparens-mode))
+(eval-after-load "which-key" '(diminish 'which-key-mode))
+; (eval-after-load "robe" '(diminish 'robe-mode))
+; (diminish 'abbrev-mode)
 
 (defmacro rename-modeline (package-name mode new-name)
   `(eval-after-load ,package-name
                     '(defadvice ,mode (after rename-modeline activate)
                                 (setq mode-name ,new-name))))
 (rename-modeline "clojure-mode" clojure-mode  "Clj")
+; (rename-modeline "enh-ruby-mode" enh-ruby-mode "Ruby")
 
 ;; Do not change shape of cursor while in operator pending mode
 (setq evil-operator-state-cursor '(box "white"))
@@ -325,6 +344,10 @@ re-downloaded in order to locate PACKAGE."
 ;;   (kbd "C->") 'sp-backward-barf-sexp)
 
 (require-package 'evil-extra-operator)
+(define-key evil-motion-state-map "gr" 'evil-operator-eval)
+; (setq evil-extra-operator-eval-modes-alist
+;       '((enh-ruby-mode ruby-send-region)))
+
 (defun my-eval-form ()
   (interactive)
   (let ((region (evil-cp-a-form)))
