@@ -399,6 +399,9 @@ re-downloaded in order to locate PACKAGE."
 		    ;; TODO Chose one of these two and map to... a?
 		    ;; "ca" 'cider-apropos
 		    "a" 'cider-apropos-documentation
+		    "x" 'cider-refresh
+		    ;; "o" 'sp-splice-sexp-killing-backward
+		    "o" 'sp-raise-sexp
 		    ;; TODO Would be nice to be able to shave off one keystroke here
 		    ;; EDIT: The double tap thing kind of works
 		    ",ar" 'cljr-add-require-to-ns
