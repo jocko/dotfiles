@@ -119,6 +119,7 @@ re-downloaded in order to locate PACKAGE."
 ;; (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 
 (global-set-key (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "C-x C-m") 'execute-extended-command)
 
 (setq evil-want-C-u-scroll t)
 
