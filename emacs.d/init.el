@@ -100,6 +100,9 @@ re-downloaded in order to locate PACKAGE."
 
 ; (global-set-key (kbd "M-x") 'counsel-M-x)
 
+(require-package 'diff-hl)
+(diff-hl-flydiff-mode)
+
 ; (require-package 'avy)
 ; (global-set-key (kbd "C-:") 'avy-goto-char)
 
