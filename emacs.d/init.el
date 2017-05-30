@@ -103,6 +103,8 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'diff-hl)
 (diff-hl-flydiff-mode)
 
+(require-package 'magit)
+
 ; (require-package 'avy)
 ; (global-set-key (kbd "C-:") 'avy-goto-char)
 
@@ -321,7 +323,8 @@ re-downloaded in order to locate PACKAGE."
 		    "j" 'evil-avy-goto-word-1-below
 		    "k" 'evil-avy-goto-word-1-above
 		    "o" 'find-file-in-project
-		    "w" 'save-buffer)
+		    "w" 'save-buffer
+		    "g" 'magit-status)
 
 ;; Seems like I need to unbind comma before it can be used as "local leader"
 ;; (eval-after-load "evil-maps"
