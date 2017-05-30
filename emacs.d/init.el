@@ -104,6 +104,22 @@ re-downloaded in order to locate PACKAGE."
 (diff-hl-flydiff-mode)
 
 (require-package 'magit)
+(setq magit-status-sections-hook
+      '(magit-insert-merge-log
+	magit-insert-rebase-sequence
+	magit-insert-am-sequence
+	magit-insert-sequencer-sequence
+	magit-insert-bisect-output
+	magit-insert-bisect-rest
+	magit-insert-bisect-log
+	magit-insert-untracked-files
+	magit-insert-unstaged-changes
+	magit-insert-staged-changes
+	magit-insert-unpulled-from-upstream
+	magit-insert-unpulled-from-pushremote
+	magit-insert-unpushed-to-upstream
+	magit-insert-unpushed-to-pushremote
+	magit-insert-recent-commits))
 
 ; (require-package 'avy)
 ; (global-set-key (kbd "C-:") 'avy-goto-char)
