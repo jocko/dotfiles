@@ -36,8 +36,8 @@ re-downloaded in order to locate PACKAGE."
 (blink-cursor-mode 0)
 
 (set-face-attribute 'default nil
-		    :family "Hack"
-		    :height 120)
+                    :family "Hack"
+                    :height 120)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -108,20 +108,20 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'magit)
 (setq magit-status-sections-hook
       '(magit-insert-merge-log
-	magit-insert-rebase-sequence
-	magit-insert-am-sequence
-	magit-insert-sequencer-sequence
-	magit-insert-bisect-output
-	magit-insert-bisect-rest
-	magit-insert-bisect-log
-	magit-insert-untracked-files
-	magit-insert-unstaged-changes
-	magit-insert-staged-changes
-	magit-insert-unpulled-from-upstream
-	magit-insert-unpulled-from-pushremote
-	magit-insert-unpushed-to-upstream
-	magit-insert-unpushed-to-pushremote
-	magit-insert-recent-commits))
+        magit-insert-rebase-sequence
+        magit-insert-am-sequence
+        magit-insert-sequencer-sequence
+        magit-insert-bisect-output
+        magit-insert-bisect-rest
+        magit-insert-bisect-log
+        magit-insert-untracked-files
+        magit-insert-unstaged-changes
+        magit-insert-staged-changes
+        magit-insert-unpulled-from-upstream
+        magit-insert-unpulled-from-pushremote
+        magit-insert-unpushed-to-upstream
+        magit-insert-unpushed-to-pushremote
+        magit-insert-recent-commits))
 
 ; (require-package 'avy)
 ; (global-set-key (kbd "C-:") 'avy-goto-char)
@@ -334,15 +334,15 @@ re-downloaded in order to locate PACKAGE."
 ;; (setq my-leader "SPC")
 
 (general-define-key :prefix "SPC"
-		    :keymaps '(normal motion dired-mode-map)
-		    ;; :states '(normal)
-		    "" nil
-		    "b" 'switch-to-buffer
-		    "j" 'evil-avy-goto-word-1-below
-		    "k" 'evil-avy-goto-word-1-above
-		    "o" 'find-file-in-project
-		    "w" 'save-buffer
-		    "g" 'magit-status)
+                    :keymaps '(normal motion dired-mode-map)
+                    ;; :states '(normal)
+                    "" nil
+                    "b" 'switch-to-buffer
+                    "j" 'evil-avy-goto-word-1-below
+                    "k" 'evil-avy-goto-word-1-above
+                    "o" 'find-file-in-project
+                    "w" 'save-buffer
+                    "g" 'magit-status)
 
 ;; Seems like I need to unbind comma before it can be used as "local leader"
 ;; (eval-after-load "evil-maps"
@@ -398,43 +398,43 @@ re-downloaded in order to locate PACKAGE."
 (setq my-local-leader ",")
 
 (general-define-key :prefix my-local-leader
-		    :keymaps 'clojure-mode-map
-		    :states '(normal visual motion)
-		    "" nil
-		    ;; "e" 'cider-eval-last-sexp
-		    ;; TODO Maybe have a "s" (i.e. eval sexp)?
-		    "d" 'cider-eval-defun-at-point
-		    "f" 'my-cider-eval-form
-		    ;; "s" 'cider-eval-sexp
-		    ;; XXX Probably not as useful as I first though
-		    ;; "n" 'cider-eval-ns-form
-		    ;; "v" 'cider-eval-sexp-at-point
-		    "k" 'cider-load-buffer
-		    ;; TODO Chose one of these two and map to... a?
-		    ;; "ca" 'cider-apropos
-		    ;; Lookup doc but prompt for symbol
-		    "a" '(lambda (&optional arg) (interactive "P") (cider-grimoire t))
-		    "x" 'cider-refresh
-		    ;; "o" 'sp-splice-sexp-killing-backward
-		    "o" 'sp-raise-sexp
-		    ;; TODO Would be nice to be able to shave off one keystroke here
-		    ;; EDIT: The double tap thing kind of works
-		    ",ar" 'cljr-add-require-to-ns
-		    ",am" 'cljr-add-missing-libspec
-		    ",cn" 'cljr-clean-ns
-		    ",il" 'cljr-introduce-let
-		    ",el" 'cljr-expand-let
-		    ",tf" 'clojure-thread-first-all
-		    ",tl" 'clojure-thread-last-all
-		    "(" '(lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(")))
+                    :keymaps 'clojure-mode-map
+                    :states '(normal visual motion)
+                    "" nil
+                    ;; "e" 'cider-eval-last-sexp
+                    ;; TODO Maybe have a "s" (i.e. eval sexp)?
+                    "d" 'cider-eval-defun-at-point
+                    "f" 'my-cider-eval-form
+                    ;; "s" 'cider-eval-sexp
+                    ;; XXX Probably not as useful as I first though
+                    ;; "n" 'cider-eval-ns-form
+                    ;; "v" 'cider-eval-sexp-at-point
+                    "k" 'cider-load-buffer
+                    ;; TODO Chose one of these two and map to... a?
+                    ;; "ca" 'cider-apropos
+                    ;; Lookup doc but prompt for symbol
+                    "a" '(lambda (&optional arg) (interactive "P") (cider-grimoire t))
+                    "x" 'cider-refresh
+                    ;; "o" 'sp-splice-sexp-killing-backward
+                    "o" 'sp-raise-sexp
+                    ;; TODO Would be nice to be able to shave off one keystroke here
+                    ;; EDIT: The double tap thing kind of works
+                    ",ar" 'cljr-add-require-to-ns
+                    ",am" 'cljr-add-missing-libspec
+                    ",cn" 'cljr-clean-ns
+                    ",il" 'cljr-introduce-let
+                    ",el" 'cljr-expand-let
+                    ",tf" 'clojure-thread-first-all
+                    ",tl" 'clojure-thread-last-all
+                    "(" '(lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(")))
 
 
 (general-define-key :prefix ","
-		    :keymaps 'emacs-lisp-mode-map
-		    :states '(normal visual motion)
-		    "" nil
-		    ;; "d" 'cider-eval-defun-at-point
-		    "f" 'my-eval-form)
+                    :keymaps 'emacs-lisp-mode-map
+                    :states '(normal visual motion)
+                    "" nil
+                    ;; "d" 'cider-eval-defun-at-point
+                    "f" 'my-eval-form)
 ;; XXX A failed experiment
 ;; (require-package 'evil-extra-operator)
 ;; For lispy modes, evaluate movement/textobj
