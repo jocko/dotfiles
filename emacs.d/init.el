@@ -475,5 +475,10 @@ re-downloaded in order to locate PACKAGE."
 (setq-default indent-tabs-mode nil)
 
 (require-package 'markdown-mode)
+
+;; Why doesn't this work :/
+(setq whitespace-style '(trailing tabs tab-mark))
+(add-hook 'prog-mode-hook 'whitespace-mode)
+
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
