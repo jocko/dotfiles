@@ -412,7 +412,8 @@ re-downloaded in order to locate PACKAGE."
 		    "k" 'cider-load-buffer
 		    ;; TODO Chose one of these two and map to... a?
 		    ;; "ca" 'cider-apropos
-		    "a" 'cider-apropos-documentation
+		    ;; Lookup doc but prompt for symbol
+		    "a" '(lambda (&optional arg) (interactive "P") (cider-grimoire t))
 		    "x" 'cider-refresh
 		    ;; "o" 'sp-splice-sexp-killing-backward
 		    "o" 'sp-raise-sexp
@@ -448,6 +449,7 @@ re-downloaded in order to locate PACKAGE."
 (evil-set-initial-state 'cider-repl-mode 'emacs)
 (evil-set-initial-state 'cider-stacktrace-mode 'emacs)
 (evil-set-initial-state 'cider-docview-mode 'motion)
+(evil-set-initial-state 'cider-popup-buffer-mode 'motion)
 ;; Unsure about this
 ; (evil-set-initial-state 'lisp-interaction-mode 'emacs)
 
