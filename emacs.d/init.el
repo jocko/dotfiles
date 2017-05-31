@@ -478,5 +478,6 @@ re-downloaded in order to locate PACKAGE."
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
+(require-package 'markdown-mode)
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
