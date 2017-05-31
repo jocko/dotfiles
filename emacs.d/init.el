@@ -103,7 +103,7 @@ re-downloaded in order to locate PACKAGE."
 ; (global-set-key (kbd "M-x") 'counsel-M-x)
 
 (require-package 'diff-hl)
-(diff-hl-flydiff-mode)
+(add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
 
 (require-package 'magit)
 (setq magit-status-sections-hook
