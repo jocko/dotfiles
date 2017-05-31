@@ -321,10 +321,6 @@ re-downloaded in order to locate PACKAGE."
 ;; char on the line)
 (setq evil-move-beyond-eol t)
 
-;; Remove the default jumpy scrolling behavior
-(require-package 'smooth-scrolling)
-(smooth-scrolling-mode 1)
-
 (require-package 'evil)
 (evil-mode t)
 
