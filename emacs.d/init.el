@@ -475,5 +475,8 @@ re-downloaded in order to locate PACKAGE."
 
 (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
 
+;; Use spaces instead of tabs
+(setq-default indent-tabs-mode nil)
+
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
