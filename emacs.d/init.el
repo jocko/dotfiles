@@ -41,6 +41,8 @@ re-downloaded in order to locate PACKAGE."
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(setq evil-search-module 'evil-search)
+
 (cd "~/Repos")
 
 (require-package 'spaceline)
