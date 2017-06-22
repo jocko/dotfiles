@@ -32,6 +32,7 @@ re-downloaded in order to locate PACKAGE."
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq echo-keystrokes 0.1)
+(setq mouse-yank-at-point t)
 
 (blink-cursor-mode 0)
 
