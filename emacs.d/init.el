@@ -207,6 +207,9 @@ re-downloaded in order to locate PACKAGE."
 
 ;; Skip prompt for interactive commands that require a symbol (e.g. cider-doc)
 (setq cider-prompt-for-symbol nil)
+;; Display eval result with overlays only (I get so confused when a
+;; giant echo area appears at the bottom of my screen)
+(setq cider-use-overlays t)
 
 (defun my-clojure-mode-hook ()
   ;; (yas-reload-all)
