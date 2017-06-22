@@ -324,6 +324,14 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'evil)
 (evil-mode t)
 
+(defun my-cider-debug-toggle-insert-state ()
+  (if cider--debug-mode
+      (evil-emacs-state)
+    (evil-normal-state)))
+
+
+(add-hook 'cider--debug-mode-hook 'my-cider-debug-toggle-insert-state)
+
 (require-package 'general)
 
 ;; (evil-define-key 'normal smartparens-mode-map (kbd ">") 'paredit-forward-slurp-sexp)
@@ -417,6 +425,7 @@ re-downloaded in order to locate PACKAGE."
                     "x" 'cider-refresh
                     ;; "o" 'sp-splice-sexp-killing-backward
                     "o" 'sp-raise-sexp
+                    "t" 'cider-test-run-ns-tests
                     ;; TODO Would be nice to be able to shave off one keystroke here
                     ;; EDIT: The double tap thing kind of works
                     ",ar" 'cljr-add-require-to-ns
@@ -424,8 +433,11 @@ re-downloaded in order to locate PACKAGE."
                     ",cn" 'cljr-clean-ns
                     ",il" 'cljr-introduce-let
                     ",el" 'cljr-expand-let
+                    ",ef" 'cljr-extract-function
                     ",tf" 'clojure-thread-first-all
                     ",tl" 'clojure-thread-last-all
+                    ",cp" 'cljr-cycle-privacy
+                    ",ad" 'cljr-add-declaration
                     "(" '(lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(")))
 
 
@@ -450,6 +462,7 @@ re-downloaded in order to locate PACKAGE."
 (evil-set-initial-state 'cider-stacktrace-mode 'emacs)
 (evil-set-initial-state 'cider-docview-mode 'motion)
 (evil-set-initial-state 'cider-popup-buffer-mode 'motion)
+(evil-set-initial-state 'cider-inspector-mode 'motion)
 ;; Unsure about this
 ; (evil-set-initial-state 'lisp-interaction-mode 'emacs)
 
