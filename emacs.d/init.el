@@ -212,6 +212,9 @@ re-downloaded in order to locate PACKAGE."
 ;; giant echo area appears at the bottom of my screen)
 (setq cider-use-overlays t)
 
+(define-clojure-indent
+  (match 1))
+
 (defun my-clojure-mode-hook ()
   ;; (yas-reload-all)
   ;; (yas-minor-mode)
