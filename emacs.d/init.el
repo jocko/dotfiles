@@ -212,8 +212,9 @@ re-downloaded in order to locate PACKAGE."
 ;; giant echo area appears at the bottom of my screen)
 (setq cider-use-overlays t)
 
-(define-clojure-indent
-  (match 1))
+;; TODO For some reason, this doesn't work on my mac
+;; (define-clojure-indent
+;;  (match 1))
 
 (defun my-clojure-mode-hook ()
   ;; (yas-reload-all)
@@ -339,6 +340,11 @@ re-downloaded in order to locate PACKAGE."
 
 
 (add-hook 'cider--debug-mode-hook 'my-cider-debug-toggle-insert-state)
+
+(require-package 'company)
+(add-hook 'cider-mode-hook #'company-mode)
+(setq company-idle-delay nil)
+(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 
 (require-package 'general)
 
