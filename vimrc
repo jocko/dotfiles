@@ -131,6 +131,8 @@ let g:ruby_indent_block_style = 'do'
 autocmd FileType gitcommit setlocal spell
 
 nnoremap <leader>w :w<CR>
+" Use ma to set mark, then leader+a will jump back to it
+nnoremap <leader>a `a
 
 " CtrlP
 map <leader>o :CtrlP<CR>
@@ -144,7 +146,7 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
   let g:ackprg = 'ag --vimgrep --smart-case' 
 endif
-nnoremap <leader>a :Ack! ""<Left>
+" nnoremap <leader>a :Ack! ""<Left>
 
 " Jump to tag, show list if multiple tags
 nnoremap <c-]> g<c-]>
