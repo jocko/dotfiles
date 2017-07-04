@@ -333,6 +333,9 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'evil)
 (evil-mode t)
 
+;; Switch to emacs state in cider debug so we don't mess up the
+;; debug mappings (stepping, inspecting etc). When we are done, we
+;; return to normal state.
 (defun my-cider-debug-toggle-insert-state ()
   (if cider--debug-mode
       (evil-emacs-state)
@@ -442,6 +445,7 @@ re-downloaded in order to locate PACKAGE."
                     "t" 'cider-test-run-ns-tests
                     ;; TODO Would be nice to be able to shave off one keystroke here
                     ;; EDIT: The double tap thing kind of works
+                    ;; Ooooor, maybe make a hydra for it... maybe
                     ",ar" 'cljr-add-require-to-ns
                     ",am" 'cljr-add-missing-libspec
                     ",cn" 'cljr-clean-ns
@@ -495,8 +499,6 @@ re-downloaded in order to locate PACKAGE."
 ;   `(eval-after-load ,feature
 ;      '(progn ,@body)))
 
-(require-package 'which-key)
-(which-key-mode)
 
 (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
 
