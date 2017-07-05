@@ -358,6 +358,8 @@ re-downloaded in order to locate PACKAGE."
 ;; (setq general-default-keymaps 'evil-normal-state-map)
 ;; (setq my-leader "SPC")
 
+(global-set-key (kbd "<C-tab>") 'other-window)
+
 (general-define-key :prefix "SPC"
                     :keymaps '(normal motion dired-mode-map)
                     ;; :states '(normal)
