@@ -462,7 +462,7 @@ re-downloaded in order to locate PACKAGE."
                     ",tl" 'clojure-thread-last-all
                     ",cp" 'cljr-cycle-privacy
                     ",ad" 'cljr-add-declaration
-                    "(" '(lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(")))
+                    "(" '(lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(") (evil-insert-state)))
 
 
 (general-define-key :prefix ","
