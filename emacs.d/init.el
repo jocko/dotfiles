@@ -358,6 +358,8 @@ re-downloaded in order to locate PACKAGE."
 ;; (setq general-default-keymaps 'evil-normal-state-map)
 ;; (setq my-leader "SPC")
 
+;; TODO Cannot decide which one is better, this one or the leader
+;; mapping
 (global-set-key (kbd "<C-tab>") 'other-window)
 
 (general-define-key :prefix "SPC"
@@ -365,12 +367,16 @@ re-downloaded in order to locate PACKAGE."
                     ;; :states '(normal)
                     "" nil
                     ;; Jump to mark "a" (set mark with "ma")
-                    "a" '(lambda (&optional arg) (interactive "P") (evil-goto-mark ?a))
+                    "a" '(lambda (&optional arg)
+                           (interactive "P")
+                           (evil-set-jump)
+                           (evil-goto-mark ?a))
                     "b" 'switch-to-buffer
                     ;; "j" 'evil-avy-goto-word-1-below
                     ;; "k" 'evil-avy-goto-word-1-above
                     ;; TODO It always confuses me when I use this in a
                     ;; non-vcs project and get a cryptic error
+                    "TAB" 'other-window
                     "o" 'find-file-in-project
                     "w" 'save-buffer
                     "g" 'magit-status)
@@ -432,8 +438,7 @@ re-downloaded in order to locate PACKAGE."
                     :keymaps 'clojure-mode-map
                     :states '(normal visual motion)
                     "" nil
-                    ;; "e" 'cider-eval-last-sexp
-                    ;; TODO Maybe have a "s" (i.e. eval sexp)?
+                    "s" 'cider-scratch
                     "d" 'cider-eval-defun-at-point
                     "f" 'my-cider-eval-form
                     ;; "s" 'cider-eval-sexp
@@ -462,7 +467,10 @@ re-downloaded in order to locate PACKAGE."
                     ",tl" 'clojure-thread-last-all
                     ",cp" 'cljr-cycle-privacy
                     ",ad" 'cljr-add-declaration
-                    "(" '(lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(") (evil-insert-state)))
+                    "(" '(lambda (&optional arg)
+                           (interactive "P")
+                           (sp-wrap-with-pair "(")
+                           (evil-insert-state)))
 
 
 (general-define-key :prefix ","
