@@ -367,8 +367,10 @@ re-downloaded in order to locate PACKAGE."
                     ;; Jump to mark "a" (set mark with "ma")
                     "a" '(lambda (&optional arg) (interactive "P") (evil-goto-mark ?a))
                     "b" 'switch-to-buffer
-                    "j" 'evil-avy-goto-word-1-below
-                    "k" 'evil-avy-goto-word-1-above
+                    ;; "j" 'evil-avy-goto-word-1-below
+                    ;; "k" 'evil-avy-goto-word-1-above
+                    ;; TODO It always confuses me when I use this in a
+                    ;; non-vcs project and get a cryptic error
                     "o" 'find-file-in-project
                     "w" 'save-buffer
                     "g" 'magit-status)
