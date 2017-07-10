@@ -148,6 +148,9 @@ if executable('ag')
 endif
 " nnoremap <leader>a :Ack! ""<Left>
 
+" Switch to other window
+nnoremap <leader><Tab> <c-w>w
+
 " Jump to tag, show list if multiple tags
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
