@@ -359,8 +359,8 @@ re-downloaded in order to locate PACKAGE."
 ;; (setq my-leader "SPC")
 
 ;; TODO Cannot decide which one is better, this one or the leader
-;; mapping
-(global-set-key (kbd "<C-tab>") 'other-window)
+;; mapping. For the moment, the leader mapping is winning
+;; (global-set-key (kbd "<C-tab>") 'other-window)
 
 (general-define-key :prefix "SPC"
                     :keymaps '(normal motion dired-mode-map)
