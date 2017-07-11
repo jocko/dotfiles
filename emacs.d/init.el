@@ -36,6 +36,8 @@ re-downloaded in order to locate PACKAGE."
 
 (blink-cursor-mode 0)
 
+(global-auto-revert-mode)
+
 (set-face-attribute 'default nil
                     :family "Hack"
                     :height 120)
@@ -313,6 +315,7 @@ re-downloaded in order to locate PACKAGE."
 (eval-after-load "company" '(diminish 'company-mode))
 ; (eval-after-load "robe" '(diminish 'robe-mode))
 ; (diminish 'abbrev-mode)
+(diminish 'auto-revert-mode)
 
 (defmacro rename-modeline (package-name mode new-name)
   `(eval-after-load ,package-name
