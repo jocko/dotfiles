@@ -238,6 +238,7 @@ re-downloaded in order to locate PACKAGE."
   (modify-syntax-entry ?! "w" clojure-mode-syntax-table)
   ;; and :
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
+  (local-set-key (kbd "TAB") #'company-indent-or-complete-common)
   )
 
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
@@ -357,7 +358,6 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'company)
 (add-hook 'cider-mode-hook #'company-mode)
 (setq company-idle-delay nil)
-(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 
 (require-package 'general)
 
