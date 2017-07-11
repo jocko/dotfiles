@@ -499,7 +499,14 @@ re-downloaded in order to locate PACKAGE."
 ; (evil-set-initial-state 'lisp-interaction-mode 'emacs)
 
 
+;; This makes the *-search execute with the vim defintion of a word
+;; (e.g. 'my-word' instead of just 'my')
+;; TODO Is this neccessary when I redefine forward-evil-word??
+(setq-default evil-symbol-word-search 'symbol)
 
+;; Treat hyphens/underscores as word characters (just like vim)
+(with-eval-after-load 'evil
+  (defalias #'forward-evil-word #'forward-evil-symbol))
 
 
 
