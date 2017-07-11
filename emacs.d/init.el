@@ -232,6 +232,12 @@ re-downloaded in order to locate PACKAGE."
   ;; TODO This mode didn't work as I expected
   ;; (highlight-parentheses-mode)
   (show-paren-mode)
+  ;; Make hyphens into word characters
+  (modify-syntax-entry ?- "w" clojure-mode-syntax-table)
+  ;; and !
+  (modify-syntax-entry ?! "w" clojure-mode-syntax-table)
+  ;; and :
+  (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
   )
 
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
@@ -511,9 +517,6 @@ re-downloaded in order to locate PACKAGE."
 ;; TODO Is this neccessary when I redefine forward-evil-word??
 (setq-default evil-symbol-word-search 'symbol)
 
-;; Treat hyphens/underscores as word characters (just like vim)
-(with-eval-after-load 'evil
-  (defalias #'forward-evil-word #'forward-evil-symbol))
 
 
 
