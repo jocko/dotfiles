@@ -310,6 +310,7 @@ re-downloaded in order to locate PACKAGE."
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
 (eval-after-load "evil-smartparens" '(diminish 'evil-smartparens-mode))
 (eval-after-load "which-key" '(diminish 'which-key-mode))
+(eval-after-load "company" '(diminish 'company-mode))
 ; (eval-after-load "robe" '(diminish 'robe-mode))
 ; (diminish 'abbrev-mode)
 
@@ -439,6 +440,8 @@ re-downloaded in order to locate PACKAGE."
                     :states '(normal visual motion)
                     "" nil
                     "s" 'cider-scratch
+                    "c" 'cider-connect
+                    "q" 'cider-quit
                     "d" 'cider-eval-defun-at-point
                     "f" 'my-cider-eval-form
                     ;; "s" 'cider-eval-sexp
@@ -494,7 +497,8 @@ re-downloaded in order to locate PACKAGE."
 (evil-set-initial-state 'cider-stacktrace-mode 'emacs)
 (evil-set-initial-state 'cider-docview-mode 'motion)
 (evil-set-initial-state 'cider-popup-buffer-mode 'motion)
-(evil-set-initial-state 'cider-inspector-mode 'motion)
+;; Unsure about this, motion or emacs???
+(evil-set-initial-state 'cider-inspector-mode 'emacs)
 ;; Unsure about this
 ; (evil-set-initial-state 'lisp-interaction-mode 'emacs)
 
