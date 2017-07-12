@@ -381,6 +381,10 @@ re-downloaded in order to locate PACKAGE."
 ;; mapping. For the moment, the leader mapping is winning
 ;; (global-set-key (kbd "<C-tab>") 'other-window)
 
+;; I want esc to cancel searches (e.g. '/' & '?'). This achieves this
+;; but I don't know if there are any other consequences to it...
+(define-key minibuffer-local-map [escape] 'keyboard-escape-quit)
+
 (general-define-key :prefix "SPC"
                     :keymaps '(normal motion dired-mode-map)
                     ;; :states '(normal)
@@ -391,11 +395,12 @@ re-downloaded in order to locate PACKAGE."
                            (evil-set-jump)
                            (evil-goto-mark ?a))
                     "b" 'switch-to-buffer
+                    "f" 'counsel-ag
                     ;; "j" 'evil-avy-goto-word-1-below
                     ;; "k" 'evil-avy-goto-word-1-above
+                    ;; "TAB" 'other-window
                     ;; TODO It always confuses me when I use this in a
                     ;; non-vcs project and get a cryptic error
-                    "TAB" 'other-window
                     "o" 'find-file-in-project
                     "w" 'save-buffer
                     "g" 'magit-status)
