@@ -150,6 +150,8 @@ endif
 
 " Switch to other window
 nnoremap <leader><Tab> <c-w>w
+" Or, the same thing, but emacs style. The jury is still out...
+nnoremap <c-x>o <c-w>w
 
 " Jump to tag, show list if multiple tags
 nnoremap <c-]> g<c-]>
