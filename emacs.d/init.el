@@ -216,6 +216,8 @@ re-downloaded in order to locate PACKAGE."
 
 (add-hook 'emacs-lisp-mode-hook #'my-emacs-lisp-mode-hook)
 
+(modify-syntax-entry ?- "w" emacs-lisp-mode-syntax-table)
+
 ;; Skip prompt for interactive commands that require a symbol (e.g. cider-doc)
 (setq cider-prompt-for-symbol nil)
 ;; Display eval result with overlays only (I get so confused when a
@@ -240,16 +242,15 @@ re-downloaded in order to locate PACKAGE."
   ;; TODO This mode didn't work as I expected
   ;; (highlight-parentheses-mode)
   (show-paren-mode)
-  ;; Make hyphens into word characters
-  (modify-syntax-entry ?- "w" clojure-mode-syntax-table)
-  ;; and !
-  (modify-syntax-entry ?! "w" clojure-mode-syntax-table)
-  ;; and :
-  (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
   (local-set-key (kbd "TAB") #'company-indent-or-complete-common)
   )
 
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
+
+(with-eval-after-load 'clojure-mode
+  (modify-syntax-entry ?- "w" clojure-mode-syntax-table)
+  (modify-syntax-entry ?! "w" clojure-mode-syntax-table)
+  (modify-syntax-entry ?: "w" clojure-mode-syntax-table))
 
 ; (require-package 'cider)
 
