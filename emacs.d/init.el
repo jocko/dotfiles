@@ -46,6 +46,9 @@ re-downloaded in order to locate PACKAGE."
 
 (setq evil-search-module 'evil-search)
 
+;; Treat underscore as a word character in all modes
+(modify-syntax-entry ?_ "w" (standard-syntax-table))
+
 (cd "~/Repos")
 
 (require-package 'spaceline)
