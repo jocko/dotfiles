@@ -49,6 +49,11 @@ re-downloaded in order to locate PACKAGE."
 ;; Treat underscore as a word character in all modes
 (modify-syntax-entry ?_ "w" (standard-syntax-table))
 
+;; Mouse selection copies to primary (i.e. can later be pasted with
+;; middle mouse), but NOT to clipboard (i.e. <C-v>)
+(setq x-select-enable-primary t)
+(setq x-select-enable-clipboard nil)
+
 (cd "~/Repos")
 
 (require-package 'spaceline)
