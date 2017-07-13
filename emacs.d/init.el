@@ -383,7 +383,10 @@ re-downloaded in order to locate PACKAGE."
 
 ;; I want esc to cancel searches (e.g. '/' & '?'). This achieves this
 ;; but I don't know if there are any other consequences to it...
-(define-key minibuffer-local-map [escape] 'keyboard-escape-quit)
+;; (define-key minibuffer-local-map [escape] 'keyboard-escape-quit)
+
+;; What could go wrong...
+(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
 (general-define-key :prefix "SPC"
                     :keymaps '(normal motion dired-mode-map)
