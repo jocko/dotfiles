@@ -209,7 +209,9 @@ re-downloaded in order to locate PACKAGE."
   (show-paren-mode)
   ;; TODO This mode didn't work as I expected
   ;; (highlight-parentheses-mode)
-  (smartparens-strict-mode)
+  ;; (smartparens-strict-mode)
+  ;; I'm currently evaluation the non-strict mode
+  (smartparens-mode)
   ;; (lispy-mode)
   ;; (paredit-mode)
   )
@@ -237,7 +239,9 @@ re-downloaded in order to locate PACKAGE."
   ;; (linum-relative-mode)
   ;; (paredit-mode)
   ;; (lispy-mode)
-  (smartparens-strict-mode)
+  ;; (smartparens-strict-mode)
+  ;; I'm currently evaluation the non-strict mode
+  (smartparens-mode)
   (rainbow-delimiters-mode)
   ;; TODO This mode didn't work as I expected
   ;; (highlight-parentheses-mode)
