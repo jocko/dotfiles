@@ -40,8 +40,8 @@ xterm*metaSendsEscape: true
 *color15: #ebdbb2
 
 xterm*faceName:    xft:Hack:size=14
-!xterm*faceName:           Hack
-!xterm*faceSize: 6
-!xterm*faceSize: 14
+! This is a nice one as well
+!xterm*faceName:    xft:Fira Mono:size=14
+
 URxvt.font: xft:Hack:size=10
 !URxvt.letterSpace: -1
