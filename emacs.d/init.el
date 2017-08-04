@@ -253,6 +253,7 @@ re-downloaded in order to locate PACKAGE."
 
 (with-eval-after-load 'clojure-mode
   (modify-syntax-entry ?- "w" clojure-mode-syntax-table)
+  (modify-syntax-entry ?_ "w" clojure-mode-syntax-table)
   (modify-syntax-entry ?! "w" clojure-mode-syntax-table)
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table))
 
