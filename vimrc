@@ -8,41 +8,42 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim'
 Plugin 'morhetz/gruvbox'
-" Plugin 'vim-scripts/twilight'
-" Plugin 'w0ng/vim-hybrid'
-" Plugin 'chriskempson/base16-vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-vinegar'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-surround'
+Plugin 'jpalardy/vim-slime'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'mileszs/ack.vim'
+Plugin 'farmergreg/vim-lastplace'
 Plugin 'kana/vim-textobj-user'
 Plugin 'rhysd/vim-textobj-ruby'
-Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-surround'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'godlygeek/tabular'
-" TODO These three plugins, not sure if I'm using.
-" Plugin 'tkhren/vim-textobj-numeral'
-" Plugin 'Julian/vim-textobj-variable-segment'
-" Plugin 'wellle/targets.vim'
-Plugin 'jpalardy/vim-slime'
-" Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-repeat'
-Plugin 'elixir-lang/vim-elixir'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'guns/vim-sexp'
 Plugin 'junegunn/rainbow_parentheses.vim'
-" Plugin 'python-mode/python-mode'
 Plugin 'tpope/vim-fugitive'
 Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-endwise.git'
 Plugin 'tpope/vim-unimpaired'
+
+" vim-addon-mw-utils & tlib_vim are requried by vim-snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
+
+Plugin 'chakrit/upstart.vim'
+
+" TODO These three plugins, not sure if I'm using.
+" Plugin 'tkhren/vim-textobj-numeral'
+" Plugin 'Julian/vim-textobj-variable-segment'
+" Plugin 'wellle/targets.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -82,7 +83,9 @@ set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
 set wrap
-set lazyredraw
+" I sometimes get this strange behavior where the cursor jumps forward and
+" then back. Seem to be because of this.
+" set lazyredraw
 
 set list
 set listchars=tab:▸\ ,eol:¬,trail:·
