@@ -450,6 +450,12 @@ re-downloaded in order to locate PACKAGE."
 (evil-define-operator evil-cider-eval (beg end)
   (cider-eval-region beg end))
 
+(defun my-inspect-form ()
+  (interactive)
+  (let ((region (evil-cp-a-form)))
+    (cider-inspect-expr (buffer-substring (nth 0 region) (nth 1 region))
+                        (cider-current-ns))))
+
 ;; TODO Maybe rename these two to something like my-cider-eval-sexp
 ;; (defun cider-eval-sexp ()
 ;;   (interactive)
@@ -470,6 +476,7 @@ re-downloaded in order to locate PACKAGE."
                     :keymaps 'clojure-mode-map
                     :states '(normal visual motion)
                     "" nil
+                    "i" 'my-inspect-form
                     "s" 'cider-scratch
                     "c" 'cider-connect
                     "q" 'cider-quit
