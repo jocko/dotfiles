@@ -129,6 +129,7 @@ PROMPT='%{$fg[yellow]%}%{$fg[green]%}[%~]
 %{$fg[blue]%}-> %{$fg[default]%}%# %{$reset_color%}'
 RPROMPT='%{$(echotc UP 1)%}${vim_mode}%{$(echotc DO 1)%}'
 
+setopt histignorespace
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
 setopt hist_find_no_dups
@@ -161,6 +162,10 @@ export FZF_DEFAULT_OPTS="--exact"
 #     _z "$@"
 #   fi
 # }
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
 
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 
