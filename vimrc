@@ -39,6 +39,7 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 
 Plugin 'chakrit/upstart.vim'
+Plugin 'Vimjas/vim-python-pep8-indent'
 
 " TODO These three plugins, not sure if I'm using.
 " Plugin 'tkhren/vim-textobj-numeral'
