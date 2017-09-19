@@ -6,3 +6,6 @@
 alias open="xdg-open"
 
 path=(~/.local/bin $path)
+
+# For some reason, Fedora uses libvirt provider by default
+export VAGRANT_DEFAULT_PROVIDER=virtualbox
