@@ -378,6 +378,8 @@ re-downloaded in order to locate PACKAGE."
 (add-hook 'cider-mode-hook #'company-mode)
 (setq company-idle-delay nil)
 
+(require-package 'ag)
+
 (require-package 'general)
 
 ;; (evil-define-key 'normal smartparens-mode-map (kbd ">") 'paredit-forward-slurp-sexp)
@@ -409,6 +411,7 @@ re-downloaded in order to locate PACKAGE."
                            (evil-goto-mark ?a))
                     "b" 'switch-to-buffer
                     "f" 'counsel-ag
+                    "s" 'ag-project
                     ;; "j" 'evil-avy-goto-word-1-below
                     ;; "k" 'evil-avy-goto-word-1-above
                     ;; "TAB" 'other-window
