@@ -146,10 +146,12 @@ re-downloaded in order to locate PACKAGE."
 ;; TODO Ambivalent about this...
 ; (global-set-key (kbd "C-x o") 'find-file-in-project)
 
-(defun ffip-setup-clojure ()
-  (setq-local ffip-prune-patterns '("*/.git/*" "*/target/*")))
-
-(add-hook 'clojure-mode-hook 'ffip-setup-clojure)
+;; (defun ffip-setup-clojure ()
+;;   (setq-local ffip-prune-patterns '("*/.git/*" "*/target/*")))
+;; (add-hook 'clojure-mode-hook 'ffip-setup-clojure)
+;; (setq ffip-prune-patterns '(".git/*" "target/*" "tmp/*"))
+(with-eval-after-load 'find-file-in-project
+  (add-to-list 'ffip-prune-patterns "*/target/*"))
 
 ;; XXX This seem to be broken. I sometimes get "unrecognized entry in undo list undo-tree-canary"
 ;; (setq undo-tree-auto-save-history t)
