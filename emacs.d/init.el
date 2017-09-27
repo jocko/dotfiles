@@ -63,7 +63,7 @@ re-downloaded in order to locate PACKAGE."
 (spaceline-toggle-buffer-encoding-abbrev-off)
 (spaceline-toggle-version-control-off)
 (spaceline-toggle-buffer-size-off)
-(spaceline-toggle-line-column-off)
+; (spaceline-toggle-line-column-off)
 (spaceline-toggle-hud-off)
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
 (setq powerline-default-separator 'nil)
