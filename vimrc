@@ -14,7 +14,7 @@ Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'jpalardy/vim-slime'
-Plugin 'elixir-lang/vim-elixir'
+" Plugin 'elixir-lang/vim-elixir'
 Plugin 'mileszs/ack.vim'
 Plugin 'farmergreg/vim-lastplace'
 Plugin 'kana/vim-textobj-user'
@@ -40,6 +40,7 @@ Plugin 'garbas/vim-snipmate'
 
 Plugin 'chakrit/upstart.vim'
 Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'bps/vim-textobj-python'
 
 " TODO These three plugins, not sure if I'm using.
 " Plugin 'tkhren/vim-textobj-numeral'
@@ -177,7 +178,8 @@ let g:undotree_SetFocusWhenToggle=1
 
 let g:slime_python_ipython = 1
 let g:slime_target = "tmux"
-
+" Eval code (w. slime) as indicated by motion.
+autocmd FileType python nmap <buffer> cp <Plug>SlimeMotionSend
 " vmap <Leader>fs :!sqlformat -r -kupper -<CR>
 
 " let g:vim_markdown_folding_disabled = 1
