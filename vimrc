@@ -42,6 +42,10 @@ Plugin 'chakrit/upstart.vim'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'bps/vim-textobj-python'
 
+" TODO This replaces ctrlp?
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+
 " TODO These three plugins, not sure if I'm using.
 " Plugin 'tkhren/vim-textobj-numeral'
 " Plugin 'Julian/vim-textobj-variable-segment'
@@ -140,8 +144,11 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>a `a
 
 " CtrlP
-map <leader>o :CtrlP<CR>
-map <leader>b :CtrlPBuffer<CR>
+" map <leader>o :CtrlP<CR>
+" map <leader>b :CtrlPBuffer<CR>
+map <leader>o :GFiles<CR>
+map <leader>O :Files<CR>
+map <leader>b :Buffers<CR>
 " Always open files in a new window
 let g:ctrlp_switch_buffer = 0
 
