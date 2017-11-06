@@ -23,8 +23,10 @@ tags
 .rake_tasks
 .ruby-version
 .pryrc
-venv
-.vagrant/
+/venv
+/.venv
+/.ipynb_checkpoints
+/.vagrant
 target/
-.ropeproject/
+/.ropeproject
 .dir-locals.el
