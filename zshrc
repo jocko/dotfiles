@@ -136,18 +136,14 @@ setopt hist_find_no_dups
 setopt share_history
 #setopt extendedglob
 #unsetopt autocd beep
-# bindkey -e
-bindkey -v
-KEYTIMEOUT=1
-bindkey "^?" backward-delete-char
-bindkey "^H" backward-delete-char
-bindkey '^w' backward-kill-word
-bindkey '^a' beginning-of-line
-bindkey '^e' end-of-line
-#zstyle :compinstall filename '/home/jocko/.zshrc'
-#autoload -Uz compinit
-#compinit
-# End of lines added by compinstall
+bindkey -e
+# bindkey -v
+# KEYTIMEOUT=1
+# bindkey "^?" backward-delete-char
+# bindkey "^H" backward-delete-char
+# bindkey '^w' backward-kill-word
+# bindkey '^a' beginning-of-line
+# bindkey '^e' end-of-line
 
 FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_OPTS="--exact"
