@@ -158,7 +158,7 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
   let g:ackprg = 'ag --vimgrep --smart-case' 
 endif
-" nnoremap <leader>a :Ack! ""<Left>
+nnoremap <leader>s :Ack! ""<Left>
 
 " Switch to other window
 nnoremap <leader><Tab> <c-w>w
@@ -195,3 +195,4 @@ let g:pymode_folding = 0
 let g:pymode_lint_ignore = "E501"
 let g:pymode_run = 0
 let g:pymode_breakpoint = 0
+
