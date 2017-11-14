@@ -30,3 +30,4 @@ tags
 target/
 /.ropeproject
 .dir-locals.el
+*.pyc
