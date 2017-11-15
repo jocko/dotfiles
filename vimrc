@@ -39,7 +39,9 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 
 Plugin 'chakrit/upstart.vim'
-Plugin 'Vimjas/vim-python-pep8-indent'
+" TODO Is this compatible with python-mode? Do I even need it?
+" Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'python-mode/python-mode'
 Plugin 'bps/vim-textobj-python'
 
 " TODO This replaces ctrlp?
@@ -163,7 +165,7 @@ nnoremap <leader>s :Ack! ""<Left>
 " Switch to other window
 nnoremap <leader><Tab> <c-w>w
 " Or, the same thing, but emacs style. The jury is still out...
-nnoremap <c-x>o <c-w>w
+nnoremap <c-x>o <c-w>p
 
 " Jump to tag, show list if multiple tags
 nnoremap <c-]> g<c-]>
