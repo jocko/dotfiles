@@ -125,9 +125,20 @@ function ding() {
 }
 
 setopt prompt_subst
-PROMPT='%{$fg[yellow]%}%{$fg[green]%}[%~]
+if [[ -z "$SSH_CLIENT" ]]; then
+  prompt_host=""
+  PROMPT='$%{$fg[yellow]%}%{$fg[green]%}[%~]
 %{$fg[blue]%}-> %{$fg[default]%}%# %{$reset_color%}'
-RPROMPT='%{$(echotc UP 1)%}${vim_mode}%{$(echotc DO 1)%}'
+else
+  #prompt_host=%{$fg[yellow]%}%n%{$fg[cyan]%}@%{$reset_color$fg[red]%}$(hostname -s)
+  prompt_host=%{$fg[magenta]%}%{$fg[yellow]%}$(hostname -s)%{$reset_colors%}
+  PROMPT='$prompt_host %{$fg[yellow]%}%{$fg[blue]%}[%~]
+%{$fg[magenta]%}-> %{$fg[default]%}%# %{$reset_color%}'
+fi
+
+#PROMPT='$prompt_host %{$fg[yellow]%}%{$fg[green]%}[%~]
+#%{$fg[blue]%}-> %{$fg[default]%}%# %{$reset_color%}'
+#RPROMPT='%{$(echotc UP 1)%}${vim_mode}%{$(echotc DO 1)%}'
 
 setopt histignorespace
 setopt hist_ignore_dups
