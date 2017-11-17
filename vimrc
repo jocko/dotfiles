@@ -197,6 +197,7 @@ let g:pymode_folding = 0
 let g:pymode_lint_ignore = "E501"
 let g:pymode_run = 0
 let g:pymode_breakpoint = 0
+let g:pymode_lint_cwindow = 0
 
 " This prevents CTRL-A & CTRL-X to interpret numbers with leading zeroes as octal
 set nrformats-=octal
