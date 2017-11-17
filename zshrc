@@ -127,7 +127,7 @@ function ding() {
 setopt prompt_subst
 if [[ -z "$SSH_CLIENT" ]]; then
   prompt_host=""
-  PROMPT='$%{$fg[yellow]%}%{$fg[green]%}[%~]
+  PROMPT='%{$fg[yellow]%}%{$fg[green]%}[%~]
 %{$fg[blue]%}-> %{$fg[default]%}%# %{$reset_color%}'
 else
   #prompt_host=%{$fg[yellow]%}%n%{$fg[cyan]%}@%{$reset_color$fg[red]%}$(hostname -s)
