@@ -91,6 +91,8 @@ set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
 set wrap
+" This prevents CTRL-A & CTRL-X to interpret numbers with leading zeroes as octal
+set nrformats-=octal
 " I sometimes get this strange behavior where the cursor jumps forward and
 " then back. Seem to be because of this.
 " set lazyredraw
@@ -198,6 +200,3 @@ let g:pymode_lint_ignore = "E501"
 let g:pymode_run = 0
 let g:pymode_breakpoint = 0
 let g:pymode_lint_cwindow = 0
-
-" This prevents CTRL-A & CTRL-X to interpret numbers with leading zeroes as octal
-set nrformats-=octal
