@@ -108,7 +108,11 @@ function precmd() {
 }
 
 function print_title() {
-  print -Pn '\e]0;$1\a'
+  if [[ -z "$SSH_CLIENT" ]]; then
+    print -Pn '\e]0;$1\a'
+  else
+    print -Pn '\e]0;%m: $1\a'
+  fi
 }
 
 function preexec() {
