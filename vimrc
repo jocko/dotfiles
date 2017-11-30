@@ -39,9 +39,9 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 
 Plugin 'chakrit/upstart.vim'
-" TODO Is this compatible with python-mode? Do I even need it?
-" Plugin 'Vimjas/vim-python-pep8-indent'
-Plugin 'python-mode/python-mode'
+
+Plugin 'Vimjas/vim-python-pep8-indent'
+" Plugin 'python-mode/python-mode'
 Plugin 'bps/vim-textobj-python'
 
 " TODO This replaces ctrlp?
