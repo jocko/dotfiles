@@ -36,8 +36,9 @@ export TERMINAL=xterm
 # ----------------
 # session    optional     pam_gnome_keyring.so
 # export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
-eval $(ssh-agent)
-ssh-add
+# eval $(ssh-agent)
+# export SSH_ASKPASS=/usr/libexec/openssh/ssh-askpass
+# ssh-add
 
-exec i3
-ssh-agent -k
+exec ssh-agent i3
+#ssh-agent -k
