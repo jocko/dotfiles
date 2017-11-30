@@ -54,7 +54,7 @@ re-downloaded in order to locate PACKAGE."
 (setq x-select-enable-primary t)
 (setq x-select-enable-clipboard nil)
 
-(cd "~/Repos")
+(cd "~/repos")
 
 (require-package 'spaceline)
 (require 'spaceline-config)
