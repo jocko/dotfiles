@@ -200,3 +200,5 @@ let g:pymode_lint_ignore = "E501"
 let g:pymode_run = 0
 let g:pymode_breakpoint = 0
 let g:pymode_lint_cwindow = 0
+
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
