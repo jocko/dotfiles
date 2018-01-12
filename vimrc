@@ -53,20 +53,24 @@ Plugin 'junegunn/fzf.vim'
 " Plugin 'Julian/vim-textobj-variable-segment'
 " Plugin 'wellle/targets.vim'
 
+Plugin 'dracula/vim'
+
 call vundle#end()
 filetype plugin indent on
 syntax enable
 
-set background=dark
-color gruvbox
-
-" set background=dark
-" color base16-tomorrow-night
-
-" XXX Sprinkle fairy dust
+" XXX Sprinkle fairy dust. I don't know what it does but it is required for
+" certain certain schemes. Some schemes however will break if you enable it.
 if has("termguicolors")
   set termguicolors
 endif
+
+set background=dark
+" color gruvbox
+color dracula
+
+" set background=dark
+" color base16-tomorrow-night
 
 set autoread
 autocmd FocusGained,BufEnter * checktime
