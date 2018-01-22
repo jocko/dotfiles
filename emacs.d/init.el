@@ -151,7 +151,8 @@ re-downloaded in order to locate PACKAGE."
 ;; (add-hook 'clojure-mode-hook 'ffip-setup-clojure)
 ;; (setq ffip-prune-patterns '(".git/*" "target/*" "tmp/*"))
 (with-eval-after-load 'find-file-in-project
-  (add-to-list 'ffip-prune-patterns "*/target/*"))
+  (add-to-list 'ffip-prune-patterns "*/target/*")
+  (add-to-list 'ffip-prune-patterns "*/.vagrant/*"))
 
 ;; XXX This seem to be broken. I sometimes get "unrecognized entry in undo list undo-tree-canary"
 ;; (setq undo-tree-auto-save-history t)
