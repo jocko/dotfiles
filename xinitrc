@@ -32,6 +32,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 export TERMINAL=xterm
+
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
 # /etc/pam.d/login
 # ----------------
 # session    optional     pam_gnome_keyring.so
