@@ -48,12 +48,9 @@ Plugin 'bps/vim-textobj-python'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
-" TODO These three plugins, not sure if I'm using.
-" Plugin 'tkhren/vim-textobj-numeral'
-" Plugin 'Julian/vim-textobj-variable-segment'
-" Plugin 'wellle/targets.vim'
-
-Plugin 'dracula/vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'liuchengxu/space-vim-dark'
+Plugin 'fatih/vim-go'
 
 call vundle#end()
 filetype plugin indent on
@@ -61,16 +58,17 @@ syntax enable
 
 " XXX Sprinkle fairy dust. I don't know what it does but it is required for
 " certain certain schemes. Some schemes however will break if you enable it.
-if has("termguicolors")
-  set termguicolors
-endif
+" Update: Don't think this should be used in xterm, at all.
+" if has("termguicolors")
+"   set termguicolors
+" endif
 
 set background=dark
 " color gruvbox
-color dracula
+color solarized
+" color space-vim-dark
 
-" set background=dark
-" color base16-tomorrow-night
+              
 
 set autoread
 autocmd FocusGained,BufEnter * checktime
@@ -154,8 +152,8 @@ nnoremap <leader>a `a
 " CtrlP
 " map <leader>o :CtrlP<CR>
 " map <leader>b :CtrlPBuffer<CR>
-map <leader>o :GFiles<CR>
-map <leader>O :Files<CR>
+map <leader>o :Files<CR>
+map <leader>O :GFiles?<CR>
 map <leader>b :Buffers<CR>
 " Always open files in a new window
 let g:ctrlp_switch_buffer = 0
