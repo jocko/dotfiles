@@ -6,7 +6,6 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'kien/ctrlp.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-vinegar'
@@ -44,7 +43,6 @@ Plugin 'Vimjas/vim-python-pep8-indent'
 " Plugin 'python-mode/python-mode'
 Plugin 'bps/vim-textobj-python'
 
-" TODO This replaces ctrlp?
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
@@ -155,13 +153,9 @@ nnoremap <leader>a `a
 map <leader>o :Files<CR>
 map <leader>O :GFiles?<CR>
 map <leader>b :Buffers<CR>
-" Always open files in a new window
-let g:ctrlp_switch_buffer = 0
 
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " We can disable cache when using ag
-  let g:ctrlp_use_caching = 0
+  let $FZF_DEFAULT_COMMAND = 'ag -g ""'
   let g:ackprg = 'ag --vimgrep --smart-case' 
 endif
 nnoremap <leader>s :Ack! ""<Left>
