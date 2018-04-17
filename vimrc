@@ -105,7 +105,7 @@ augroup trailing
   au InsertLeave * :set listchars+=trail:·
 augroup END
 
-set undodir=$HOME/.vim/undo
+set undodir=~/.vim/undo
 if !isdirectory(expand(&undodir))
   call mkdir(expand(&undodir), "p")
 endif
