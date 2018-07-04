@@ -13,9 +13,13 @@ alias lup="grep 'starting full system upgrade' /var/log/pacman.log | tail -1 | c
 
 alias open="xdg-open"
 
+alias packer="packer-io"
+
 path=(~/.local/bin $path)
 
 export ERL_LIBS=~/erlang
+export ERL_AFLAGS="-kernel shell_history enabled"
+
 export GOPATH=~/go
 path=($path $GOPATH/bin)
 
