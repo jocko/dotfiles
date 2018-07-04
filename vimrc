@@ -144,6 +144,7 @@ autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
 let g:ruby_indent_block_style = 'do'
 " autocmd FileType ruby abbr <buffer> pry! require 'pry'; binding.pry
 " autocmd FileType ruby nnoremap <buffer> <LocalLeader>gd :Ack! 'def (self\.)?<cword>\('<CR>
+autocmd FileType ruby nnoremap <buffer> <LocalLeader>s :execute "SlimeSend1 load('".expand('%:p')."')"<CR>
 
 autocmd FileType gitcommit setlocal spell
 
@@ -204,3 +205,4 @@ let g:pymode_lint_cwindow = 0
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
 autocmd Filetype go setlocal nolist
+
