@@ -139,6 +139,8 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 autocmd FileType erlang setlocal expandtab shiftwidth=4
 autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
 
+" autocmd FileType c setlocal noexpandtab shiftwidth=4
+
 let g:ruby_indent_block_style = 'do'
 " autocmd FileType ruby abbr <buffer> pry! require 'pry'; binding.pry
 " autocmd FileType ruby nnoremap <buffer> <LocalLeader>gd :Ack! 'def (self\.)?<cword>\('<CR>
