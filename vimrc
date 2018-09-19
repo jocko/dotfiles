@@ -48,7 +48,6 @@ Plugin 'junegunn/fzf.vim'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'liuchengxu/space-vim-dark'
-Plugin 'fatih/vim-go'
 
 call vundle#end()
 filetype plugin indent on
@@ -63,8 +62,8 @@ syntax enable
 
 set background=dark
 " color gruvbox
-color solarized
-" color space-vim-dark
+" color solarized
+color space-vim-dark
 
               
 
