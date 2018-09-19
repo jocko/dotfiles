@@ -31,3 +31,4 @@ target/
 /.ropeproject
 .dir-locals.el
 *.pyc
+/coverage
