@@ -31,6 +31,14 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-endwise.git'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'pangloss/vim-javascript'
+" Plugin 'mxw/vim-jsx'
+Plugin 'leafgarland/typescript-vim'
+" Plugin 'peitalin/vim-jsx-typescript'
+Plugin 'vim-syntastic/syntastic'
+" Plugin 'Quramy/tsuquyomi'
+Plugin 'maxmellon/vim-jsx-pretty'
+Plugin 'wellle/targets.vim'
 
 " vim-addon-mw-utils & tlib_vim are requried by vim-snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -140,6 +148,12 @@ autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
 
 " autocmd FileType c setlocal noexpandtab shiftwidth=4
 
+autocmd FileType typescript.tsx setlocal noexpandtab shiftwidth=2
+autocmd FileType typescript setlocal noexpandtab shiftwidth=2
+autocmd FileType javascript.jsx setlocal noexpandtab shiftwidth=2
+autocmd FileType javascript setlocal noexpandtab shiftwidth=2
+autocmd FileType less setlocal noexpandtab shiftwidth=2
+
 let g:ruby_indent_block_style = 'do'
 " autocmd FileType ruby abbr <buffer> pry! require 'pry'; binding.pry
 " autocmd FileType ruby nnoremap <buffer> <LocalLeader>gd :Ack! 'def (self\.)?<cword>\('<CR>
@@ -205,3 +219,21 @@ autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
 autocmd Filetype go setlocal nolist
 
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:tsuquyomi_disable_quickfix = 1
+" let g:syntastic_aggregate_errors = 1
+let g:syntastic_typescript_checkers = ['tslint']
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 2
+" let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gb :Gblame<CR>
+
+nmap <leader>r :r!adb shell input text "RR"<CR>
