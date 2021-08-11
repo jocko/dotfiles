@@ -41,9 +41,9 @@ Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'wellle/targets.vim'
 
 " vim-addon-mw-utils & tlib_vim are requried by vim-snipmate
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'garbas/vim-snipmate'
 
 Plugin 'chakrit/upstart.vim'
 

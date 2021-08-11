@@ -5,6 +5,7 @@
 ._*
 Icon
 
+.sdkmanrc
 Thumbs.db
 ehthumbs.db
 *.swp

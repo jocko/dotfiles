@@ -1,0 +1,27 @@
+[ -f ~/.dircolors ] && eval "$(dircolors ~/.dircolors)"
+
+alias open="xdg-open"
+
+if [[ -x /usr/lib/command-not-found || -x /usr/share/command-not-found/command-not-found ]]; then
+  command_not_found_handler() {
+    if [[ -x /usr/lib/command-not-found ]]; then
+      /usr/lib/command-not-found -- "$1"
+      return $?
+    elif [[ -x /usr/share/command-not-found/command-not-found ]]; then
+      /usr/share/command-not-found/command-not-found -- "$1"
+      return $?
+    else
+      printf "zsh: command not found: %s\n" "$1" >&2
+      return 127
+    fi
+  }
+fi
+
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/jocko/.sdkman"
+[[ -s "/home/jocko/.sdkman/bin/sdkman-init.sh" ]] && source "/home/jocko/.sdkman/bin/sdkman-init.sh"
