@@ -22,7 +22,7 @@ mkdir ~/.vim/swap
 ## misc
 
 ```
-sudo apt install build-essential atool curl fonts-hack-ttf httpie jq gron fzf pcmanfm sxiv
+sudo apt install build-essential atool curl fonts-hack-ttf httpie jq gron fzf pcmanfm sxiv zathura
 mkdir ~/bin
 ```
 
@@ -75,6 +75,8 @@ cp xkblayout-state ~/bin
 
 ### dunst
 
+TODO This config need some love. Not using at the moment.
+
 ```
 ln -sf ~/.dotfiles/config/dunst ~/.config/dunst
 ```
@@ -86,7 +88,7 @@ xdg-mime query default inode/directory
 xdg-mime default pcmanfm.desktop inode/directory
 
 xdg-mime query default application/pdf
-xdg-mime default sxiv.desktop application/pdf
+xdg-mime default org.pwmt.zathura.desktop application/pdf
 ```
 
 ## zsh
