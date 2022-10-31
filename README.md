@@ -22,7 +22,7 @@ mkdir ~/.vim/swap
 ## misc
 
 ```
-sudo apt install build-essential atool curl fonts-hack-ttf httpie jq gron fzf pcmanfm sxiv zathura
+sudo apt install build-essential atool curl fonts-hack-ttf httpie jq gron fzf pcmanfm sxiv zathura direnv
 mkdir ~/bin
 ```
 
