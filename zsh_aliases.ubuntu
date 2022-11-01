@@ -26,9 +26,6 @@ fi
 
 path=(~/.local/bin $path)
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
 export N_PREFIX=$HOME/.local
 
 export ERL_AFLAGS="-kernel shell_history enabled"
