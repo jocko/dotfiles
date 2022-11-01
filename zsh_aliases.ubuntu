@@ -1,3 +1,8 @@
+[ -f /usr/local/share/chruby/chruby.sh ] && source /usr/local/share/chruby/chruby.sh
+[ -f /usr/local/share/chruby/auto.sh ] && source /usr/local/share/chruby/auto.sh
+
+command -v direnv &> /dev/null && eval "$(direnv hook zsh)"
+
 [ -f ~/.dircolors ] && eval "$(dircolors ~/.dircolors)"
 
 alias open="xdg-open"
@@ -24,8 +29,10 @@ path=(~/.local/bin $path)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
+export N_PREFIX=$HOME/.local
+
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/jocko/.sdkman"
-[[ -s "/home/jocko/.sdkman/bin/sdkman-init.sh" ]] && source "/home/jocko/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
