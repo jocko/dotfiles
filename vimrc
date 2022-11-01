@@ -38,6 +38,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'vim-syntastic/syntastic'
 " Plugin 'Quramy/tsuquyomi'
 Plugin 'maxmellon/vim-jsx-pretty'
+Plugin 'prettier/vim-prettier'
 Plugin 'wellle/targets.vim'
 
 " vim-addon-mw-utils & tlib_vim are requried by vim-snipmate
@@ -150,6 +151,7 @@ autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
 
 autocmd FileType typescript.tsx setlocal noexpandtab shiftwidth=2
 autocmd FileType typescript setlocal noexpandtab shiftwidth=2
+autocmd FileType typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType javascript.jsx setlocal noexpandtab shiftwidth=2
 autocmd FileType javascript setlocal noexpandtab shiftwidth=2
 autocmd FileType less setlocal noexpandtab shiftwidth=2
