@@ -116,3 +116,26 @@ curl -s "https://get.sdkman.io" | bash
 sdk list java
 sdk list maven
 ```
+
+## jupyter-vim (TODO)
+
+### .vimrc
+
+Plugin 'jupyter-vim/jupyter-vim'
+
+let g:my_venv = fnamemodify('~/.vim/venv', ':p')
+if exists('g:my_venv')
+    pythonx import os; import vim
+    pythonx activate_this = os.path.join(vim.eval('g:my_venv'), 'bin/activate_this.py')
+    pythonx with open(activate_this) as f: exec(f.read(), {'__file__': activate_this})
+endif
+
+### qtconsole
+
+pip3 install PyQt5 jupyter-qtconsole pandas matplotlib
+
+jupyter qtconsole --generate-config
+
+### ~/.jupyter/jupyter_console_config.py
+
+c.ZMQTerminalInteractiveShell.include_other_output = True
