@@ -1,2 +1,5 @@
-set editing-mode vi
-set keymap vi-command
+# This determines delay for normal mode after hitting esc
+set keyseq-timeout 50
+# TODO evaluate these
+# set editing-mode vi
+# set keymap vi-command
