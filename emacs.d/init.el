@@ -361,7 +361,8 @@ re-downloaded in order to locate PACKAGE."
 ;; positioning the cursor AFTER the closing paren of the form (which
 ;; is obviously hard to do in vim if this paren happens to be the last
 ;; char on the line)
-(setq evil-move-beyond-eol t)
+;; TODO 2022-10-08 Trying out setting this to nil
+(setq evil-move-beyond-eol nil)
 
 (require-package 'evil)
 (evil-mode t)
@@ -502,7 +503,7 @@ re-downloaded in order to locate PACKAGE."
                     ;; "ca" 'cider-apropos
                     ;; Lookup doc but prompt for symbol
                     "a" '(lambda (&optional arg) (interactive "P") (cider-grimoire t))
-                    "x" 'cider-refresh
+                    "x" 'cider-ns-refresh
                     ;; "o" 'sp-splice-sexp-killing-backward
                     "o" 'sp-raise-sexp
                     "t" 'cider-test-run-ns-tests
