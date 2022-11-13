@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # shellcheck disable=SC1090,SC1091
 
 case $- in
@@ -7,6 +7,9 @@ case $- in
 esac
 
 _have() { type "$1" &>/dev/null; }
+
+# TODO This, as an ENV will do stuff I want
+# GIT_COMPLETION_SHOW_ALL=1
 
 # TODO Are aliases kind of lame?
 # alias g="git"
