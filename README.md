@@ -38,6 +38,13 @@ sudo dpkg -i ./keyring.deb
 lsb_release -c
 ```
 
+TODO Make this work
+-> % echo "deb http://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" >> /etc/apt/sources.list.d/sur5r-i3.list
+This is how it works for docker
+      echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 ```
 # /etc/apt/sources.list.d/sur5r-i3.list
 
@@ -49,6 +56,16 @@ sudo apt install i3
 ln -sf ~/.dotfiles/i3/config ~/.config/i3/config 
 ```
 
+### xfce4-terminal
+
+```
+sudo apt install xfce4-terminal
+sudo update-alternatives --config x-terminal-emulator
+```
+
+#### themes
+
+https://github.com/arcticicestudio/nord-xfce-terminal
 
 ### rofi
 
@@ -106,6 +123,22 @@ sudo apt install python3-pip python3-venv
 sudo apt install build-essential libssl-dev libffi-dev python3-dev libxml2-dev libxslt-dev
 ```
 
+## Map caps-lock to escape
+
+On Debian/Ubuntu (not Gnome!):
+
+```
+# ~/.xsessionrc
+
+setxkbmap -option caps:escape
+```
+
+For Gnome:
+
+```
+dconf write "/org/gnome/desktop/input-sources/xkb-options" "['caps:swapescape']"
+```
+
 ## sdkman
 
 ```
@@ -139,3 +172,9 @@ jupyter qtconsole --generate-config
 ### ~/.jupyter/jupyter_console_config.py
 
 c.ZMQTerminalInteractiveShell.include_other_output = True
+
+## Move back to Bash (Experimental)
+
+* Use vi mode
+* echo 'set completion-ignore-case On' >> ~/.inputrc
+* Need to fix my prompt (PS1='\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\n\[\e[0m\]-\[\e[0m\]> \[\e[0m\]\$ \[\e[0m\]')

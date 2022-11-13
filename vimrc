@@ -163,7 +163,7 @@ autocmd FileType ruby nnoremap <buffer> <LocalLeader>s :execute "SlimeSend1 load
 
 autocmd FileType gitcommit setlocal spell
 
-nnoremap <leader>w :w<CR>
+" nnoremap <leader>w :w<CR>
 " Use ma to set mark, then leader+a will jump back to it
 nnoremap <leader>a `a
 
@@ -200,7 +200,7 @@ omap an <Plug>(textobj-numeral-a)
 nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
 " nnoremap <Leader>u :UndotreeToggle<CR>
-nnoremap U :UndotreeToggle<CR>
+" nnoremap U :UndotreeToggle<CR>
 let g:undotree_SetFocusWhenToggle=1
 
 let g:slime_python_ipython = 1
@@ -234,8 +234,8 @@ let g:syntastic_auto_loc_list = 2
 " let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gb :Gblame<CR>
+" nnoremap <leader>gs :Gstatus<CR>
+" nnoremap <leader>gd :Gdiff<CR>
+" nnoremap <leader>gb :Gblame<CR>
 
 nmap <leader>r :r!adb shell input text "RR"<CR>
