@@ -59,6 +59,9 @@ set -o vi
 # https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236
 # https://github.com/junegunn/fzf/wiki/Examples#git
 
+gsw() {
+  git switch "$(git branch -v --sort=-committerdate | grep -vF '*' | fzf | tr -s ' ' | cut -d ' ' -f2)"
+}
 
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
