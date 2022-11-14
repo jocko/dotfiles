@@ -1,8 +1,8 @@
 # This determines delay for normal mode after hitting esc
 set keyseq-timeout 50
-set show-mode-in-prompt on
-set vi-ins-mode-string \e[34m-
-set vi-cmd-mode-string \e[34m:
+# set show-mode-in-prompt on
+# set vi-ins-mode-string \e[34m-
+# set vi-cmd-mode-string \e[34m:
 # TODO evaluate these
 # set editing-mode vi
 # set keymap vi-command
