@@ -155,6 +155,7 @@ autocmd FileType typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType javascript.jsx setlocal noexpandtab shiftwidth=2
 autocmd FileType javascript setlocal noexpandtab shiftwidth=2
 autocmd FileType less setlocal noexpandtab shiftwidth=2
+autocmd FileType scss setlocal noexpandtab shiftwidth=2
 
 let g:ruby_indent_block_style = 'do'
 " autocmd FileType ruby abbr <buffer> pry! require 'pry'; binding.pry

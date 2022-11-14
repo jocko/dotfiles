@@ -165,7 +165,7 @@ endif
 
 ### qtconsole
 
-pip3 install PyQt5 jupyter-qtconsole pandas matplotlib
+pip3 install PyQt5 jupyter pandas matplotlib
 
 jupyter qtconsole --generate-config
 

@@ -16,6 +16,7 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
+(require-package 'pkg-info)
 (require-package 'spacemacs-theme)
 (require-package 'spacegray-theme)
 (require-package 'dracula-theme)
