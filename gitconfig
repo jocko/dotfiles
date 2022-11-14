@@ -1,5 +1,4 @@
 [user]
-    email = joakim.erelt@gmail.com
     name = Joakim Erelt
 [alias]
     ctags = !.git/hooks/ctags
