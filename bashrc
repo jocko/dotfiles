@@ -24,12 +24,15 @@ alias gc="git commit -v"
 alias gc!="git commit -v --amend"
 alias gca="git commit -v -a"
 alias gca!="git commit -v -a --amend"
+# Use fzf? No, probably need another, sometimes want to use gco <file>
 alias gco="git checkout"
 alias gd="git diff"
 alias gst="git status"
+# This I need completion for
 alias gp="git push"
 
-PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]-\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
+# PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]-\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
+PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
 
 set -o vi
 
