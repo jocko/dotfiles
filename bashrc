@@ -8,20 +8,26 @@ esac
 
 _have() { type "$1" &>/dev/null; }
 
+HISTSIZE=5000
+HISTFILESIZE=10000
+HISTCONTROL=ignoredups:erasedups
+shopt -s histappend
+PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+
 # TODO This, as an ENV will do stuff I want
 # GIT_COMPLETION_SHOW_ALL=1
 
 # TODO Are aliases kind of lame?
 # alias g="git"
-# alias ga="git add"
-# alias gc="git commit -v"
-# alias gc!="git commit -v --amend"
-# alias gca="git commit -v -a"
-# alias gca!="git commit -v -a --amend"
-# alias gco="git checkout"
-# alias gd="git diff"
-# alias gst="git status"
-# alias gp="git push"
+alias ga="git add"
+alias gc="git commit -v"
+alias gc!="git commit -v --amend"
+alias gca="git commit -v -a"
+alias gca!="git commit -v -a --amend"
+alias gco="git checkout"
+alias gd="git diff"
+alias gst="git status"
+alias gp="git push"
 
 PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]-\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
 
