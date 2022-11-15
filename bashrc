@@ -16,24 +16,40 @@ HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
+# Do I want/need this? gc --allow-empty is hidden, but are there others?
 export GIT_COMPLETION_SHOW_ALL=1
 
-# function_exists() {
-#   declare -f -F $1 > /dev/null
-#   return $?
-# }
+# Force loading of git completion function
+if ! declare -f __git_complete > /dev/null; then
+  bash_completion=$(pkg-config --variable=completionsdir bash-completion 2>/dev/null) ||
+    bash_completion='/usr/share/bash-completion/completions'
+  test -f "${bash_completion}/git" && . "${bash_completion}/git"
+fi
 
-# for al in `git --list-cmds=alias`; do
-#   alias g$al="git $al"
+# Set up git aliases and auto completion (if necessary)
+if declare -f __git_complete > /dev/null; then
+  alias ga="git add"
+  __git_complete ga _git_add
 
-#   complete_func=_git_$(git --list-cmds=alias $al)
-#   function_exists $complete_fnc && __git_complete g$al $complete_func
-# done
+  alias gd="git diff"
+  __git_complete gd _git_diff
+
+  # Currently, this does not work fully. For example: `gp origin <Tab>` gives no suggestions
+  alias gp="git push"
+  __git_complete gp _git_push
+
+  alias gst="git status"
+  alias gc="git commit -v"
+  alias gc!="git commit -v --amend"
+  alias gca="git commit -v -a"
+  alias gca!="git commit -v -a --amend"
+fi
 
 # TODO
 # Fix Ctrl-R (fzf probably)
 # Show status in terminal header (eg vim is editing file)
 # Somewhere, maybe not in this file, add -d by default to `git difftool`
+# Spelling
 
 # Definately need autocomplete for this
 # alias g="git"
