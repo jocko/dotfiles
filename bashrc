@@ -27,7 +27,11 @@ if ! declare -f __git_complete > /dev/null; then
 fi
 
 # Set up git aliases and auto completion (if necessary)
+# TODO Consider using git aliases instead. Together with `g` alias, will give `g d` instead of `gd` etc
 if declare -f __git_complete > /dev/null; then
+  alias g="git"
+  __git_complete g __git_main
+
   alias ga="git add"
   __git_complete ga _git_add
 
