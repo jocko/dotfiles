@@ -18,10 +18,10 @@ PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 export GIT_COMPLETION_SHOW_ALL=1
 
-function_exists() {
-  declare -f -F $1 > /dev/null
-  return $?
-}
+# function_exists() {
+#   declare -f -F $1 > /dev/null
+#   return $?
+# }
 
 # for al in `git --list-cmds=alias`; do
 #   alias g$al="git $al"
@@ -59,8 +59,46 @@ set -o vi
 # https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236
 # https://github.com/junegunn/fzf/wiki/Examples#git
 
+# TODO Better mnemonics
 gsw() {
-  git switch "$(git branch -v --sort=-committerdate | grep -vF '*' | fzf | tr -s ' ' | cut -d ' ' -f2)"
+  git rev-parse HEAD > /dev/null 2>&1 || return
+
+  git branch -v --sort=-committerdate |
+    grep -vF '*' |
+    fzf |
+    tr -s ' ' |
+    cut -d ' ' -f2 |
+    xargs -r git switch
+}
+
+gadd() {
+  git rev-parse HEAD > /dev/null 2>&1 || return
+
+  git ls-files -m -o --exclude-standard |
+    fzf -m |
+    xargs -r git add
+}
+
+gres() {
+  git rev-parse HEAD > /dev/null 2>&1 || return
+
+  git diff --name-only --cached |
+    fzf -m |
+    xargs -r git restore --staged
+}
+
+fzf-down() {
+  fzf --height 50% --min-height 20 --border --bind ctrl-/:toggle-preview "$@"
+}
+
+_gh() {
+  git rev-parse HEAD > /dev/null 2>&1 || return
+
+  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
+  fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+    --header 'Press CTRL-S to toggle sort' \
+    --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always' |
+  grep -o "[a-f0-9]\{7,\}"
 }
 
 if [ -f ~/.bash_aliases ]; then
