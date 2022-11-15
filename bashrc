@@ -54,52 +54,48 @@ PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]-\[\e[0;34m\]> \[\e[0
 
 set -o vi
 
-# TODO Experiment with this...
-# https://polothy.github.io/post/2019-08-19-fzf-git-checkout/
-# https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236
-# https://github.com/junegunn/fzf/wiki/Examples#git
+# TODO Better mnemonics, or probably abandon this. Try to extract the fzf part, maybe provide
+# aliases, and/or functions (with mappings?).
+# gsw() {
+#   git rev-parse HEAD > /dev/null 2>&1 || return
 
-# TODO Better mnemonics
-gsw() {
-  git rev-parse HEAD > /dev/null 2>&1 || return
+#   git branch -v --sort=-committerdate |
+#     grep -vF '*' |
+#     fzf |
+#     tr -s ' ' |
+#     cut -d ' ' -f2 |
+#     xargs -r git switch
+# }
 
-  git branch -v --sort=-committerdate |
-    grep -vF '*' |
-    fzf |
-    tr -s ' ' |
-    cut -d ' ' -f2 |
-    xargs -r git switch
-}
+# gadd() {
+#   git rev-parse HEAD > /dev/null 2>&1 || return
 
-gadd() {
-  git rev-parse HEAD > /dev/null 2>&1 || return
+#   git ls-files -m -o --exclude-standard |
+#     fzf -m |
+#     xargs -r git add
+# }
 
-  git ls-files -m -o --exclude-standard |
-    fzf -m |
-    xargs -r git add
-}
+# gres() {
+#   git rev-parse HEAD > /dev/null 2>&1 || return
 
-gres() {
-  git rev-parse HEAD > /dev/null 2>&1 || return
+#   git diff --name-only --cached |
+#     fzf -m |
+#     xargs -r git restore --staged
+# }
 
-  git diff --name-only --cached |
-    fzf -m |
-    xargs -r git restore --staged
-}
+# fzf-down() {
+#   fzf --height 50% --min-height 20 --border --bind ctrl-/:toggle-preview "$@"
+# }
 
-fzf-down() {
-  fzf --height 50% --min-height 20 --border --bind ctrl-/:toggle-preview "$@"
-}
+# _gh() {
+#   git rev-parse HEAD > /dev/null 2>&1 || return
 
-_gh() {
-  git rev-parse HEAD > /dev/null 2>&1 || return
-
-  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
-  fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-    --header 'Press CTRL-S to toggle sort' \
-    --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always' |
-  grep -o "[a-f0-9]\{7,\}"
-}
+#   git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
+#   fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+#     --header 'Press CTRL-S to toggle sort' \
+#     --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always' |
+#   grep -o "[a-f0-9]\{7,\}"
+# }
 
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
