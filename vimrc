@@ -68,6 +68,7 @@ syntax enable
 " color gruvbox
 " color solarized
 " color space-vim-dark
+" TODO Only if plugin have been installed
 color nord
 
 set autoread

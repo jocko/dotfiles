@@ -63,6 +63,8 @@ sudo apt install xfce4-terminal
 sudo update-alternatives --config x-terminal-emulator
 ```
 
+Symlink/copy themes to `.local/share/xfce4/terminal/colorschemes/`
+
 #### themes
 
 https://github.com/arcticicestudio/nord-xfce-terminal
