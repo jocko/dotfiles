@@ -11,6 +11,8 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # TODO Path for mvn (e.g. sdkman)
+# C-w doesn't always work
+# Edit command line in vim
 
 
 HISTSIZE=5000
