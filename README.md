@@ -63,6 +63,7 @@ sudo apt install xfce4-terminal
 sudo update-alternatives --config x-terminal-emulator
 ```
 
+TODO Look for another theme. Comments, for example, are difficult to read in Nord
 Symlink/copy themes to `.local/share/xfce4/terminal/colorschemes/`
 
 #### themes

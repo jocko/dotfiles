@@ -10,6 +10,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   . /etc/bash_completion
 fi
 
+# TODO Path for mvn (e.g. sdkman)
+
+
 HISTSIZE=5000
 HISTFILESIZE=10000
 HISTCONTROL=ignoredups:erasedups
