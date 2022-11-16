@@ -9,13 +9,14 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-vinegar'
+" TODO Remove
 Plugin 'mbbill/undotree'
+"
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
-Plugin 'jpalardy/vim-slime'
-" Plugin 'elixir-lang/vim-elixir'
 Plugin 'mileszs/ack.vim'
 Plugin 'farmergreg/vim-lastplace'
+" TODO Remove
 Plugin 'kana/vim-textobj-user'
 Plugin 'rhysd/vim-textobj-ruby'
 Plugin 'tpope/vim-eunuch'
@@ -24,41 +25,35 @@ Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-sexp-mappings-for-regular-people'
-Plugin 'guns/vim-sexp'
-Plugin 'junegunn/rainbow_parentheses.vim'
+"
 Plugin 'tpope/vim-fugitive'
-Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-endwise.git'
+" TODO Remove
 Plugin 'tpope/vim-unimpaired'
+"
 Plugin 'pangloss/vim-javascript'
-" Plugin 'mxw/vim-jsx'
 Plugin 'leafgarland/typescript-vim'
-" Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'vim-syntastic/syntastic'
-" Plugin 'Quramy/tsuquyomi'
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'prettier/vim-prettier'
+" TODO Remove
 Plugin 'wellle/targets.vim'
+"
 
-" vim-addon-mw-utils & tlib_vim are requried by vim-snipmate
-" Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'tomtom/tlib_vim'
-" Plugin 'garbas/vim-snipmate'
-
-Plugin 'chakrit/upstart.vim'
-
+" TODO Remove
 Plugin 'Vimjas/vim-python-pep8-indent'
-" Plugin 'python-mode/python-mode'
 Plugin 'bps/vim-textobj-python'
+"
 
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
-Plugin 'altercation/vim-colors-solarized'
+" TODO gruvbox, nord, ...
 Plugin 'liuchengxu/space-vim-dark'
+Plugin 'arcticicestudio/nord-vim'
 
 call vundle#end()
+
 filetype plugin indent on
 syntax enable
 
@@ -69,12 +64,11 @@ syntax enable
 "   set termguicolors
 " endif
 
-set background=dark
+" set background=dark
 " color gruvbox
 " color solarized
-color space-vim-dark
-
-              
+" color space-vim-dark
+color nord
 
 set autoread
 autocmd FocusGained,BufEnter * checktime
