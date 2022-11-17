@@ -26,6 +26,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fireplace'
 "
+Plugin 'junegunn/rainbow_parentheses.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-endwise.git'
 " TODO Remove
