@@ -13,8 +13,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   . /etc/bash_completion
 fi
 
-# TODO Path for mvn (e.g. sdkman)
-# Edit command line in vim (use 'v' in normal mode does this)
+# TODO
+#
+# * Edit command line in vim (use 'v' in normal mode does this)
+# * Commands/aliases (reachable from vim) for `fmt -p '#'` etc, good idea?
+# * mapping for copying in termina, ctrl+shift+c????
 
 # By default, C-w behaves a bit strange in vi mode.
 #
@@ -25,6 +28,8 @@ fi
 # we have to do either `stty werase undef`, or put `set bind-tty-special-chars off`
 # in `.inputrc`.
 bind -m vi-insert '"\C-w":unix-word-rubout'
+# Don't have this mapped for regular vim, find a way to unmap it. Simply
+# leaving out the mapping below will only map the derpy version
 bind -m vi-command '"\C-w":unix-word-rubout'
 
 HISTSIZE=5000

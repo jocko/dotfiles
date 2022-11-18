@@ -132,7 +132,6 @@ On Debian/Ubuntu (not Gnome!):
 
 ```
 # ~/.xsessionrc
-
 setxkbmap -option caps:escape
 ```
 

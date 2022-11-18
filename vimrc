@@ -6,14 +6,30 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
+" TODO mappings that are nice, but always forget
+" * make split equal (ie after resize) C-w =
+" * center view at current line
+
+" TODO Can I make a delete-list movement? Eg delete `bar,` or `baz` from (/[foo, bar, baz]/), what about maps/dicts?
+" TODO Would be nice to be able to evaluate arbitrary code in vim, eg send
+" selection to node and display result
+" TODO Native alternative to fzf?
+
+" TODO Group plugins into essential, ui-stuff (eg themes), nice-to-have
+" etc.  Also might be a good idea to describe a specific problem that
+" each one solves (i.e. motivation to why it is here). Ideally, plugins
+" should only have ui-stuff (I should be able to acomplish essential
+" tasks everywhere)
 Plugin 'morhetz/gruvbox'
 Plugin 'vim-ruby/vim-ruby'
+" Enhances Vims built-in file browser, netrw. TODO Learn more about what this actually does
 Plugin 'tpope/vim-vinegar'
 " TODO Remove
-Plugin 'mbbill/undotree'
+" Plugin 'mbbill/undotree'
 "
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
+" TODO What are the 'native' alternatives to this?
 Plugin 'mileszs/ack.vim'
 Plugin 'farmergreg/vim-lastplace'
 " TODO Remove
@@ -52,6 +68,8 @@ Plugin 'junegunn/fzf.vim'
 " TODO gruvbox, nord, ...
 Plugin 'liuchengxu/space-vim-dark'
 Plugin 'arcticicestudio/nord-vim'
+
+Plugin 'aquach/vim-http-client'
 
 call vundle#end()
 
@@ -108,6 +126,10 @@ augroup trailing
   au InsertEnter * :set listchars-=trail:·
   au InsertLeave * :set listchars+=trail:·
 augroup END
+
+let g:http_client_focus_output_window = 0
+let g:http_client_result_vsplit = 0
+let g:http_client_preserve_responses = 1
 
 set undodir=~/.vim/undo
 if !isdirectory(expand(&undodir))
