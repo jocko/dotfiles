@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090,SC1091
 
+# TODO I give up, go back to zsh. Document why so I don't try to do this again
+
+
 case $- in
   *i*) ;;
   *) return;;
@@ -11,9 +14,18 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # TODO Path for mvn (e.g. sdkman)
-# C-w doesn't always work
-# Edit command line in vim
+# Edit command line in vim (use 'v' in normal mode does this)
 
+# By default, C-w behaves a bit strange in vi mode.
+#
+#   echo foo bar # C-w here, would not do anything (either in command or insert mode)
+#       ^
+#
+# Rebinding C-w seem to do the trick. But before this can be done,
+# we have to do either `stty werase undef`, or put `set bind-tty-special-chars off`
+# in `.inputrc`.
+bind -m vi-insert '"\C-w":unix-word-rubout'
+bind -m vi-command '"\C-w":unix-word-rubout'
 
 HISTSIZE=5000
 HISTFILESIZE=10000
@@ -23,6 +35,7 @@ PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 # Do I want/need this? gc --allow-empty is hidden, but are there others?
 export GIT_COMPLETION_SHOW_ALL=1
+export EDITOR="vim"
 
 # Force loading of git completion function
 if ! declare -f __git_complete > /dev/null; then
