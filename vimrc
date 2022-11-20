@@ -64,7 +64,8 @@ syntax enable
 
 " Makes :fin[d]  look for files recursively
 " TODO Should i remove the /usr/include default entry?
-set path+=**
+" set path+=**
+set path-=/usr/include
 
 " Automatically reread files that have changed outside vim
 set autoread
