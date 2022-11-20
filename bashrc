@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090,SC1091
 
-# TODO I give up, go back to zsh. Document why so I don't try to do this again
-
-
 case $- in
   *i*) ;;
   *) return;;
@@ -17,7 +14,7 @@ fi
 #
 # * Edit command line in vim (use 'v' in normal mode does this)
 # * Commands/aliases (reachable from vim) for `fmt -p '#'` etc, good idea?
-# * mapping for copying in termina, ctrl+shift+c????
+# * mapping for copying to/from clipboard in terminal, ctrl+shift+c????
 
 # By default, C-w behaves a bit strange in vi mode.
 #
@@ -28,15 +25,16 @@ fi
 # we have to do either `stty werase undef`, or put `set bind-tty-special-chars off`
 # in `.inputrc`.
 bind -m vi-insert '"\C-w":unix-word-rubout'
-# Don't have this mapped for regular vim, find a way to unmap it. Simply
+# I don't have this mapped for regular vim, find a way to unmap it. Simply
 # leaving out the mapping below will only map the derpy version
 bind -m vi-command '"\C-w":unix-word-rubout'
 
 HISTSIZE=5000
 HISTFILESIZE=10000
 HISTCONTROL=ignoredups:erasedups
-shopt -s histappend
-PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+HISTIGNORE='ls:cd:cd *'
+# shopt -s histverify
+# PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 # Do I want/need this? gc --allow-empty is hidden, but are there others?
 export GIT_COMPLETION_SHOW_ALL=1
@@ -48,6 +46,10 @@ if ! declare -f __git_complete > /dev/null; then
     bash_completion='/usr/share/bash-completion/completions'
   test -f "${bash_completion}/git" && . "${bash_completion}/git"
 fi
+
+alias fmt="fmt --width=80"
+alias grep="grep --color=auto"
+alias ls="ls --color=auto"
 
 # Set up git aliases and auto completion (if necessary)
 # TODO Consider using git aliases instead. Together with `g` alias, will give `g d` instead of `gd` etc
@@ -139,6 +141,9 @@ set -o vi
 #     --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always' |
 #   grep -o "[a-f0-9]\{7,\}"
 # }
+
+# Turns of terminal suspend feature, i.e. C-S freezes everything
+stty -ixon
 
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
