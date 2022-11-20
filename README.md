@@ -122,7 +122,7 @@ ln -sf ~/.dotfiles/zshrc ~/.zshrc
 ## python
 
 ```
-sudo apt install python3-pip python3-venv
+sudo apt install python3-pip python3-venv python-is-python3
 sudo apt install build-essential libssl-dev libffi-dev python3-dev libxml2-dev libxslt-dev
 ```
 
