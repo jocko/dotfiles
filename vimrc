@@ -2,85 +2,65 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
+  call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
+  Plugin 'VundleVim/Vundle.vim'
 
-" TODO mappings that are nice, but always forget
-" * make split equal (ie after resize) C-w =
-" * center view at current line
+  " TODO mappings that are nice, but always forget
+  " * make split equal (ie after resize) C-w =
+  " * center view at current line
 
-" TODO Can I make a delete-list movement? Eg delete `bar,` or `baz` from (/[foo, bar, baz]/), what about maps/dicts?
-" TODO Would be nice to be able to evaluate arbitrary code in vim, eg send
-" selection to node and display result
-" TODO Native alternative to fzf?
+  " TODO Can I make a delete-list movement? Eg delete `bar,` or `baz` from (/[foo, bar, baz]/), what about maps/dicts?
+  " TODO Would be nice to be able to evaluate arbitrary code in vim, eg send
+  " selection to node and display result
+  " TODO Native alternative to fzf?
 
-" TODO Group plugins into essential, ui-stuff (eg themes), nice-to-have
-" etc.  Also might be a good idea to describe a specific problem that
-" each one solves (i.e. motivation to why it is here). Ideally, plugins
-" should only have ui-stuff (I should be able to acomplish essential
-" tasks everywhere)
+  " TODO Group plugins into essential, ui-stuff (eg themes), nice-to-have
+  " etc.  Also might be a good idea to describe a specific problem that
+  " each one solves (i.e. motivation to why it is here). Ideally, plugins
+  " should only have ui-stuff (I should be able to acomplish essential
+  " tasks everywhere)
 
-" Themes
-Plugin 'morhetz/gruvbox'
-Plugin 'liuchengxu/space-vim-dark'
-Plugin 'arcticicestudio/nord-vim'
+  " Git wrapper
+  Plugin 'tpope/vim-fugitive'
+  " Reopen files at last edit position
+  Plugin 'farmergreg/vim-lastplace'
+  " Automatically add end statements, e.g. in Ruby, end after def etc.
+  Plugin 'tpope/vim-endwise.git'
 
-Plugin 'vim-ruby/vim-ruby'
-" Enhances Vims built-in file browser, netrw. TODO Learn more about what this actually does
-Plugin 'tpope/vim-vinegar'
-" TODO Remove
-" Plugin 'mbbill/undotree'
-"
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-surround'
-" TODO What are the 'native' alternatives to this?
-Plugin 'mileszs/ack.vim'
-Plugin 'farmergreg/vim-lastplace'
-" TODO Remove
-Plugin 'kana/vim-textobj-user'
-Plugin 'rhysd/vim-textobj-ruby'
-Plugin 'tpope/vim-eunuch'
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-fireplace'
-"
-Plugin 'junegunn/rainbow_parentheses.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-endwise.git'
-" TODO Remove
-Plugin 'tpope/vim-unimpaired'
-"
-Plugin 'pangloss/vim-javascript'
-Plugin 'leafgarland/typescript-vim'
-" TODO What does this do?
-Plugin 'vim-syntastic/syntastic'
+  " Themes
+  Plugin 'morhetz/gruvbox'
+  Plugin 'liuchengxu/space-vim-dark'
+  Plugin 'arcticicestudio/nord-vim'
 
-Plugin 'maxmellon/vim-jsx-pretty'
-Plugin 'prettier/vim-prettier'
-" TODO Remove
-Plugin 'wellle/targets.vim'
-"
+  Plugin 'vim-ruby/vim-ruby'
 
-" TODO Remove
-Plugin 'Vimjas/vim-python-pep8-indent'
-Plugin 'bps/vim-textobj-python'
-"
+  Plugin 'pangloss/vim-javascript'
+  Plugin 'leafgarland/typescript-vim'
 
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+  Plugin 'maxmellon/vim-jsx-pretty'
+  " Plugin 'prettier/vim-prettier'
 
-Plugin 'aquach/vim-http-client'
+  " TODO Can I get rid of this?
+  Plugin 'tpope/vim-vinegar'
+  " TODO What are the 'native' alternatives to this?
+  Plugin 'mileszs/ack.vim'
+  Plugin 'tpope/vim-commentary'
+  Plugin 'tpope/vim-surround'
+  Plugin 'aquach/vim-http-client'
+  Plugin 'junegunn/fzf'
+  Plugin 'junegunn/fzf.vim'
+  Plugin 'jpalardy/vim-slime'
+  Plugin 'dense-analysis/ale'
 
-call vundle#end()
+  call vundle#end()
+
+  color nord
+endif
 
 filetype plugin indent on
 syntax enable
-
-" TODO Only if plugin have been installed
-color nord
 
 " Makes :fin[d]  look for files recursively
 " TODO Should i remove the /usr/include default entry?
@@ -88,7 +68,6 @@ set path+=**
 
 " Automatically reread files that have changed outside vim
 set autoread
-" TODO Is this still needed? If so, try to document why
 autocmd FocusGained,BufEnter * checktime
 
 set tabstop=2 shiftwidth=2
@@ -137,34 +116,17 @@ endif
 
 set directory=~/.vim/swap//
 
-augroup rainbow_lisp
-  autocmd!
-  autocmd FileType lisp,clojure,scheme RainbowParentheses
-augroup END
-
-autocmd FileType clojure setlocal lispwords+=go-loop
-
+" TODO What is this?
 set t_ZH=[3m
 set t_ZR=[23m
 
 let mapleader=" "
 let maplocalleader=","
 
-" gj/gk operates on display lines (useful when 'wrap' is on)
-" nnoremap j gj
-" nnoremap k gk
-
 " Clear search higlight
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
-" TODO Should learn to do this myself
-" map <leader>y "*y
-
-autocmd FileType erlang setlocal expandtab shiftwidth=4
-autocmd BufNewFile,BufRead rebar.config setlocal ft=erlang
-
-" autocmd FileType c setlocal noexpandtab shiftwidth=4
-
+" TODO Clean up
 autocmd FileType typescript.tsx setlocal noexpandtab shiftwidth=2
 autocmd FileType typescript setlocal noexpandtab shiftwidth=2
 autocmd FileType typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
@@ -172,11 +134,6 @@ autocmd FileType javascript.jsx setlocal noexpandtab shiftwidth=2
 autocmd FileType javascript setlocal noexpandtab shiftwidth=2
 autocmd FileType less setlocal noexpandtab shiftwidth=2
 autocmd FileType scss setlocal noexpandtab shiftwidth=2
-
-let g:ruby_indent_block_style = 'do'
-" autocmd FileType ruby abbr <buffer> pry! require 'pry'; binding.pry
-" autocmd FileType ruby nnoremap <buffer> <LocalLeader>gd :Ack! 'def (self\.)?<cword>\('<CR>
-autocmd FileType ruby nnoremap <buffer> <LocalLeader>s :execute "SlimeSend1 load('".expand('%:p')."')"<CR>
 
 autocmd FileType gitcommit setlocal spell
 
@@ -186,8 +143,8 @@ autocmd FileType gitcommit setlocal spell
 " nnoremap <leader>a `a
 
 map <leader>o :Files<CR>
-map <leader>O :GFiles?<CR>
-map <leader>b :Buffers<CR>
+" map <leader>O :GFiles?<CR>
+" map <leader>b :Buffers<CR>
 
 if executable('ag')
   let $FZF_DEFAULT_COMMAND = 'ag -g ""'
@@ -195,29 +152,38 @@ if executable('ag')
 endif
 nnoremap <leader>s :Ack! ""<Left>
 
+" TODO Need this?
 " Switch to other window
-nnoremap <leader><Tab> <c-w>w
+" nnoremap <leader><Tab> <c-w>w
 " Or, the same thing, but emacs style. The jury is still out...
-nnoremap <c-x>o <c-w>p
+" nnoremap <c-x>o <c-w>p
 
 " Jump to tag, show list if multiple tags
-nnoremap <c-]> g<c-]>
-vnoremap <c-]> g<c-]>
+" TODO Need this?
+" nnoremap <c-]> g<c-]>
+" vnoremap <c-]> g<c-]>
 
+" TODO What is this?
 runtime! macros/matchit.vim
-
-let g:textobj_numeral_no_default_key_mappings = 1
-
-vmap an <Plug>(textobj-numeral-a)
-omap an <Plug>(textobj-numeral-a)
 
 " Mark occurrences (note: <raise>-f => *)
 nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
-let g:slime_python_ipython = 1
-let g:slime_target = "tmux"
-" Eval code (w. slime) as indicated by motion.
-autocmd FileType python nmap <buffer> cp <Plug>SlimeMotionSend
+let g:slime_target = "vimterminal"
 
-" autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+" TODO Test this out
+" Taken from https://blog.ffff.lt/posts/typescript-and-ale/
+" autocmd FileType javascript map <buffer> <c-]> :ALEGoToDefinition<CR>
+" autocmd FileType typescript map <buffer> <c-]> :ALEGoToDefinition<CR>
+" autocmd FileType typescriptreact map <buffer> <c-]> :ALEGoToDefinition<CR>
+" let js_fixers = ['prettier', 'eslint']
 
+" let g:ale_fixers = {
+" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+" \   'javascript': js_fixers,
+" \   'javascript.jsx': js_fixers,
+" \   'typescript': js_fixers,
+" \   'typescriptreact': js_fixers,
+" \   'css': ['prettier'],
+" \   'json': ['prettier'],
+" \}
