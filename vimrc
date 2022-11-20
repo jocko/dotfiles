@@ -20,7 +20,12 @@ Plugin 'VundleVim/Vundle.vim'
 " each one solves (i.e. motivation to why it is here). Ideally, plugins
 " should only have ui-stuff (I should be able to acomplish essential
 " tasks everywhere)
+
+" Themes
 Plugin 'morhetz/gruvbox'
+Plugin 'liuchengxu/space-vim-dark'
+Plugin 'arcticicestudio/nord-vim'
+
 Plugin 'vim-ruby/vim-ruby'
 " Enhances Vims built-in file browser, netrw. TODO Learn more about what this actually does
 Plugin 'tpope/vim-vinegar'
@@ -50,7 +55,9 @@ Plugin 'tpope/vim-unimpaired'
 "
 Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
+" TODO What does this do?
 Plugin 'vim-syntastic/syntastic'
+
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'prettier/vim-prettier'
 " TODO Remove
@@ -65,10 +72,6 @@ Plugin 'bps/vim-textobj-python'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
-" TODO gruvbox, nord, ...
-Plugin 'liuchengxu/space-vim-dark'
-Plugin 'arcticicestudio/nord-vim'
-
 Plugin 'aquach/vim-http-client'
 
 call vundle#end()
@@ -76,26 +79,21 @@ call vundle#end()
 filetype plugin indent on
 syntax enable
 
-" XXX Sprinkle fairy dust. I don't know what it does but it is required for
-" certain certain schemes. Some schemes however will break if you enable it.
-" Update: Don't think this should be used in xterm, at all.
-" if has("termguicolors")
-"   set termguicolors
-" endif
-
-" set background=dark
-" color gruvbox
-" color solarized
-" color space-vim-dark
 " TODO Only if plugin have been installed
 color nord
 
+" Makes :fin[d]  look for files recursively
+" TODO Should i remove the /usr/include default entry?
+set path+=**
+
+" Automatically reread files that have changed outside vim
 set autoread
+" TODO Is this still needed? If so, try to document why
 autocmd FocusGained,BufEnter * checktime
 
 set tabstop=2 shiftwidth=2
-set number
 set expandtab
+set number
 " set ignorecase
 " set smartcase
 set ttimeout
@@ -127,6 +125,7 @@ augroup trailing
   au InsertLeave * :set listchars+=trail:·
 augroup END
 
+" TODO plugin stuff, move
 let g:http_client_focus_output_window = 0
 let g:http_client_result_vsplit = 0
 let g:http_client_preserve_responses = 1
@@ -149,7 +148,6 @@ set t_ZH=[3m
 set t_ZR=[23m
 
 let mapleader=" "
-" TODO Find another localleader
 let maplocalleader=","
 
 " gj/gk operates on display lines (useful when 'wrap' is on)
@@ -184,11 +182,9 @@ autocmd FileType gitcommit setlocal spell
 
 " nnoremap <leader>w :w<CR>
 " Use ma to set mark, then leader+a will jump back to it
-nnoremap <leader>a `a
+" TODO Practice this instead of having a mapping
+" nnoremap <leader>a `a
 
-" CtrlP
-" map <leader>o :CtrlP<CR>
-" map <leader>b :CtrlPBuffer<CR>
 map <leader>o :Files<CR>
 map <leader>O :GFiles?<CR>
 map <leader>b :Buffers<CR>
@@ -218,43 +214,10 @@ omap an <Plug>(textobj-numeral-a)
 " Mark occurrences (note: <raise>-f => *)
 nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
-" nnoremap <Leader>u :UndotreeToggle<CR>
-" nnoremap U :UndotreeToggle<CR>
-let g:undotree_SetFocusWhenToggle=1
-
 let g:slime_python_ipython = 1
 let g:slime_target = "tmux"
 " Eval code (w. slime) as indicated by motion.
 autocmd FileType python nmap <buffer> cp <Plug>SlimeMotionSend
-" vmap <Leader>fs :!sqlformat -r -kupper -<CR>
 
-" let g:vim_markdown_folding_disabled = 1
+" autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
-let g:pymode_folding = 0
-let g:pymode_lint_ignore = "E501"
-let g:pymode_run = 0
-let g:pymode_breakpoint = 0
-let g:pymode_lint_cwindow = 0
-
-autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
-
-autocmd Filetype go setlocal nolist
-
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:tsuquyomi_disable_quickfix = 1
-" let g:syntastic_aggregate_errors = 1
-let g:syntastic_typescript_checkers = ['tslint']
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-" let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" nnoremap <leader>gs :Gstatus<CR>
-" nnoremap <leader>gd :Gdiff<CR>
-" nnoremap <leader>gb :Gblame<CR>
-
-nmap <leader>r :r!adb shell input text "RR"<CR>
