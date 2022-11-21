@@ -39,9 +39,6 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'pangloss/vim-javascript'
   Plugin 'leafgarland/typescript-vim'
 
-  Plugin 'maxmellon/vim-jsx-pretty'
-  " Plugin 'prettier/vim-prettier'
-
   " TODO Can I get rid of this?
   Plugin 'tpope/vim-vinegar'
   " TODO What are the 'native' alternatives to this?
@@ -51,12 +48,39 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'aquach/vim-http-client'
   Plugin 'junegunn/fzf'
   Plugin 'junegunn/fzf.vim'
+
+  " Slime is super awesome! I have it configured to use vim terminal. So
+  " I can just do :term, start a repl or whatever  and then just do C-c
+  " C-c to send text to it.
   Plugin 'jpalardy/vim-slime'
+
+  " TODO I do not grok how this plugin should be configured. Linting is
+  " sluggish (at least for typescript) and I'm not that interested in it
+  " (but how to turn
+  "  off linting only?). Having prettier is nice, but if I turn of
+  "  linters, then I cannot do pretty, or C-]. Maybe doesn't matter because
+  "  prettier is super slow as well. I would want navigate to tag
+  "  (i.e. C-]) but maybe try ctags first, or find another plugin that
+  "  suits me better.
   Plugin 'dense-analysis/ale'
 
   call vundle#end()
 
   color nord
+
+  " TODO When doing :Git blame for example, the commit hash for
+  " uncommitted changes is represented by 000000 in a dark color which
+  " sometimes makes it difficult to identify where the cursor is. Nord
+  " for example has this problem. Maybe a good idea to make the cursor
+  " stand out more? Disabling colors in fugitive, like this:
+  "
+  "   let g:fugitive_dynamic_colors = 0
+  "
+  " somewhat solves this problem. But colors are nice, and I want them.
+
+  " let g:ale_fixers = {'typescriptreact': ['deno']}
+  " let g:ale_linters = {'typescriptreact': ['deno']}
+  let g:ale_linters_explicit = 1
 endif
 
 filetype plugin indent on
@@ -177,14 +201,18 @@ let g:slime_target = "vimterminal"
 " autocmd FileType javascript map <buffer> <c-]> :ALEGoToDefinition<CR>
 " autocmd FileType typescript map <buffer> <c-]> :ALEGoToDefinition<CR>
 " autocmd FileType typescriptreact map <buffer> <c-]> :ALEGoToDefinition<CR>
-" let js_fixers = ['prettier', 'eslint']
 
 " let g:ale_fixers = {
-" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-" \   'javascript': js_fixers,
-" \   'javascript.jsx': js_fixers,
-" \   'typescript': js_fixers,
-" \   'typescriptreact': js_fixers,
-" \   'css': ['prettier'],
-" \   'json': ['prettier'],
+" \   'typescriptreact': ['prettier'],
 " \}
+
+" let js_fixers = ['prettier', 'eslint']
+" let g:ale_fixers = {
+" " \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+" " \   'javascript': js_fixers,
+" " \   'javascript.jsx': js_fixers,
+" " \   'typescript': js_fixers,
+" " \   'typescriptreact': js_fixers,
+" " \   'css': ['prettier'],
+" " \   'json': ['prettier'],
+" " \}
