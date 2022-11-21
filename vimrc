@@ -7,14 +7,7 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
 
   Plugin 'VundleVim/Vundle.vim'
 
-  " TODO mappings that are nice, but always forget
-  " * make split equal (ie after resize) C-w =
-  " * center view at current line
-
   " TODO Can I make a delete-list movement? Eg delete `bar,` or `baz` from (/[foo, bar, baz]/), what about maps/dicts?
-  " TODO Would be nice to be able to evaluate arbitrary code in vim, eg send
-  " selection to node and display result
-  " TODO Native alternative to fzf?
 
   " TODO Group plugins into essential, ui-stuff (eg themes), nice-to-have
   " etc.  Also might be a good idea to describe a specific problem that
@@ -29,10 +22,17 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   " Automatically add end statements, e.g. in Ruby, end after def etc.
   Plugin 'tpope/vim-endwise.git'
 
+  Plugin 'junegunn/fzf'
+  Plugin 'junegunn/fzf.vim'
+
   " Themes
   Plugin 'morhetz/gruvbox'
   Plugin 'liuchengxu/space-vim-dark'
   Plugin 'arcticicestudio/nord-vim'
+
+  " Nice to have stuff
+  Plugin 'aquach/vim-http-client'
+  Plugin 'jpalardy/vim-slime'
 
   Plugin 'vim-ruby/vim-ruby'
 
@@ -40,20 +40,13 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'leafgarland/typescript-vim'
 
   " TODO Can I get rid of this?
-  Plugin 'tpope/vim-vinegar'
+  " Plugin 'tpope/vim-vinegar'
   " TODO What are the 'native' alternatives to this?
   Plugin 'mileszs/ack.vim'
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-surround'
-  Plugin 'aquach/vim-http-client'
-  Plugin 'junegunn/fzf'
-  Plugin 'junegunn/fzf.vim'
-
-  " Slime is super awesome! I have it configured to use vim terminal. So
-  " I can just do :term, start a repl or whatever  and then just do C-c
-  " C-c to send text to it.
-  Plugin 'jpalardy/vim-slime'
-
+  
+  
   " TODO I do not grok how this plugin should be configured. Linting is
   " sluggish (at least for typescript) and I'm not that interested in it
   " (but how to turn
@@ -66,7 +59,19 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
 
   call vundle#end()
 
-  color nord
+  " Colorscheme overrides. Since we do this with autocommands, it is
+  " possible to try out new themes (e.g. :color gruvbox) and not have
+  " these overrides carry over to the next theme . Also, the overrides
+  " are scoped to a specific theme.
+  autocmd ColorScheme nord highlight IncSearch cterm=NONE ctermfg=0 ctermbg=11
+  autocmd ColorScheme gruvbox highlight IncSearch cterm=NONE ctermfg=0 ctermbg=9
+
+  " Required for some themes (e.g. gruvbox)
+  set background=dark
+
+  color gruvbox
+  " color nord
+
 
   " TODO When doing :Git blame for example, the commit hash for
   " uncommitted changes is represented by 000000 in a dark color which
@@ -87,7 +92,7 @@ filetype plugin indent on
 syntax enable
 
 " Makes :fin[d]  look for files recursively
-" TODO Should i remove the /usr/include default entry?
+" TODO Set this up based on file type
 " set path+=**
 set path-=/usr/include
 
