@@ -45,17 +45,15 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'mileszs/ack.vim'
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-surround'
-  
-  
+
   " TODO I do not grok how this plugin should be configured. Linting is
   " sluggish (at least for typescript) and I'm not that interested in it
-  " (but how to turn
-  "  off linting only?). Having prettier is nice, but if I turn of
-  "  linters, then I cannot do pretty, or C-]. Maybe doesn't matter because
-  "  prettier is super slow as well. I would want navigate to tag
-  "  (i.e. C-]) but maybe try ctags first, or find another plugin that
-  "  suits me better.
-  Plugin 'dense-analysis/ale'
+  " (but how to turn off linting only?). Having prettier is nice, but
+  " if I turn of linters, then I cannot do pretty, or C-]. Maybe doesn't
+  " matter because prettier is super slow as well. I would want navigate
+  " to tag (i.e. C-]) but maybe try ctags first, or find another plugin
+  " that suits me better.
+  " Plugin 'dense-analysis/ale'
 
   call vundle#end()
 
@@ -91,10 +89,8 @@ endif
 filetype plugin indent on
 syntax enable
 
-" Makes :fin[d]  look for files recursively
-" TODO Set this up based on file type
-" set path+=**
-set path-=/usr/include
+set path+=src/**
+" set path-=/usr/include
 
 " Automatically reread files that have changed outside vim
 set autoread
@@ -201,23 +197,3 @@ nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hl
 
 let g:slime_target = "vimterminal"
 
-" TODO Test this out
-" Taken from https://blog.ffff.lt/posts/typescript-and-ale/
-" autocmd FileType javascript map <buffer> <c-]> :ALEGoToDefinition<CR>
-" autocmd FileType typescript map <buffer> <c-]> :ALEGoToDefinition<CR>
-" autocmd FileType typescriptreact map <buffer> <c-]> :ALEGoToDefinition<CR>
-
-" let g:ale_fixers = {
-" \   'typescriptreact': ['prettier'],
-" \}
-
-" let js_fixers = ['prettier', 'eslint']
-" let g:ale_fixers = {
-" " \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-" " \   'javascript': js_fixers,
-" " \   'javascript.jsx': js_fixers,
-" " \   'typescript': js_fixers,
-" " \   'typescriptreact': js_fixers,
-" " \   'css': ['prettier'],
-" " \   'json': ['prettier'],
-" " \}
