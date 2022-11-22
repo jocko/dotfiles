@@ -10,12 +10,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   . /etc/bash_completion
 fi
 
-# TODO
-#
-# * Edit command line in vim (use 'v' in normal mode does this)
-# * Commands/aliases (reachable from vim) for `fmt -p '#'` etc, good idea?
-# * mapping for copying to/from clipboard in terminal, ctrl+shift+c????
-
 # By default, C-w behaves a bit strange in vi mode.
 #
 #   echo foo bar # C-w here, would not do anything (either in command or insert mode)
@@ -25,9 +19,8 @@ fi
 # we have to do either `stty werase undef`, or put `set bind-tty-special-chars off`
 # in `.inputrc`.
 bind -m vi-insert '"\C-w":unix-word-rubout'
-# I don't have this mapped for regular vim, find a way to unmap it. Simply
-# leaving out the mapping below will only map the derpy version
-bind -m vi-command '"\C-w":unix-word-rubout'
+# I don't have this mapped for regular vim, unbind it.
+bind -m vi-command -r "\C-w"
 
 HISTSIZE=5000
 HISTFILESIZE=10000
@@ -36,7 +29,7 @@ HISTIGNORE='ls:cd:cd *'
 # shopt -s histverify
 # PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
-# Do I want/need this? gc --allow-empty is hidden, but are there others?
+# Will for example suggest --allow-empty when doing completion for git commit
 export GIT_COMPLETION_SHOW_ALL=1
 export EDITOR="vim"
 
@@ -64,8 +57,8 @@ if declare -f __git_complete > /dev/null; then
   __git_complete gd _git_diff
 
   # Currently, this does not work fully. For example: `gp origin <Tab>` gives no suggestions
-  alias gp="git push"
-  __git_complete gp _git_push
+  # alias gp="git push"
+  # __git_complete gp _git_push
 
   alias gst="git status"
   alias gc="git commit -v"
@@ -79,20 +72,6 @@ fi
 # Show status in terminal header (eg vim is editing file)
 # Somewhere, maybe not in this file, add -d by default to `git difftool`
 # Spelling
-
-# Definately need autocomplete for this
-# alias g="git"
-# alias ga="git add"
-# alias gc="git commit -v"
-# alias gc!="git commit -v --amend"
-# alias gca="git commit -v -a"
-# alias gca!="git commit -v -a --amend"
-# # Use fzf? No, probably need another, sometimes want to use gco <file>. Consider "new" git commands, git switch & git restore
-# alias gco="git checkout"
-# alias gd="git diff"
-# alias gst="git status"
-# # This I need completion for
-# alias gp="git push"
 
 PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]-\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
 # PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
@@ -142,7 +121,7 @@ set -o vi
 #   grep -o "[a-f0-9]\{7,\}"
 # }
 
-# Turns of terminal suspend feature, i.e. C-S freezes everything
+# Turns off terminal suspend feature (<C-s> which freezes everything)
 stty -ixon
 
 if [ -f ~/.bash_aliases ]; then
