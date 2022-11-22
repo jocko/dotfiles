@@ -46,15 +46,6 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-surround'
 
-  " TODO I do not grok how this plugin should be configured. Linting is
-  " sluggish (at least for typescript) and I'm not that interested in it
-  " (but how to turn off linting only?). Having prettier is nice, but
-  " if I turn of linters, then I cannot do pretty, or C-]. Maybe doesn't
-  " matter because prettier is super slow as well. I would want navigate
-  " to tag (i.e. C-]) but maybe try ctags first, or find another plugin
-  " that suits me better.
-  " Plugin 'dense-analysis/ale'
-
   call vundle#end()
 
   " Colorscheme overrides. Since we do this with autocommands, it is
@@ -80,10 +71,6 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   "   let g:fugitive_dynamic_colors = 0
   "
   " somewhat solves this problem. But colors are nice, and I want them.
-
-  " let g:ale_fixers = {'typescriptreact': ['deno']}
-  " let g:ale_linters = {'typescriptreact': ['deno']}
-  let g:ale_linters_explicit = 1
 endif
 
 filetype plugin indent on
@@ -99,8 +86,6 @@ autocmd FocusGained,BufEnter * checktime
 set tabstop=2 shiftwidth=2
 set expandtab
 set number
-" set ignorecase
-" set smartcase
 set ttimeout
 set ttimeoutlen=100
 set hidden
@@ -118,9 +103,6 @@ set completeopt=longest,menu,preview
 set wrap
 " This prevents CTRL-A & CTRL-X to interpret numbers with leading zeroes as octal
 set nrformats-=octal
-" I sometimes get this strange behavior where the cursor jumps forward and
-" then back. Seem to be because of this.
-" set lazyredraw
 
 set list
 set listchars=tab:▸\ ,eol:¬,trail:·
@@ -130,10 +112,12 @@ augroup trailing
   au InsertLeave * :set listchars+=trail:·
 augroup END
 
-" TODO plugin stuff, move
+" Plugin config
 let g:http_client_focus_output_window = 0
 let g:http_client_result_vsplit = 0
 let g:http_client_preserve_responses = 1
+let g:slime_target = "vimterminal"
+
 
 set undodir=~/.vim/undo
 if !isdirectory(expand(&undodir))
@@ -148,9 +132,6 @@ set t_ZR=[23m
 
 let mapleader=" "
 let maplocalleader=","
-
-" Clear search higlight
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " TODO Clean up
 autocmd FileType typescript.tsx setlocal noexpandtab shiftwidth=2
@@ -195,5 +176,6 @@ runtime! macros/matchit.vim
 " Mark occurrences (note: <raise>-f => *)
 nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 
-let g:slime_target = "vimterminal"
+" Clear search higlight
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
