@@ -76,7 +76,8 @@ endif
 filetype plugin indent on
 syntax enable
 
-set path+=src/**
+" TODO Do this in ftplugin
+" set path+=src/**
 " set path-=/usr/include
 
 " Automatically reread files that have changed outside vim
