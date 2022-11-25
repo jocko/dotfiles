@@ -12,7 +12,10 @@ ln -sf ~/.dotfiles/gitignore ~/.gitignore
 
 ## vim
 
-For vim with clipboard support, install vim-gtk3 instead. Check with :echo has('clipboard')
+For vim with clipboard support, install `vim-gtk3` instead. Check with
+`:echo has('clipboard')`. Or use PPA to get latest version, for example
+`sudo add-apt-repository ppa:jonathonf/vim`
+
 ```
 sudo apt install vim
 ln -sf ~/.dotfiles/vimrc ~/.vimrc

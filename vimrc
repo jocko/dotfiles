@@ -105,7 +105,7 @@ set completeopt=longest,menu,preview
 set wrap
 " This prevents CTRL-A & CTRL-X to interpret numbers with leading zeroes as octal
 set nrformats-=octal
-" TODO Evaluate this
+" TODO Evaluate this, can I disable for quickfix window?
 " Highlights the line where the cursor is at
 set cursorline
 
