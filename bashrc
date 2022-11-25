@@ -130,6 +130,9 @@ set -o vi
 # Turns off terminal suspend feature (<C-s> which freezes everything)
 stty -ixon
 
+command -v direnv > /dev/null && eval "$(direnv hook bash)"
+
+# TODO Do I need two of these?
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
