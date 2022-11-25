@@ -1,3 +1,4 @@
+" TODO This should not be needed anymore
 set nocompatible
 filetype off
 
@@ -34,15 +35,15 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'aquach/vim-http-client'
   Plugin 'jpalardy/vim-slime'
 
+  " Language specific stuff
   Plugin 'vim-ruby/vim-ruby'
-
   Plugin 'pangloss/vim-javascript'
   Plugin 'leafgarland/typescript-vim'
 
   " TODO Can I get rid of this?
   " Plugin 'tpope/vim-vinegar'
   " TODO What are the 'native' alternatives to this?
-  Plugin 'mileszs/ack.vim'
+  " Plugin 'mileszs/ack.vim'
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-surround'
 
@@ -104,6 +105,9 @@ set completeopt=longest,menu,preview
 set wrap
 " This prevents CTRL-A & CTRL-X to interpret numbers with leading zeroes as octal
 set nrformats-=octal
+" TODO Evaluate this
+" Highlights the line where the cursor is at
+set cursorline
 
 set list
 set listchars=tab:▸\ ,eol:¬,trail:·
