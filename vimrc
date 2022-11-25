@@ -180,3 +180,15 @@ nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hl
 " Clear search higlight
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
+function! Grep(...)
+  return system('grep -n ' . expandcmd(join(a:000, ' ')) . ' /dev/null')
+endfunction
+
+command! -nargs=+ -complete=file_in_path Grep cgetexpr Grep(<f-args>)
+
+augroup quickfix
+  autocmd!
+  autocmd QuickFixCmdPost cgetexpr cwindow
+augroup END
+
+cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'Grep' : 'grep'
