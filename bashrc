@@ -29,6 +29,12 @@ HISTIGNORE='ls:cd:cd *'
 # shopt -s histverify
 # PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
+# Allows to use ** when globbing. For example, ls **/*.rb (i.e. similar
+# to find . -name '*.rb'). When globstar is off, ** can still be used,
+# but behaves like * (i.e. only a single directory, not recursive). Not
+# sure if particular useful, but will evaluate.
+shopt -s globstar
+
 # Will for example suggest --allow-empty when doing completion for git commit
 export GIT_COMPLETION_SHOW_ALL=1
 export EDITOR="vim"
