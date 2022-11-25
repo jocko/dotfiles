@@ -180,15 +180,27 @@ nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hl
 " Clear search higlight
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
+" Make grepping a bit more user friendly.
 function! Grep(...)
+  " The /dev/null at the end kicks in if a file argument is omitted
+  " (i.e. will give an empty result instead of searching everywhere)
   return system('grep -n ' . expandcmd(join(a:000, ' ')) . ' /dev/null')
 endfunction
 
 command! -nargs=+ -complete=file_in_path Grep cgetexpr Grep(<f-args>)
 
+" Open up the quickfix window when I do :Grep
 augroup quickfix
   autocmd!
   autocmd QuickFixCmdPost cgetexpr cwindow
 augroup END
 
+" Abbreviation that changes :grep into :Grep
 cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'Grep' : 'grep'
+
+" Clear hlsearch automatically
+augroup vimrc-incsearch-highlight
+  autocmd!
+  autocmd CmdlineEnter [/\?] :set hlsearch
+  autocmd CmdlineLeave [/\?] :set nohlsearch
+augroup END
