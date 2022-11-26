@@ -6,6 +6,10 @@ Tested on Ubuntu 22.04
 
 Make sure apt is up to date and that `git` is installed.
 
+If necessary, generate a new SSH key:
+
+    ssh-keygen -t ed25519 -C "<email>"
+
 Clone the dotfiles repo:
 
     git clone git@github.com:jocko/dotfiles-v2.git ~/.dotfiles
@@ -18,7 +22,7 @@ Link the git config:
 Note that `gitconfig` doesn't specify `user.email`. Instead, set this
 system wide:
 
-    sudo git config --system user.email "..."
+    sudo git config --system user.email "<email>"
 
 Link bash config
 
@@ -67,7 +71,8 @@ Install `xfce4-terminal` and make it the default:
 
 Install color scheme:
 
-    ln -sf ~/.dotfiles/local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme ~/.local/share/xfce4/terminal/colorschemes/
+    ln -sf ~/.dotfiles/local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme \
+        ~/.local/share/xfce4/terminal/colorschemes/
 
 In `xfce4-terminal`, right click and uncheck `Show Menubar`. Right click
 again and open `Preferences...`. Under the `Appearance` tab, set font to
@@ -80,7 +85,9 @@ own repository.
 
 Download keyring:
 
-    curl --silent https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/ | perl -lne 'print "curl -o sur5r-keyring.deb https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/$1" if />(sur5r-keyring_.*\.deb)/' | bash
+    curl --silent https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/ \
+        | perl -lne 'print "curl -o sur5r-keyring.deb https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/$1" if />(sur5r-keyring_.*\.deb)/' \
+        | bash
 
 Install it:
 
@@ -88,7 +95,8 @@ Install it:
 
 Configure repo:
 
-    echo "deb [arch=amd64] http://debian.sur5r.net/i3/ $(lsb_release -cs) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
+    echo "deb [arch=amd64] http://debian.sur5r.net/i3/ $(lsb_release -cs) universe" \
+        | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
 
 Update apt and install `i3`:
 
@@ -118,7 +126,31 @@ Link config:
 
     ln -sf ~/.dotfiles/i3blocks.conf ~/.i3blocks.conf
 
-## PCManFM
+## Firefox
+
+TODO Try out non-snap version (ppa:mozillateam/ppa) and document
+
+## Python
+
+Install `python3` and make `python` point to it:
+
+    sudo apt install -y python3-pip python3-venv python-is-python3
+
+
+TODO What is this for exactly?
+sudo apt install build-essential libssl-dev libffi-dev python3-dev libxml2-dev libxslt-dev
+TODO Jupyter?
+
+## Ruby
+
+TODO
+
+ruby-install
+chruby
+
+## Extras
+
+### PCManFM
 
 Install `pcmanfm`:
 
@@ -132,30 +164,50 @@ Inspect mime type(s):
 
     xdg-mime query default inode/directory
 
+### sxiv
+
+Install `sxiv`:
+
+    sudo apt install -y sxiv
+
+Configure mime type(s):
+
+    xdg-mime default sxiv.desktop image/gif \
+        && xdg-mime default sxiv.desktop image/jpeg \
+        && xdg-mime default sxiv.desktop image/jpg \
+        && xdg-mime default sxiv.desktop image/png
+
 ### dunst
 
-TODO This config need some love. Not using at the moment.
+TODO Install `dunst`
 
-```
-ln -sf ~/.dotfiles/config/dunst ~/.config/dunst
-```
+Link config (note: probably need some love):
 
-### xdg-mime
+    ln -sf ~/.dotfiles/config/dunst ~/.config/dunst
 
-```
-xdg-mime query default inode/directory
-xdg-mime default pcmanfm.desktop inode/directory
+Try it out:
 
-xdg-mime query default application/pdf
-xdg-mime default org.pwmt.zathura.desktop application/pdf
-```
+    ding Ermahgerd!
 
-## python
+TODO Find something better than `pinta`
 
-```
-sudo apt install python3-pip python3-venv python-is-python3
-sudo apt install build-essential libssl-dev libffi-dev python3-dev libxml2-dev libxslt-dev
-```
+### Misc
+
+    sudo apt install -y httpie
+
+    sudo apt install -y jq
+
+    sudo apt install -y gron
+
+    sudo apt install -y fzf
+
+    sudo apt install -y atool
+
+    curl -s "https://get.sdkman.io" | bash
+    # TODO Need env, maybe just add it to bashrc
+    # TODO Maybe provide examples for JDK, mvn to install 
+
+    # Same as for sdkman but for nvm
 
 ## Map caps-lock to escape
 
@@ -171,46 +223,4 @@ For Gnome:
 ```
 dconf write "/org/gnome/desktop/input-sources/xkb-options" "['caps:swapescape']"
 ```
-
-
-## Firefox
-
-TODO Try out non-snap version (ppa:mozillateam/ppa) and document
-
-## Extras
-
-    sudo apt install httpie
-
-    sudo apt install jq
-
-    sudo apt install gron
-
-    sudo apt install fzf
-
-    sudo apt install atool
-
-    curl -s "https://get.sdkman.io" | bash
-
-## jupyter-vim (TODO)
-
-### .vimrc
-
-Plugin 'jupyter-vim/jupyter-vim'
-
-let g:my_venv = fnamemodify('~/.vim/venv', ':p')
-if exists('g:my_venv')
-    pythonx import os; import vim
-    pythonx activate_this = os.path.join(vim.eval('g:my_venv'), 'bin/activate_this.py')
-    pythonx with open(activate_this) as f: exec(f.read(), {'__file__': activate_this})
-endif
-
-### qtconsole
-
-pip3 install PyQt5 jupyter pandas matplotlib
-
-jupyter qtconsole --generate-config
-
-### ~/.jupyter/jupyter_console_config.py
-
-c.ZMQTerminalInteractiveShell.include_other_output = True
 
