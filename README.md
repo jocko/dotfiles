@@ -229,6 +229,8 @@ Install it:
 
     sudo apt install -y gron
 
+    sudo apt install -y tree
+
     # SDKMAN (without touching my dotfiles)
 
     curl -s "https://get.sdkman.io?rcupdate=false" | bash
@@ -249,6 +251,7 @@ Install it:
 
 On Debian/Ubuntu (not Gnome!):
 
+TODO Could this go in i3/config, just as I do for xset r rate?
 ```
 # ~/.xsessionrc
 setxkbmap -option caps:escape
