@@ -61,6 +61,10 @@ Create ~/bin:
 
     mkdir ~/bin
 
+Optionally, copy skeleton file(s):
+
+    cp ~/.dotfiles/skel/bash_local ~/.bash_local
+
 Install essential packages:
 
     sudo apt install -y build-essential curl direnv
@@ -210,12 +214,6 @@ Install it:
 
     sudo apt install -y scrot
 
-    curl -s "https://get.sdkman.io" | bash
-    # TODO Need env, maybe just add it to bashrc
-    # TODO Maybe provide examples for JDK, mvn to install 
-
-    # Same as for sdkman but for nvm
-
     sudo apt install -y pcmanfm \
         && xdg-mime default pcmanfm.desktop inode/directory
 
@@ -225,11 +223,25 @@ Install it:
         && xdg-mime default sxiv.desktop image/jpg \
         && xdg-mime default sxiv.desktop image/png
 
+    sudo apt install -y ksnip
+
     sudo apt install -y atool
 
     sudo apt install -y gron
 
-TODO Find something better than `pinta`
+    # SDKMAN
+
+    curl -s "https://get.sdkman.io" | bash
+
+    sdk install java
+
+    sdk install maven
+
+    # NVM
+
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+
+    nvm install 16
 
 ## Hacks
 
