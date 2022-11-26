@@ -229,17 +229,17 @@ Install it:
 
     sudo apt install -y gron
 
-    # SDKMAN
+    # SDKMAN (without touching my dotfiles)
 
-    curl -s "https://get.sdkman.io" | bash
+    curl -s "https://get.sdkman.io?rcupdate=false" | bash
 
     sdk install java
 
     sdk install maven
 
-    # NVM
+    # NVM (without touching my dotfiles)
 
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | PROFILE=/dev/null bash
 
     nvm install 16
 
