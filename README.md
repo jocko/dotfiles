@@ -24,28 +24,30 @@ Link bash config
 
     link -sf ~/.dotfiles/bashrc ~/.bashrc
 
-When it comes to vim, there are a couple of options. Package `vim` works
-okay, but doesn't have `xterm_clipboard` (can be checked in vim by doing
-`:echo has('clipboard')`). Better then to install `vim-gtk3`. Also,
-installing from PPA might give us a newer vim version. For example:
+When it comes to vim, there are a couple of options. Package `vim`
+works okay, but doesn't have `xterm_clipboard` (can be checked in vim
+by doing `:echo has('clipboard')`). Better option then is to install
+`vim-gtk3`. Also, installing from PPA might give us a newer vim
+version. For example:
 
     sudo add-apt-repository ppa:jonathonf/vim # Optional step
-    sudo apt install vim-gtk3
+
+    sudo apt install -y vim-gtk3
 
 Link the vim config and create swap directory:
 
-    ln -sf ~/.dotfiles/vimrc ~/.vimrc
-    mkdir ~/.vim/swap
+    ln -sf ~/.dotfiles/vimrc ~/.vimrc && mkdir ~/.vim/swap
 
 Install Vundle:
 
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-Start `vim` and run `:PluginInstall`.
+Start `vim` and run `:PluginInstall`. Now, rest of the commands can be
+executed from inside vim, using slime (`<C-c><C-c>` and `:terminal`).
 
 Install font of choice:
 
-    sudo apt install fonts-hack-ttf
+    sudo apt install -y fonts-hack-ttf
 
 Create ~/bin:
 
@@ -53,13 +55,14 @@ Create ~/bin:
 
 Install essential packages:
 
-    sudo apt install build-essential curl direnv
+    sudo apt install -y build-essential curl direnv
 
 ## Terminal emulator
 
 Install `xfce4-terminal` and make it the default:
 
-    sudo apt install xfce4-terminal
+    sudo apt install -y xfce4-terminal
+
     sudo update-alternatives --config x-terminal-emulator
 
 Install color scheme:
@@ -69,10 +72,6 @@ Install color scheme:
 In `xfce4-terminal`, right click and uncheck `Show Menubar`. Right click
 again and open `Preferences...`. Under the `Appearance` tab, set font to
 `Hack Regular 14`. Under the `Colors` tab, load preset `gruvbox dark`.
-
-## Firefox
-
-TODO Try out non-snap version (ppa:mozillateam/ppa) and document
 
 ## i3 Window Manager
 
@@ -85,59 +84,53 @@ Download keyring:
 
 Install it:
 
-    sudo dpkg -i sur5r-keyring.deb
+    sudo dpkg -i sur5r-keyring.deb && rm sur5r-keyring.deb
 
-```
-lsb_release -c
-```
+Configure repo:
 
-TODO Make this work
--> % echo "deb http://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" >> /etc/apt/sources.list.d/sur5r-i3.list
-This is how it works for docker
-      echo \
-        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    echo "deb [arch=amd64] http://debian.sur5r.net/i3/ $(lsb_release -cs) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
 
-```
-# /etc/apt/sources.list.d/sur5r-i3.list
+Update apt and install `i3`:
 
-deb [arch=amd64] http://debian.sur5r.net/i3/ focal universe
-```
+    sudo apt update && sudo apt install -y i3
 
-```
-sudo apt install i3
-ln -sf ~/.dotfiles/i3/config ~/.config/i3/config 
-```
+Link config:
 
-### misc
+    ln -sf ~/.dotfiles/i3/config ~/.config/i3/config 
 
-```
-sudo apt install build-essential atool curl fonts-hack-ttf httpie jq gron fzf pcmanfm sxiv zathura direnv
-mkdir ~/bin
-```
+Install `rofi` (dmenu replacement)
 
-### rofi
+    sudo apt install -y rofi
 
-```
-sudo apt install rofi
-```
+Install `xkblayout-state`
 
-### i3blocks
+    sudo apt install -y libx11-dev
 
-```
-sudo apt install i3blocks
-ln -sf ~/.dotfiles/i3blocks.conf ~/.i3blocks.conf
-```
+    mkdir -p ~/src && git clone git@github.com:nonpop/xkblayout-state.git ~/src/xkblayout-state
 
-### xkblayout-state
+    pushd ~/src/xkblayout-state && make && cp xkblayout-state ~/bin && popd
 
+Install `i3blocks`:
 
-```
-git clone git@github.com:nonpop/xkblayout-state.git ~/src/xkblayout-state
-sudo apt install libx11-dev
-make
-cp xkblayout-state ~/bin
-```
+    sudo apt install -y i3blocks
+
+Link config:
+
+    ln -sf ~/.dotfiles/i3blocks.conf ~/.i3blocks.conf
+
+## PCManFM
+
+Install `pcmanfm`:
+
+    sudo apt install -y pcmanfm
+
+Configure mime type(s):
+
+    xdg-mime default pcmanfm.desktop inode/directory
+
+Inspect mime type(s):
+
+    xdg-mime query default inode/directory
 
 ### dunst
 
@@ -155,14 +148,6 @@ xdg-mime default pcmanfm.desktop inode/directory
 
 xdg-mime query default application/pdf
 xdg-mime default org.pwmt.zathura.desktop application/pdf
-```
-
-## zsh
-
-```
-sudo apt install zsh
-chsh -s $(which zsh)
-ln -sf ~/.dotfiles/zshrc ~/.zshrc
 ```
 
 ## python
@@ -187,16 +172,24 @@ For Gnome:
 dconf write "/org/gnome/desktop/input-sources/xkb-options" "['caps:swapescape']"
 ```
 
-## sdkman
 
-```
-curl -s "https://get.sdkman.io" | bash
-```
+## Firefox
 
-```
-sdk list java
-sdk list maven
-```
+TODO Try out non-snap version (ppa:mozillateam/ppa) and document
+
+## Extras
+
+    sudo apt install httpie
+
+    sudo apt install jq
+
+    sudo apt install gron
+
+    sudo apt install fzf
+
+    sudo apt install atool
+
+    curl -s "https://get.sdkman.io" | bash
 
 ## jupyter-vim (TODO)
 
@@ -221,8 +214,3 @@ jupyter qtconsole --generate-config
 
 c.ZMQTerminalInteractiveShell.include_other_output = True
 
-## Move back to Bash (Experimental)
-
-* Use vi mode
-* echo 'set completion-ignore-case On' >> ~/.inputrc
-* Need to fix my prompt (PS1='\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\n\[\e[0m\]-\[\e[0m\]> \[\e[0m\]\$ \[\e[0m\]')
