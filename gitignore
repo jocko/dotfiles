@@ -35,6 +35,7 @@ target/
 /coverage
 dev.yml
 .nvmrc
+vim/.netrwhist
 
 /ui/i18n/en.po.json
 /ui/i18n/sv.po.json
