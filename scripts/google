@@ -1,0 +1,3 @@
+#!/bin/sh
+url="google.com/search?q=$(urlencode "$*")"
+firefox -new-tab "$url" 2> /dev/null
