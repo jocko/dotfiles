@@ -85,7 +85,7 @@ In `xfce4-terminal`, right click and uncheck `Show Menubar`. Right click
 again and open `Preferences...`. Under the `Appearance` tab, set font to
 `Hack Regular 14`. Under the `Colors` tab, load preset `gruvbox dark`.
 
-## i3 Window Manager
+## Window Manager
 
 Official Ubuntu i3 packages might be quite old, install using i3's
 own repository.
