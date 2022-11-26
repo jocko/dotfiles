@@ -1,42 +1,91 @@
-## git
+# My dotfiles
 
-```
-sudo apt install git
-```
+Tested on Ubuntu 22.04
 
-```
-git clone git@github.com:jocko/dotfiles-v2.git ~/.dotfiles
-ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
-ln -sf ~/.dotfiles/gitignore ~/.gitignore
-```
+## Bootstrap
 
-## vim
+Make sure apt is up to date and that `git` is installed.
 
-For vim with clipboard support, install `vim-gtk3` instead. Check with
-`:echo has('clipboard')`. Or use PPA to get latest version, for example
-`sudo add-apt-repository ppa:jonathonf/vim`
+Clone the dotfiles repo:
 
-```
-sudo apt install vim
-ln -sf ~/.dotfiles/vimrc ~/.vimrc
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-mkdir ~/.vim/swap
-```
+    git clone git@github.com:jocko/dotfiles-v2.git ~/.dotfiles
 
-## misc
+Link the git config:
 
-```
-sudo apt install build-essential atool curl fonts-hack-ttf httpie jq gron fzf pcmanfm sxiv zathura direnv
-mkdir ~/bin
-```
+    ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+    ln -sf ~/.dotfiles/gitignore ~/.gitignore
 
-## i3
+Note that `gitconfig` doesn't specify `user.email`. Instead, set this
+system wide:
 
-Download keyring (apt-helper download-file ...)
-https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/
-```
-sudo dpkg -i ./keyring.deb
-```
+    sudo git config --system user.email "..."
+
+Link bash config
+
+    link -sf ~/.dotfiles/bashrc ~/.bashrc
+
+When it comes to vim, there are a couple of options. Package `vim` works
+okay, but doesn't have `xterm_clipboard` (can be checked in vim by doing
+`:echo has('clipboard')`). Better then to install `vim-gtk3`. Also,
+installing from PPA might give us a newer vim version. For example:
+
+    sudo add-apt-repository ppa:jonathonf/vim # Optional step
+    sudo apt install vim-gtk3
+
+Link the vim config and create swap directory:
+
+    ln -sf ~/.dotfiles/vimrc ~/.vimrc
+    mkdir ~/.vim/swap
+
+Install Vundle:
+
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+Start `vim` and run `:PluginInstall`.
+
+Install font of choice:
+
+    sudo apt install fonts-hack-ttf
+
+Create ~/bin:
+
+    mkdir ~/bin
+
+Install essential packages:
+
+    sudo apt install build-essential curl direnv
+
+## Terminal emulator
+
+Install `xfce4-terminal` and make it the default:
+
+    sudo apt install xfce4-terminal
+    sudo update-alternatives --config x-terminal-emulator
+
+Install color scheme:
+
+    ln -sf ~/.dotfiles/local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme ~/.local/share/xfce4/terminal/colorschemes/
+
+In `xfce4-terminal`, right click and uncheck `Show Menubar`. Right click
+again and open `Preferences...`. Under the `Appearance` tab, set font to
+`Hack Regular 14`. Under the `Colors` tab, load preset `gruvbox dark`.
+
+## Firefox
+
+TODO Try out non-snap version (ppa:mozillateam/ppa) and document
+
+## i3 Window Manager
+
+Official Ubuntu i3 packages might be quite old, install using i3's
+own repository.
+
+Download keyring:
+
+    curl --silent https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/ | perl -lne 'print "curl -o sur5r-keyring.deb https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/$1" if />(sur5r-keyring_.*\.deb)/' | bash
+
+Install it:
+
+    sudo dpkg -i sur5r-keyring.deb
 
 ```
 lsb_release -c
@@ -60,19 +109,12 @@ sudo apt install i3
 ln -sf ~/.dotfiles/i3/config ~/.config/i3/config 
 ```
 
-### xfce4-terminal
+### misc
 
 ```
-sudo apt install xfce4-terminal
-sudo update-alternatives --config x-terminal-emulator
+sudo apt install build-essential atool curl fonts-hack-ttf httpie jq gron fzf pcmanfm sxiv zathura direnv
+mkdir ~/bin
 ```
-
-TODO Look for another theme. Comments, for example, are difficult to read in Nord
-Symlink/copy themes to `.local/share/xfce4/terminal/colorschemes/`
-
-#### themes
-
-https://github.com/arcticicestudio/nord-xfce-terminal
 
 ### rofi
 
