@@ -47,6 +47,10 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-surround'
 
+  " TODO Evaluate
+  Plugin 'vim-pandoc/vim-pandoc'
+  Plugin 'vim-pandoc/vim-pandoc-syntax'
+
   call vundle#end()
 
   " Colorscheme overrides. Since we do this with autocommands, it is
@@ -72,6 +76,8 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   "   let g:fugitive_dynamic_colors = 0
   "
   " somewhat solves this problem. But colors are nice, and I want them.
+
+  let g:pandoc#modules#disabled = ["folding"]
 endif
 
 filetype plugin indent on
@@ -85,7 +91,9 @@ syntax enable
 set autoread
 autocmd FocusGained,BufEnter * checktime
 
-set tabstop=2 shiftwidth=2
+" TODO Is this a more sensible default?
+set tabstop=4 shiftwidth=4
+" set tabstop=2 shiftwidth=2
 set expandtab
 set number
 set ttimeout
@@ -94,7 +102,8 @@ set hidden
 set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
-set wildignore+=venv,.git,*.orig
+" TODO This is probably not the right way
+" set wildignore+=venv,.git,*.orig
 set scrolloff=5
 set undofile
 set backspace=indent,eol,start
@@ -103,14 +112,12 @@ set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
 set wrap
-" This prevents CTRL-A & CTRL-X to interpret numbers with leading zeroes as octal
-set nrformats-=octal
-" TODO Evaluate this, can I disable for quickfix window?
-" Highlights the line where the cursor is at
+set nrformats=bin,hex,unsigned
 set cursorline
-
 set list
-set listchars=tab:▸\ ,eol:¬,trail:·
+" set listchars=tab:▸\ ,eol:¬,trail:·
+" TODO Evaluate
+set listchars=tab:▸\ ,trail:·
 augroup trailing
   au!
   au InsertEnter * :set listchars-=trail:·
