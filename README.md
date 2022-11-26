@@ -126,6 +126,16 @@ Link config:
 
     ln -sf ~/.dotfiles/i3blocks.conf ~/.i3blocks.conf
 
+TODO Install `dunst`
+
+Link config (note: probably need some love):
+
+    ln -sf ~/.dotfiles/config/dunst ~/.config/dunst
+
+Try it out:
+
+    ding Ermahgerd!
+
 ## Firefox
 
 TODO Try out non-snap version (ppa:mozillateam/ppa) and document
@@ -150,49 +160,6 @@ chruby
 
 ## Extras
 
-### PCManFM
-
-Install `pcmanfm`:
-
-    sudo apt install -y pcmanfm
-
-Configure mime type(s):
-
-    xdg-mime default pcmanfm.desktop inode/directory
-
-Inspect mime type(s):
-
-    xdg-mime query default inode/directory
-
-### sxiv
-
-Install `sxiv`:
-
-    sudo apt install -y sxiv
-
-Configure mime type(s):
-
-    xdg-mime default sxiv.desktop image/gif \
-        && xdg-mime default sxiv.desktop image/jpeg \
-        && xdg-mime default sxiv.desktop image/jpg \
-        && xdg-mime default sxiv.desktop image/png
-
-### dunst
-
-TODO Install `dunst`
-
-Link config (note: probably need some love):
-
-    ln -sf ~/.dotfiles/config/dunst ~/.config/dunst
-
-Try it out:
-
-    ding Ermahgerd!
-
-TODO Find something better than `pinta`
-
-### Misc
-
     sudo apt install -y httpie
 
     sudo apt install -y jq
@@ -209,7 +176,34 @@ TODO Find something better than `pinta`
 
     # Same as for sdkman but for nvm
 
-## Map caps-lock to escape
+Install `pcmanfm`:
+
+    sudo apt install -y pcmanfm
+
+Configure mime type(s):
+
+    xdg-mime default pcmanfm.desktop inode/directory
+
+Inspect mime type(s):
+
+    xdg-mime query default inode/directory
+
+Install `sxiv`:
+
+    sudo apt install -y sxiv
+
+Configure mime type(s):
+
+    xdg-mime default sxiv.desktop image/gif \
+        && xdg-mime default sxiv.desktop image/jpeg \
+        && xdg-mime default sxiv.desktop image/jpg \
+        && xdg-mime default sxiv.desktop image/png
+
+TODO Find something better than `pinta`
+
+## Hacks
+
+### Map caps-lock to escape
 
 On Debian/Ubuntu (not Gnome!):
 
