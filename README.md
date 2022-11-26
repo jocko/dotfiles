@@ -46,8 +46,12 @@ Install Vundle:
 
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-Start `vim` and run `:PluginInstall`. Now, rest of the commands can be
-executed from inside vim, using slime (`<C-c><C-c>` and `:terminal`).
+Start `vim` and run `:PluginInstall`.
+
+Now, rest of the commands can be executed via slime from inside
+vim. Launch a `:terminal` and do `<C-c><C-c>` below:
+
+    sudo pwd
 
 Install font of choice:
 
@@ -65,9 +69,8 @@ Install essential packages:
 
 Install `xfce4-terminal` and make it the default:
 
-    sudo apt install -y xfce4-terminal
-
-    sudo update-alternatives --config x-terminal-emulator
+    sudo apt install -y xfce4-terminal \
+        && sudo update-alternatives --config x-terminal-emulator
 
 Install color scheme:
 
@@ -138,7 +141,20 @@ Try it out:
 
 ## Firefox
 
-TODO Try out non-snap version (ppa:mozillateam/ppa) and document
+This installs a non-snap version of Firefox.
+
+Add PPA:
+
+    sudo add-apt-repository ppa:mozillateam/ppa
+
+Pin it:
+
+    echo -e "Package: *\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001" \
+        | sudo tee /etc/apt/preferences.d/mozilla-firefox
+
+Install `firefox`:
+
+    sudo apt install -y firefox
 
 ## Python
 
@@ -146,17 +162,43 @@ Install `python3` and make `python` point to it:
 
     sudo apt install -y python3-pip python3-venv python-is-python3
 
-
-TODO What is this for exactly?
-sudo apt install build-essential libssl-dev libffi-dev python3-dev libxml2-dev libxslt-dev
-TODO Jupyter?
-
 ## Ruby
 
-TODO
+Download `ruby-install` (note: version is static):
 
-ruby-install
-chruby
+    wget -O ~/src/ruby-install.tar.gz https://github.com/postmodern/ruby-install/archive/v0.8.5.tar.gz \
+        && rm -rf ~/src/ruby-install \
+        && mkdir ~/src/ruby-install \
+        && tar -xzvf ~/src/ruby-install.tar.gz --strip-components=1 -C ~/src/ruby-install \
+        && rm ~/src/ruby-install.tar.gz
+
+Install it:
+
+    pushd ~/src/ruby-install/ \
+        && sudo make install \
+        && popd
+
+Download latest ruby versions:
+
+    ruby-install --update
+
+Install ruby 3.1 (note: might take a while):
+
+    ruby-install ruby 3.1
+
+Download `chruby` (note: version is static):
+
+    wget -O ~/src/chruby.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz \
+        && rm -rf ~/src/chruby \
+        && mkdir ~/src/chruby \
+        && tar -xzvf ~/src/chruby.tar.gz --strip-components=1 -C ~/src/chruby \
+        && rm ~/src/chruby.tar.gz
+
+Install it:
+
+    pushd ~/src/chruby/ \
+        && sudo make install \
+        && popd
 
 ## Extras
 
@@ -164,11 +206,9 @@ chruby
 
     sudo apt install -y jq
 
-    sudo apt install -y gron
-
     sudo apt install -y fzf
 
-    sudo apt install -y atool
+    sudo apt install -y scrot
 
     curl -s "https://get.sdkman.io" | bash
     # TODO Need env, maybe just add it to bashrc
@@ -176,28 +216,18 @@ chruby
 
     # Same as for sdkman but for nvm
 
-Install `pcmanfm`:
+    sudo apt install -y pcmanfm \
+        && xdg-mime default pcmanfm.desktop inode/directory
 
-    sudo apt install -y pcmanfm
-
-Configure mime type(s):
-
-    xdg-mime default pcmanfm.desktop inode/directory
-
-Inspect mime type(s):
-
-    xdg-mime query default inode/directory
-
-Install `sxiv`:
-
-    sudo apt install -y sxiv
-
-Configure mime type(s):
-
-    xdg-mime default sxiv.desktop image/gif \
+    sudo apt install -y sxiv \
+        && xdg-mime default sxiv.desktop image/gif \
         && xdg-mime default sxiv.desktop image/jpeg \
         && xdg-mime default sxiv.desktop image/jpg \
         && xdg-mime default sxiv.desktop image/png
+
+    sudo apt install -y atool
+
+    sudo apt install -y gron
 
 TODO Find something better than `pinta`
 
@@ -218,3 +248,4 @@ For Gnome:
 dconf write "/org/gnome/desktop/input-sources/xkb-options" "['caps:swapescape']"
 ```
 
+### TODO touchpad point to click
