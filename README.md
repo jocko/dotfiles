@@ -2,6 +2,10 @@
 
 Tested on Ubuntu 22.04
 
+## TODO
+
+ * dircolors
+
 ## Bootstrap
 
 Make sure apt is up to date and that `git` is installed.
