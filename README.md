@@ -5,10 +5,17 @@ Tested on Ubuntu 22.04
 ## TODO
 
  * dircolors
+ * Rename repo to just `dotfiles`
+ * Clean up dunst config. Also, it doesn't need its own directory
+ * Clean up i3blocks & i3status config
+ * Make `mute` & `unmute` great again
+ * i3 doesn't need its own config directory
+ * Flatten directory structure for xfce4 theme. I have the full command written down in this file now, don't need the entire path there as well.
+ * See if I can find a sweet setup for jupyter-vim (vim-slime maybe?)
 
 ## Bootstrap
 
-Make sure apt is up to date and that `git` is installed.
+Make sure `apt` is up to date and that `git` is installed.
 
 If necessary, generate a new SSH key:
 
@@ -73,7 +80,7 @@ Install essential packages:
 
     sudo apt install -y build-essential curl direnv
 
-## Terminal emulator
+## Terminal Emulator
 
 Install `xfce4-terminal` and make it the default:
 
