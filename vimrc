@@ -153,6 +153,7 @@ autocmd FileType javascript.jsx setlocal noexpandtab shiftwidth=2
 autocmd FileType javascript setlocal noexpandtab shiftwidth=2
 autocmd FileType less setlocal noexpandtab shiftwidth=2
 autocmd FileType scss setlocal noexpandtab shiftwidth=2
+autocmd FileType sh setlocal expandtab tabstop=2 shiftwidth=2
 
 autocmd FileType gitcommit setlocal spell
 
