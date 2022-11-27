@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090,SC1091
 
+# TODO
+# Show status in terminal header (eg vim is editing file, or which dir I'm currently in)
+# Somewhere, maybe not in this file, add -d by default to `git difftool`
+# Spelling
+# What to do with git and aliases. Keep using gd, gc etc or use git aliases instead? Both?
+
 case $- in
   *i*) ;;
   *) return;;
@@ -25,15 +31,6 @@ bind -m vi-command -r "\C-w"
 HISTSIZE=5000
 HISTFILESIZE=10000
 HISTCONTROL=ignoredups:erasedups
-HISTIGNORE='ls:cd:cd *'
-# shopt -s histverify
-# PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
-
-# Allows to use ** when globbing. For example, ls **/*.rb (i.e. similar
-# to find . -name '*.rb'). When globstar is off, ** can still be used,
-# but behaves like * (i.e. only a single directory, not recursive). Not
-# sure if particular useful, but will evaluate.
-shopt -s globstar
 
 # Will for example suggest --allow-empty when doing completion for git commit
 export GIT_COMPLETION_SHOW_ALL=1
@@ -53,7 +50,6 @@ alias grep="grep --color=auto"
 alias ls="ls --color=auto"
 
 # Set up git aliases and auto completion (if necessary)
-# TODO Consider using git aliases instead. Together with `g` alias, will give `g d` instead of `gd` etc
 if declare -f __git_complete > /dev/null; then
   alias g="git"
   __git_complete g __git_main
@@ -64,10 +60,6 @@ if declare -f __git_complete > /dev/null; then
   alias gd="git diff"
   __git_complete gd _git_diff
 
-  # Currently, this does not work fully. For example: `gp origin <Tab>` gives no suggestions
-  # alias gp="git push"
-  # __git_complete gp _git_push
-
   alias gst="git status"
   alias gc="git commit -v"
   alias gc!="git commit -v --amend"
@@ -75,14 +67,7 @@ if declare -f __git_complete > /dev/null; then
   alias gca!="git commit -v -a --amend"
 fi
 
-# TODO
-# Fix Ctrl-R (fzf probably)
-# Show status in terminal header (eg vim is editing file)
-# Somewhere, maybe not in this file, add -d by default to `git difftool`
-# Spelling
-
 PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]-\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
-# PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
 
 set -o vi
 
@@ -94,11 +79,6 @@ if [ -f ~/.dircolors ]; then
 fi
 
 command -v direnv > /dev/null && eval "$(direnv hook bash)"
-
-# TODO Do I need two of these?
-if [ -f ~/.bash_aliases ]; then
-  . ~/.bash_aliases
-fi
 
 # The idea here is to have this file contain stuff that is very specific
 # to a particular computer, or things that I simply don't want to put
