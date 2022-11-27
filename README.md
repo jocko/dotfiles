@@ -72,13 +72,17 @@ Create ~/bin:
 
     mkdir ~/bin
 
+Install essential packages:
+
+    sudo apt install -y build-essential curl direnv
+
 Optionally, copy skeleton file(s):
 
     cp ~/.dotfiles/skel/bash_local ~/.bash_local
 
-Install essential packages:
+Optionally, symlink dircolors:
 
-    sudo apt install -y build-essential curl direnv
+    ln -sf ~/.dotfiles/dircolors ~/.dircolors
 
 ## Terminal Emulator
 

@@ -86,51 +86,12 @@ PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]-\[\e[0;34m\]> \[\e[0
 
 set -o vi
 
-# TODO Better mnemonics, or probably abandon this. Try to extract the fzf part, maybe provide
-# aliases, and/or functions (with mappings?).
-# gsw() {
-#   git rev-parse HEAD > /dev/null 2>&1 || return
-
-#   git branch -v --sort=-committerdate |
-#     grep -vF '*' |
-#     fzf |
-#     tr -s ' ' |
-#     cut -d ' ' -f2 |
-#     xargs -r git switch
-# }
-
-# gadd() {
-#   git rev-parse HEAD > /dev/null 2>&1 || return
-
-#   git ls-files -m -o --exclude-standard |
-#     fzf -m |
-#     xargs -r git add
-# }
-
-# gres() {
-#   git rev-parse HEAD > /dev/null 2>&1 || return
-
-#   git diff --name-only --cached |
-#     fzf -m |
-#     xargs -r git restore --staged
-# }
-
-# fzf-down() {
-#   fzf --height 50% --min-height 20 --border --bind ctrl-/:toggle-preview "$@"
-# }
-
-# _gh() {
-#   git rev-parse HEAD > /dev/null 2>&1 || return
-
-#   git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
-#   fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-#     --header 'Press CTRL-S to toggle sort' \
-#     --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always' |
-#   grep -o "[a-f0-9]\{7,\}"
-# }
-
 # Turns off terminal suspend feature (<C-s> which freezes everything)
 stty -ixon
+
+if [ -f ~/.dircolors ]; then
+  eval "$(dircolors ~/.dircolors)"
+fi
 
 command -v direnv > /dev/null && eval "$(direnv hook bash)"
 
@@ -139,6 +100,11 @@ if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
+# The idea here is to have this file contain stuff that is very specific
+# to a particular computer, or things that I simply don't want to put
+# under version control. That also means that this file typically should
+# not be symlinked. I have a template for it in `skel` dir that can be
+# used as a starter.
 if [ -f ~/.bash_local ]; then
   . ~/.bash_local
 fi
