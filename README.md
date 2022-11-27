@@ -5,7 +5,6 @@ Tested on Ubuntu 22.04
 ## TODO
 
  * Clean up dunst config. Also, it doesn't need its own directory
- * Clean up i3blocks & i3status config
  * i3 doesn't need its own config directory
  * Make `mute` & `unmute` great again
  * See if I can find a sweet setup for jupyter-vim (vim-slime maybe?)
