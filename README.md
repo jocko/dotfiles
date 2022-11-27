@@ -5,7 +5,6 @@ Tested on Ubuntu 22.04
 ## TODO
 
  * Clean up dunst config. Also, it doesn't need its own directory
- * i3 doesn't need its own config directory
  * Make `mute` & `unmute` great again
  * See if I can find a sweet setup for jupyter-vim (vim-slime maybe?)
  * Rename repo to just `dotfiles`
@@ -123,7 +122,7 @@ Update apt and install `i3`:
 
 Link config:
 
-    ln -sf ~/.dotfiles/i3/config ~/.config/i3/config 
+    ln -sf ~/.dotfiles/i3.config ~/.config/i3/config 
 
 Install `rofi` (dmenu replacement)
 
