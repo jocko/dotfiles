@@ -4,10 +4,9 @@ Tested on Ubuntu 22.04
 
 ## TODO
 
- * Clean up dunst config. Also, it doesn't need its own directory
+ * Clean up dunst config. Also, it doesn't need its own directory. Fix ding in bash
  * Make `mute` & `unmute` great again
  * See if I can find a sweet setup for jupyter-vim (vim-slime maybe?)
- * Rename repo to just `dotfiles`
 
 ## Bootstrap
 
@@ -260,18 +259,54 @@ Install it:
 
 ### Map caps-lock to escape
 
-On Debian/Ubuntu (not Gnome!):
+Gnome has its own way of doing things. I'm documenting it here just in case.
 
-TODO Could this go in i3/config, just as I do for xset r rate?
-```
-# ~/.xsessionrc
-setxkbmap -option caps:escape
-```
+    dconf write "/org/gnome/desktop/input-sources/xkb-options" "['caps:swapescape']"
 
-For Gnome:
+For i3, we can add a line to `~/.xsessionrc` (this is an Ubuntu specific dotfile):
 
-```
-dconf write "/org/gnome/desktop/input-sources/xkb-options" "['caps:swapescape']"
-```
+    echo "setxkbmap -option caps:escape" >> ~/.xsessionrc
 
-### TODO touchpad point to click
+### Touchpad tapping
+
+List all input devices:
+
+    xinput
+
+Likely, it is the input named *Synaptics XXXX*
+
+    xinput list --name-only | grep -i synaptics
+
+If this is correct, test it out by doing:
+
+    xinput set-prop "$(xinput list --name-only | grep -i synaptics)" "libinput Tapping Enabled" 1
+
+Make it persistent:
+
+    echo xinput set-prop \""$(xinput list --name-only | grep -i synaptics)"\" \"libinput Tapping Enabled\" 1 \
+        >> ~/.xsessionrc
+
+## Notes
+
+### User lingering
+
+User lingering supposedly allows processes to run even after the user
+has logged out. My problem with this was related to environment variables
+and how they just kept on piling up. As an example, sourcing the default
+`~/.profile` will add two new entries, `~/bin` and `~/.local/bin`, to the
+`$PATH`. Doing this multiple times is probably quite harmless, but very
+much not something I want. Fortunately, the feature can be disabled.
+
+Check if user lingering is enabled:
+
+    loginctl show-user 1000 --property=Linger
+
+If so, disable it:
+
+    loginctl disable-linger 1000
+
+pggrep/pkill # ps/kill using pattern (in package `procps`)
+apt-file search [/usr/bin/]pgrep # search for package providing file
+dpkg -L <package> # list files installed from package
+dpkg -l <pattern> # list packages matching pattern
+vmstat # show resource usage
