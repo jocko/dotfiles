@@ -4,7 +4,6 @@ Tested on Ubuntu 22.04
 
 ## TODO
 
- * Flatten directory structure for xfce4 theme. I have the full command written down in this file now, don't need the entire path there as well.
  * Clean up dunst config. Also, it doesn't need its own directory
  * Clean up i3blocks & i3status config
  * i3 doesn't need its own config directory
@@ -92,8 +91,8 @@ Install `xfce4-terminal` and make it the default:
 
 Install color scheme:
 
-    ln -sf ~/.dotfiles/local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme \
-        ~/.local/share/xfce4/terminal/colorschemes/
+    cp ~/.dotfiles/skel/xfce4-gruvbox-dark.theme \
+        ~/.local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme
 
 In `xfce4-terminal`, right click and uncheck `Show Menubar`. Right click
 again and open `Preferences...`. Under the `Appearance` tab, set font to
