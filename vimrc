@@ -50,6 +50,7 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   " TODO Evaluate
   Plugin 'vim-pandoc/vim-pandoc'
   Plugin 'vim-pandoc/vim-pandoc-syntax'
+  Plugin 'ludovicchabant/vim-gutentags'
 
   call vundle#end()
 
@@ -102,8 +103,7 @@ set hidden
 set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
-" TODO This is probably not the right way
-" set wildignore+=venv,.git,*.orig
+set wildignore+=.git,*.orig
 set scrolloff=5
 set undofile
 set backspace=indent,eol,start
@@ -115,8 +115,6 @@ set wrap
 set nrformats=bin,hex,unsigned
 set cursorline
 set list
-" set listchars=tab:▸\ ,eol:¬,trail:·
-" TODO Evaluate
 set listchars=tab:▸\ ,trail:·
 augroup trailing
   au!

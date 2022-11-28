@@ -68,7 +68,7 @@ Create ~/bin:
 
 Install essential packages:
 
-    sudo apt install -y build-essential curl direnv
+    sudo apt install -y build-essential curl direnv exuberant-ctags
 
 Optionally, copy skeleton file(s):
 
@@ -148,7 +148,7 @@ TODO install dunst
 
 Link config:
 
-    ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
+    mkdir -p ~/.config/dunst && ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
 
 Try it out:
 
