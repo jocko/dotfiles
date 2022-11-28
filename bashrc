@@ -30,7 +30,8 @@ bind -m vi-command -r "\C-w"
 
 HISTSIZE=5000
 HISTFILESIZE=10000
-HISTCONTROL=ignoredups:erasedups
+# TODO Should I have ignoreboth:erasedups?
+HISTCONTROL=ignoreboth
 
 # Will for example suggest --allow-empty when doing completion for git commit
 export GIT_COMPLETION_SHOW_ALL=1
