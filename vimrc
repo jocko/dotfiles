@@ -1,5 +1,3 @@
-" TODO This should not be needed anymore
-set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -10,17 +8,12 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
 
   " TODO Can I make a delete-list movement? Eg delete `bar,` or `baz` from (/[foo, bar, baz]/), what about maps/dicts?
 
-  " TODO Group plugins into essential, ui-stuff (eg themes), nice-to-have
-  " etc.  Also might be a good idea to describe a specific problem that
-  " each one solves (i.e. motivation to why it is here). Ideally, plugins
-  " should only have ui-stuff (I should be able to acomplish essential
-  " tasks everywhere)
-
   " Git wrapper
   Plugin 'tpope/vim-fugitive'
   " Reopen files at last edit position
+  " TODO I believe this can be done without plugins
   Plugin 'farmergreg/vim-lastplace'
-  " Automatically add end statements, e.g. in Ruby, end after def etc.
+  " Automatically add end statements. `end` after `def` in Ruby for example
   Plugin 'tpope/vim-endwise.git'
 
   Plugin 'junegunn/fzf'
@@ -40,8 +33,6 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'pangloss/vim-javascript'
   Plugin 'leafgarland/typescript-vim'
 
-  " TODO Can I get rid of this?
-  " Plugin 'tpope/vim-vinegar'
   " TODO What are the 'native' alternatives to this?
   " Plugin 'mileszs/ack.vim'
   Plugin 'tpope/vim-commentary'
@@ -63,20 +54,7 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
 
   " Required for some themes (e.g. gruvbox)
   set background=dark
-
   color gruvbox
-  " color nord
-
-
-  " TODO When doing :Git blame for example, the commit hash for
-  " uncommitted changes is represented by 000000 in a dark color which
-  " sometimes makes it difficult to identify where the cursor is. Nord
-  " for example has this problem. Maybe a good idea to make the cursor
-  " stand out more? Disabling colors in fugitive, like this:
-  "
-  "   let g:fugitive_dynamic_colors = 0
-  "
-  " somewhat solves this problem. But colors are nice, and I want them.
 
   let g:pandoc#modules#disabled = ["folding"]
 endif
@@ -84,17 +62,11 @@ endif
 filetype plugin indent on
 syntax enable
 
-" TODO Do this in ftplugin
-" set path+=src/**
-" set path-=/usr/include
-
 " Automatically reread files that have changed outside vim
 set autoread
 autocmd FocusGained,BufEnter * checktime
 
-" TODO Is this a more sensible default?
 set tabstop=4 shiftwidth=4
-" set tabstop=2 shiftwidth=2
 set expandtab
 set number
 set ttimeout
@@ -155,20 +127,15 @@ autocmd FileType sh setlocal expandtab tabstop=2 shiftwidth=2
 
 autocmd FileType gitcommit setlocal spell
 
-" nnoremap <leader>w :w<CR>
-" Use ma to set mark, then leader+a will jump back to it
-" TODO Practice this instead of having a mapping
-" nnoremap <leader>a `a
+" TODO Practice this
+" map <leader>o :Files<CR>
 
-map <leader>o :Files<CR>
-" map <leader>O :GFiles?<CR>
-" map <leader>b :Buffers<CR>
-
-if executable('ag')
-  let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-  let g:ackprg = 'ag --vimgrep --smart-case' 
-endif
-nnoremap <leader>s :Ack! ""<Left>
+" TODO Use :grep instead
+" if executable('ag')
+"   let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+"   let g:ackprg = 'ag --vimgrep --smart-case' 
+" endif
+" nnoremap <leader>s :Ack! ""<Left>
 
 " TODO Need this?
 " Switch to other window
