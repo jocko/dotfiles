@@ -263,9 +263,11 @@ Gnome has its own way of doing things. I'm documenting it here just in case.
 
     dconf write "/org/gnome/desktop/input-sources/xkb-options" "['caps:swapescape']"
 
-For i3, we can add a line to `~/.xsessionrc` (this is an Ubuntu specific dotfile):
+For i3, we can add a line to `~/.xsessionrc`:
 
     echo "setxkbmap -option caps:escape" >> ~/.xsessionrc
+
+Note that `.xsessionrc` is a dotifle specific to Debian (and its derivatives).
 
 ### Touchpad tapping
 
