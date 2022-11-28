@@ -4,7 +4,6 @@ Tested on Ubuntu 22.04
 
 ## TODO
 
- * Clean up dunst config. Also, it doesn't need its own directory. Fix ding in bash
  * Make `mute` & `unmute` great again
  * See if I can find a sweet setup for jupyter-vim (vim-slime maybe?)
 
@@ -143,11 +142,13 @@ Link config:
 
     ln -sf ~/.dotfiles/i3blocks.conf ~/.i3blocks.conf
 
-TODO Install `dunst`
+TODO install dunst
 
-Link config (note: probably need some love):
+    ...
 
-    ln -sf ~/.dotfiles/config/dunst ~/.config/dunst
+Link config:
+
+    ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
 
 Try it out:
 
