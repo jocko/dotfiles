@@ -6,6 +6,8 @@
     co = checkout
     dog = log --decorate --oneline --graph --all
     punch = push --force
+[branch]
+    sort = -committerdate
 [color]
     ui = true
 [color "decorate"]

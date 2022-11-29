@@ -256,6 +256,9 @@ Install it:
 
     nvm install 16
 
+    ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode \
+        && ln -sf ~/.dotfiles/scripts/google ~/bin/google
+
 ## Hacks
 
 ### Map caps-lock to escape
@@ -317,3 +320,4 @@ apt-file search [/usr/bin/]pgrep # search for package providing file
 dpkg -L <package> # list files installed from package
 dpkg -l <pattern> # list packages matching pattern
 vmstat # show resource usage
+git switch @{-1} # switch to previous branch

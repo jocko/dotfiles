@@ -75,7 +75,8 @@ set hidden
 set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
-set wildignore+=.git,*.orig
+" TODO build & target is to generic?
+set wildignore+=.git,*.orig,*/node_modules/*,*/build/*,*/target/*
 set scrolloff=5
 set undofile
 set backspace=indent,eol,start
@@ -157,6 +158,10 @@ nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hl
 " Clear search higlight
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
+" TODO Should I get `grep: xxx: Is a directory when doing for example **/*.
+" Or, more specifically, how should I do recursive searches???
+" TODO Ideally, should respect .gitignore (if available), or at least some
+" default patterns (node_modules etc)
 " Make grepping a bit more user friendly.
 function! Grep(...)
   " The /dev/null at the end kicks in if a file argument is omitted
@@ -173,7 +178,8 @@ augroup quickfix
 augroup END
 
 " Abbreviation that changes :grep into :Grep
-cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'Grep' : 'grep'
+" TODO Temporarily disable
+" cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'Grep' : 'grep'
 
 " Clear hlsearch automatically
 augroup vimrc-incsearch-highlight
