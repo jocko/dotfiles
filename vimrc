@@ -161,27 +161,6 @@ nnoremap <silent> ]q :cnext<CR>
 " Clear search higlight
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
-" TODO Ideally, should respect .gitignore (if available), or at least some
-" default patterns (node_modules etc)
-
-" Make grepping a bit more user friendly.
-function! Grep(...)
-  " The /dev/null at the end kicks in if a file argument is omitted
-  " (i.e. will give an empty result instead of searching everywhere)
-  return system('grep -n ' . expandcmd(join(a:000, ' ')) . ' /dev/null')
-endfunction
-
-command! -nargs=+ -complete=file_in_path Grep cgetexpr Grep(<f-args>)
-
-" Open up the quickfix window when I do :Grep
-augroup quickfix
-  autocmd!
-  autocmd QuickFixCmdPost cgetexpr cwindow
-augroup END
-
-" Abbreviation that changes :grep into :Grep
-cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'Grep' : 'grep'
-
 " Clear hlsearch automatically
 augroup vimrc-incsearch-highlight
   autocmd!
