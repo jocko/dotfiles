@@ -308,6 +308,10 @@ If so, disable it:
 
     loginctl disable-linger 1000
 
+TODO Read up on user lingering. Also, how does it relate to `KillUserProcesses`?
+
+    loginctl show-user --property=KillUserProcesses
+
 pggrep/pkill # ps/kill using pattern (in package `procps`)
 apt-file search [/usr/bin/]pgrep # search for package providing file
 dpkg -L <package> # list files installed from package
