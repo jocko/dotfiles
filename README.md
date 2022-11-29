@@ -45,7 +45,7 @@ version. For example:
 
 Link the vim config and create swap directory:
 
-    ln -sf ~/.dotfiles/vimrc ~/.vimrc && mkdir ~/.vim/swap
+    ln -sf ~/.dotfiles/vimrc ~/.vimrc && mkdir -p ~/.vim/swap
 
 Install Vundle:
 
@@ -58,9 +58,9 @@ vim. Launch a `:terminal` and do `<C-c><C-c>` below:
 
     sudo pwd
 
-Install font of choice:
+Link custom vim `after`:
 
-    sudo apt install -y fonts-hack-ttf
+    ln -sf ~/.dotfiles/vim/after ~/.vim/after
 
 Create ~/bin:
 
@@ -72,7 +72,8 @@ Install essential packages:
 
 Optionally, copy skeleton file(s):
 
-    cp ~/.dotfiles/skel/bash_local ~/.bash_local
+    cp ~/.dotfiles/skel/bash_local ~/.bash_local \
+        && cat ~/.bash_local
 
 Optionally, symlink dircolors:
 
@@ -89,6 +90,10 @@ Install color scheme:
 
     cp ~/.dotfiles/skel/xfce4-gruvbox-dark.theme \
         ~/.local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme
+
+Install font of choice:
+
+    sudo apt install -y fonts-hack-ttf
 
 In `xfce4-terminal`, right click and uncheck `Show Menubar`. Right click
 again and open `Preferences...`. Under the `Appearance` tab, set font to

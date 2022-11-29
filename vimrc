@@ -44,23 +44,24 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'ludovicchabant/vim-gutentags'
 
   call vundle#end()
-
-  " Colorscheme overrides. Since we do this with autocommands, it is
-  " possible to try out new themes (e.g. :color gruvbox) and not have
-  " these overrides carry over to the next theme . Also, the overrides
-  " are scoped to a specific theme.
-  autocmd ColorScheme nord highlight IncSearch cterm=NONE ctermfg=0 ctermbg=11
-  autocmd ColorScheme gruvbox highlight IncSearch cterm=NONE ctermfg=0 ctermbg=9
-
-  " Required for some themes (e.g. gruvbox)
-  set background=dark
-  color gruvbox
-
-  let g:pandoc#modules#disabled = ["folding"]
 endif
 
 filetype plugin indent on
 syntax enable
+
+" Colorscheme overrides, need to appear before we source any
+" colorscheme. Since we do this with autocommands, it is possible to
+" try out new themes (e.g. :color gruvbox) and not have these overrides
+" carry over to the next theme . Also, the overrides are scoped to a
+" specific theme.
+autocmd ColorScheme nord highlight IncSearch cterm=NONE ctermfg=0 ctermbg=11
+autocmd ColorScheme gruvbox highlight IncSearch cterm=NONE ctermfg=0 ctermbg=9
+
+if filereadable(expand("~/.vim/bundle/gruvbox/README.md"))
+  " Required for some themes (e.g. gruvbox)
+  set background=dark
+  color gruvbox
+endif
 
 " Automatically reread files that have changed outside vim
 set autoread
@@ -100,6 +101,8 @@ let g:http_client_focus_output_window = 0
 let g:http_client_result_vsplit = 0
 let g:http_client_preserve_responses = 1
 let g:slime_target = "vimterminal"
+let g:pandoc#modules#disabled = ["folding"]
+
 
 
 set undodir=~/.vim/undo
@@ -126,8 +129,6 @@ autocmd FileType less setlocal noexpandtab shiftwidth=2
 autocmd FileType scss setlocal noexpandtab shiftwidth=2
 autocmd FileType sh setlocal expandtab tabstop=2 shiftwidth=2
 
-autocmd FileType gitcommit setlocal spell
-
 " TODO Practice this
 " map <leader>o :Files<CR>
 
@@ -152,16 +153,17 @@ autocmd FileType gitcommit setlocal spell
 " TODO What is this?
 runtime! macros/matchit.vim
 
-" Mark occurrences (note: <raise>-f => *)
-nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
-
+" This makes * stay on the word instead of jumping to the next one
+nnoremap * *N
+" Navigate prev/next quickfix errors
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
 " Clear search higlight
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
-" TODO Should I get `grep: xxx: Is a directory when doing for example **/*.
-" Or, more specifically, how should I do recursive searches???
 " TODO Ideally, should respect .gitignore (if available), or at least some
 " default patterns (node_modules etc)
+
 " Make grepping a bit more user friendly.
 function! Grep(...)
   " The /dev/null at the end kicks in if a file argument is omitted
@@ -178,8 +180,7 @@ augroup quickfix
 augroup END
 
 " Abbreviation that changes :grep into :Grep
-" TODO Temporarily disable
-" cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'Grep' : 'grep'
+cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'Grep' : 'grep'
 
 " Clear hlsearch automatically
 augroup vimrc-incsearch-highlight
