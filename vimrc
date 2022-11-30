@@ -153,8 +153,9 @@ autocmd FileType sh setlocal expandtab tabstop=2 shiftwidth=2
 " TODO What is this?
 runtime! macros/matchit.vim
 
-" This makes * stay on the word instead of jumping to the next one
-nnoremap * *N
+" This makes * stay on the word instead of jumping to the next one.
+" TODO But seem to clash with my auto clearing hlsearch stuff
+" nnoremap * *N
 " Navigate prev/next quickfix errors
 nnoremap <silent> [q :cprevious<CR>
 nnoremap <silent> ]q :cnext<CR>
