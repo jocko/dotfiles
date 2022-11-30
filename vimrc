@@ -76,8 +76,8 @@ set hidden
 set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
-" TODO build & target is to generic?
-set wildignore+=.git,*.orig,*/node_modules/*,*/build/*,*/target/*
+" TODO Look at ack --dump for sensible ignore options to put here
+set wildignore+=.git,*.orig,package-lock.json
 set scrolloff=5
 set undofile
 set backspace=indent,eol,start

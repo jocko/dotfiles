@@ -4,6 +4,10 @@ Tested on Ubuntu 22.04
 
 ## TODO
 
+ * Case-insensitive? (nice for :edit & :find at least)
+ * Optimize `!@#$%^&*` stuff on my left hand when shifting layer with right hand. Think that `!$` should be placed on home row, in favour of `&` definately, but what else? Maybe have: `!^$*&`, and above have (starting at `w`): `@#%`)
+ * ack-grep (as a complement to vimgrep)?
+ * ctags for typescript (is this any good? https://github.com/jb55/typescript-ctags/blob/master/.ctags)
  * Make `mute` & `unmute` great again
  * See if I can find a sweet setup for jupyter-vim (vim-slime maybe?)
 
@@ -324,5 +328,6 @@ pggrep/pkill # ps/kill using pattern (in package `procps`)
 apt-file search [/usr/bin/]pgrep # search for package providing file
 dpkg -L <package> # list files installed from package
 dpkg -l <pattern> # list packages matching pattern
+apt show <package> # show info about package
 vmstat # show resource usage
 git switch @{-1} # switch to previous branch
