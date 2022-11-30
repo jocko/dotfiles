@@ -4,9 +4,6 @@ Tested on Ubuntu 22.04
 
 ## TODO
 
- * Case-insensitive? (nice for :edit & :find at least)
- * Optimize `!@#$%^&*` stuff on my left hand when shifting layer with right hand. Think that `!$` should be placed on home row, in favour of `&` definately, but what else? Maybe have: `!^$*&`, and above have (starting at `w`): `@#%`)
- * ack-grep (as a complement to vimgrep)?
  * ctags for typescript (is this any good? https://github.com/jb55/typescript-ctags/blob/master/.ctags)
  * Make `mute` & `unmute` great again
  * See if I can find a sweet setup for jupyter-vim (vim-slime maybe?)
@@ -73,6 +70,10 @@ Create ~/bin:
 Install essential packages:
 
     sudo apt install -y build-essential curl direnv exuberant-ctags
+
+Link ctags config:
+
+    ln -sf ~/.dotfiles/ctags ~/.ctags
 
 Optionally, copy skeleton file(s):
 
