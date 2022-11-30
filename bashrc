@@ -24,7 +24,8 @@ fi
 # Rebinding C-w seem to do the trick. But before this can be done,
 # we have to do either `stty werase undef`, or put `set bind-tty-special-chars off`
 # in `.inputrc`.
-bind -m vi-insert '"\C-w":unix-word-rubout'
+bind -m vi-insert '"\C-w":backward-kill-word'
+# bind -m vi-insert '"\C-w":unix-word-rubout'
 # I don't have this mapped for regular vim, unbind it.
 bind -m vi-command -r "\C-w"
 
