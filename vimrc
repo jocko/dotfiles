@@ -78,6 +78,7 @@ set wildmenu
 set wildmode=longest:full,full
 " TODO Look at ack --dump for sensible ignore options to put here
 set wildignore+=.git,*.orig,package-lock.json
+set wildignorecase
 set scrolloff=5
 set undofile
 set backspace=indent,eol,start
