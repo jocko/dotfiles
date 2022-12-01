@@ -24,6 +24,7 @@ fi
 # Rebinding C-w seem to do the trick. But before this can be done,
 # we have to do either `stty werase undef`, or put `set bind-tty-special-chars off`
 # in `.inputrc`.
+# `backward-kill-word` behaves more like it it does in vim
 bind -m vi-insert '"\C-w":backward-kill-word'
 # bind -m vi-insert '"\C-w":unix-word-rubout'
 # I don't have this mapped for regular vim, unbind it.
@@ -74,6 +75,7 @@ if declare -f __git_complete > /dev/null; then
 fi
 
 PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]-\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
+# PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
 
 set -o vi
 

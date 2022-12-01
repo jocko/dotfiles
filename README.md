@@ -86,6 +86,9 @@ Optionally, symlink dircolors:
 
 ## Terminal Emulator
 
+TODO Note to self, currently trying out `gnome-terminal` again
+(experiencing some strange freezeups with `xfce4-terminal`)
+
 Install `xfce4-terminal` and make it the default:
 
     sudo apt install -y xfce4-terminal \
