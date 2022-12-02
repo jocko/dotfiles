@@ -2,7 +2,7 @@
 
 # apt install fonts-font-awesome
 
-pactl list sources | grep -q "Mute: yes" && [[ $? -eq 0 ]] && state="off";
+pactl get-source-mute @DEFAULT_SOURCE@ | grep -q "Mute: yes" && [[ $? -eq 0 ]] && state="off";
 
 
 case $state in
