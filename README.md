@@ -2,12 +2,6 @@
 
 Tested on Ubuntu 22.04
 
-## TODO
-
- * ctags for typescript (is this any good? https://github.com/jb55/typescript-ctags/blob/master/.ctags)
- * Make `mute` & `unmute` great again
- * See if I can find a sweet setup for jupyter-vim (vim-slime maybe?)
-
 ## Bootstrap
 
 Make sure `apt` is up to date and that `git` is installed.
@@ -292,7 +286,7 @@ List all input devices:
 
     xinput
 
-Likely, it is the input named *Synaptics XXXX*
+Likely, it is the input named something with *Synaptics*
 
     xinput list --name-only | grep -i synaptics
 

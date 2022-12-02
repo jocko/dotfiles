@@ -79,7 +79,7 @@ set wildmode=longest:full,full
 " TODO Look at ack --dump for sensible ignore options to put here
 " TODO These pattern are read by gutentags. Maybe turn this around and
 " whitelist stuff based on file type instead, seems safer.
-set wildignore+=.git,*.orig,package-lock.json,**/node_modules/**,**/build/**
+set wildignore+=.git,*.orig,package-lock.json,**/node_modules/**,**/build/**,**/target/**
 set wildignorecase
 set scrolloff=5
 set undofile
