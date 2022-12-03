@@ -81,6 +81,9 @@ set wildmode=longest:full,full
 " whitelist stuff based on file type instead, seems safer.
 set wildignore+=.git,*.orig,package-lock.json,**/node_modules/**,**/build/**,**/target/**
 set wildignorecase
+" TODO Evaluate ignorecase/smartcase
+set ignorecase
+set smartcase
 set scrolloff=5
 set undofile
 set backspace=indent,eol,start

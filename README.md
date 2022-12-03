@@ -40,6 +40,7 @@ version. For example:
 
 Link the vim config and create swap directory:
 
+    # TODO Should create swap dir from vimrc
     ln -sf ~/.dotfiles/vimrc ~/.vimrc && mkdir -p ~/.vim/swap
 
 Install Vundle:
@@ -226,7 +227,7 @@ Download latest ruby versions:
 
 Install ruby 3.1 (note: might take a while):
 
-    ruby-install ruby 3.1
+    ruby-install ruby 3.1 && echo 3.1 > ~/.ruby-version
 
 Download `chruby` (note: version is static):
 
@@ -342,7 +343,9 @@ TODO Read up on user lingering. Also, how does it relate to `KillUserProcesses`?
 
 ## Notes
 
-### Everyday use
+### Command-line
+
+Use the `o` alias (aliased to `xdg-open`).
 
 Use pgrep and pkill to look up and signal processes using pattern (in
 package `procps`).

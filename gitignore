@@ -14,6 +14,7 @@ ehthumbs.db
 *~
 \#*\#
 tags
+tags.lock
 
 /log/*.log
 /tmp
