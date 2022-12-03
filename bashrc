@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090,SC1091
 
-# TODO
-#
-# * Show status in terminal header (eg vim is editing file, or which dir I'm currently in)
-# * Somewhere, maybe not in this file, add -d by default to `git difftool`
-# * Spelling
-# * What to do with git and aliases. Keep using gd, gc etc or use git aliases instead? Both?
-
 case $- in
   *i*) ;;
   *) return;;
@@ -34,7 +27,6 @@ bind -m vi-command -r "\C-w"
 
 HISTSIZE=5000
 HISTFILESIZE=10000
-# TODO Should I have ignoreboth:erasedups?
 HISTCONTROL=ignoreboth
 
 # Will for example suggest --allow-empty when doing completion for git commit
