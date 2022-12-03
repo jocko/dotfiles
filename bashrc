@@ -2,10 +2,11 @@
 # shellcheck disable=SC1090,SC1091
 
 # TODO
-# Show status in terminal header (eg vim is editing file, or which dir I'm currently in)
-# Somewhere, maybe not in this file, add -d by default to `git difftool`
-# Spelling
-# What to do with git and aliases. Keep using gd, gc etc or use git aliases instead? Both?
+#
+# * Show status in terminal header (eg vim is editing file, or which dir I'm currently in)
+# * Somewhere, maybe not in this file, add -d by default to `git difftool`
+# * Spelling
+# * What to do with git and aliases. Keep using gd, gc etc or use git aliases instead? Both?
 
 case $- in
   *i*) ;;
@@ -85,6 +86,9 @@ stty -ixon
 if [ -f ~/.dircolors ]; then
   eval "$(dircolors ~/.dircolors)"
 fi
+
+[ -f /usr/local/share/chruby/chruby.sh ] && source /usr/local/share/chruby/chruby.sh
+[ -f /usr/local/share/chruby/auto.sh ] && source /usr/local/share/chruby/auto.sh
 
 command -v direnv > /dev/null && eval "$(direnv hook bash)"
 
