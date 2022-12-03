@@ -17,6 +17,8 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   . /etc/bash_completion
 fi
 
+set -o vi
+
 # By default, C-w behaves a bit strange in vi mode.
 #
 #   echo foo bar # C-w here, would not do anything (either in command or insert mode)
@@ -25,9 +27,8 @@ fi
 # Rebinding C-w seem to do the trick. But before this can be done,
 # we have to do either `stty werase undef`, or put `set bind-tty-special-chars off`
 # in `.inputrc`.
-# `backward-kill-word` behaves more like it it does in vim
-bind -m vi-insert '"\C-w":backward-kill-word'
-# bind -m vi-insert '"\C-w":unix-word-rubout'
+# bind -m vi-insert '"\C-w":backward-kill-word'
+bind -m vi-insert '"\C-w":unix-word-rubout'
 # I don't have this mapped for regular vim, unbind it.
 bind -m vi-command -r "\C-w"
 
@@ -75,10 +76,13 @@ if declare -f __git_complete > /dev/null; then
   alias gca!="git commit -v -a --amend"
 fi
 
+# function prompt {
+#    PS1=' > '
+#    echo -e "$(date +%R)  $PWD"
+# }
+# PROMPT_COMMAND='prompt'
 PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]-\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
 # PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
-
-set -o vi
 
 # Turns off terminal suspend feature (<C-s> which freezes everything)
 stty -ixon

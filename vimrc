@@ -117,6 +117,9 @@ if !isdirectory(expand(&undodir))
 endif
 
 set directory=~/.vim/swap//
+if !isdirectory(expand(&directory))
+  call mkdir(expand(&directory), "p")
+endif
 
 " TODO What is this?
 set t_ZH=[3m

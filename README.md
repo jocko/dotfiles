@@ -40,8 +40,7 @@ version. For example:
 
 Link the vim config and create swap directory:
 
-    # TODO Should create swap dir from vimrc
-    ln -sf ~/.dotfiles/vimrc ~/.vimrc && mkdir -p ~/.vim/swap
+    ln -sf ~/.dotfiles/vimrc ~/.vimrc
 
 Install Vundle:
 
