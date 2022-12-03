@@ -76,6 +76,12 @@ if declare -f __git_complete > /dev/null; then
   alias gca!="git commit -v -a --amend"
 fi
 
+# Shows pwd in terminal title
+function my_prompt_command() {
+  echo -en "\033]0;$(dirs)\a"
+}
+PROMPT_COMMAND=my_prompt_command
+
 PS1='\e[33m[\w]\e[0m\n '
 
 # Turns off terminal suspend feature (<C-s> which freezes everything)
