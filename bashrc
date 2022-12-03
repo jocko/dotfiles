@@ -76,8 +76,7 @@ if declare -f __git_complete > /dev/null; then
   alias gca!="git commit -v -a --amend"
 fi
 
-# PS1='\[\e[0;32m\][\[\e[0;32m\]\w\[\e[0;32m\]]\n\[\e[0;34m\]-\[\e[0;34m\]> \[\e[0m\]\$ \[\e[0m\]'
-PS1='\e[33m[\w]\e[0m\n> \$ '
+PS1='\e[33m[\w]\e[0m\n '
 
 # Turns off terminal suspend feature (<C-s> which freezes everything)
 stty -ixon

@@ -7,7 +7,8 @@ set bind-tty-special-chars off
 set completion-ignore-case on
 
 set show-mode-in-prompt on
-set vi-ins-mode-string -
+# Don't use color escapes here! It should work, but it doesn't. And I don't know why.
+set vi-ins-mode-string -> $
 set vi-cmd-mode-string :
 # set vi-ins-mode-string \e[34m-
 # set vi-cmd-mode-string \e[34m:
