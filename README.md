@@ -59,7 +59,7 @@ Link custom vim `after`:
 
 Create dirs in home:
 
-    mkdir ~/bin ~/repos
+    mkdir ~/bin ~/repos ~/src
 
 Install essential packages:
 
@@ -321,12 +321,7 @@ Make it persistent:
 
 ### User lingering
 
-User lingering supposedly allows processes to run even after the user
-has logged out. My problem with this was related to environment variables
-and how they just kept on piling up. As an example, sourcing the default
-`~/.profile` will add two new entries, `~/bin` and `~/.local/bin`, to the
-`$PATH`. Doing this multiple times is probably quite harmless, but very
-much not something I want. Fortunately, the feature can be disabled.
+If you notice that `$PATH` contains many entries for `~/bin` and `~/.local/bin`.
 
 Check if user lingering is enabled:
 
@@ -340,62 +335,3 @@ TODO Read up on user lingering. Also, how does it relate to `KillUserProcesses`?
 
     loginctl show-user --property=KillUserProcesses
 
-## Notes
-
-### Command-line
-
-Use the `o` alias (aliased to `xdg-open`).
-
-Use pgrep and pkill to look up and signal processes using pattern (in
-package `procps`).
-
-Use `git switch -` to switch to previous branch.
-
-Use `apt-file search pattern` to search for package providing `pattern`
-(e.g. `apt-file search [/usr/bin/]pgrep`).
-
-Use `dpkg -L package` to list files installed from `package`.
-
-Use `apt show package` to show info about `package`.
-
-### Vim
-
-
-Yank something with y. In insert mode, paste with <C-r>0
-
-In insert mode, evaluate something and insert result with <C-r>= (e.g. <C-r>=60*5)
-
-Make lower- & upper case with gu and gU, eg gUw
-
-Execute command for visual selection, e.g. norm I// (i.e. comment out selected lines)
-
-{ "foo": 42 }
-
-:fin[d] to open files. Supports globbing, e.g. `**core<TAB>` or `*.clj<TAB>`
-
-:b <something-unique-for-buffer> to go to open buffer (:ls lists open buffers)
-
-Filter/pipe to external program, e.g. current line with :.!jq '.' (jq -c '.' makes json compact again)
-{"answer":42}
-
-To filter but keep original, copy to a new line before filter (i.e. yyp, then filter on new line)
-{"answer":42}
-
-Use / to search, C-g/C-t navigates between matches
-
-Use gf to go to file under cursor. [<C-i> to goto definition. [i or :is[earch] /pattern to show first line that contains keyword. Study this! => https://vimways.org/2018/death-by-a-thousand-files/
-
-Useful links
-https://www.integralist.co.uk/posts/vim/
-https://gist.github.com/romainl/4b9f139d2a8694612b924322de1025ce
-
-gE  go backwards to end of prev word
-gI  like "I", but always go to col 1
-J   join line
-gJ  join with next line, no space
-K   look up keyword under cursor (might be useful if configured)
-~   switches case of char under cursor
-!!  in normal mode, same as :.!
-gx  xdg-open thing under cursor
-
-Learn :vimgrep & :arglist (see vimcasts)
