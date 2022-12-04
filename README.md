@@ -12,7 +12,7 @@ If necessary, generate a new SSH key:
 
 Clone the dotfiles repo:
 
-    git clone git@github.com:jocko/dotfiles-v2.git ~/.dotfiles
+    git clone git@github.com:jocko/dotfiles.git ~/.dotfiles
 
 Link the git config:
 
