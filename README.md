@@ -63,11 +63,7 @@ Create dirs in home:
 
 Install essential packages:
 
-    sudo apt install -y build-essential curl direnv exuberant-ctags
-
-Link ctags config:
-
-    ln -sf ~/.dotfiles/ctags ~/.ctags
+    sudo apt install -y build-essential curl direnv
 
 Optionally, copy skeleton file(s):
 
@@ -197,6 +193,28 @@ Pin it:
 Install `firefox`:
 
     sudo apt install -y firefox
+
+## Ctags
+
+### exuberant-ctags
+
+Install:
+
+    sudo apt install -y exuberant-ctags
+
+Link config:
+
+    ln -sf ~/.dotfiles/ctags ~/.ctags
+
+### universal-ctags
+
+Install:
+
+    sudo apt install -y universal-ctags && mkdir ~/.ctags.d/
+
+Configure:
+
+    echo --langmap=TypeScript:.ts.tsx > ~/.ctags.d/typescript.ctags
 
 ## Python
 
