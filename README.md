@@ -105,8 +105,9 @@ Install `gnome-terminal` and make it the default (by default, it is the default)
 
 Install color scheme:
 
-    git clone git@github.com:Gogh-Co/Gogh.git ~/repos
+    git clone git@github.com:Gogh-Co/Gogh.git ~/repos/Gogh
 
+TODO Currently, this doesn't work in vimterminal
     pushd ~/repos/Gogh/themes \
         && ./gruvbox-dark.sh && popd
 
