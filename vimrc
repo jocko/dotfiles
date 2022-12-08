@@ -100,6 +100,8 @@ set incsearch
 set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
+" This is useful, but throws off j/k movement with count (if there are any
+" wrapped lines between). See gj/gk which operates on display lines instead.
 set wrap
 set nrformats=bin,hex,unsigned
 set cursorline
@@ -131,11 +133,11 @@ if !isdirectory(expand(&directory))
 endif
 
 " TODO What is this?
-set t_ZH=[3m
-set t_ZR=[23m
+"set t_ZH=[3m
+"set t_ZR=[23m
 
 let mapleader=" "
-let maplocalleader=","
+" let maplocalleader=","
 
 " TODO Clean up
 autocmd FileType typescript.tsx setlocal noexpandtab shiftwidth=2
@@ -174,6 +176,8 @@ runtime! macros/matchit.vim
 " This makes * stay on the word instead of jumping to the next one.
 " TODO But seem to clash with my auto clearing hlsearch stuff
 " nnoremap * *N
+
+" TODO goto last/first
 " Navigate prev/next quickfix errors
 nnoremap <silent> [q :cprevious<CR>
 nnoremap <silent> ]q :cnext<CR>
