@@ -85,11 +85,8 @@ set hidden
 set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
-" TODO Look at ack --dump for sensible ignore options to put here
-" TODO These pattern are read by gutentags. Maybe turn this around and
-" whitelist stuff based on file type instead, seems safer.
-set wildignore+=.git,*.orig,package-lock.json,**/node_modules/**,**/build/**,**/target/**
 set wildignorecase
+set wildoptions=pum,fuzzy
 " TODO Evaluate ignorecase/smartcase
 set ignorecase
 set smartcase
@@ -97,7 +94,7 @@ set scrolloff=5
 set undofile
 set backspace=indent,eol,start
 set incsearch
-set hlsearch
+" set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
 " This is useful, but throws off j/k movement with count (if there are any
@@ -119,8 +116,19 @@ let g:http_client_result_vsplit = 0
 let g:http_client_preserve_responses = 1
 let g:slime_target = "vimterminal"
 let g:pandoc#modules#disabled = ["folding"]
-
-
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['package.json']
+let g:gutentags_file_list_command = {
+            \ 'markers': {
+            \ 'package.json': 'ack -f --no-filter -t ts -t js',
+            \ },
+            \ }
+let g:gutentags_ctags_exclude_wildignore = 0
+let g:gutentags_ctags_exclude = []
+let g:gutentags_ctags_exclude += ['*.test.ts']
+let g:gutentags_ctags_extra_args = []
+let g:gutentags_ctags_extra_args += ['--TypeScript-kinds=-p']
 
 set undodir=~/.vim/undo
 if !isdirectory(expand(&undodir))
@@ -132,45 +140,18 @@ if !isdirectory(expand(&directory))
   call mkdir(expand(&directory), "p")
 endif
 
-" TODO What is this?
-"set t_ZH=[3m
-"set t_ZR=[23m
-
 let mapleader=" "
-" let maplocalleader=","
 
 " TODO Clean up
-autocmd FileType typescript.tsx setlocal noexpandtab shiftwidth=2
-autocmd FileType typescript setlocal noexpandtab shiftwidth=2
-autocmd FileType typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
-autocmd FileType javascript.jsx setlocal noexpandtab shiftwidth=2
-autocmd FileType javascript setlocal noexpandtab shiftwidth=2
-autocmd FileType less setlocal noexpandtab shiftwidth=2
-autocmd FileType scss setlocal noexpandtab shiftwidth=2
-autocmd FileType sh setlocal expandtab tabstop=2 shiftwidth=2
+" autocmd FileType typescript.tsx setlocal noexpandtab shiftwidth=2
+" autocmd FileType typescript setlocal noexpandtab shiftwidth=2
+" autocmd FileType typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
+" autocmd FileType javascript.jsx setlocal noexpandtab shiftwidth=2
+" autocmd FileType javascript setlocal noexpandtab shiftwidth=2
+" autocmd FileType less setlocal noexpandtab shiftwidth=2
+" autocmd FileType scss setlocal noexpandtab shiftwidth=2
+" autocmd FileType sh setlocal expandtab tabstop=2 shiftwidth=2
 
-" TODO Practice this
-" map <leader>o :Files<CR>
-
-" TODO Use :grep instead
-" if executable('ag')
-"   let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-"   let g:ackprg = 'ag --vimgrep --smart-case' 
-" endif
-" nnoremap <leader>s :Ack! ""<Left>
-
-" TODO Need this?
-" Switch to other window
-" nnoremap <leader><Tab> <c-w>w
-" Or, the same thing, but emacs style. The jury is still out...
-" nnoremap <c-x>o <c-w>p
-
-" Jump to tag, show list if multiple tags
-" TODO Need this?
-" nnoremap <c-]> g<c-]>
-" vnoremap <c-]> g<c-]>
-
-" TODO What is this?
 runtime! macros/matchit.vim
 
 " This makes * stay on the word instead of jumping to the next one.
@@ -182,11 +163,11 @@ runtime! macros/matchit.vim
 nnoremap <silent> [q :cprevious<CR>
 nnoremap <silent> ]q :cnext<CR>
 " Clear search higlight
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+" nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " Clear hlsearch automatically
-augroup vimrc-incsearch-highlight
-  autocmd!
-  autocmd CmdlineEnter [/\?] :set hlsearch
-  autocmd CmdlineLeave [/\?] :set nohlsearch
-augroup END
+" augroup vimrc-incsearch-highlight
+"   autocmd!
+"   autocmd CmdlineEnter [/\?] :set hlsearch
+"   autocmd CmdlineLeave [/\?] :set nohlsearch
+" augroup END
