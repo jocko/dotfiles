@@ -63,7 +63,7 @@ Create dirs in home:
 
 Install essential packages:
 
-    sudo apt install -y build-essential curl direnv
+    sudo apt install -y build-essential curl direnv ack
 
 Optionally, copy skeleton file(s):
 
@@ -197,6 +197,9 @@ Install `firefox`:
 
 ## Ctags
 
+Choose either `exuberant-ctags` or `universal-ctags`. I'm currently using
+`universal-ctags`.
+
 ### exuberant-ctags
 
 Install:
@@ -213,9 +216,9 @@ Install:
 
     sudo apt install -y universal-ctags && mkdir ~/.ctags.d/
 
-Configure:
+Link config:
 
-    echo --langmap=TypeScript:.ts.tsx > ~/.ctags.d/typescript.ctags
+    ln -sf ~/.dotfiles/typescript.ctags ~/.ctags.d/typescript.ctags
 
 ## Python
 
