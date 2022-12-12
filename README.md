@@ -272,8 +272,6 @@ Install it:
 
     sudo apt install -y fzf
 
-    sudo apt install -y scrot
-
     sudo apt install -y pcmanfm \
         && xdg-mime default pcmanfm.desktop inode/directory
 
@@ -340,20 +338,4 @@ Make it persistent:
 
     echo xinput set-prop \""$(xinput list --name-only | grep -i synaptics)"\" \"libinput Tapping Enabled\" 1 \
         >> ~/.xsessionrc
-
-### User lingering
-
-If you notice that `$PATH` contains many entries for `~/bin` and `~/.local/bin`.
-
-Check if user lingering is enabled:
-
-    loginctl show-user 1000 --property=Linger
-
-If so, disable it:
-
-    loginctl disable-linger 1000
-
-TODO Read up on user lingering. Also, how does it relate to `KillUserProcesses`?
-
-    loginctl show-user --property=KillUserProcesses
 
