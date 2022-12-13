@@ -30,8 +30,13 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
 
   " Language specific stuff
   Plugin 'vim-ruby/vim-ruby'
-  Plugin 'pangloss/vim-javascript'
+
+  " TODO Figure out this JS/TypeScript stuff. What do I need here????
+  " Plugin 'pangloss/vim-javascript'
   Plugin 'leafgarland/typescript-vim'
+  " Plugin 'yuezk/vim-js'
+  " Makes indentation bueno (for typescript at least)
+  " Plugin 'maxmellon/vim-jsx-pretty'
 
   " TODO What are the 'native' alternatives to this?
   " Plugin 'mileszs/ack.vim'
@@ -90,6 +95,7 @@ set wildoptions=pum,fuzzy
 " TODO Evaluate ignorecase/smartcase
 set ignorecase
 set smartcase
+set tagcase=match
 set scrolloff=5
 set undofile
 set backspace=indent,eol,start
