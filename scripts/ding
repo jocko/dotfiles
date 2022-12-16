@@ -1,0 +1,6 @@
+#!/bin/bash
+
+"$@"
+lastexit=$?
+notify-send -a "><(((('>" -u critical "$*"
+exit "$lastexit"

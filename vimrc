@@ -161,7 +161,6 @@ runtime! macros/matchit.vim
 " TODO But seem to clash with my auto clearing hlsearch stuff
 " nnoremap * *N
 
-" TODO goto last/first
 " Navigate prev/next quickfix errors
 nnoremap <silent> [a :previous<CR>
 nnoremap <silent> ]a :next<CR>

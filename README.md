@@ -107,9 +107,8 @@ Install color scheme:
 
     git clone git@github.com:Gogh-Co/Gogh.git ~/repos/Gogh
 
-TODO Currently, this doesn't work in vimterminal
     pushd ~/repos/Gogh/themes \
-        && ./gruvbox-dark.sh && popd
+        && TERMINAL=gnome-terminal ./gruvbox-dark.sh && popd
 
 In `gnome-terminal`, Right click and open `Preferences`. Under `General`,
 uncheck `Show menubar by default in new terminals`. Select `Gruvbox
@@ -166,9 +165,9 @@ Link config:
 
     ln -sf ~/.dotfiles/i3blocks.conf ~/.i3blocks.conf
 
-TODO install dunst
+Install dunst
 
-    ...
+    sudo apt install -y dunst
 
 Link config:
 
@@ -176,7 +175,7 @@ Link config:
 
 Try it out:
 
-    ding Ermahgerd!
+    ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ding echo Ermahgerd!
 
 ## Firefox
 
