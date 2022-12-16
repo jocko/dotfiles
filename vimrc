@@ -31,12 +31,9 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   " Language specific stuff
   Plugin 'vim-ruby/vim-ruby'
 
-  " TODO Figure out this JS/TypeScript stuff. What do I need here????
   " Plugin 'pangloss/vim-javascript'
   Plugin 'leafgarland/typescript-vim'
-  " Plugin 'yuezk/vim-js'
-  " Makes indentation bueno (for typescript at least)
-  " Plugin 'maxmellon/vim-jsx-pretty'
+  Plugin 'maxmellon/vim-jsx-pretty'
 
   " TODO What are the 'native' alternatives to this?
   " Plugin 'mileszs/ack.vim'
@@ -166,8 +163,14 @@ runtime! macros/matchit.vim
 
 " TODO goto last/first
 " Navigate prev/next quickfix errors
+nnoremap <silent> [a :previous<CR>
+nnoremap <silent> ]a :next<CR>
+nnoremap <silent> [A :first<CR>
+nnoremap <silent> ]A :last<CR>
 nnoremap <silent> [q :cprevious<CR>
 nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [Q :cfirst<CR>
+nnoremap <silent> ]Q :clast<CR>
 " Clear search higlight
 " nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
