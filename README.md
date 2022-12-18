@@ -185,14 +185,16 @@ Add PPA:
 
     sudo add-apt-repository ppa:mozillateam/ppa
 
-Pin it:
+Lower priority of snap package:
 
-    echo -e "Package: *\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001" \
+    echo -e "Package: firefox*\nPin: release o=Ubuntu*\nPin-Priority: -1" \
         | sudo tee /etc/apt/preferences.d/mozilla-firefox
 
 Install `firefox`:
 
     sudo apt install -y firefox
+
+TODO unattended upgrades?
 
 ## Ctags
 

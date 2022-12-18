@@ -6,44 +6,38 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
 
   Plugin 'VundleVim/Vundle.vim'
 
-  " TODO Can I make a delete-list movement? Eg delete `bar,` or `baz` from (/[foo, bar, baz]/), what about maps/dicts?
-
-  " Git wrapper
   Plugin 'tpope/vim-fugitive'
+
+  Plugin 'aquach/vim-http-client'
+  Plugin 'jpalardy/vim-slime'
+  Plugin 'ludovicchabant/vim-gutentags'
   " Reopen files at last edit position
   " TODO I believe this can be done without plugins
-  Plugin 'farmergreg/vim-lastplace'
-  " Automatically add end statements. `end` after `def` in Ruby for example
-  Plugin 'tpope/vim-endwise.git'
+  " Plugin 'farmergreg/vim-lastplace'
 
-  Plugin 'junegunn/fzf'
-  Plugin 'junegunn/fzf.vim'
+  " TODO Evaluate NOT using this
+  " Plugin 'junegunn/fzf'
+  " Plugin 'junegunn/fzf.vim'
 
   " Themes
   Plugin 'morhetz/gruvbox'
   Plugin 'liuchengxu/space-vim-dark'
   Plugin 'arcticicestudio/nord-vim'
 
-  " Nice to have stuff
-  Plugin 'aquach/vim-http-client'
-  Plugin 'jpalardy/vim-slime'
 
   " Language specific stuff
   Plugin 'vim-ruby/vim-ruby'
-
-  " Plugin 'pangloss/vim-javascript'
   Plugin 'leafgarland/typescript-vim'
   Plugin 'maxmellon/vim-jsx-pretty'
 
-  " TODO What are the 'native' alternatives to this?
-  " Plugin 'mileszs/ack.vim'
+  " Automatically add end statements. `end` after `def` in Ruby for example
+  Plugin 'tpope/vim-endwise.git'
+  " Comment stuff out
   Plugin 'tpope/vim-commentary'
-  Plugin 'tpope/vim-surround'
 
   " TODO Evaluate
   Plugin 'vim-pandoc/vim-pandoc'
   Plugin 'vim-pandoc/vim-pandoc-syntax'
-  Plugin 'ludovicchabant/vim-gutentags'
 
   call vundle#end()
 endif
@@ -67,18 +61,24 @@ endif
 
 " Automatically reread files that have changed outside vim
 set autoread
-" autocmd FocusGained,BufEnter * if mode() != 'c' | checktime | endif
 augroup auto_checktime
   autocmd!
-  " Notify if file is changed outside of vim
-  " Trigger `checktime` when files changes on disk
   " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
   " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
   autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
           \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
 augroup END
 
-set tabstop=4 shiftwidth=4
+" Jump to the last known cursor position
+augroup lastplace
+  au!
+  autocmd BufReadPost *
+        \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+        \ |   exe "normal! g`\""
+        \ | endif
+augroup END
+
+set tabstop=2 shiftwidth=2
 set expandtab
 set number
 set ttimeout
@@ -89,7 +89,6 @@ set wildmenu
 set wildmode=longest:full,full
 set wildignorecase
 set wildoptions=pum,fuzzy
-" TODO Evaluate ignorecase/smartcase
 set ignorecase
 set smartcase
 set tagcase=match
@@ -145,21 +144,7 @@ endif
 
 let mapleader=" "
 
-" TODO Clean up
-" autocmd FileType typescript.tsx setlocal noexpandtab shiftwidth=2
-" autocmd FileType typescript setlocal noexpandtab shiftwidth=2
-" autocmd FileType typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
-" autocmd FileType javascript.jsx setlocal noexpandtab shiftwidth=2
-" autocmd FileType javascript setlocal noexpandtab shiftwidth=2
-" autocmd FileType less setlocal noexpandtab shiftwidth=2
-" autocmd FileType scss setlocal noexpandtab shiftwidth=2
-" autocmd FileType sh setlocal expandtab tabstop=2 shiftwidth=2
-
 runtime! macros/matchit.vim
-
-" This makes * stay on the word instead of jumping to the next one.
-" TODO But seem to clash with my auto clearing hlsearch stuff
-" nnoremap * *N
 
 " Navigate prev/next quickfix errors
 nnoremap <silent> [a :previous<CR>
@@ -170,12 +155,4 @@ nnoremap <silent> [q :cprevious<CR>
 nnoremap <silent> ]q :cnext<CR>
 nnoremap <silent> [Q :cfirst<CR>
 nnoremap <silent> ]Q :clast<CR>
-" Clear search higlight
-" nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
-" Clear hlsearch automatically
-" augroup vimrc-incsearch-highlight
-"   autocmd!
-"   autocmd CmdlineEnter [/\?] :set hlsearch
-"   autocmd CmdlineLeave [/\?] :set nohlsearch
-" augroup END

@@ -46,11 +46,6 @@ alias fmt="fmt --width=80"
 alias grep="grep --color=auto"
 alias ls="ls --color=auto"
 
-# TODO Trying out scripts/ding instead
-# function ding() {
-#   notify-send -a "><(((('>" -u critical "$(history 1)"
-# }
-
 # Set up git aliases and auto completion (if necessary)
 if declare -f __git_complete > /dev/null; then
   alias g="git"
