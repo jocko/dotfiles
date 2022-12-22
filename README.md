@@ -227,6 +227,10 @@ Install `python3` and make `python` point to it:
 
     sudo apt install -y python3-pip python3-venv python-is-python3
 
+Optionally, install `pgcli`
+
+    sudo apt install libpq-dev && pip install --user pgcli
+
 ## Ruby
 
 Download `ruby-install` (note: version is static):
