@@ -12,6 +12,8 @@ fi
 
 set -o vi
 
+# TODO ssh-agent
+
 # By default, C-w behaves a bit strange in vi mode.
 #
 #   echo foo bar # C-w here, would not do anything (either in command or insert mode)
