@@ -11,13 +11,6 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'aquach/vim-http-client'
   Plugin 'jpalardy/vim-slime'
   Plugin 'ludovicchabant/vim-gutentags'
-  " Reopen files at last edit position
-  " TODO I believe this can be done without plugins
-  " Plugin 'farmergreg/vim-lastplace'
-
-  " TODO Evaluate NOT using this
-  " Plugin 'junegunn/fzf'
-  " Plugin 'junegunn/fzf.vim'
 
   " Themes
   Plugin 'morhetz/gruvbox'
