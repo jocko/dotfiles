@@ -8,6 +8,7 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
 
   Plugin 'tpope/vim-fugitive'
 
+  " TODO Probably use httpie + slime instead
   Plugin 'aquach/vim-http-client'
   Plugin 'jpalardy/vim-slime'
   Plugin 'ludovicchabant/vim-gutentags'
@@ -113,10 +114,11 @@ let g:slime_target = "vimterminal"
 let g:pandoc#modules#disabled = ["folding"]
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['package.json']
+let g:gutentags_project_root = ['package.json', 'Gemfile']
 let g:gutentags_file_list_command = {
             \ 'markers': {
             \ 'package.json': 'ack -f --no-filter -t ts -t js',
+            \ 'Gemfile': 'ack -f --no-filter -t ruby',
             \ },
             \ }
 let g:gutentags_ctags_exclude_wildignore = 0
