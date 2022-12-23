@@ -269,6 +269,22 @@ Install it:
         && sudo make install \
         && popd
 
+## ssh-agent
+
+Create systemd service:
+
+    mkdir -p ~/.config/systemd/user \
+        && ln -sf ~/.dotfiles/ssh-agent.service ~/.config/systemd/user/ssh-agent.service
+
+Make it start automatically:
+
+    systemctl --user enable ssh-agent \
+        && systemctl --user start ssh-agent
+
+Make the ssh client add keys to the running agent:
+
+    echo "AddKeysToAgent yes" >>  ~/.ssh/config
+
 ## Extras
 
     sudo apt install -y httpie
