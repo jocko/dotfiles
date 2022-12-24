@@ -4,6 +4,9 @@ Tested on Ubuntu 22.04
 
 ## Bootstrap
 
+TODO Is `xdg-utils` installed on a fresh system? Need `xdg-mime` command
+TODO Is `zip` & `unzip` installed on a fresh system?
+
 Make sure `apt` is up to date and that `git` is installed.
 
 If necessary, generate a new SSH key:
@@ -63,7 +66,7 @@ Create dirs in home:
 
 Install essential packages:
 
-    sudo apt install -y build-essential curl direnv ack
+    sudo apt install -y build-essential curl direnv ack wget
 
 Optionally, copy skeleton file(s):
 
@@ -165,11 +168,8 @@ Link config:
 
     ln -sf ~/.dotfiles/i3blocks.conf ~/.i3blocks.conf
 
-Install dunst
-
-    sudo apt install -y dunst
-
-Link config:
+Link `dunst` config (`dunst` is recommended by `i3`, so it should already be
+installed):
 
     mkdir -p ~/.config/dunst && ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
 
@@ -229,7 +229,7 @@ Install `python3` and make `python` point to it:
 
 Optionally, install `pgcli`
 
-    sudo apt install libpq-dev && pip install --user pgcli
+    sudo apt install -y libpq-dev && pip install --user pgcli
 
 ## Ruby
 

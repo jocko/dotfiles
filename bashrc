@@ -21,7 +21,7 @@ set -o vi
 # we have to do either `stty werase undef`, or put `set bind-tty-special-chars off`
 # in `.inputrc`.
 bind -m vi-insert '"\C-w":unix-word-rubout'
-# I don't have this mapped for regular vim, unbind it.
+# Unbind CTRL-w for command mode
 bind -m vi-command -r "\C-w"
 
 HISTSIZE=5000
