@@ -41,7 +41,7 @@ version. For example:
 
     sudo apt install -y vim-gtk3
 
-Link the vim config and create swap directory:
+Link the vim config:
 
     ln -sf ~/.dotfiles/vimrc ~/.vimrc
 
@@ -82,6 +82,9 @@ Optionally, symlink dircolors:
 Install font of choice:
 
     sudo apt install -y fonts-hack-ttf
+
+Choose either `xfce4-terminal` or `gnome-terminal`. I'm currently using
+`gnome-terminal`.
 
 ### xfce4-terminal
 
