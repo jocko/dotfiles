@@ -4,9 +4,6 @@ Tested on Ubuntu 22.04
 
 ## Bootstrap
 
-TODO Is `xdg-utils` installed on a fresh system? Need `xdg-mime` command
-TODO Is `zip` & `unzip` installed on a fresh system?
-
 Make sure `apt` is up to date and that `git` is installed.
 
 If necessary, generate a new SSH key:
@@ -26,10 +23,6 @@ Note that `gitconfig` doesn't specify `user.email`. Instead, set this
 system wide:
 
     sudo git config --system user.email "<email>"
-
-Link bash config
-
-    link -sf ~/.dotfiles/bashrc ~/.bashrc
 
 When it comes to vim, there are a couple of options. Package `vim`
 works okay, but doesn't have `xterm_clipboard` (can be checked in vim
@@ -56,6 +49,14 @@ vim. Launch a `:terminal` and do `<C-c><C-c>` below:
 
     sudo pwd
 
+Link bash config
+
+    ln -sf ~/.dotfiles/bashrc ~/.bashrc
+
+Link readline config:
+
+    ln -sf ~/.dotfiles/inputrc ~/.inputrc
+
 Link custom vim `after`:
 
     ln -sf ~/.dotfiles/vim/after ~/.vim/after
@@ -76,52 +77,6 @@ Optionally, copy skeleton file(s):
 Optionally, symlink dircolors:
 
     ln -sf ~/.dotfiles/dircolors ~/.dircolors
-
-## Terminal Emulator
-
-Install font of choice:
-
-    sudo apt install -y fonts-hack-ttf
-
-Choose either `xfce4-terminal` or `gnome-terminal`. I'm currently using
-`gnome-terminal`.
-
-### xfce4-terminal
-
-Install `xfce4-terminal` and make it the default:
-
-    sudo apt install -y xfce4-terminal \
-        && sudo update-alternatives --config x-terminal-emulator
-
-Install color scheme:
-
-    cp ~/.dotfiles/skel/xfce4-gruvbox-dark.theme \
-        ~/.local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme
-
-In `xfce4-terminal`, right click and uncheck `Show Menubar`. Right click
-again and open `Preferences...`. Under the `Appearance` tab, set font to
-`Hack Regular 14`. Under the `Colors` tab, load preset `gruvbox dark`.
-
-### GNOME Terminal
-
-Install `gnome-terminal` and make it the default (by default, it is the default):
-
-    sudo apt install -y gnome-terminal \
-        && sudo update-alternatives --config x-terminal-emulator
-
-Install color scheme:
-
-    git clone git@github.com:Gogh-Co/Gogh.git ~/repos/Gogh
-
-    pushd ~/repos/Gogh/themes \
-        && TERMINAL=gnome-terminal ./gruvbox-dark.sh && popd
-
-In `gnome-terminal`, Right click and open `Preferences`. Under `General`,
-uncheck `Show menubar by default in new terminals`. Select `Gruvbox
-Dark` profile. Under `Text` tab, set `Custom font` to `Hack Regular 14`
-and uncheck `Terminal bell`. Under the `Scrolling` tab, uncheck `Show
-scrollbar`. To make the theme the default, click the little `v` on the
-theme name and select `Set as default`.
 
 ## Window Manager
 
@@ -149,7 +104,7 @@ Update apt and install `i3`:
 
 Link config:
 
-    ln -sf ~/.dotfiles/i3.config ~/.config/i3/config 
+    mkdir ~/.config/i3 && ln -sf ~/.dotfiles/i3.config ~/.config/i3/config 
 
 Install `rofi` (dmenu replacement)
 
@@ -180,6 +135,51 @@ Try it out:
 
     ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ding echo Ermahgerd!
 
+## Terminal Emulator
+
+Install font of choice:
+
+    sudo apt install -y fonts-hack-ttf
+
+Choose either `xfce4-terminal` or `gnome-terminal`. I'm currently using
+`gnome-terminal`.
+
+### xfce4-terminal
+
+Install `xfce4-terminal` and make it the default:
+
+    sudo apt install -y xfce4-terminal \
+        && sudo update-alternatives --config x-terminal-emulator
+
+Install color scheme:
+
+    cp ~/.dotfiles/skel/xfce4-gruvbox-dark.theme \
+        ~/.local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme
+
+In `xfce4-terminal`, right click and uncheck `Show Menubar`. Right click
+again and open `Preferences...`. Under the `Appearance` tab, set font to
+`Hack Regular 14`. Under the `Colors` tab, load preset `gruvbox dark`.
+
+### GNOME Terminal
+
+Optionally, make `gnome-terminal` the default (by default, it is the default):
+
+    sudo update-alternatives --config x-terminal-emulator
+
+Install color scheme:
+
+    git clone git@github.com:Gogh-Co/Gogh.git ~/repos/Gogh
+
+    pushd ~/repos/Gogh/themes \
+        && TERMINAL=gnome-terminal ./gruvbox-dark.sh && popd
+
+In `gnome-terminal`, Right click and open `Preferences`. Under `General`,
+uncheck `Show menubar by default in new terminals` (note that this option is
+not visible under Gnome). Select `Gruvbox Dark` profile. Under `Text` tab, set
+`Custom font` to `Hack Regular 14` and uncheck `Terminal bell`. Under the
+`Scrolling` tab, uncheck `Show scrollbar`. To make the theme the default, click
+the little `v` on the theme name and select `Set as default`.
+
 ## Firefox
 
 This installs a non-snap version of Firefox.
@@ -198,6 +198,10 @@ Install `firefox`:
     sudo apt install -y firefox
 
 TODO unattended upgrades?
+
+Optionally, remove snap:
+
+    sudo snap remove firefox
 
 ## Ctags
 
