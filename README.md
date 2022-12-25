@@ -167,14 +167,17 @@ On a fresh Ubuntu install, `gnome-terminal` is the default. If not, configure it
 
     sudo update-alternatives --config x-terminal-emulator
 
+Install prequisites:
+
+    sudo apt install -y gconf2
+
 Install color scheme:
-TODO is `apt install gconf2` needed?
-TODO is `apt install dconf-cli` needed?
-TODO Can I do this withouth git clone?
 
-    git clone git@github.com:Gogh-Co/Gogh.git ~/repos/Gogh
+    git clone git@github.com:Gogh-Co/Gogh.git ~/repos/gogh
 
-    pushd ~/repos/Gogh/themes \
+TODO Try to make this work on the first try
+
+    pushd ~/repos/gogh/themes \
         && TERMINAL=gnome-terminal ./gruvbox-dark.sh && popd
 
 In `gnome-terminal`, Right click and open `Preferences`. Under `General`,
