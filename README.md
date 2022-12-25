@@ -14,13 +14,9 @@ Clone the dotfiles repo:
 
     git clone git@github.com:jocko/dotfiles.git ~/.dotfiles
 
-Link bash config
+Link bash and readline config:
 
-    ln -sf ~/.dotfiles/bashrc ~/.bashrc
-
-Link readline config:
-
-    ln -sf ~/.dotfiles/inputrc ~/.inputrc
+    ln -sf ~/.dotfiles/bashrc ~/.bashrc && ln -sf ~/.dotfiles/inputrc ~/.inputrc
 
 When it comes to vim, there are a couple of options. Package `vim`
 works okay, but doesn't have `xterm_clipboard` (can be checked in vim
@@ -180,8 +176,6 @@ Install prequisites:
 Install color scheme:
 
     git clone git@github.com:Gogh-Co/Gogh.git ~/repos/gogh
-
-TODO Try to make this work on the first try
 
     pushd ~/repos/gogh/themes \
         && TERMINAL=gnome-terminal ./gruvbox-dark.sh && popd
