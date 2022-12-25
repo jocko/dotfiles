@@ -336,9 +336,8 @@ Make the ssh client add keys to the running agent:
 
     # SDKMAN (without touching my dotfiles)
 
-    curl -s "https://get.sdkman.io?rcupdate=false" | bash
-
-    source ~/.bash_local
+    curl -s "https://get.sdkman.io?rcupdate=false" | bash \
+        && source ~/.bash_local
 
     sdk install java
 
@@ -346,9 +345,8 @@ Make the ssh client add keys to the running agent:
 
     # NVM (without touching my dotfiles)
 
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | PROFILE=/dev/null bash
-
-    source ~/.bash_local
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | PROFILE=/dev/null bash \
+        && source ~/.bash_local
 
     nvm install 16
 
