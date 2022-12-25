@@ -82,7 +82,9 @@ set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
 set wildignorecase
-set wildoptions=pum,fuzzy
+if v:version >= 900
+  set wildoptions=pum,fuzzy
+endif
 set ignorecase
 set smartcase
 set tagcase=match
