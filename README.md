@@ -349,8 +349,8 @@ Make the ssh client add keys to the running agent:
     nvm install 16
 
     ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode \
-        && ln -sf ~/.dotfiles/scripts/google ~/bin/google
-        && ln -sf ~/.dotfiles/scripts/mute ~/bin/mute
+        && ln -sf ~/.dotfiles/scripts/google ~/bin/google \
+        && ln -sf ~/.dotfiles/scripts/mute ~/bin/mute \
         && ln -sf ~/.dotfiles/scripts/unmute ~/bin/unmute
 
 ## Hacks
