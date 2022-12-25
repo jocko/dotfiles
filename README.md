@@ -14,6 +14,14 @@ Clone the dotfiles repo:
 
     git clone git@github.com:jocko/dotfiles.git ~/.dotfiles
 
+Link bash config
+
+    ln -sf ~/.dotfiles/bashrc ~/.bashrc
+
+Link readline config:
+
+    ln -sf ~/.dotfiles/inputrc ~/.inputrc
+
 When it comes to vim, there are a couple of options. Package `vim`
 works okay, but doesn't have `xterm_clipboard` (can be checked in vim
 by doing `:echo has('clipboard')`). Better option then is to install
@@ -38,14 +46,6 @@ Now, rest of the commands can be executed via slime from inside
 vim. Launch a `:terminal` and do `<C-c><C-c>` below:
 
     sudo pwd
-
-Link bash config
-
-    ln -sf ~/.dotfiles/bashrc ~/.bashrc
-
-Link readline config:
-
-    ln -sf ~/.dotfiles/inputrc ~/.inputrc
 
 Link the git config:
 
@@ -135,6 +135,8 @@ Try it out:
 
     ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ~/bin/ding echo Ermahgerd!
 
+Log out and then login to i3.
+
 ## Terminal Emulator
 
 Install font of choice:
@@ -166,6 +168,10 @@ again and open `Preferences...`. Under the `Appearance` tab, set font to
 On a fresh Ubuntu install, `gnome-terminal` is the default. If not, configure it:
 
     sudo update-alternatives --config x-terminal-emulator
+
+TODO First, manually create a dummy profile via preferences. Otherwise, you
+will get an error `No value set for '/apps/gnome-terminal/global/profile_list'`
+when running the gogh install scripts.
 
 Install prequisites:
 
@@ -285,6 +291,10 @@ Install it:
 
 ## ssh-agent
 
+Check status:
+
+    ssh-add -L
+
 Create systemd service:
 
     mkdir -p ~/.config/systemd/user \
@@ -340,6 +350,8 @@ Make the ssh client add keys to the running agent:
 
     ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode \
         && ln -sf ~/.dotfiles/scripts/google ~/bin/google
+        && ln -sf ~/.dotfiles/scripts/mute ~/bin/mute
+        && ln -sf ~/.dotfiles/scripts/unmute ~/bin/unmute
 
 ## Hacks
 
