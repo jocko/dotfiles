@@ -39,6 +39,14 @@ vim. Launch a `:terminal` and do `<C-c><C-c>` below:
 
     sudo pwd
 
+Link bash config
+
+    ln -sf ~/.dotfiles/bashrc ~/.bashrc
+
+Link readline config:
+
+    ln -sf ~/.dotfiles/inputrc ~/.inputrc
+
 Link the git config:
 
     ln -sf ~/.dotfiles/gitconfig ~/.gitconfig \
@@ -48,14 +56,6 @@ Note that `gitconfig` doesn't specify `user.email`. Instead, set this
 system wide:
 
     sudo git config --system user.email "<email>"
-
-Link bash config
-
-    ln -sf ~/.dotfiles/bashrc ~/.bashrc
-
-Link readline config:
-
-    ln -sf ~/.dotfiles/inputrc ~/.inputrc
 
 Link custom vim `after`:
 
