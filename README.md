@@ -14,16 +14,6 @@ Clone the dotfiles repo:
 
     git clone git@github.com:jocko/dotfiles.git ~/.dotfiles
 
-Link the git config:
-
-    ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
-    ln -sf ~/.dotfiles/gitignore ~/.gitignore
-
-Note that `gitconfig` doesn't specify `user.email`. Instead, set this
-system wide:
-
-    sudo git config --system user.email "<email>"
-
 When it comes to vim, there are a couple of options. Package `vim`
 works okay, but doesn't have `xterm_clipboard` (can be checked in vim
 by doing `:echo has('clipboard')`). Better option then is to install
@@ -48,6 +38,16 @@ Now, rest of the commands can be executed via slime from inside
 vim. Launch a `:terminal` and do `<C-c><C-c>` below:
 
     sudo pwd
+
+Link the git config:
+
+    ln -sf ~/.dotfiles/gitconfig ~/.gitconfig \
+        && ln -sf ~/.dotfiles/gitignore ~/.gitignore
+
+Note that `gitconfig` doesn't specify `user.email`. Instead, set this
+system wide:
+
+    sudo git config --system user.email "<email>"
 
 Link bash config
 
@@ -104,7 +104,7 @@ Update apt and install `i3`:
 
 Link config:
 
-    mkdir ~/.config/i3 && ln -sf ~/.dotfiles/i3.config ~/.config/i3/config 
+    mkdir -p ~/.config/i3 && ln -sf ~/.dotfiles/i3.config ~/.config/i3/config 
 
 Install `rofi` (dmenu replacement)
 
@@ -114,7 +114,7 @@ Install `xkblayout-state`
 
     sudo apt install -y libx11-dev
 
-    mkdir -p ~/src && git clone git@github.com:nonpop/xkblayout-state.git ~/src/xkblayout-state
+    git clone git@github.com:nonpop/xkblayout-state.git ~/src/xkblayout-state
 
     pushd ~/src/xkblayout-state && make && cp xkblayout-state ~/bin && popd
 
@@ -133,7 +133,7 @@ installed):
 
 Try it out:
 
-    ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ding echo Ermahgerd!
+    ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ~/bin/ding echo Ermahgerd!
 
 ## Terminal Emulator
 
@@ -153,7 +153,8 @@ Install `xfce4-terminal` and make it the default:
 
 Install color scheme:
 
-    cp ~/.dotfiles/skel/xfce4-gruvbox-dark.theme \
+    mkdir -p ~/.local/share/xfce4/terminal/colorschemes \
+        && cp ~/.dotfiles/skel/xfce4-gruvbox-dark.theme \
         ~/.local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme
 
 In `xfce4-terminal`, right click and uncheck `Show Menubar`. Right click
@@ -162,11 +163,14 @@ again and open `Preferences...`. Under the `Appearance` tab, set font to
 
 ### GNOME Terminal
 
-Optionally, make `gnome-terminal` the default (by default, it is the default):
+On a fresh Ubuntu install, `gnome-terminal` is the default. If not, configure it:
 
     sudo update-alternatives --config x-terminal-emulator
 
 Install color scheme:
+TODO is `apt install gconf2` needed?
+TODO is `apt install dconf-cli` needed?
+TODO Can I do this withouth git clone?
 
     git clone git@github.com:Gogh-Co/Gogh.git ~/repos/Gogh
 
