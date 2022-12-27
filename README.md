@@ -165,15 +165,11 @@ On a fresh Ubuntu install, `gnome-terminal` is the default. If not, configure it
 
     sudo update-alternatives --config x-terminal-emulator
 
-TODO First, manually create a dummy profile via preferences. Otherwise, you
-will get an error `No value set for '/apps/gnome-terminal/global/profile_list'`
-when running the gogh install scripts.
+The Gogh install script will fail on a fresh install because it assumes some
+config is already in place. To work around this, manually create a dummy
+profile via preferences. 
 
-Install prequisites:
-
-    sudo apt install -y gconf2
-
-Install color scheme:
+Then, clone Gogh repo and install color scheme:
 
     git clone git@github.com:Gogh-Co/Gogh.git ~/repos/gogh
 
