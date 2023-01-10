@@ -299,9 +299,16 @@ Make the ssh client add keys to the running agent:
 
     echo "AddKeysToAgent yes" >>  ~/.ssh/config
 
-## Extras
+## httpie
 
-    sudo apt install -y httpie
+    curl -SsL https://packages.httpie.io/deb/KEY.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/httpie-key.gpg
+
+    sudo curl -SsL -o /etc/apt/sources.list.d/httpie.list https://packages.httpie.io/deb/httpie.list
+
+    sudo apt update \
+        && sudo apt install httpie
+
+## Extras
 
     sudo apt install -y jq
 
