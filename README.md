@@ -63,7 +63,7 @@ Create dirs in home:
 
 Install essential packages:
 
-    sudo apt install -y build-essential curl direnv ack wget
+    sudo apt install -y build-essential curl direnv wget
 
 Optionally, copy skeleton file(s):
 
@@ -307,6 +307,16 @@ Make the ssh client add keys to the running agent:
 
     sudo apt update \
         && sudo apt install httpie
+
+## ack
+
+Install:
+
+    sudo apt install -y ack
+
+Link config:
+
+    ln -sf ~/.dotfiles/ackrc ~/.ackrc
 
 ## Extras
 
