@@ -40,7 +40,7 @@ if ! declare -f __git_complete > /dev/null; then
   test -f "${bash_completion}/git" && . "${bash_completion}/git"
 fi
 
-alias o='xdg-open "$@" 2> /dev/null'
+alias open='xdg-open "$@" 2> /dev/null'
 alias fmt="fmt --width=80"
 
 alias grep="grep --color=auto"
