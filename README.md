@@ -139,8 +139,8 @@ Install font of choice:
 
     sudo apt install -y fonts-hack-ttf
 
-Choose either `xfce4-terminal` or `gnome-terminal`. I'm currently using
-`gnome-terminal`.
+Choose either `xfce4-terminal` or `gnome-terminal`. They should work equally
+well AFAIK.
 
 ### xfce4-terminal
 
@@ -155,9 +155,10 @@ Install color scheme:
         && cp ~/.dotfiles/skel/xfce4-gruvbox-dark.theme \
         ~/.local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme
 
-In `xfce4-terminal`, right click and uncheck `Show Menubar`. Right click
-again and open `Preferences...`. Under the `Appearance` tab, set font to
-`Hack Regular 14`. Under the `Colors` tab, load preset `gruvbox dark`.
+In `xfce4-terminal`, right click and open `Preferences...`. Under the `General`
+tab. Set `Scrollbar is:` to `Disabled`. Uncheck `Show unsafe paste dialog`.
+Under the `Appearance` tab, set font to `Hack Regular 14`. Uncheck `Display
+menubar in new windows`. Under the `Colors` tab, load preset `gruvbox dark`.
 
 ### GNOME Terminal
 
@@ -334,10 +335,6 @@ Link config:
         && xdg-mime default sxiv.desktop image/png
 
     sudo apt install -y ksnip
-
-    sudo apt install -y atool
-
-    sudo apt install -y gron
 
     sudo apt install -y tree
 
