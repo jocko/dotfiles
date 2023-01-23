@@ -6,7 +6,3 @@ set bind-tty-special-chars off
 
 set completion-ignore-case on
 
-set show-mode-in-prompt on
-# Don't use color escapes here! It should work, but it doesn't. And I don't know why.
-set vi-ins-mode-string -> $
-set vi-cmd-mode-string :

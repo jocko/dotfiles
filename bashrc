@@ -10,20 +10,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   . /etc/bash_completion
 fi
 
-set -o vi
-
-# By default, C-w behaves a bit strange in vi mode.
-#
-#   echo foo bar # C-w here, would not do anything (either in command or insert mode)
-#       ^
-#
-# Rebinding C-w seem to do the trick. But before this can be done,
-# we have to do either `stty werase undef`, or put `set bind-tty-special-chars off`
-# in `.inputrc`.
-bind -m vi-insert '"\C-w":unix-word-rubout'
-# Unbind CTRL-w for command mode
-bind -m vi-command -r "\C-w"
-
 HISTSIZE=5000
 HISTFILESIZE=10000
 HISTCONTROL=ignoreboth
@@ -70,7 +56,7 @@ function my_prompt_command() {
 }
 PROMPT_COMMAND=my_prompt_command
 
-PS1='\e[33m[\w]\e[0m\n '
+PS1='\e[33m[\w]\e[0m\n-> $ '
 
 # Turns off terminal suspend feature (<C-s> which freezes everything)
 stty -ixon
