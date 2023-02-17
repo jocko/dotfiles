@@ -361,15 +361,12 @@ Link config:
 
 ## Hacks
 
-### Map caps-lock to escape
+### Set key repeat rate etc
 
-Gnome has its own way of doing things. I'm documenting it here just in case.
+    sudo apt install inputplug
 
-    dconf write "/org/gnome/desktop/input-sources/xkb-options" "['caps:swapescape']"
-
-For i3, we can add a line to `~/.xsessionrc`:
-
-    echo "setxkbmap -option caps:escape" >> ~/.xsessionrc
+    cp ~/.dotfiles/skel/xsessionrc ~/.xsessionrc \
+        && cat ~/.xsessionrc
 
 Note that `.xsessionrc` is a dotifle specific to Debian (and its derivatives).
 
