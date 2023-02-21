@@ -91,6 +91,7 @@ if v:version >= 900
 endif
 set ignorecase
 set smartcase
+set infercase
 set tagcase=match
 set scrolloff=5
 set undofile
