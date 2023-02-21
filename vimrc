@@ -30,6 +30,8 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'tpope/vim-commentary'
   " Handy mappings (e.g ]q for navigating quickfix list)
   Plugin 'tpope/vim-unimpaired'
+  " Turn off syntax for large files
+  Plugin 'fracpete/vim-large-files'
 
   " TODO Evaluate
   Plugin 'vim-pandoc/vim-pandoc'
@@ -132,6 +134,7 @@ let g:gutentags_ctags_exclude = []
 let g:gutentags_ctags_exclude += ['*.test.ts']
 let g:gutentags_ctags_extra_args = []
 let g:gutentags_ctags_extra_args += ['--TypeScript-kinds=-p']
+let LargeFile = 1024 * 1024 * 1
 
 set undodir=~/.vim/undo
 if !isdirectory(expand(&undodir))
