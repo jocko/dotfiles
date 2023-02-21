@@ -28,6 +28,8 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'tpope/vim-endwise.git'
   " Comment stuff out
   Plugin 'tpope/vim-commentary'
+  " Handy mappings (e.g ]q for navigating quickfix list)
+  Plugin 'tpope/vim-unimpaired'
 
   " TODO Evaluate
   Plugin 'vim-pandoc/vim-pandoc'
@@ -91,13 +93,15 @@ set tagcase=match
 set scrolloff=5
 set undofile
 set backspace=indent,eol,start
-set incsearch
+" set incsearch
 " set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
 " This is useful, but throws off j/k movement with count (if there are any
 " wrapped lines between). See gj/gk which operates on display lines instead.
-set wrap
+" 2023-02-21 Evaluating using nowrap. Try to document why wrap is a good thing
+" if I end up going back. Also, maybe have it set on a per filetype basis.
+set nowrap
 set nrformats=bin,hex,unsigned
 set cursorline
 set list
@@ -143,13 +147,13 @@ let mapleader=" "
 
 runtime! macros/matchit.vim
 
-" Navigate prev/next quickfix errors
-nnoremap <silent> [a :previous<CR>
-nnoremap <silent> ]a :next<CR>
-nnoremap <silent> [A :first<CR>
-nnoremap <silent> ]A :last<CR>
-nnoremap <silent> [q :cprevious<CR>
-nnoremap <silent> ]q :cnext<CR>
-nnoremap <silent> [Q :cfirst<CR>
-nnoremap <silent> ]Q :clast<CR>
+" Provided by vim-unimpaired
+" nnoremap <silent> [a :previous<CR>
+" nnoremap <silent> ]a :next<CR>
+" nnoremap <silent> [A :first<CR>
+" nnoremap <silent> ]A :last<CR>
+" nnoremap <silent> [q :cprevious<CR>
+" nnoremap <silent> ]q :cnext<CR>
+" nnoremap <silent> [Q :cfirst<CR>
+" nnoremap <silent> ]Q :clast<CR>
 
