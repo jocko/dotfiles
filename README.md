@@ -338,6 +338,8 @@ Link config:
 
     sudo apt install -y tree
 
+    sudo apt install -y xclip
+
     # SDKMAN (without touching my dotfiles)
 
     curl -s "https://get.sdkman.io?rcupdate=false" | bash \

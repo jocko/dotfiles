@@ -27,7 +27,7 @@ if ! declare -f __git_complete > /dev/null; then
 fi
 
 alias open='xdg-open "$@" 2> /dev/null'
-alias fmt="fmt --width=80"
+alias xclip='xclip -selection clipboard -r'
 
 alias grep="grep --color=auto"
 alias ls="ls --color=auto"

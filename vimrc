@@ -86,6 +86,8 @@ set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
 set wildignorecase
+" TODO Would adding wildignore help with :vim /foo/ * not matching tags for
+" example?
 if v:version >= 900
   set wildoptions=pum,fuzzy
 endif
@@ -150,6 +152,12 @@ endif
 let mapleader=" "
 
 runtime! macros/matchit.vim
+
+" TODO Have this and let it contain the derpy fileplugin stuff (e.g. tabs in
+" json)?
+" if filereadable(expand('~/.vimrc.local'))
+"   source ~/.vimrc.local
+" endif
 
 " Provided by vim-unimpaired
 " nnoremap <silent> [a :previous<CR>
