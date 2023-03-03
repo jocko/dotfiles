@@ -16,6 +16,7 @@ HISTCONTROL=ignoreboth
 
 # Will for example suggest --allow-empty when doing completion for git commit
 export GIT_COMPLETION_SHOW_ALL=1
+export GIT_PAGER=less
 export EDITOR="vim"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
