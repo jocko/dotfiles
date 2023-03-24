@@ -349,6 +349,9 @@ Link config:
 
     sdk install maven
 
+    sudo wget https://raw.github.com/juven/maven-bash-completion/master/bash_completion.bash \
+        --output-document /etc/bash_completion.d/mvn
+
     # NVM (without touching my dotfiles)
 
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | PROFILE=/dev/null bash \
