@@ -1,2 +1,4 @@
 --type-add=js:ext:jsx
 --ignore-file=is:tags
+--ignore-file=ext:mp3
+--ignore-directory=is:.venv
