@@ -88,8 +88,6 @@ set wildmenu
 set wildmode=longest:full,full
 set wildignorecase
 set wildignore+=tags
-" TODO Would adding wildignore help with :vim /foo/ * not matching tags for
-" example?
 if v:version >= 900
   set wildoptions=pum,fuzzy
 endif
