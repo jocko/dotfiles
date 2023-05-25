@@ -93,8 +93,9 @@ set wildignore+=tags
 if v:version >= 900
   set wildoptions=pum,fuzzy
 endif
-set ignorecase
-set smartcase
+" Why do I keep changing this?
+" set ignorecase
+" set smartcase
 set infercase
 set tagcase=match
 set scrolloff=5
