@@ -23,6 +23,7 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'leafgarland/typescript-vim'
   Plugin 'maxmellon/vim-jsx-pretty'
+  Plugin 'tpope/vim-fireplace'
 
   " Automatically add end statements. `end` after `def` in Ruby for example
   Plugin 'tpope/vim-endwise.git'
