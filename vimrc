@@ -100,7 +100,7 @@ set tagcase=match
 set scrolloff=5
 set undofile
 set backspace=indent,eol,start
-" set incsearch
+set incsearch
 " set hlsearch
 set relativenumber
 set completeopt=longest,menu,preview
@@ -155,19 +155,20 @@ let mapleader=" "
 
 runtime! macros/matchit.vim
 
+" Mark occurrences (note: <raise>-f => *)
+" nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
+nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>
+
+" Clear hlsearch automatically
+augroup vimrc-incsearch-highlight
+  autocmd!
+  autocmd CmdlineEnter [/\?] :set hlsearch
+  autocmd CmdlineLeave [/\?] :set nohlsearch
+augroup END
+
 " TODO Have this and let it contain the derpy fileplugin stuff (e.g. tabs in
 " json)?
 " if filereadable(expand('~/.vimrc.local'))
 "   source ~/.vimrc.local
 " endif
-
-" Provided by vim-unimpaired
-" nnoremap <silent> [a :previous<CR>
-" nnoremap <silent> ]a :next<CR>
-" nnoremap <silent> [A :first<CR>
-" nnoremap <silent> ]A :last<CR>
-" nnoremap <silent> [q :cprevious<CR>
-" nnoremap <silent> ]q :cnext<CR>
-" nnoremap <silent> [Q :cfirst<CR>
-" nnoremap <silent> ]Q :clast<CR>
 
