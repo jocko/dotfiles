@@ -352,12 +352,13 @@ Link config:
     sudo wget https://raw.github.com/juven/maven-bash-completion/master/bash_completion.bash \
         --output-document /etc/bash_completion.d/mvn
 
-    # NVM (without touching my dotfiles)
+    # fnm (without touching my dotfiles)
+    # NOT TESTED!
+    curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | PROFILE=/dev/null bash \
-        && source ~/.bash_local
+    fnm completions --shell bash | sudo tee /etc/bash_completion.d/fnm > /dev/null
 
-    nvm install 16
+    fnm install 18
 
     ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode \
         && ln -sf ~/.dotfiles/scripts/google ~/bin/google \
