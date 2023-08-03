@@ -73,7 +73,7 @@ augroup END
 augroup lastplace
   au!
   autocmd BufReadPost *
-        \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+        \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit\|rebase'
         \ |   exe "normal! g`\""
         \ | endif
 augroup END
