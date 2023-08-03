@@ -86,11 +86,16 @@ set ttimeoutlen=100
 set hidden
 set laststatus=2
 set wildmenu
-set wildmode=longest:full,full
+" set wildmode=longest:full,full
+" TODO This seems nice, evaluate
+" set wildmode=full:lastused
+set wildmode=longest:lastused:full,full
 set wildignorecase
 set wildignore+=tags
 if v:version >= 900
-  set wildoptions=pum,fuzzy
+  " TODO try without fuzzy
+  " set wildoptions=pum,fuzzy
+  set wildoptions=pum
 endif
 " Why do I keep changing this?
 " set ignorecase
