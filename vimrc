@@ -32,10 +32,11 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   " Turn off syntax for large files
   Plugin 'fracpete/vim-large-files'
 
+  Plugin 'mileszs/ack.vim'
+
   " TODO Evaluate
   Plugin 'vim-pandoc/vim-pandoc'
   Plugin 'vim-pandoc/vim-pandoc-syntax'
-  Plugin 'mileszs/ack.vim'
 
   call vundle#end()
 endif
