@@ -8,8 +8,6 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
 
   Plugin 'tpope/vim-fugitive'
 
-  " TODO Probably use httpie + slime instead
-  Plugin 'aquach/vim-http-client'
   Plugin 'jpalardy/vim-slime'
   Plugin 'ludovicchabant/vim-gutentags'
 
