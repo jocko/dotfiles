@@ -37,6 +37,9 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   " TODO Evaluate
   Plugin 'vim-pandoc/vim-pandoc'
   Plugin 'vim-pandoc/vim-pandoc-syntax'
+  Plugin 'mhinz/vim-signify'
+  Plugin 'idanarye/vim-merginal'
+  Plugin 'sbdchd/neoformat'
 
   call vundle#end()
 endif
@@ -144,6 +147,7 @@ let g:gutentags_ctags_exclude += ['*.test.ts']
 let g:gutentags_ctags_extra_args = []
 let g:gutentags_ctags_extra_args += ['--TypeScript-kinds=-p']
 let LargeFile = 1024 * 1024 * 1
+let g:merginal_splitType = ''
 
 set undodir=~/.vim/undo
 if !isdirectory(expand(&undodir))
@@ -169,6 +173,14 @@ augroup vimrc-incsearch-highlight
   autocmd CmdlineEnter [/\?] :set hlsearch
   autocmd CmdlineLeave [/\?] :set nohlsearch
 augroup END
+
+" vim-signify hunk text object
+omap ic <plug>(signify-motion-inner-pending)
+xmap ic <plug>(signify-motion-inner-visual)
+omap ac <plug>(signify-motion-outer-pending)
+xmap ac <plug>(signify-motion-outer-visual)
+" vim-signify faster sign updates
+set updatetime=100
 
 " TODO Have this and let it contain the derpy fileplugin stuff (e.g. tabs in
 " json)?
