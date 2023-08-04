@@ -181,6 +181,8 @@ omap ac <plug>(signify-motion-outer-pending)
 xmap ac <plug>(signify-motion-outer-visual)
 " vim-signify faster sign updates
 set updatetime=100
+" Don't shift entire editor when vim-signify kicks in
+set signcolumn=yes
 
 " TODO Have this and let it contain the derpy fileplugin stuff (e.g. tabs in
 " json)?
