@@ -108,7 +108,8 @@ set undofile
 set backspace=indent,eol,start
 set incsearch
 " set hlsearch
-set relativenumber
+" TODO Evaluate NOT using relativenumber
+" set relativenumber
 set completeopt=longest,menu,preview
 " This is useful, but throws off j/k movement with count (if there are any
 " wrapped lines between). See gj/gk which operates on display lines instead.
