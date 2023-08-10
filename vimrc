@@ -35,11 +35,10 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'mileszs/ack.vim'
 
   " TODO Evaluate
-  Plugin 'vim-pandoc/vim-pandoc'
-  Plugin 'vim-pandoc/vim-pandoc-syntax'
   Plugin 'mhinz/vim-signify'
   Plugin 'idanarye/vim-merginal'
   Plugin 'sbdchd/neoformat'
+  Plugin 'machakann/vim-highlightedyank'
 
   call vundle#end()
 endif
