@@ -185,8 +185,6 @@ set updatetime=100
 set signcolumn=yes
 
 let maplocalleader=","
-" TODO Should be in an ftplugin
-autocmd FileType typescriptreact nnoremap <buffer> <LocalLeader>f :Neoformat<cr>
 
 " TODO Have this and let it contain the derpy fileplugin stuff (e.g. tabs in
 " json)?
