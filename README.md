@@ -340,6 +340,8 @@ Link config:
 
     sudo apt install -y xclip
 
+    sudo apt install -y highlight
+
     # SDKMAN (without touching my dotfiles)
 
     curl -s "https://get.sdkman.io?rcupdate=false" | bash \
