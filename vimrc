@@ -159,8 +159,6 @@ if !isdirectory(expand(&directory))
   call mkdir(expand(&directory), "p")
 endif
 
-let mapleader=" "
-
 runtime! macros/matchit.vim
 
 " Mark occurrences (note: <raise>-f => *)
@@ -184,7 +182,7 @@ set updatetime=100
 " Don't shift entire editor when vim-signify kicks in
 set signcolumn=yes
 
-let maplocalleader=","
+let maplocalleader=" "
 
 autocmd FileType typescript,typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType json setlocal noexpandtab shiftwidth=2 tabstop=2
