@@ -186,6 +186,18 @@ set signcolumn=yes
 
 let maplocalleader=","
 
+autocmd FileType typescript,typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
+autocmd FileType json setlocal noexpandtab shiftwidth=2 tabstop=2
+
+autocmd FileType typescript,typescriptreact setlocal path-=/usr/include path+=src/**
+autocmd FileType typescript,typescriptreact setlocal complete-=i
+autocmd FileType typescript,typescriptreact nnoremap <buffer> <LocalLeader>f :Neoformat<cr>
+
+autocmd FileType gitcommit setlocal spell
+
+" TODO Figure this out
+" autocmd FileType typescript,typescriptreact setlocal include=from
+
 " TODO Have this and let it contain the derpy fileplugin stuff (e.g. tabs in
 " json)?
 " if filereadable(expand('~/.vimrc.local'))
