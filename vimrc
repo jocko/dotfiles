@@ -186,6 +186,7 @@ let maplocalleader=" "
 
 autocmd FileType typescript,typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType json setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd FileType markdown setlocal shiftwidth=4 tabstop=4
 
 autocmd FileType typescript,typescriptreact setlocal path-=/usr/include path+=src/**
 autocmd FileType typescript,typescriptreact setlocal complete-=i
