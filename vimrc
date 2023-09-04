@@ -196,6 +196,7 @@ autocmd FileType gitcommit setlocal spell
 
 " TODO Figure this out
 " autocmd FileType typescript,typescriptreact setlocal include=from
+autocmd FileType typescript,typescriptreact setlocal define=\\(const\\)
 
 " TODO Have this and let it contain the derpy fileplugin stuff (e.g. tabs in
 " json)?
