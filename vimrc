@@ -105,7 +105,7 @@ set infercase
 set tagcase=match
 set scrolloff=5
 set undofile
-set backspace=indent,eol,start
+set backspace=indent,eol,nostop
 set incsearch
 " set hlsearch
 " TODO Evaluate NOT using relativenumber
@@ -192,7 +192,7 @@ autocmd FileType markdown setlocal shiftwidth=4 tabstop=4
 
 autocmd FileType typescript,typescriptreact setlocal path-=/usr/include path+=src/**
 autocmd FileType typescript,typescriptreact setlocal complete-=i
-autocmd FileType typescript,typescriptreact nnoremap <buffer> <LocalLeader>f :Neoformat<cr>
+autocmd FileType typescript,typescriptreact nnoremap <buffer> <LocalLeader>f :Neoformat prettierd<cr>
 
 autocmd FileType gitcommit setlocal spell
 
