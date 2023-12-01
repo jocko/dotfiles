@@ -38,7 +38,7 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'mhinz/vim-signify'
   Plugin 'idanarye/vim-merginal'
   Plugin 'sbdchd/neoformat'
-  Plugin 'machakann/vim-highlightedyank'
+  Plugin 'unblevable/quick-scope'
 
   call vundle#end()
 endif
