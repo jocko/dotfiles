@@ -120,6 +120,8 @@ set nrformats=bin,hex,unsigned
 set cursorline
 set list
 set listchars=tab:▸\ ,trail:·
+" Evaluate. Will make '-' part of keywords
+set iskeyword+=\-
 augroup trailing
   au!
   au InsertEnter * :set listchars-=trail:·
