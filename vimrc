@@ -121,7 +121,9 @@ set cursorline
 set list
 set listchars=tab:▸\ ,trail:·
 " Evaluate. Will make '-' part of keywords
-set iskeyword+=\-
+" Result => Didn't work as well as I would have thought. For example, unable
+" to auto complete JIRAs in branch names on the form SER-1234-make-teapots
+" set iskeyword+=\-
 augroup trailing
   au!
   au InsertEnter * :set listchars-=trail:·
@@ -133,6 +135,7 @@ let g:http_client_focus_output_window = 0
 let g:http_client_result_vsplit = 0
 let g:http_client_preserve_responses = 1
 let g:slime_target = "vimterminal"
+let g:slime_python_ipython = 1
 let g:pandoc#modules#disabled = ["folding"]
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_add_default_project_roots = 0
