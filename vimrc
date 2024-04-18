@@ -197,6 +197,8 @@ autocmd FileType typescript,typescriptreact setlocal path-=/usr/include path+=sr
 autocmd FileType typescript,typescriptreact setlocal complete-=i
 autocmd FileType typescript,typescriptreact nnoremap <buffer> <LocalLeader>f :Neoformat prettierd<cr>
 
+autocmd FileType python nnoremap <buffer> <LocalLeader>f :Neoformat autopep8<cr>
+
 autocmd FileType gitcommit setlocal spell
 
 " TODO Figure this out
