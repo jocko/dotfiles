@@ -236,7 +236,7 @@ Link config:
 
 Install `python3` and make `python` point to it:
 
-    sudo apt install -y python3-pip python3-venv python-is-python3
+    sudo apt install -y python3-pip python3-venv python-is-python3 python3-autopep8
 
 Optionally, install `pgcli`
 
