@@ -376,7 +376,7 @@ Link config:
     cp ~/.dotfiles/skel/xsessionrc ~/.xsessionrc \
         && cat ~/.xsessionrc
 
-Note that `.xsessionrc` is a dotifle specific to Debian (and its derivatives).
+Note that `.xsessionrc` is a dotfile specific to Debian (and its derivatives).
 
 ### Touchpad tapping
 
