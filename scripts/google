@@ -1,4 +1,0 @@
-#!/bin/sh
-url="https://google.com/search?q=$(urlencode "$*")"
-# firefox -new-tab "$url" 2> /dev/null
-xdg-open "$url" 2> /dev/null

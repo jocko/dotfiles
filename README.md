@@ -362,10 +362,9 @@ Link config:
 
     fnm install 18
 
-    ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode \
-        && ln -sf ~/.dotfiles/scripts/google ~/bin/google \
-        && ln -sf ~/.dotfiles/scripts/mute ~/bin/mute \
-        && ln -sf ~/.dotfiles/scripts/unmute ~/bin/unmute
+    ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode
+
+    ln -sf ~/.dotfiles/scripts/google ~/bin/google
 
 ## Hacks
 
