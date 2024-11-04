@@ -397,3 +397,11 @@ Make it persistent:
     echo xinput set-prop \""$(xinput list --name-only | grep -i synaptics)"\" \"libinput Tapping Enabled\" 1 \
         >> ~/.xsessionrc
 
+### WIP JetBrains Toolbox App
+
+    curl -s  'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' \
+        | jq -r '.TBA[0].downloads.linux.link' \
+        | xargs wget -O /tmp/jetbrains-toolbox.tar.gz \
+        && tar -xzf jetbrains-toolbox.tar.gz --strip-components=1 \
+        && /tmp/jetbrains-toolbox \
+        && ln -sf ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox ~/bin/jetbrains-toolbox 
