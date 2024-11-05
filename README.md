@@ -364,8 +364,6 @@ Link config:
 
     ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode
 
-    ln -sf ~/.dotfiles/scripts/google ~/bin/google
-
 ## Hacks
 
 ### Set key repeat rate etc
