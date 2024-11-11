@@ -1,6 +1,6 @@
 # My dotfiles
 
-Tested on Ubuntu 22.04
+Tested on Ubuntu 24.04 (not tested on a fresh install!)
 
 ## Bootstrap
 
@@ -21,10 +21,7 @@ Link bash and readline config:
 When it comes to vim, there are a couple of options. Package `vim`
 works okay, but doesn't have `xterm_clipboard` (can be checked in vim
 by doing `:echo has('clipboard')`). Better option then is to install
-`vim-gtk3`. Also, installing from PPA might give us a newer vim
-version. For example:
-
-    sudo add-apt-repository ppa:jonathonf/vim # Optional step
+`vim-gtk3`.
 
     sudo apt install -y vim-gtk3
 
@@ -59,7 +56,7 @@ Link custom vim `after`:
 
 Create dirs in home:
 
-    mkdir ~/bin ~/repos ~/src
+    mkdir ~/bin ~/repos ~/src ~/lab
 
 Install essential packages:
 
@@ -188,20 +185,24 @@ the little `v` on the theme name and select `Set as default`.
 
 This installs a non-snap version of Firefox.
 
-Add PPA:
+Install keyring:
 
-    sudo add-apt-repository ppa:mozillateam/ppa
+    wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- \
+        | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+
+Configure repo:
+
+    echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" \
+        | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
 
 Lower priority of snap package:
 
     echo -e "Package: firefox*\nPin: release o=Ubuntu*\nPin-Priority: -1" \
         | sudo tee /etc/apt/preferences.d/mozilla-firefox
 
-Install `firefox`:
+Install `firefox` (TODO `apt update` not needed?):
 
     sudo apt install -y firefox
-
-TODO unattended upgrades?
 
 Optionally, remove snap:
 
