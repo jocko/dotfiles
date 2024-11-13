@@ -128,8 +128,6 @@ Try it out:
 
     ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ~/bin/ding echo Ermahgerd!
 
-Log out and then login to i3.
-
 ## Terminal Emulator
 
 Install font of choice:
@@ -200,7 +198,11 @@ Lower priority of snap package:
     echo -e "Package: firefox*\nPin: release o=Ubuntu*\nPin-Priority: -1" \
         | sudo tee /etc/apt/preferences.d/mozilla-firefox
 
-Install `firefox` (TODO `apt update` not needed?):
+Uninstall snap package:
+
+    sudo apt update && sudo apt remove -y firefox
+
+Install `firefox`:
 
     sudo apt install -y firefox
 
@@ -247,7 +249,7 @@ Optionally, install `pgcli`
 
 Download `ruby-install` (note: version is static):
 
-    wget -O ~/src/ruby-install.tar.gz https://github.com/postmodern/ruby-install/archive/v0.8.5.tar.gz \
+    wget -O ~/src/ruby-install.tar.gz https://github.com/postmodern/ruby-install/archive/v0.9.3.tar.gz \
         && rm -rf ~/src/ruby-install \
         && mkdir ~/src/ruby-install \
         && tar -xzvf ~/src/ruby-install.tar.gz --strip-components=1 -C ~/src/ruby-install \
@@ -308,7 +310,7 @@ Make the ssh client add keys to the running agent:
     sudo curl -SsL -o /etc/apt/sources.list.d/httpie.list https://packages.httpie.io/deb/httpie.list
 
     sudo apt update \
-        && sudo apt install httpie
+        && sudo apt install -y httpie
 
 ## ack
 
@@ -322,6 +324,7 @@ Link config:
 
 ## Extras
 
+    # TODO Something else has already installed this at this point?
     sudo apt install -y jq
 
     sudo apt install -y fzf
@@ -339,8 +342,10 @@ Link config:
 
     sudo apt install -y tree
 
+    # TODO What is this?
     sudo apt install -y xclip
 
+    # TODO And this?
     sudo apt install -y highlight
 
     # SDKMAN (without touching my dotfiles)
@@ -397,9 +402,11 @@ Make it persistent:
 
 ### WIP JetBrains Toolbox App
 
+    sudo apt install -y libfuse2
+
     curl -s  'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' \
         | jq -r '.TBA[0].downloads.linux.link' \
         | xargs wget -O /tmp/jetbrains-toolbox.tar.gz \
-        && tar -xzf jetbrains-toolbox.tar.gz --strip-components=1 \
+        && tar -xzvf /tmp/jetbrains-toolbox.tar.gz --strip-components=1 -C /tmp \
         && /tmp/jetbrains-toolbox \
         && ln -sf ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox ~/bin/jetbrains-toolbox 
