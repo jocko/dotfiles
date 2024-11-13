@@ -64,6 +64,8 @@ Install essential packages:
 
 Optionally, copy skeleton file(s):
 
+    cat ~/.dotfiles/skel/bash_local
+
     cp ~/.dotfiles/skel/bash_local ~/.bash_local \
         && cat ~/.bash_local
 
@@ -324,11 +326,6 @@ Link config:
 
 ## Extras
 
-    # TODO Something else has already installed this at this point?
-    sudo apt install -y jq
-
-    sudo apt install -y fzf
-
     sudo apt install -y pcmanfm \
         && xdg-mime default pcmanfm.desktop inode/directory
 
@@ -342,13 +339,9 @@ Link config:
 
     sudo apt install -y tree
 
-    # TODO What is this?
-    sudo apt install -y xclip
+    ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode
 
-    # TODO And this?
-    sudo apt install -y highlight
-
-    # SDKMAN (without touching my dotfiles)
+### SDKMAN (without touching my dotfiles)
 
     curl -s "https://get.sdkman.io?rcupdate=false" | bash \
         && source ~/.bash_local
@@ -360,15 +353,24 @@ Link config:
     sudo wget https://raw.github.com/juven/maven-bash-completion/master/bash_completion.bash \
         --output-document /etc/bash_completion.d/mvn
 
-    # fnm (without touching my dotfiles)
-    # NOT TESTED!
+### fnm (without touching my dotfiles)
+
     curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
     fnm completions --shell bash | sudo tee /etc/bash_completion.d/fnm > /dev/null
 
     fnm install 18
 
-    ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode
+### JetBrains Toolbox App
+
+    sudo apt install -y libfuse2
+
+    curl -s  'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' \
+        | jq -r '.TBA[0].downloads.linux.link' \
+        | xargs wget -O /tmp/jetbrains-toolbox.tar.gz \
+        && tar -xzvf /tmp/jetbrains-toolbox.tar.gz --strip-components=1 -C /tmp \
+        && /tmp/jetbrains-toolbox \
+        && ln -sf ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox ~/bin/jetbrains-toolbox 
 
 ## Hacks
 
@@ -400,13 +402,3 @@ Make it persistent:
     echo xinput set-prop \""$(xinput list --name-only | grep -i synaptics)"\" \"libinput Tapping Enabled\" 1 \
         >> ~/.xsessionrc
 
-### WIP JetBrains Toolbox App
-
-    sudo apt install -y libfuse2
-
-    curl -s  'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' \
-        | jq -r '.TBA[0].downloads.linux.link' \
-        | xargs wget -O /tmp/jetbrains-toolbox.tar.gz \
-        && tar -xzvf /tmp/jetbrains-toolbox.tar.gz --strip-components=1 -C /tmp \
-        && /tmp/jetbrains-toolbox \
-        && ln -sf ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox ~/bin/jetbrains-toolbox 
