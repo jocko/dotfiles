@@ -1,14 +1,20 @@
 # My dotfiles
 
-Tested on Ubuntu 24.04 (not tested on a fresh install!)
+Tested on Ubuntu 24.04
 
 ## Bootstrap
 
 Make sure `apt` is up to date and that `git` is installed.
 
+    sudo apt update && sudo apt upgrade && sudo apt install git
+
+Set a hostname:
+
+    sudo hostname piglet
+
 If necessary, generate a new SSH key:
 
-    ssh-keygen -t ed25519 -C "<email>"
+    ssh-keygen -t ed25519
 
 Clone the dotfiles repo:
 
@@ -115,7 +121,7 @@ Install `xkblayout-state`
 
 Install `i3blocks`:
 
-    sudo apt install -y i3blocks
+    sudo apt install -y i3blocks fonts-font-awesome
 
 Link config:
 
