@@ -6,13 +6,18 @@ Tested on Ubuntu 24.04
 
 Make sure `apt` is up to date and that `git` is installed.
 
-    sudo apt update && sudo apt upgrade && sudo apt install git
+    sudo apt update && sudo apt upgrade -y && sudo apt install -y git
 
-Set a hostname:
+Make sure that you are satisfied with the hostname (it will be used for
+the SSH key):
+
+    hostname
+
+Or, set a new one:
 
     sudo hostname piglet
 
-If necessary, generate a new SSH key:
+If necessary, generate a new SSH key (and add it to github):
 
     ssh-keygen -t ed25519
 
@@ -20,9 +25,10 @@ Clone the dotfiles repo:
 
     git clone git@github.com:jocko/dotfiles.git ~/.dotfiles
 
-Link bash and readline config:
+Since I might be using different emails across my computers, I don't want this
+config in my dotfiles. Instead, I set this system wide:
 
-    ln -sf ~/.dotfiles/bashrc ~/.bashrc && ln -sf ~/.dotfiles/inputrc ~/.inputrc
+    sudo git config --system user.email "<email>"
 
 When it comes to vim, there are a couple of options. Package `vim`
 works okay, but doesn't have `xterm_clipboard` (can be checked in vim
@@ -46,15 +52,14 @@ vim. Launch a `:terminal` and do `<C-c><C-c>` below:
 
     sudo pwd
 
+Link bash and readline config:
+
+    ln -sf ~/.dotfiles/bashrc ~/.bashrc && ln -sf ~/.dotfiles/inputrc ~/.inputrc
+
 Link the git config:
 
     ln -sf ~/.dotfiles/gitconfig ~/.gitconfig \
         && ln -sf ~/.dotfiles/gitignore ~/.gitignore
-
-Note that `gitconfig` doesn't specify `user.email`. Instead, set this
-system wide:
-
-    sudo git config --system user.email "<email>"
 
 Link custom vim `after`:
 
@@ -165,6 +170,8 @@ menubar in new windows`. Under the `Colors` tab, load preset `gruvbox dark`.
 
 ### GNOME Terminal
 
+TODO Verify this section
+
 On a fresh Ubuntu install, `gnome-terminal` is the default. If not, configure it:
 
     sudo update-alternatives --config x-terminal-emulator
@@ -255,6 +262,10 @@ Optionally, install `pgcli`
 
 ## Ruby
 
+Link `gem` config:
+
+    ln -sf ~/.dotfiles/gemrc ~/.gemrc
+
 Download `ruby-install` (note: version is static):
 
     wget -O ~/src/ruby-install.tar.gz https://github.com/postmodern/ruby-install/archive/v0.9.3.tar.gz \
@@ -273,9 +284,10 @@ Download latest ruby versions:
 
     ruby-install --update
 
-Install ruby 3.1 (note: might take a while):
+TODO Probably install a later version
+Install ruby 3.3 (note: might take a while):
 
-    ruby-install ruby 3.1 && echo 3.1 > ~/.ruby-version
+    ruby-install ruby 3.3 && echo 3.3 > ~/.ruby-version
 
 Download `chruby` (note: version is static):
 
@@ -332,22 +344,11 @@ Link config:
 
 ## Extras
 
-    sudo apt install -y pcmanfm \
-        && xdg-mime default pcmanfm.desktop inode/directory
+Install latest stable Git version from PPA:
 
-    sudo apt install -y sxiv \
-        && xdg-mime default sxiv.desktop image/gif \
-        && xdg-mime default sxiv.desktop image/jpeg \
-        && xdg-mime default sxiv.desktop image/jpg \
-        && xdg-mime default sxiv.desktop image/png
+    sudo add-apt-repository ppa:git-core/ppa && sudo apt install -y git
 
-    sudo apt install -y ksnip
-
-    sudo apt install -y tree
-
-    ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode
-
-### SDKMAN (without touching my dotfiles)
+Install SDKMAN (`sdk`) without touching my dotfiles:
 
     curl -s "https://get.sdkman.io?rcupdate=false" | bash \
         && source ~/.bash_local
@@ -359,7 +360,7 @@ Link config:
     sudo wget https://raw.github.com/juven/maven-bash-completion/master/bash_completion.bash \
         --output-document /etc/bash_completion.d/mvn
 
-### fnm (without touching my dotfiles)
+Install Fast Node Manager (`fnm`) without touching my dotfiles:
 
     curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
@@ -367,7 +368,7 @@ Link config:
 
     fnm install 18
 
-### JetBrains Toolbox App
+Install Jetbrains Toolbox App (packaged as an AppImage which requires FUSE):
 
     sudo apt install -y libfuse2
 
@@ -377,6 +378,29 @@ Link config:
         && tar -xzvf /tmp/jetbrains-toolbox.tar.gz --strip-components=1 -C /tmp \
         && /tmp/jetbrains-toolbox \
         && ln -sf ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox ~/bin/jetbrains-toolbox 
+
+Setup file manager of choice:
+
+    sudo apt install -y pcmanfm \
+        && xdg-mime default pcmanfm.desktop inode/directory
+
+Setup Simple X Image Viewer:
+
+    sudo apt install -y sxiv \
+        && xdg-mime default sxiv.desktop image/gif \
+        && xdg-mime default sxiv.desktop image/jpeg \
+        && xdg-mime default sxiv.desktop image/jpg \
+        && xdg-mime default sxiv.desktop image/png
+
+Install screenshot tool:
+
+    sudo apt install -y ksnip
+
+Misc stuff:
+
+    sudo apt install -y tree
+
+    ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode
 
 ## Hacks
 
