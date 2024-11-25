@@ -71,7 +71,7 @@ Create dirs in home:
 
 Install essential packages:
 
-    sudo apt install -y build-essential curl direnv wget
+    sudo apt install -y build-essential curl direnv wget tree
 
 Optionally, copy skeleton file(s):
 
@@ -342,11 +342,13 @@ Link config:
 
     ln -sf ~/.dotfiles/ackrc ~/.ackrc
 
-## Extras
+## Git PPA
 
 Install latest stable Git version from PPA:
 
     sudo add-apt-repository ppa:git-core/ppa && sudo apt install -y git
+
+## SDKMAN
 
 Install SDKMAN (`sdk`) without touching my dotfiles:
 
@@ -360,15 +362,19 @@ Install SDKMAN (`sdk`) without touching my dotfiles:
     sudo wget https://raw.github.com/juven/maven-bash-completion/master/bash_completion.bash \
         --output-document /etc/bash_completion.d/mvn
 
+## Fast Node Manager (fnm)
+
 Install Fast Node Manager (`fnm`) without touching my dotfiles:
 
     curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
     fnm completions --shell bash | sudo tee /etc/bash_completion.d/fnm > /dev/null
 
-    fnm install 18
+    fnm install 22
 
-Install Jetbrains Toolbox App (packaged as an AppImage which requires FUSE):
+## Jetbrains Toolbox App
+
+Toolbox App is packaged as an AppImage, which requires FUSE:
 
     sudo apt install -y libfuse2
 
@@ -378,6 +384,8 @@ Install Jetbrains Toolbox App (packaged as an AppImage which requires FUSE):
         && tar -xzvf /tmp/jetbrains-toolbox.tar.gz --strip-components=1 -C /tmp \
         && /tmp/jetbrains-toolbox \
         && ln -sf ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox ~/bin/jetbrains-toolbox 
+
+## Desktop Utils
 
 Setup file manager of choice:
 
@@ -395,12 +403,6 @@ Setup Simple X Image Viewer:
 Install screenshot tool:
 
     sudo apt install -y ksnip
-
-Misc stuff:
-
-    sudo apt install -y tree
-
-    ln -sf ~/.dotfiles/scripts/urlencode ~/bin/urlencode
 
 ## Hacks
 
