@@ -1,12 +1,16 @@
 # My dotfiles
 
-Tested on Ubuntu 24.04
+Tested on Fedora 41
 
 ## Bootstrap
 
-Make sure `apt` is up to date and that `git` is installed.
+TODO Remove some unused packages:
 
-    sudo apt update && sudo apt upgrade -y && sudo apt install -y git
+    sudo dnf remove libreoffice-core # TODO --assumeyes ?
+
+Make sure system is up to date:
+
+    sudo dnf upgrade # TODO --assumeyes ?
 
 Make sure that you are satisfied with the hostname (it will be used for
 the SSH key):
@@ -30,12 +34,12 @@ config in my dotfiles. Instead, I set this system wide:
 
     sudo git config --system user.email "<email>"
 
-When it comes to vim, there are a couple of options. Package `vim`
+When it comes to vim, there are a couple of options. Package `vim-enhanced`
 works okay, but doesn't have `xterm_clipboard` (can be checked in vim
 by doing `:echo has('clipboard')`). Better option then is to install
-`vim-gtk3`.
+`vim-X11`.
 
-    sudo apt install -y vim-gtk3
+    sudo dnf install --assumeyes vim-X11
 
 Link the vim config:
 
@@ -45,7 +49,7 @@ Install Vundle:
 
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-Start `vim` and run `:PluginInstall`.
+Start `gvim -v` and run `:PluginInstall`.
 
 Now, rest of the commands can be executed via slime from inside
 vim. Launch a `:terminal` and do `<C-c><C-c>` below:
@@ -71,7 +75,7 @@ Create dirs in home:
 
 Install essential packages:
 
-    sudo apt install -y build-essential curl direnv wget tree
+    sudo dnf install --assumeyes direnv # TODO Maybe remove completely?
 
 Optionally, copy skeleton file(s):
 
@@ -86,27 +90,9 @@ Optionally, symlink dircolors:
 
 ## Window Manager
 
-Official Ubuntu i3 packages might be quite old, install using i3's
-own repository.
+Install `i3`:
 
-Download keyring:
-
-    curl --silent https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/ \
-        | perl -lne 'print "curl -o sur5r-keyring.deb https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/$1" if />(sur5r-keyring_.*\.deb)/' \
-        | bash
-
-Install it:
-
-    sudo dpkg -i sur5r-keyring.deb && rm sur5r-keyring.deb
-
-Configure repo:
-
-    echo "deb [arch=amd64] http://debian.sur5r.net/i3/ $(lsb_release -cs) universe" \
-        | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
-
-Update apt and install `i3`:
-
-    sudo apt update && sudo apt install -y i3
+    sudo dnf install --assumeyes i3
 
 Link config:
 
@@ -154,8 +140,7 @@ well AFAIK.
 
 Install `xfce4-terminal` and make it the default:
 
-    sudo apt install -y xfce4-terminal \
-        && sudo update-alternatives --config x-terminal-emulator
+    sudo dnf install --assumeyes xfce4-terminal
 
 Install color scheme:
 
