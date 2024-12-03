@@ -1,12 +1,16 @@
 # My dotfiles
 
-Tested on Ubuntu 24.04
+Tested on Fedora 41
 
 ## Bootstrap
 
-Make sure `apt` is up to date and that `git` is installed.
+TODO Remove some unused packages:
 
-    sudo apt update && sudo apt upgrade -y && sudo apt install -y git
+    sudo dnf remove libreoffice-core # TODO --assumeyes ?
+
+Make sure system is up to date:
+
+    sudo dnf upgrade # TODO --assumeyes ?
 
 Make sure that you are satisfied with the hostname (it will be used for
 the SSH key):
@@ -30,12 +34,12 @@ config in my dotfiles. Instead, I set this system wide:
 
     sudo git config --system user.email "<email>"
 
-When it comes to vim, there are a couple of options. Package `vim`
+When it comes to vim, there are a couple of options. Package `vim-enhanced`
 works okay, but doesn't have `xterm_clipboard` (can be checked in vim
 by doing `:echo has('clipboard')`). Better option then is to install
-`vim-gtk3`.
+`vim-X11`.
 
-    sudo apt install -y vim-gtk3 screen
+    sudo dnf install -y vim-X11 screen
 
 Link the screen config:
 
@@ -49,7 +53,7 @@ Install Vundle:
 
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-Start `vim` and run `:PluginInstall`.
+Start `gvim -v` and run `:PluginInstall`.
 
 Now, rest of the commands can be executed via slime from inside
 vim. Launch `screen -S vim` in a terminal and do `<C-c><C-c>` below:
@@ -75,8 +79,7 @@ Create dirs in home:
 
 Install "essential" packages:
 
-    sudo apt install -y build-essential curl wget tree \
-        pulseaudio-utils atool xscreensaver
+    sudo dnf install --y direnv atool
 
 Optionally, copy skeleton file(s):
 
@@ -158,8 +161,7 @@ Install font of choice:
 
 Install `xfce4-terminal` and make it the default:
 
-    sudo apt install -y xfce4-terminal \
-        && sudo update-alternatives --config x-terminal-emulator
+    sudo dnf install --y xfce4-terminal
 
 Install color scheme:
 
@@ -279,6 +281,26 @@ Install it:
     pushd ~/src/chruby/ \
         && sudo make install \
         && popd
+
+## ssh-agent
+
+Check status:
+
+    ssh-add -L
+
+Create systemd service:
+
+    mkdir -p ~/.config/systemd/user \
+        && ln -sf ~/.dotfiles/ssh-agent.service ~/.config/systemd/user/ssh-agent.service
+
+Make it start automatically:
+
+    systemctl --user enable ssh-agent \
+        && systemctl --user start ssh-agent
+
+Make the ssh client add keys to the running agent:
+
+    echo "AddKeysToAgent yes" >>  ~/.ssh/config
 
 ## httpie
 
