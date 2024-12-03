@@ -400,6 +400,11 @@ Setup Simple X Image Viewer:
         && xdg-mime default sxiv.desktop image/jpg \
         && xdg-mime default sxiv.desktop image/png
 
+Setup (PDF) document viewer:
+
+    sudo apt install zathura \
+        && xdg-mime default org.pwmt.zathura.desktop application/pdf
+
 Install screenshot tool:
 
     sudo apt install -y ksnip
@@ -434,3 +439,8 @@ Make it persistent:
     echo xinput set-prop \""$(xinput list --name-only | grep -i synaptics)"\" \"libinput Tapping Enabled\" 1 \
         >> ~/.xsessionrc
 
+## TODO
+
+
+* kicad
+* locate (sudo apt install plocate)
