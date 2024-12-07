@@ -71,7 +71,7 @@ Create dirs in home:
 
 Install essential packages:
 
-    sudo apt install -y build-essential curl direnv wget tree
+    sudo apt install -y build-essential curl direnv wget tree apt-file
 
 Optionally, copy skeleton file(s):
 
@@ -284,7 +284,6 @@ Download latest ruby versions:
 
     ruby-install --update
 
-TODO Probably install a later version
 Install ruby 3.3 (note: might take a while):
 
     ruby-install ruby 3.3 && echo 3.3 > ~/.ruby-version
@@ -444,3 +443,8 @@ Make it persistent:
 
 * kicad
 * locate (sudo apt install plocate)
+* mousepad
+* thunar
+* lock screen shortcut in i3 config, ctrl+alt+l or something similar
+* set background
+* password generator cmd
