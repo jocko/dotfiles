@@ -35,7 +35,7 @@ works okay, but doesn't have `xterm_clipboard` (can be checked in vim
 by doing `:echo has('clipboard')`). Better option then is to install
 `vim-gtk3`.
 
-    sudo apt install -y vim-gtk3
+    sudo apt install -y vim-gtk3 screen
 
 Link the vim config:
 
@@ -48,7 +48,7 @@ Install Vundle:
 Start `vim` and run `:PluginInstall`.
 
 Now, rest of the commands can be executed via slime from inside
-vim. Launch a `:terminal` and do `<C-c><C-c>` below:
+vim. Launch `screen -S vim` in a terminal and do `<C-c><C-c>` below:
 
     sudo pwd
 
@@ -71,7 +71,7 @@ Create dirs in home:
 
 Install essential packages:
 
-    sudo apt install -y build-essential curl direnv wget tree apt-file
+    sudo apt install -y build-essential curl direnv wget tree apt-file diceware plocate
 
 Optionally, copy skeleton file(s):
 
@@ -86,8 +86,7 @@ Optionally, symlink dircolors:
 
 ## Window Manager
 
-Official Ubuntu i3 packages might be quite old, install using i3's
-own repository.
+This installs from i3's own repository.
 
 Download keyring:
 
@@ -147,11 +146,6 @@ Install font of choice:
 
     sudo apt install -y fonts-hack-ttf
 
-Choose either `xfce4-terminal` or `gnome-terminal`. They should work equally
-well AFAIK.
-
-### xfce4-terminal
-
 Install `xfce4-terminal` and make it the default:
 
     sudo apt install -y xfce4-terminal \
@@ -167,32 +161,6 @@ In `xfce4-terminal`, right click and open `Preferences...`. Under the `General`
 tab. Set `Scrollbar is:` to `Disabled`. Uncheck `Show unsafe paste dialog`.
 Under the `Appearance` tab, set font to `Hack Regular 14`. Uncheck `Display
 menubar in new windows`. Under the `Colors` tab, load preset `gruvbox dark`.
-
-### GNOME Terminal
-
-TODO Verify this section
-
-On a fresh Ubuntu install, `gnome-terminal` is the default. If not, configure it:
-
-    sudo update-alternatives --config x-terminal-emulator
-
-The Gogh install script will fail on a fresh install because it assumes some
-config is already in place. To work around this, manually create a dummy
-profile via preferences. 
-
-Then, clone Gogh repo and install color scheme:
-
-    git clone git@github.com:Gogh-Co/Gogh.git ~/repos/gogh
-
-    pushd ~/repos/gogh/themes \
-        && TERMINAL=gnome-terminal ./gruvbox-dark.sh && popd
-
-In `gnome-terminal`, Right click and open `Preferences`. Under `General`,
-uncheck `Show menubar by default in new terminals` (note that this option is
-not visible under Gnome). Select `Gruvbox Dark` profile. Under `Text` tab, set
-`Custom font` to `Hack Regular 14` and uncheck `Terminal bell`. Under the
-`Scrolling` tab, uncheck `Show scrollbar`. To make the theme the default, click
-the little `v` on the theme name and select `Set as default`.
 
 ## Firefox
 
@@ -304,6 +272,8 @@ Install it:
 
 ## ssh-agent
 
+TODO This section seem to be obsolete since 24.04
+
 Check status:
 
     ssh-add -L
@@ -388,8 +358,8 @@ Toolbox App is packaged as an AppImage, which requires FUSE:
 
 Setup file manager of choice:
 
-    sudo apt install -y pcmanfm \
-        && xdg-mime default pcmanfm.desktop inode/directory
+    sudo apt install -y thunar \
+        && xdg-mime default thunar.desktop inode/directory
 
 Setup Simple X Image Viewer:
 
@@ -401,14 +371,19 @@ Setup Simple X Image Viewer:
 
 Setup (PDF) document viewer:
 
-    sudo apt install zathura \
+    sudo apt install -y zathura \
         && xdg-mime default org.pwmt.zathura.desktop application/pdf
 
 Install screenshot tool:
 
     sudo apt install -y ksnip
 
-## Hacks
+Install graphical text editor:
+
+    sudo apt install -y mousepad \
+        && xdg-mime default org.xfce.mousepad.desktop text/plain
+
+## Miscellaneous
 
 ### Set key repeat rate etc
 
@@ -438,13 +413,26 @@ Make it persistent:
     echo xinput set-prop \""$(xinput list --name-only | grep -i synaptics)"\" \"libinput Tapping Enabled\" 1 \
         >> ~/.xsessionrc
 
+## Kagi
+
+Login to `https://kagi.com/signin`. Right click address bar in Firefox and `Add
+"Kagi Search"`. Open `about:preferences#search` and select `Kagi`.
+
+## Printing
+
+Configure printers using CUPS. Navigate to
+
+    http://localhost:631
+
+User should already belong to `lpadmin` group, so enter login credentials at
+login prompt.
+
+Under Administration, select `Add Printer`. TODO yada yada
+
+TODO Evaluate drivers from Epson
+
 ## TODO
 
-
 * kicad
-* locate (sudo apt install plocate)
-* mousepad
-* thunar
 * lock screen shortcut in i3 config, ctrl+alt+l or something similar
 * set background
-* password generator cmd

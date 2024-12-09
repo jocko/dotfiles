@@ -134,7 +134,7 @@ augroup END
 let g:http_client_focus_output_window = 0
 let g:http_client_result_vsplit = 0
 let g:http_client_preserve_responses = 1
-let g:slime_target = "vimterminal"
+let g:slime_default_config = {"sessionname": "vim", "windowname": "0"}
 let g:slime_python_ipython = 1
 let g:pandoc#modules#disabled = ["folding"]
 let g:gutentags_define_advanced_commands = 1
