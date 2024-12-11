@@ -72,7 +72,8 @@ Create dirs in home:
 Install essential packages:
 
     sudo apt install -y build-essential curl direnv wget tree \
-        apt-file diceware plocate pulseaudio-utils htop meld
+        apt-file diceware plocate pulseaudio-utils htop meld \
+        xautolock
 
 Optionally, copy skeleton file(s):
 
