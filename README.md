@@ -71,7 +71,8 @@ Create dirs in home:
 
 Install essential packages:
 
-    sudo apt install -y build-essential curl direnv wget tree apt-file diceware plocate
+    sudo apt install -y build-essential curl direnv wget tree \
+        apt-file diceware plocate pulseaudio-utils htop meld
 
 Optionally, copy skeleton file(s):
 
@@ -86,7 +87,7 @@ Optionally, symlink dircolors:
 
 ## Window Manager
 
-This installs from i3's own repository.
+Optionally, configue to install from i3's own repository.
 
 Download keyring:
 
@@ -101,11 +102,12 @@ Install it:
 Configure repo:
 
     echo "deb [arch=amd64] http://debian.sur5r.net/i3/ $(lsb_release -cs) universe" \
-        | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
+        | sudo tee /etc/apt/sources.list.d/sur5r-i3.list \
+        && sudo apt update
 
-Update apt and install `i3`:
+Install `i3`:
 
-    sudo apt update && sudo apt install -y i3
+    sudo apt install -y i3
 
 Link config:
 
@@ -361,6 +363,11 @@ Setup file manager of choice:
     sudo apt install -y thunar \
         && xdg-mime default thunar.desktop inode/directory
 
+Hack for getting Firefox to respect my mime mapping above when opening downloads folder.
+
+    mkdir -p ~/.local/share/dbus-1/services \
+        && cp ~/.dotfiles/skel/org.freedesktop.FileManager1.service ~/.local/share/dbus-1/services/
+
 Setup Simple X Image Viewer:
 
     sudo apt install -y sxiv \
@@ -430,6 +437,34 @@ login prompt.
 Under Administration, select `Add Printer`. TODO yada yada
 
 TODO Evaluate drivers from Epson
+
+## TMK
+
+    git clone ...
+
+    git submodule update --init
+
+Install AVR toolchain:
+
+    sudo apt install -y gcc-avr avr-libc avrdude
+
+TODO Linux udev rules
+
+Teensy:
+
+    wget -O /tmp/teensy.tar.gz https://www.pjrc.com/teensy/teensy_linux64.tar.gz \
+        && mkdir /tmp/teensy \
+        && tar -xzvf /tmp/teensy.tar.gz -C /tmp/teensy/
+
+UDEV rules:
+
+    wget -q https://www.pjrc.com/teensy/00-teensy.rules -O- \
+        | sudo tee /etc/udev/rules.d/00-teensy.rules > /dev/null
+
+TODO `hid_listen`
+
+    wget -O ~/bin/hid_listen https://github.com/tmk/hid_listen/raw/master/binaries/hid_listen.linux \
+        && chmod +x ~/bin/hid_listen
 
 ## TODO
 
