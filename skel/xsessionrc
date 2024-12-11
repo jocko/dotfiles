@@ -9,3 +9,6 @@ do
         esac
 done &
 
+# Used for vim-slime
+screen -dm -S vim
+
