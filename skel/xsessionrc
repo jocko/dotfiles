@@ -10,5 +10,5 @@ do
 done &
 
 # Used for vim-slime
-screen -dm -S vim
+screen -ls vim > /dev/null || screen -dm -S vim
 

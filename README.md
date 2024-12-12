@@ -69,11 +69,11 @@ Create dirs in home:
 
     mkdir ~/bin ~/repos ~/src ~/lab
 
-Install essential packages:
+Install "essential" packages:
 
     sudo apt install -y build-essential curl direnv wget tree \
         apt-file diceware plocate pulseaudio-utils htop meld \
-        xautolock
+        xautolock highlight
 
 Optionally, copy skeleton file(s):
 
