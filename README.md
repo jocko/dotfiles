@@ -421,12 +421,12 @@ Make it persistent:
     echo xinput set-prop \""$(xinput list --name-only | grep -i synaptics)"\" \"libinput Tapping Enabled\" 1 \
         >> ~/.xsessionrc
 
-## Kagi
+### Kagi
 
 Login to `https://kagi.com/signin`. Right click address bar in Firefox and `Add
 "Kagi Search"`. Open `about:preferences#search` and select `Kagi`.
 
-## Printing
+### Printing
 
 Configure printers using CUPS. Navigate to
 
@@ -439,7 +439,7 @@ Under Administration, select `Add Printer`. TODO yada yada
 
 TODO Evaluate drivers from Epson
 
-## TMK
+### TMK
 
     git clone ...
 
@@ -467,8 +467,8 @@ TODO `hid_listen`
     wget -O ~/bin/hid_listen https://github.com/tmk/hid_listen/raw/master/binaries/hid_listen.linux \
         && chmod +x ~/bin/hid_listen
 
-## TODO
+### KiCad
 
-* kicad
-* lock screen shortcut in i3 config, ctrl+alt+l or something similar
-* set background
+    sudo add-apt-repository ppa:kicad/kicad-8.0-releases \
+        && sudo apt install -y kicad
+

@@ -33,12 +33,12 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'fracpete/vim-large-files'
 
   Plugin 'mileszs/ack.vim'
+  Plugin 'unblevable/quick-scope'
 
   " TODO Evaluate
-  Plugin 'mhinz/vim-signify'
-  Plugin 'idanarye/vim-merginal'
-  Plugin 'sbdchd/neoformat'
-  Plugin 'unblevable/quick-scope'
+  " Plugin 'mhinz/vim-signify'
+  " Plugin 'idanarye/vim-merginal'
+  " Plugin 'sbdchd/neoformat'
 
   call vundle#end()
 endif
@@ -87,15 +87,10 @@ set ttimeoutlen=100
 set hidden
 set laststatus=2
 set wildmenu
-" set wildmode=longest:full,full
-" TODO This seems nice, evaluate
-" set wildmode=full:lastused
 set wildmode=longest:lastused:full,full
 set wildignorecase
 set wildignore+=tags
 if v:version >= 900
-  " TODO try without fuzzy
-  " set wildoptions=pum,fuzzy
   set wildoptions=pum
 endif
 " Why do I keep changing this?
@@ -108,8 +103,6 @@ set undofile
 set backspace=indent,eol,nostop
 set incsearch
 " set hlsearch
-" TODO Evaluate NOT using relativenumber
-" set relativenumber
 set completeopt=longest,menu,preview
 " This is useful, but throws off j/k movement with count (if there are any
 " wrapped lines between). See gj/gk which operates on display lines instead.
