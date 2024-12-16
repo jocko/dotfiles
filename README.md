@@ -473,17 +473,5 @@ TODO `hid_listen`
 
 ### Everything else
 
-    sudo apt install -y apt-file
-
-    sudo apt install -y diceware
-
-    sudo apt install -y plocate
-
-    sudo apt install -y htop
-
-    sudo apt install -y meld
-
-    sudo apt install -y highlight
-
-    sudo apt install -y arandr
+    sudo apt install -y apt-file diceware plocate htop meld highlight arandr
 
