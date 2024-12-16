@@ -71,9 +71,8 @@ Create dirs in home:
 
 Install "essential" packages:
 
-    sudo apt install -y build-essential curl direnv wget tree \
-        apt-file diceware plocate pulseaudio-utils htop meld \
-        xautolock highlight
+    sudo apt install -y build-essential curl wget tree \
+        pulseaudio-utils xautolock
 
 Optionally, copy skeleton file(s):
 
@@ -471,4 +470,20 @@ TODO `hid_listen`
 
     sudo add-apt-repository ppa:kicad/kicad-8.0-releases \
         && sudo apt install -y kicad
+
+### Everything else
+
+    sudo apt install -y apt-file
+
+    sudo apt install -y diceware
+
+    sudo apt install -y plocate
+
+    sudo apt install -y htop
+
+    sudo apt install -y meld
+
+    sudo apt install -y highlight
+
+    sudo apt install -y arandr
 
