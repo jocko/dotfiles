@@ -194,6 +194,8 @@ autocmd FileType python nnoremap <buffer> <LocalLeader>f :Neoformat autopep8<cr>
 
 autocmd FileType gitcommit setlocal spell
 
+autocmd FileType openscad setlocal autoindent smartindent
+
 " TODO Figure this out
 " autocmd FileType typescript,typescriptreact setlocal include=from
 autocmd FileType typescript,typescriptreact setlocal define=\\(const\\)
