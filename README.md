@@ -272,28 +272,6 @@ Install it:
         && sudo make install \
         && popd
 
-## ssh-agent
-
-TODO This section seem to be obsolete since 24.04
-
-Check status:
-
-    ssh-add -L
-
-Create systemd service:
-
-    mkdir -p ~/.config/systemd/user \
-        && ln -sf ~/.dotfiles/ssh-agent.service ~/.config/systemd/user/ssh-agent.service
-
-Make it start automatically:
-
-    systemctl --user enable ssh-agent \
-        && systemctl --user start ssh-agent
-
-Make the ssh client add keys to the running agent:
-
-    echo "AddKeysToAgent yes" >>  ~/.ssh/config
-
 ## httpie
 
     curl -SsL https://packages.httpie.io/deb/KEY.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/httpie-key.gpg
@@ -476,3 +454,10 @@ TODO `hid_listen`
     sudo apt install -y apt-file diceware plocate htop meld highlight arandr \
         openscad
 
+### TODO ssh config
+
+Create versioned config file?
+
+Make the ssh client add keys to the running agent:
+
+    echo "AddKeysToAgent yes" >>  ~/.ssh/config
