@@ -1,4 +1,4 @@
 msgwait 0
 msgminwait 0
 caption always "%{= 2m}%{+b w}Screen: %n | %S"
-escape ^Jj
+# escape ^Jj
