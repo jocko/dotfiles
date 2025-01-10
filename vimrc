@@ -46,6 +46,10 @@ endif
 filetype plugin indent on
 syntax enable
 
+if !executable('ctags')
+  let g:gutentags_dont_load = 1
+endif
+
 " Colorscheme overrides, need to appear before we source any
 " colorscheme. Since we do this with autocommands, it is possible to
 " try out new themes (e.g. :color gruvbox) and not have these overrides
