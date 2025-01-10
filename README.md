@@ -72,7 +72,7 @@ Create dirs in home:
 Install "essential" packages:
 
     sudo apt install -y build-essential curl wget tree \
-        pulseaudio-utils xautolock
+        pulseaudio-utils xautolock atool
 
 Optionally, copy skeleton file(s):
 
