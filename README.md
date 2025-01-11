@@ -37,6 +37,10 @@ by doing `:echo has('clipboard')`). Better option then is to install
 
     sudo apt install -y vim-gtk3 screen
 
+Link the screen config:
+
+    ln -sr ~/.dotfiles/screenrc ~/.screenrc
+
 Link the vim config:
 
     ln -sf ~/.dotfiles/vimrc ~/.vimrc
@@ -72,7 +76,7 @@ Create dirs in home:
 Install "essential" packages:
 
     sudo apt install -y build-essential curl wget tree \
-        pulseaudio-utils xautolock atool
+        pulseaudio-utils xautolock atool xsecurelock
 
 Optionally, copy skeleton file(s):
 
@@ -451,8 +455,9 @@ TODO `hid_listen`
 
 ### Everything else
 
-    sudo apt install -y apt-file diceware plocate htop meld highlight arandr \
-        openscad
+    sudo apt install -y apt-file diceware plocate htop meld highlight arandr
+
+    sudo apt install -y openscad
 
 ### TODO ssh config
 
