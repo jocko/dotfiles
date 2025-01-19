@@ -12,5 +12,5 @@ done &
 # Used for vim-slime
 screen -ls vim > /dev/null || screen -dm -S vim
 
-xset s 300 dpms 300 300 300
+xset dpms 600 600 600
 xsetroot -solid "#1d2021"
