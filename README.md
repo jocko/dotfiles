@@ -455,7 +455,8 @@ TODO `hid_listen`
 
 ### Everything else
 
-    sudo apt install -y apt-file diceware plocate htop meld highlight arandr
+    sudo apt install -y apt-file diceware plocate htop meld highlight arandr \
+        net-tools
 
     sudo apt install -y openscad
 
