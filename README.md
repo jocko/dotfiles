@@ -453,6 +453,27 @@ TODO `hid_listen`
     sudo add-apt-repository ppa:kicad/kicad-8.0-releases \
         && sudo apt install -y kicad
 
+### Docker
+
+TODO Untested
+
+Install keyring:
+
+    sudo curl https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+
+Configure repo:
+
+    echo "deb [signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+        | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+Install `docker-ce`:
+
+    sudo apt update && sudo apt install -y docker-ce
+
+Add user to `docker` group:
+
+    sudo usermod -aG docker $USER
+
 ### Everything else
 
     sudo apt install -y apt-file diceware plocate htop meld highlight arandr \
