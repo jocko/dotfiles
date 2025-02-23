@@ -89,8 +89,6 @@ Optionally, symlink dircolors:
 
     ln -sf ~/.dotfiles/dircolors ~/.dircolors
 
-TODO Link xscreensaver settings:  ~/.xscreensaver
-
 ## Window Manager
 
 Optionally, configue to install from i3's own repository.
@@ -147,6 +145,10 @@ installed):
 Try it out:
 
     ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ~/bin/ding echo Ermahgerd!
+
+Link xscreensaver settings:
+
+    ln -sf ~/.dotfiles/xscreensaver  ~/.xscreensaver
 
 ## Terminal Emulator
 
