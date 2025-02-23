@@ -416,7 +416,7 @@ Configure printers using CUPS. Navigate to
 User should already belong to `lpadmin` group, so enter login credentials at
 login prompt.
 
-Under Administration, select `Add Printer`. TODO yada yada
+Under Administration, select `Add Printer`. TODO yada yada (EPSON Printer, driverless, 2.0.0)
 
 TODO Evaluate drivers from Epson
 
