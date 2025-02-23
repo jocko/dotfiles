@@ -76,7 +76,7 @@ Create dirs in home:
 Install "essential" packages:
 
     sudo apt install -y build-essential curl wget tree \
-        pulseaudio-utils xautolock atool xsecurelock
+        pulseaudio-utils atool xscreensaver
 
 Optionally, copy skeleton file(s):
 
@@ -88,6 +88,8 @@ Optionally, copy skeleton file(s):
 Optionally, symlink dircolors:
 
     ln -sf ~/.dotfiles/dircolors ~/.dircolors
+
+TODO Link xscreensaver settings:  ~/.xscreensaver
 
 ## Window Manager
 
