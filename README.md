@@ -349,6 +349,9 @@ Setup file manager of choice:
     sudo apt install -y thunar \
         && xdg-mime default thunar.desktop inode/directory
 
+In `Thunar`, open `Edit/Preferences`. Under `Display`, select `Remember view
+settings for each folder`.
+
 Hack for getting Firefox to respect my mime mapping above when opening downloads folder.
 
     mkdir -p ~/.local/share/dbus-1/services \
