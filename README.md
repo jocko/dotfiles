@@ -105,7 +105,7 @@ Install it:
 
 Configure repo:
 
-    echo "deb [arch=amd64] http://debian.sur5r.net/i3/ $(lsb_release -cs) universe" \
+    echo "deb [signed-by=/usr/share/keyrings/sur5r-keyring.gpg] http://debian.sur5r.net/i3/ $(lsb_release -cs) universe" \
         | sudo tee /etc/apt/sources.list.d/sur5r-i3.list \
         && sudo apt update
 
@@ -246,7 +246,7 @@ Link `gem` config:
 
 Download `ruby-install` (note: version is static):
 
-    wget -O ~/src/ruby-install.tar.gz https://github.com/postmodern/ruby-install/archive/v0.9.3.tar.gz \
+    wget -O ~/src/ruby-install.tar.gz https://github.com/postmodern/ruby-install/archive/v0.10.1.tar.gz \
         && rm -rf ~/src/ruby-install \
         && mkdir ~/src/ruby-install \
         && tar -xzvf ~/src/ruby-install.tar.gz --strip-components=1 -C ~/src/ruby-install \
