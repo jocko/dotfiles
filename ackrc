@@ -4,3 +4,4 @@
 --ignore-file=ext:mp3
 --ignore-file=ext:ipynb
 --ignore-directory=is:.venv
+--ignore-directory=is:.next
