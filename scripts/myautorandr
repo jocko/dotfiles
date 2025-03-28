@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ACTIVE_MONITORS="$(xrandr --listmonitors | tail -n +2 | awk '{ print $4 }')"
-RIGHT_MONITOR="$(echo "$ACTIVE_MONITORS" | grep HDMI- | head -n 1)"
-LEFT_MONITOR="$(echo "$ACTIVE_MONITORS" | grep eDP- |  head -n 1)"
+RIGHT_MONITOR="$(echo "$ACTIVE_MONITORS" | grep DisplayPort- | head -n 1)"
+LEFT_MONITOR="$(echo "$ACTIVE_MONITORS" | grep eDP |  head -n 1)"
 
 if [ -n "$LEFT_MONITOR" ] && [ -n "$RIGHT_MONITOR" ] ; then
   xrandr --output "$LEFT_MONITOR" --auto \
