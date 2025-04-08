@@ -38,7 +38,12 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   " TODO Evaluate
   " Plugin 'mhinz/vim-signify'
   " Plugin 'idanarye/vim-merginal'
-  " Plugin 'sbdchd/neoformat'
+  Plugin 'sbdchd/neoformat'
+  Plugin 'tpope/vim-projectionist'
+
+  " Plugin 'prabirshrestha/vim-lsp'
+  " Plugin 'mattn/vim-lsp-settings'
+  Plugin 'dense-analysis/ale'
 
   call vundle#end()
 endif
@@ -186,13 +191,14 @@ set signcolumn=yes
 
 let maplocalleader=" "
 
-autocmd FileType typescript,typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
-autocmd FileType json setlocal noexpandtab shiftwidth=2 tabstop=2
+" autocmd FileType typescript,typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
+" autocmd FileType json setlocal noexpandtab shiftwidth=2 tabstop=2
 autocmd FileType markdown setlocal shiftwidth=4 tabstop=4
 
-autocmd FileType typescript,typescriptreact setlocal path-=/usr/include path+=src/**
+autocmd FileType typescript,typescriptreact setlocal path-=/usr/include path+=src/** path+=app/**
 autocmd FileType typescript,typescriptreact setlocal complete-=i
 autocmd FileType typescript,typescriptreact nnoremap <buffer> <LocalLeader>f :Neoformat prettierd<cr>
+autocmd FileType typescript,typescriptreact nmap <buffer> <C-]> <Plug>(ale_go_to_definition)
 
 autocmd FileType python nnoremap <buffer> <LocalLeader>f :Neoformat autopep8<cr>
 
