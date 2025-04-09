@@ -122,6 +122,7 @@ set nrformats=bin,hex,unsigned
 set cursorline
 set list
 set listchars=tab:▸\ ,trail:·
+set path-=/usr/include
 " Evaluate. Will make '-' part of keywords
 " Result => Didn't work as well as I would have thought. For example, unable
 " to auto complete JIRAs in branch names on the form SER-1234-make-teapots
@@ -195,7 +196,6 @@ let maplocalleader=" "
 " autocmd FileType json setlocal noexpandtab shiftwidth=2 tabstop=2
 autocmd FileType markdown setlocal shiftwidth=4 tabstop=4
 
-autocmd FileType typescript,typescriptreact setlocal path-=/usr/include path+=src/** path+=app/**
 autocmd FileType typescript,typescriptreact setlocal complete-=i
 autocmd FileType typescript,typescriptreact nnoremap <buffer> <LocalLeader>f :Neoformat prettierd<cr>
 autocmd FileType typescript,typescriptreact nmap <buffer> <C-]> <Plug>(ale_go_to_definition)
