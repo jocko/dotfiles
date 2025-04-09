@@ -36,11 +36,11 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'unblevable/quick-scope'
 
   " TODO Evaluate
-  " Plugin 'mhinz/vim-signify'
+  Plugin 'mhinz/vim-signify' " Added back at 2025-04-09 - I was missing some kind of line wise indication that a line had been changed (or not)
   " Plugin 'idanarye/vim-merginal'
   Plugin 'sbdchd/neoformat'
   Plugin 'tpope/vim-projectionist'
-
+  Plugin 'fatih/vim-go'
   " Plugin 'prabirshrestha/vim-lsp'
   " Plugin 'mattn/vim-lsp-settings'
   Plugin 'dense-analysis/ale'
