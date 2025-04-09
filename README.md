@@ -392,17 +392,19 @@ Note that `.xsessionrc` is a dotfile specific to Debian (and its derivatives).
 
 ### Touchpad tapping
 
+TODO: find a better way to identify the touchpad
+
 List all input devices:
 
     xinput
 
 Likely, it is the input named something with *Synaptics*
 
-    xinput list --name-only | grep -i synaptics
+    xinput list --name-only | grep -i touchpad
 
 If this is correct, test it out by doing:
 
-    xinput set-prop "$(xinput list --name-only | grep -i synaptics)" "libinput Tapping Enabled" 1
+    xinput set-prop "$(xinput list --name-only | grep -i touchpad)" "libinput Tapping Enabled" 1
 
 Make it persistent:
 
