@@ -28,7 +28,8 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   " Comment stuff out
   Plugin 'tpope/vim-commentary'
   " Handy mappings (e.g ]q for navigating quickfix list)
-  Plugin 'tpope/vim-unimpaired'
+  " Disabled at 2025-04-14 Will try using <C-N>/<C-P> for navigating quickfix
+  " Plugin 'tpope/vim-unimpaired'
   " Turn off syntax for large files
   Plugin 'fracpete/vim-large-files'
 
@@ -40,10 +41,12 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   " Plugin 'idanarye/vim-merginal'
   Plugin 'sbdchd/neoformat'
   Plugin 'tpope/vim-projectionist'
-  Plugin 'fatih/vim-go'
+  " Plugin 'fatih/vim-go'
   " Plugin 'prabirshrestha/vim-lsp'
   " Plugin 'mattn/vim-lsp-settings'
   Plugin 'dense-analysis/ale'
+  " Plugin 'rjohnsondev/vim-compiler-go'
+  Plugin 'tpope/vim-dispatch'
 
   call vundle#end()
 endif
@@ -123,10 +126,6 @@ set cursorline
 set list
 set listchars=tab:▸\ ,trail:·
 set path-=/usr/include
-" Evaluate. Will make '-' part of keywords
-" Result => Didn't work as well as I would have thought. For example, unable
-" to auto complete JIRAs in branch names on the form SER-1234-make-teapots
-" set iskeyword+=\-
 augroup trailing
   au!
   au InsertEnter * :set listchars-=trail:·
@@ -134,11 +133,13 @@ augroup trailing
 augroup END
 
 " Plugin config
+" TODO http_client_xxx not used?
 let g:http_client_focus_output_window = 0
 let g:http_client_result_vsplit = 0
 let g:http_client_preserve_responses = 1
 let g:slime_default_config = {"sessionname": "vim", "windowname": "0"}
 let g:slime_python_ipython = 1
+" TODO pandoc not used?
 let g:pandoc#modules#disabled = ["folding"]
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_add_default_project_roots = 0
@@ -156,6 +157,7 @@ let g:gutentags_ctags_extra_args = []
 let g:gutentags_ctags_extra_args += ['--TypeScript-kinds=-p']
 let LargeFile = 1024 * 1024 * 1
 let g:merginal_splitType = ''
+let g:dispatch_no_maps = 1
 
 set undodir=~/.vim/undo
 if !isdirectory(expand(&undodir))
