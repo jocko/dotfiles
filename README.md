@@ -39,7 +39,7 @@ works okay, but doesn't have `xterm_clipboard` (can be checked in vim
 by doing `:echo has('clipboard')`). Better option then is to install
 `vim-X11`.
 
-    sudo dnf install -y vim-X11 screen
+    sudo dnf install -y vim-X11
 
 Link the screen config:
 
@@ -53,16 +53,17 @@ Install Vundle:
 
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-Start `gvim -v` and run `:PluginInstall`.
+Start `vimx` and run `:PluginInstall`.
 
 Now, rest of the commands can be executed via slime from inside
-vim. Launch `screen -S vim` in a terminal and do `<C-c><C-c>` below:
+vim. Launch a `:term` and do `<C-c><C-c>` below:
 
     sudo pwd
 
 Link bash and readline config:
 
-    ln -sf ~/.dotfiles/bashrc ~/.bashrc && ln -sf ~/.dotfiles/inputrc ~/.inputrc
+    ln -sf ~/.dotfiles/bashrc.d ~/.bashrc.d \
+        && ln -sf ~/.dotfiles/inputrc ~/.inputrc
 
 Link the git config:
 
@@ -79,8 +80,9 @@ Create dirs in home:
 
 Install "essential" packages:
 
-    sudo dnf install --y direnv atool
+    sudo dnf install --y direnv atool screen diceware htop
 
+TODO Remove this?
 Optionally, copy skeleton file(s):
 
     cat ~/.dotfiles/skel/bash_local
@@ -98,29 +100,14 @@ Install `sway`:
 
     sudo dnf install -y sway
 
-TODO Go through entire config (currently copied from /etc/sway/config)
+TODO Clean up
 Link config:
 
     mkdir -p ~/.config/sway && ln -sf ~/.dotfiles/sway.config ~/.config/sway/config 
 
-TODO Consider removing (rofi not compatible with wayland?)
-Install `rofi` (dmenu replacement)
-
-    sudo dnf install -y rofi
-
-TODO Will not work at all on wayland
-Install `xkblayout-state`
-
-    sudo apt install -y libx11-dev
-
-    git clone git@github.com:nonpop/xkblayout-state.git ~/src/xkblayout-state
-
-    pushd ~/src/xkblayout-state && make && cp xkblayout-state ~/bin && popd
-
-TODO
 Install `i3blocks`:
 
-    sudo apt install -y i3blocks fonts-font-awesome
+    sudo dnf install -y i3blocks fontawesome-fonts-all
 
 Link config:
 
@@ -139,6 +126,7 @@ Try it out:
 
     ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ~/bin/ding echo Ermahgerd!
 
+TODO
 Link xscreensaver settings:
 
     ln -sf ~/.dotfiles/xscreensaver  ~/.xscreensaver
@@ -147,9 +135,9 @@ Link xscreensaver settings:
 
 Install font of choice:
 
-sudo dnf install -y source-foundry-hack-fonts.noarch
+sudo dnf install -y source-foundry-hack-fonts
 
-Install `xfce4-terminal` and make it the default:
+Install `xfce4-terminal`:
 
     sudo dnf install -y xfce4-terminal
 
@@ -163,37 +151,6 @@ In `xfce4-terminal`, right click and open `Preferences...`. Under the `General`
 tab. Set `Scrollbar is:` to `Disabled`. Uncheck `Show unsafe paste dialog`.
 Under the `Appearance` tab, set font to `Hack Regular 14`. Uncheck `Display
 menubar in new windows`. Under the `Colors` tab, load preset `gruvbox dark`.
-
-## Firefox
-
-This installs a non-snap version of Firefox.
-
-Install keyring:
-
-    wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- \
-        | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
-
-Configure repo:
-
-    echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" \
-        | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
-
-Lower priority of snap package:
-
-    echo -e "Package: firefox*\nPin: release o=Ubuntu*\nPin-Priority: -1" \
-        | sudo tee /etc/apt/preferences.d/mozilla-firefox
-
-Uninstall snap package:
-
-    sudo apt update && sudo apt remove -y firefox
-
-Install `firefox`:
-
-    sudo apt install -y firefox
-
-Optionally, remove snap:
-
-    sudo snap remove firefox
 
 ## Ctags
 
@@ -311,11 +268,16 @@ Link config:
 
     ln -sf ~/.dotfiles/ackrc ~/.ackrc
 
-## Git PPA
+## Mullvad
 
-Install latest stable Git version from PPA:
+Add Mullvad repo:
 
-    sudo add-apt-repository ppa:git-core/ppa && sudo apt install -y git
+    sudo dnf config-manager addrepo \
+        --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
+
+Install it:
+
+    sudo dnf install -y mullvad-vpn
 
 ## SDKMAN
 
@@ -358,12 +320,13 @@ Toolbox App is packaged as an AppImage, which requires FUSE:
 
 Setup file manager of choice:
 
-    sudo apt install -y thunar \
+    sudo dnf install -y thunar \
         && xdg-mime default thunar.desktop inode/directory
 
-In `Thunar`, open `Edit/Preferences`. Under `Display`, select `Remember view
+In `thunar`, open `Edit/Preferences`. Under `Display`, select `Remember view
 settings for each folder`.
 
+TODO This doesn't seem to work on anymore :/
 Hack for getting Firefox to respect my mime mapping above when opening downloads folder.
 
     mkdir -p ~/.local/share/dbus-1/services \
@@ -371,7 +334,7 @@ Hack for getting Firefox to respect my mime mapping above when opening downloads
 
 Setup Simple X Image Viewer:
 
-    sudo apt install -y sxiv \
+    sudo dnf install -y sxiv \
         && xdg-mime default sxiv.desktop image/gif \
         && xdg-mime default sxiv.desktop image/jpeg \
         && xdg-mime default sxiv.desktop image/jpg \
@@ -379,49 +342,20 @@ Setup Simple X Image Viewer:
 
 Setup (PDF) document viewer:
 
-    sudo apt install -y zathura \
+    sudo dnf install -y zathura \
         && xdg-mime default org.pwmt.zathura.desktop application/pdf
 
+TODO
 Install screenshot tool:
 
     sudo apt install -y ksnip
 
 Install graphical text editor:
 
-    sudo apt install -y mousepad \
+    sudo dnf install -y mousepad \
         && xdg-mime default org.xfce.mousepad.desktop text/plain
 
 ## Miscellaneous
-
-### Set key repeat rate etc
-
-    sudo apt install inputplug
-
-    cp ~/.dotfiles/skel/xsessionrc ~/.xsessionrc \
-        && cat ~/.xsessionrc
-
-Note that `.xsessionrc` is a dotfile specific to Debian (and its derivatives).
-
-### Touchpad tapping
-
-TODO: find a better way to identify the touchpad
-
-List all input devices:
-
-    xinput
-
-Likely, it is the input named something with *Synaptics*
-
-    xinput list --name-only | grep -i touchpad
-
-If this is correct, test it out by doing:
-
-    xinput set-prop "$(xinput list --name-only | grep -i touchpad)" "libinput Tapping Enabled" 1
-
-Make it persistent:
-
-    echo xinput set-prop \""$(xinput list --name-only | grep -i synaptics)"\" \"libinput Tapping Enabled\" 1 \
-        >> ~/.xsessionrc
 
 ### Kagi
 
@@ -494,13 +428,6 @@ Install `docker-ce`:
 Add user to `docker` group:
 
     sudo usermod -aG docker $USER
-
-### Everything else
-
-    sudo apt install -y apt-file diceware plocate htop meld highlight arandr \
-        net-tools
-
-    sudo apt install -y openscad
 
 ### TODO ssh config
 
