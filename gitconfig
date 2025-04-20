@@ -1,10 +1,6 @@
 [user]
     name = Joakim Erelt
 [alias]
-    ctags = !.git/hooks/ctags
-    st = status
-    co = checkout
-    dog = log --decorate --oneline --graph --all
     punch = push --force
 [branch]
     sort = -committerdate
@@ -15,7 +11,6 @@
     branch = green
 [core]
     autocrlf = input
-    editor = vim
     excludesfile = ~/.gitignore
 [push]
     default = simple
