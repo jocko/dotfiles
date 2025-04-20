@@ -94,36 +94,21 @@ Optionally, symlink dircolors:
 
 ## Window Manager
 
-Optionally, configue to install from i3's own repository.
+Install `sway`:
 
-Download keyring:
+    sudo dnf install -y sway
 
-    curl --silent https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/ \
-        | perl -lne 'print "curl -o sur5r-keyring.deb https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/$1" if />(sur5r-keyring_.*\.deb)/' \
-        | bash
-
-Install it:
-
-    sudo dpkg -i sur5r-keyring.deb && rm sur5r-keyring.deb
-
-Configure repo:
-
-    echo "deb [signed-by=/usr/share/keyrings/sur5r-keyring.gpg] http://debian.sur5r.net/i3/ $(lsb_release -cs) universe" \
-        | sudo tee /etc/apt/sources.list.d/sur5r-i3.list \
-        && sudo apt update
-
-Install `i3`:
-
-    sudo apt install -y i3
-
+TODO Go through entire config (currently copied from /etc/sway/config)
 Link config:
 
-    mkdir -p ~/.config/i3 && ln -sf ~/.dotfiles/i3.config ~/.config/i3/config 
+    mkdir -p ~/.config/sway && ln -sf ~/.dotfiles/sway.config ~/.config/sway/config 
 
+TODO Consider removing (rofi not compatible with wayland?)
 Install `rofi` (dmenu replacement)
 
-    sudo apt install -y rofi
+    sudo dnf install -y rofi
 
+TODO Will not work at all on wayland
 Install `xkblayout-state`
 
     sudo apt install -y libx11-dev
@@ -132,6 +117,7 @@ Install `xkblayout-state`
 
     pushd ~/src/xkblayout-state && make && cp xkblayout-state ~/bin && popd
 
+TODO
 Install `i3blocks`:
 
     sudo apt install -y i3blocks fonts-font-awesome
@@ -140,8 +126,12 @@ Link config:
 
     ln -sf ~/.dotfiles/i3blocks.conf ~/.i3blocks.conf
 
-Link `dunst` config (`dunst` is recommended by `i3`, so it should already be
-installed):
+Install `dunst`:
+
+    sudo dnf install -y dunst
+
+TODO Did this work?
+Link config:
 
     mkdir -p ~/.config/dunst && ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
 
@@ -157,11 +147,11 @@ Link xscreensaver settings:
 
 Install font of choice:
 
-    sudo apt install -y fonts-hack-ttf
+sudo dnf install -y source-foundry-hack-fonts.noarch
 
 Install `xfce4-terminal` and make it the default:
 
-    sudo dnf install --y xfce4-terminal
+    sudo dnf install -y xfce4-terminal
 
 Install color scheme:
 
