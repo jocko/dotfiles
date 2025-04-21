@@ -72,6 +72,16 @@ autocmd ColorScheme nord highlight IncSearch cterm=NONE ctermfg=0 ctermbg=11
 autocmd ColorScheme gruvbox highlight IncSearch cterm=NONE ctermfg=0 ctermbg=9
 
 if filereadable(expand("~/.vim/bundle/gruvbox/README.md"))
+  " termguicolors is set according to instructions on
+  " https://github.com/morhetz/gruvbox/wiki/Terminal-specific
+  "
+  " Not having this setting can cause a border around vim, in a slightly
+  " different shade (how big this border is depends on how well the font size
+  " aligns with the screen resolution)
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+
   " Required for some themes (e.g. gruvbox)
   set background=dark
   color gruvbox
@@ -131,6 +141,8 @@ set cursorline
 set list
 set listchars=tab:▸\ ,trail:·
 set path-=/usr/include
+set noshowcmd
+
 augroup trailing
   au!
   au InsertEnter * :set listchars-=trail:·

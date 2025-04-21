@@ -80,7 +80,7 @@ Create dirs in home:
 
 Install "essential" packages:
 
-    sudo dnf install --y direnv atool screen diceware htop
+    sudo dnf install --y direnv atool screen diceware htop NetworkManager-tui pavucontrol
 
 TODO Remove this?
 Optionally, copy skeleton file(s):
