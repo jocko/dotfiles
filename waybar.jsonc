@@ -10,21 +10,24 @@
     "modules-center": [
     ],
     "modules-right": [
-        "idle_inhibitor",
+        // "idle_inhibitor",
         "sway/language",
         "battery",
         "clock",
         "pulseaudio",
         "tray"
     ],
+    "sway/language": {
+      "format": "{}"
+    },
     "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        }
+        // "numlock": true,
+        // "capslock": true,
+        // "format": "{name}"
+        // "format-icons": {
+        //     "locked": "",
+        //     "unlocked": ""
+        // }
     },
     "sway/mode": {
         // "format": "<span style=\"italic\">{}</span>"
@@ -113,12 +116,15 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        // "format": "{volume}% {icon} {format_source}",
+        "format": "{format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        // "format-muted": " {format_source}",
+        // "format-source": "{volume}% ",
+        "format-source": "OPEN ",
+        // "format-source-muted": "",
+        "format-source-muted": "",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
