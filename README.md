@@ -79,15 +79,19 @@ Create dirs in home:
 
     mkdir ~/bin ~/repos ~/src ~/lab
 
+TODO screenshot tool
 Install "essential" packages:
 
-    sudo dnf install --y direnv atool screen diceware htop NetworkManager-tui pavucontrol
+    sudo dnf install --y direnv atool screen diceware htop \
+        NetworkManager-tui pavucontrol make httpie ack
 
 Symlink misc stuff:
 
     ln -sf ~/.dotfiles/dircolors ~/.dircolors
 
     ln -sf ~/.dotfiles/screenrc ~/.screenrc
+
+    ln -sf ~/.dotfiles/ackrc ~/.ackrc
 
 ## Window Manager
 
@@ -99,20 +103,12 @@ Link config:
 
     mkdir -p ~/.config/sway && ln -sf ~/.dotfiles/sway.config ~/.config/sway/config 
 
-TODO Moved to `waybar`
-Install `i3blocks`:
-
-    sudo dnf install -y i3blocks fontawesome-fonts-all
-
-Link config:
-
-    ln -sf ~/.dotfiles/i3blocks.conf ~/.i3blocks.conf
+TODO Install `waybar`:
 
 Install `dunst`:
 
     sudo dnf install -y dunst
 
-TODO Did this work?
 Link config:
 
     mkdir -p ~/.config/dunst && ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
@@ -121,16 +117,11 @@ Try it out:
 
     ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ~/bin/ding echo Ermahgerd!
 
-TODO
-Link xscreensaver settings:
-
-    ln -sf ~/.dotfiles/xscreensaver  ~/.xscreensaver
-
 ## Terminal Emulator
 
 Install font of choice:
 
-sudo dnf install -y source-foundry-hack-fonts
+    sudo dnf install -y source-foundry-hack-fonts
 
 Install `xfce4-terminal`:
 
@@ -147,22 +138,12 @@ tab. Set `Scrollbar is:` to `Disabled`. Uncheck `Show unsafe paste dialog`.
 Under the `Appearance` tab, set font to `Hack Regular 14`. Uncheck `Display
 menubar in new windows`. Under the `Colors` tab, load preset `gruvbox dark`.
 
-## Ctags
+### Kagi
 
-Choose either `exuberant-ctags` or `universal-ctags`. I'm currently using
-`universal-ctags`.
+Login to `https://kagi.com/signin`. Right click address bar in Firefox and `Add
+"Kagi Search"`. Open `about:preferences#search` and select `Kagi`.
 
-### exuberant-ctags
-
-Install:
-
-    sudo apt install -y exuberant-ctags
-
-Link config:
-
-    ln -sf ~/.dotfiles/ctags ~/.ctags
-
-### universal-ctags
+## Universal Ctags
 
 Install:
 
@@ -174,6 +155,7 @@ Link config:
 
 ## Python
 
+TODO python is already installed?
 Install `python3` and make `python` point to it:
 
     sudo apt install -y python3-pip python3-venv python-is-python3 python3-autopep8
@@ -208,7 +190,7 @@ Download latest ruby versions:
 
 Install ruby 3.3 (note: might take a while):
 
-    ruby-install ruby 3.3 && echo 3.3 > ~/.ruby-version
+    ruby-install ruby 3.4 && echo 3.4 > ~/.ruby-version
 
 Download `chruby` (note: version is static):
 
@@ -244,50 +226,6 @@ Make the ssh client add keys to the running agent:
 
     echo "AddKeysToAgent yes" >>  ~/.ssh/config
 
-## httpie
-
-    curl -SsL https://packages.httpie.io/deb/KEY.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/httpie-key.gpg
-
-    sudo curl -SsL -o /etc/apt/sources.list.d/httpie.list https://packages.httpie.io/deb/httpie.list
-
-    sudo apt update \
-        && sudo apt install -y httpie
-
-## ack
-
-Install:
-
-    sudo apt install -y ack
-
-Link config:
-
-    ln -sf ~/.dotfiles/ackrc ~/.ackrc
-
-## Mullvad
-
-Add Mullvad repo:
-
-    sudo dnf config-manager addrepo \
-        --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
-
-Install it:
-
-    sudo dnf install -y mullvad-vpn
-
-## SDKMAN
-
-Install SDKMAN (`sdk`) without touching my dotfiles:
-
-    curl -s "https://get.sdkman.io?rcupdate=false" | bash \
-        && source ~/.bash_local
-
-    sdk install java
-
-    sdk install maven
-
-    sudo wget https://raw.github.com/juven/maven-bash-completion/master/bash_completion.bash \
-        --output-document /etc/bash_completion.d/mvn
-
 ## Fast Node Manager (fnm)
 
 Install Fast Node Manager (`fnm`) without touching my dotfiles:
@@ -295,65 +233,6 @@ Install Fast Node Manager (`fnm`) without touching my dotfiles:
     curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
     $HOME/.local/share/fnm/fnm completions --shell bash | sudo tee /etc/bash_completion.d/fnm > /dev/null
-
-## Jetbrains Toolbox App
-
-Toolbox App is packaged as an AppImage, which requires FUSE:
-
-    sudo apt install -y libfuse2
-
-    curl -s  'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' \
-        | jq -r '.TBA[0].downloads.linux.link' \
-        | xargs wget -O /tmp/jetbrains-toolbox.tar.gz \
-        && tar -xzvf /tmp/jetbrains-toolbox.tar.gz --strip-components=1 -C /tmp \
-        && /tmp/jetbrains-toolbox \
-        && ln -sf ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox ~/bin/jetbrains-toolbox 
-
-## Desktop Utils
-
-Setup file manager of choice:
-
-    sudo dnf install -y thunar \
-        && xdg-mime default thunar.desktop inode/directory
-
-In `thunar`, open `Edit/Preferences`. Under `Display`, select `Remember view
-settings for each folder`.
-
-TODO This doesn't seem to work on anymore :/
-Hack for getting Firefox to respect my mime mapping above when opening downloads folder.
-
-    mkdir -p ~/.local/share/dbus-1/services \
-        && cp ~/.dotfiles/skel/org.freedesktop.FileManager1.service ~/.local/share/dbus-1/services/
-
-Setup Simple X Image Viewer:
-
-    sudo dnf install -y sxiv \
-        && xdg-mime default sxiv.desktop image/gif \
-        && xdg-mime default sxiv.desktop image/jpeg \
-        && xdg-mime default sxiv.desktop image/jpg \
-        && xdg-mime default sxiv.desktop image/png
-
-Setup (PDF) document viewer:
-
-    sudo dnf install -y zathura \
-        && xdg-mime default org.pwmt.zathura.desktop application/pdf
-
-TODO
-Install screenshot tool:
-
-    sudo apt install -y ksnip
-
-Install graphical text editor:
-
-    sudo dnf install -y mousepad \
-        && xdg-mime default org.xfce.mousepad.desktop text/plain
-
-## Miscellaneous
-
-### Kagi
-
-Login to `https://kagi.com/signin`. Right click address bar in Firefox and `Add
-"Kagi Search"`. Open `about:preferences#search` and select `Kagi`.
 
 ### Docker
 
@@ -377,13 +256,16 @@ Add current user to `docker` group:
 
     sudo usermod -aG docker $USER
 
-### TODO ssh config
+## Mullvad
 
-Create versioned config file?
+Add Mullvad repo:
 
-Make the ssh client add keys to the running agent:
+    sudo dnf config-manager addrepo \
+        --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
 
-    echo "AddKeysToAgent yes" >>  ~/.ssh/config
+Install it:
+
+    sudo dnf install -y mullvad-vpn
 
 ### TODO TMK
 
