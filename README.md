@@ -1,16 +1,16 @@
 # My dotfiles
 
-Tested on Fedora 41
+Tested on Fedora 42
 
 ## Bootstrap
 
-TODO Remove some unused packages:
+Remove some unused packages:
 
-    sudo dnf remove libreoffice-core # TODO --assumeyes ?
+    sudo dnf remove -y libreoffice-core
 
 Make sure system is up to date:
 
-    sudo dnf upgrade # TODO --assumeyes ?
+    sudo dnf upgrade -y
 
 Make sure that you are satisfied with the hostname (it will be used for
 the SSH key):
@@ -41,10 +41,6 @@ by doing `:echo has('clipboard')`). Better option then is to install
 
     sudo dnf install -y vim-X11
 
-Link the screen config:
-
-    ln -sr ~/.dotfiles/screenrc ~/.screenrc
-
 Link the vim config:
 
     ln -sf ~/.dotfiles/vimrc ~/.vimrc
@@ -65,7 +61,7 @@ Link bash and readline config:
     ln -sf ~/.dotfiles/bashrc.d ~/.bashrc.d \
         && ln -sf ~/.dotfiles/inputrc ~/.inputrc
 
-Link the git config:
+Link git config:
 
     ln -sf ~/.dotfiles/gitconfig ~/.gitconfig \
         && ln -sf ~/.dotfiles/gitignore ~/.gitignore
@@ -82,17 +78,11 @@ Install "essential" packages:
 
     sudo dnf install --y direnv atool screen diceware htop NetworkManager-tui pavucontrol
 
-TODO Remove this?
-Optionally, copy skeleton file(s):
-
-    cat ~/.dotfiles/skel/bash_local
-
-    cp ~/.dotfiles/skel/bash_local ~/.bash_local \
-        && cat ~/.bash_local
-
-Optionally, symlink dircolors:
+Symlink misc stuff:
 
     ln -sf ~/.dotfiles/dircolors ~/.dircolors
+
+    ln -sf ~/.dotfiles/screenrc ~/.screenrc
 
 ## Window Manager
 
@@ -100,11 +90,11 @@ Install `sway`:
 
     sudo dnf install -y sway
 
-TODO Clean up
 Link config:
 
     mkdir -p ~/.config/sway && ln -sf ~/.dotfiles/sway.config ~/.config/sway/config 
 
+TODO Moved to `waybar`
 Install `i3blocks`:
 
     sudo dnf install -y i3blocks fontawesome-fonts-all
@@ -299,9 +289,7 @@ Install Fast Node Manager (`fnm`) without touching my dotfiles:
 
     curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
-    fnm completions --shell bash | sudo tee /etc/bash_completion.d/fnm > /dev/null
-
-    fnm install 22
+    $HOME/.local/share/fnm/fnm completions --shell bash | sudo tee /etc/bash_completion.d/fnm > /dev/null
 
 ## Jetbrains Toolbox App
 
@@ -362,20 +350,37 @@ Install graphical text editor:
 Login to `https://kagi.com/signin`. Right click address bar in Firefox and `Add
 "Kagi Search"`. Open `about:preferences#search` and select `Kagi`.
 
-### Printing
+### Docker
 
-Configure printers using CUPS. Navigate to
+Add repo:
 
-    http://localhost:631
+     sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 
-User should already belong to `lpadmin` group, so enter login credentials at
-login prompt.
+Install `docker-ce`:
 
-Under Administration, select `Add Printer`. TODO yada yada (EPSON Printer, driverless, 2.0.0)
+    sudo dnf install -y docker-ce
 
-TODO Evaluate drivers from Epson
+Start Docker Engine:
 
-### TMK
+    sudo systemctl enable --now docker
+
+Verify installation:
+
+    sudo docker run hello-world
+
+Add current user to `docker` group:
+
+    sudo usermod -aG docker $USER
+
+### TODO ssh config
+
+Create versioned config file?
+
+Make the ssh client add keys to the running agent:
+
+    echo "AddKeysToAgent yes" >>  ~/.ssh/config
+
+### TODO TMK
 
     git clone ...
 
@@ -403,36 +408,16 @@ TODO `hid_listen`
     wget -O ~/bin/hid_listen https://github.com/tmk/hid_listen/raw/master/binaries/hid_listen.linux \
         && chmod +x ~/bin/hid_listen
 
-### KiCad
+### Printing
 
-    sudo add-apt-repository ppa:kicad/kicad-8.0-releases \
-        && sudo apt install -y kicad
+Configure printers using CUPS. Navigate to
 
-### Docker
+    http://localhost:631
 
-TODO Untested
+User should already belong to `lpadmin` group, so enter login credentials at
+login prompt.
 
-Install keyring:
+Under Administration, select `Add Printer`. TODO yada yada (EPSON Printer, driverless, 2.0.0)
 
-    sudo curl https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+TODO Evaluate drivers from Epson
 
-Configure repo:
-
-    echo "deb [signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
-        | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-Install `docker-ce`:
-
-    sudo apt update && sudo apt install -y docker-ce
-
-Add user to `docker` group:
-
-    sudo usermod -aG docker $USER
-
-### TODO ssh config
-
-Create versioned config file?
-
-Make the ssh client add keys to the running agent:
-
-    echo "AddKeysToAgent yes" >>  ~/.ssh/config
