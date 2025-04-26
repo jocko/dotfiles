@@ -45,11 +45,16 @@ Link the vim config:
 
     ln -sf ~/.dotfiles/vimrc ~/.vimrc
 
+Note that `vim-X11` installs a `vimx` command, but no `vim`. Create `vim`
+command:
+
+    sudo ln -sf /usr/bin/gvim /usr/bin/vim
+
 Install Vundle:
 
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-Start `vimx` and run `:PluginInstall`.
+Start `vim` and run `:PluginInstall`.
 
 Now, rest of the commands can be executed via slime from inside
 vim. Launch a `:term` and do `<C-c><C-c>` below:
