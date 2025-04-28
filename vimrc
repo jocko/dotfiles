@@ -44,8 +44,9 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   " Plugin 'fatih/vim-go'
   " Plugin 'prabirshrestha/vim-lsp'
   " Plugin 'mattn/vim-lsp-settings'
-  Plugin 'dense-analysis/ale'
+  " Plugin 'dense-analysis/ale'
   " Plugin 'rjohnsondev/vim-compiler-go'
+  Plugin 'yegappan/lsp'
   Plugin 'tpope/vim-dispatch'
 
   call vundle#end()
@@ -54,6 +55,10 @@ endif
 filetype plugin indent on
 syntax enable
 
+" let g:ale_echo_cursor = 0
+" let g:ale_hover_cursor = 0
+" let g:ale_floating_preview = 1
+let g:ale_set_ballons = 1
 if !executable('ctags')
   let g:gutentags_dont_load = 1
 endif
@@ -171,10 +176,12 @@ endif
 
 runtime! macros/matchit.vim
 
+" TODO Remove?
 " Mark occurrences (note: <raise>-f => *)
 " nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
 nnoremap <Leader>f :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>
 
+" TODO And this?
 " Clear hlsearch automatically
 augroup vimrc-incsearch-highlight
   autocmd!
@@ -183,6 +190,7 @@ augroup vimrc-incsearch-highlight
 augroup END
 
 " vim-signify hunk text object
+" TODO Am I using this?
 omap ic <plug>(signify-motion-inner-pending)
 xmap ic <plug>(signify-motion-inner-visual)
 omap ac <plug>(signify-motion-outer-pending)
@@ -200,13 +208,17 @@ autocmd FileType markdown setlocal shiftwidth=4 tabstop=4
 
 autocmd FileType typescript,typescriptreact setlocal complete-=i
 autocmd FileType typescript,typescriptreact nnoremap <buffer> <LocalLeader>f :Neoformat prettierd<cr>
-autocmd FileType typescript,typescriptreact nmap <buffer> <C-]> <Plug>(ale_go_to_definition)
+" autocmd FileType typescript,typescriptreact nmap <buffer> <C-]> <Plug>(ale_go_to_definition)
+" autocmd FileType typescript,typescriptreact nmap <buffer> K <Plug>(ale_hover)
+autocmd FileType typescript,typescriptreact compiler eslint
 
 autocmd FileType python nnoremap <buffer> <LocalLeader>f :Neoformat autopep8<cr>
 
 autocmd FileType gitcommit setlocal spell
 
 autocmd FileType openscad setlocal autoindent smartindent
+
+" autocmd FileType go nmap <buffer> <C-]> <Plug>(ale_go_to_definition)
 
 " TODO Figure this out
 " autocmd FileType typescript,typescriptreact setlocal include=from
@@ -218,3 +230,46 @@ autocmd FileType typescript,typescriptreact setlocal define=\\(const\\)
 "   source ~/.vimrc.local
 " endif
 
+" TODO Evaluate
+nnoremap gs :Git<cr>
+nnoremap gb :Git blame<cr>
+nnoremap g<Space> :Ack 
+nnoremap mm :Make<cr>
+" nnoremap <C-N> :cnext<cr>
+" nnoremap <C-P> :cprev<cr>
+nnoremap ]q :cnext<cr>
+nnoremap [q :cprev<cr>
+iabbrev #b #!/usr/bin/env
+
+" TODO Clean up
+" let tsLspCmd = expand('$FNM_MULTISHELL_PATH') . '/bin/typescript-language-server'
+let tsLspCmd = expand('$FNM_MULTISHELL_PATH') . '/bin/typescript-language-server'
+if executable(tsLspCmd)
+  let lspOpts = #{autoComplete: v:false}
+  autocmd User LspSetup call LspOptionsSet(lspOpts)
+
+  let lspServers = [#{
+    \	  name: 'tsserver',
+    \	  filetype: ['typescript', 'typescriptreact',],
+    \	  path: tsLspCmd,
+    \	  args: ['--stdio']
+    \ }]
+  autocmd User LspSetup call LspAddServer(lspServers)
+endif
+
+function! s:foo() 
+  nmap <buffer> <C-]> :LspGotoDefinition<CR>
+  setlocal keywordprg=:LspHover
+endfunction
+
+augroup foo
+  autocmd!
+  autocmd User LspAttached call s:foo()
+augroup END
+" if executable('typescript-language-server')
+"   call LspAddServer([#{name: 'tsserver'
+"                  \   filetype: ['javascript', 'typescript'],
+"                  \   path: 'typescript-language-server',
+"                  \   args: ['--stdio']
+"                  \ }])
+" endif
