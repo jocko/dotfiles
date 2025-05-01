@@ -1,4 +1,0 @@
-#!/bin/bash
-
-pactl set-source-mute @DEFAULT_SOURCE@ off
-pactl set-sink-mute @DEFAULT_SINK@ off

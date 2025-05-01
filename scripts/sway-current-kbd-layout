@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-active_layout=$(swaymsg --raw -t get_inputs | jq -j 'map(select(has("xkb_active_layout_name")))[0].xkb_active_layout_name')
-case $active_layout in
-  "English (US)") echo U.S. ;;
-  *) echo $active_layout ;;
-esac
-

@@ -1,9 +1,0 @@
-export PATH="$HOME/.local/share/fnm:$PATH"
-command -v fnm > /dev/null && eval "$(fnm env --use-on-cd)"
-
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-if [ -d $HOME/go/bin ]; then
-  export PATH="$PATH:$HOME/go/bin"
-fi

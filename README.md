@@ -130,7 +130,7 @@ Install `xfce4-terminal`:
 Install color scheme:
 
     mkdir -p ~/.local/share/xfce4/terminal/colorschemes \
-        && cp ~/.dotfiles/skel/xfce4-gruvbox-dark.theme \
+        && cp ~/.dotfiles/xfce4-gruvbox-dark.theme \
         ~/.local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme
 
 In `xfce4-terminal`, right click and open `Preferences...`. Under the `General`
