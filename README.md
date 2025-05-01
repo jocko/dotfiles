@@ -269,13 +269,17 @@ Install it:
 
 ### TODO TMK
 
-    git clone ...
-
-    git submodule update --init
-
 Install AVR toolchain:
 
-    sudo apt install -y gcc-avr avr-libc avrdude
+    sudo dnf install -y avr-gcc avr-libc avrdude
+
+Clone repo:
+
+    git clone git@github.com:jocko/tmk_keyboard.git
+
+    pushd ~/repos/tmk_keyboard/ \
+        && git submodule update --init \
+        && popd
 
 TODO Linux udev rules
 
