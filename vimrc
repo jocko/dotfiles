@@ -11,25 +11,17 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'jpalardy/vim-slime'
   Plugin 'ludovicchabant/vim-gutentags'
 
-  " Themes
   Plugin 'morhetz/gruvbox'
-  Plugin 'liuchengxu/space-vim-dark'
-  Plugin 'arcticicestudio/nord-vim'
-
 
   " Language specific stuff
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'leafgarland/typescript-vim'
   Plugin 'maxmellon/vim-jsx-pretty'
-  Plugin 'tpope/vim-fireplace'
 
   " Automatically add end statements. `end` after `def` in Ruby for example
   Plugin 'tpope/vim-endwise.git'
   " Comment stuff out
   Plugin 'tpope/vim-commentary'
-  " Handy mappings (e.g ]q for navigating quickfix list)
-  " Disabled at 2025-04-14 Will try using <C-N>/<C-P> for navigating quickfix
-  " Plugin 'tpope/vim-unimpaired'
   " Turn off syntax for large files
   Plugin 'fracpete/vim-large-files'
 
@@ -41,10 +33,6 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   " Plugin 'idanarye/vim-merginal'
   Plugin 'sbdchd/neoformat'
   Plugin 'tpope/vim-projectionist'
-  " Plugin 'fatih/vim-go'
-  " Plugin 'prabirshrestha/vim-lsp'
-  " Plugin 'mattn/vim-lsp-settings'
-  " Plugin 'dense-analysis/ale'
   " Plugin 'rjohnsondev/vim-compiler-go'
   Plugin 'yegappan/lsp'
   Plugin 'tpope/vim-dispatch'
@@ -55,10 +43,6 @@ endif
 filetype plugin indent on
 syntax enable
 
-" let g:ale_echo_cursor = 0
-" let g:ale_hover_cursor = 0
-" let g:ale_floating_preview = 1
-let g:ale_set_ballons = 1
 if !executable('ctags')
   let g:gutentags_dont_load = 1
 endif
@@ -68,7 +52,6 @@ endif
 " try out new themes (e.g. :color gruvbox) and not have these overrides
 " carry over to the next theme . Also, the overrides are scoped to a
 " specific theme.
-autocmd ColorScheme nord highlight IncSearch cterm=NONE ctermfg=0 ctermbg=11
 autocmd ColorScheme gruvbox highlight IncSearch cterm=NONE ctermfg=0 ctermbg=9
 
 if filereadable(expand("~/.vim/bundle/gruvbox/README.md"))
@@ -150,14 +133,8 @@ augroup trailing
 augroup END
 
 " Plugin config
-" TODO http_client_xxx not used?
-let g:http_client_focus_output_window = 0
-let g:http_client_result_vsplit = 0
-let g:http_client_preserve_responses = 1
 let g:slime_target = "vimterminal"
 let g:slime_python_ipython = 1
-" TODO pandoc not used?
-let g:pandoc#modules#disabled = ["folding"]
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['package.json', 'Gemfile']
@@ -173,7 +150,6 @@ let g:gutentags_ctags_exclude += ['*.test.ts']
 let g:gutentags_ctags_extra_args = []
 let g:gutentags_ctags_extra_args += ['--TypeScript-kinds=-p']
 let LargeFile = 1024 * 1024 * 1
-let g:merginal_splitType = ''
 let g:dispatch_no_maps = 1
 
 set undodir=~/.vim/undo
@@ -201,12 +177,6 @@ augroup vimrc-incsearch-highlight
   autocmd CmdlineLeave [/\?] :set nohlsearch
 augroup END
 
-" vim-signify hunk text object
-" TODO Am I using this?
-omap ic <plug>(signify-motion-inner-pending)
-xmap ic <plug>(signify-motion-inner-visual)
-omap ac <plug>(signify-motion-outer-pending)
-xmap ac <plug>(signify-motion-outer-visual)
 " vim-signify faster sign updates
 set updatetime=100
 " Don't shift entire editor when vim-signify kicks in
@@ -214,14 +184,10 @@ set signcolumn=yes
 
 let maplocalleader=" "
 
-" autocmd FileType typescript,typescriptreact setlocal noexpandtab shiftwidth=4 tabstop=4
-" autocmd FileType json setlocal noexpandtab shiftwidth=2 tabstop=2
 autocmd FileType markdown setlocal shiftwidth=4 tabstop=4
 
 autocmd FileType typescript,typescriptreact setlocal complete-=i
 autocmd FileType typescript,typescriptreact nnoremap <buffer> <LocalLeader>f :Neoformat prettierd<cr>
-" autocmd FileType typescript,typescriptreact nmap <buffer> <C-]> <Plug>(ale_go_to_definition)
-" autocmd FileType typescript,typescriptreact nmap <buffer> K <Plug>(ale_hover)
 autocmd FileType typescript,typescriptreact compiler eslint
 
 autocmd FileType python nnoremap <buffer> <LocalLeader>f :Neoformat autopep8<cr>
@@ -229,18 +195,6 @@ autocmd FileType python nnoremap <buffer> <LocalLeader>f :Neoformat autopep8<cr>
 autocmd FileType gitcommit setlocal spell
 
 autocmd FileType openscad setlocal autoindent smartindent
-
-" autocmd FileType go nmap <buffer> <C-]> <Plug>(ale_go_to_definition)
-
-" TODO Figure this out
-" autocmd FileType typescript,typescriptreact setlocal include=from
-autocmd FileType typescript,typescriptreact setlocal define=\\(const\\)
-
-" TODO Have this and let it contain the derpy fileplugin stuff (e.g. tabs in
-" json)?
-" if filereadable(expand('~/.vimrc.local'))
-"   source ~/.vimrc.local
-" endif
 
 " TODO Evaluate
 nnoremap gs :Git<cr>
