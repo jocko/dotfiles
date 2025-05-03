@@ -103,7 +103,15 @@ Link config:
 
     mkdir -p ~/.config/sway && ln -sf ~/.dotfiles/sway.config ~/.config/sway/config 
 
-TODO Install `waybar`:
+Install `waybar`:
+
+    sudo dnf install -y waybar
+
+Link config:
+
+    mkdir -p ~/.config/waybar \
+        && ln -sf ~/.dotfiles/waybar.jsonc ~/.config/waybar/config.jsonc \
+        && ln -sf ~/.dotfiles/waybar.css ~/.config/waybar/style.css
 
 Install `dunst`:
 
