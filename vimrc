@@ -259,6 +259,8 @@ endif
 
 function! s:foo() 
   nmap <buffer> <C-]> :LspGotoDefinition<CR>
+  nnoremap <buffer> ]d :LspDiagNext<cr>
+  nnoremap <buffer> [d :LspDiagPrev<cr>
   setlocal keywordprg=:LspHover
 endfunction
 
