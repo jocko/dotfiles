@@ -79,7 +79,6 @@ Create dirs in home:
 
     mkdir ~/bin ~/repos ~/src ~/lab
 
-TODO screenshot tool
 Install "essential" packages:
 
     sudo dnf install --y direnv atool screen diceware htop \
@@ -112,6 +111,15 @@ Link config:
     mkdir -p ~/.config/waybar \
         && ln -sf ~/.dotfiles/waybar.jsonc ~/.config/waybar/config.jsonc \
         && ln -sf ~/.dotfiles/waybar.css ~/.config/waybar/style.css
+
+Install screenshot tools:
+
+    sudo dnf install -y grim slurp swappy
+
+Link `swappy` config:
+
+    mkdir -p ~/.config/swappy \
+        && ln -sf ~/.dotfiles/swappy.config ~/.config/swappy/config
 
 Install `dunst`:
 
