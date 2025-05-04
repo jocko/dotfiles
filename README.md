@@ -82,7 +82,8 @@ Create dirs in home:
 Install "essential" packages:
 
     sudo dnf install --y direnv atool screen diceware htop \
-        NetworkManager-tui pavucontrol make httpie ack atool
+        NetworkManager-tui pavucontrol make httpie ack atool \
+        swaylock
 
 Symlink misc stuff:
 
