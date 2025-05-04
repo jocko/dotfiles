@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+swaylock -fKL \
+  -c 282828 \
+  --inside-color 282828 \
+  --ring-color 458588 \
+  --separator-color 282828 \
+  --key-hl-color d79921 \
+  --line-ver-color a89984 \
+  --inside-ver-color 282828 \
+  --ring-ver-color 3c3836 \
+  --text-ver-color ebdbb2 \
+  --line-color 282828 \
+  --inside-wrong-color 282828 \
+  --ring-wrong-color cc241d \
+  --line-wrong-color 282828 \
+  --text-wrong-color ebdbb2
+
