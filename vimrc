@@ -224,6 +224,9 @@ if executable(tsLspCmd)
 endif
 
 function! s:foo() 
+  " TODO Does this work the same as regular version? For example, if I have a
+  " split open and the target of the goto is open in another buffer, i get
+  " switched to that buffer instead of opening in current
   nmap <buffer> <C-]> :LspGotoDefinition<CR>
   nnoremap <buffer> ]d :LspDiagNext<cr>
   nnoremap <buffer> [d :LspDiagPrev<cr>
