@@ -1,32 +1,11 @@
 TERM xterm-256color
+TERM alacritty
 
-DIR 35
+NORMAL 00
+RESET 0
+
+FILE 37
+DIR 01;33
 LINK target
+EXEC 31
 
-EXEC 01;31
-
-# dotfiles
-*vimrc 33
-*bashrc 33
-*bash_aliases 33
-*bash_local 33
-*ruby-version 33
-*envrc 33
-*gitignore 33
-*gitconfig 33
-
-# code
-.rb 34
-.clj 34
-.c 34
-.h 34
-.js 34
-
-# text
-.md 32
-.txt 32
-
-# important
-*Gemfile 31
-*Makefile 31
-*package.json 31

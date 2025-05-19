@@ -1,5 +1,5 @@
 #!/usr/bin/sh
 
-for terminal in xfce4-terminal foot; do
+for terminal in alacritty xfce4-terminal foot; do
   command -v "$terminal" > /dev/null && exec "$terminal" "$@"
 done
