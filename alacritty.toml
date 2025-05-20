@@ -1,6 +1,6 @@
 [font]
 normal = { family = "Hack", style = "Regular" }
-size = 13
+size = 14
 
 [colors.primary]
 foreground = "#ebdbb2"
