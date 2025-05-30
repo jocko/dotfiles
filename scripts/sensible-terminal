@@ -1,5 +1,7 @@
 #!/usr/bin/sh
 
-for terminal in alacritty xfce4-terminal foot; do
+# Back to using xfce4-terminal, since alacritty doesn't work with FocusGained &
+# co events in vim (which I'm using to automatically trigger file reload)
+for terminal in xfce4-terminal alacritty foot; do
   command -v "$terminal" > /dev/null && exec "$terminal" "$@"
 done
