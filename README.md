@@ -2,7 +2,26 @@
 
 ## Installing
 
+After booting into live environment, connect to Internet:
+
+    iwctl ...
+
+Start installer:
+
+    archinstall
+
+After install has finished and we have booted into the fresh system. Connect to
+Internet:
+
+    nmcli ...
+
 ## Bootstrap
+
+TODO Increase sudo timeout
+
+Install git:
+
+    sudo pacman -S git
 
 Clone the dotfiles repo:
 
@@ -17,10 +36,6 @@ vim. Launch a `:term` and do `<C-c><C-c>` below:
 
     sudo pwd
 
-Make sure everything is up to date
-
-    sudo pacman -Syu --noconfirm
-
 Link bash and readline config:
 
     ln -sf ~/.dotfiles/bashrc ~/.bashrc && ln -sf ~/.dotfiles/inputrc ~/.inputrc
@@ -33,29 +48,13 @@ Install "essential" packages:
 
     sudo pacman -S --noconfirm bash-completion wget tree atool screen pkgfile openssh
 
-Link the screen config:
-
-    ln -sr ~/.dotfiles/screenrc ~/.screenrc
-
-Symlink dircolors:
-
-    ln -sf ~/.dotfiles/dircolors ~/.dircolors
-
-Enable `pkgfile-update.timer':
-
-    sudo systemctl enable pkgfile-update.timer
-
-## Window Manager
-
 Install `sway`:
 
-    sudo pacman -S --noconfirm sway xdg-desktop-portal-wlr
+    sudo pacman -S --noconfirm sway xdg-desktop-portal-wlr wmenu
 
 Link config:
 
     mkdir -p ~/.config/sway && ln -sf ~/.dotfiles/sway.config ~/.config/sway/config 
-
-TODO symlink ~/.dotfiles/sway.sh
 
 Install `waybar`:
 
@@ -84,15 +83,15 @@ Link `dunst` config:
 
     mkdir -p ~/.config/dunst && ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
 
-Try it out:
+Configure automatic launch of sway when logging in on TTY1:
 
-    ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ~/bin/ding echo Ermahgerd!
-
-## Terminal Emulator
+    sudo cp ~/.dotfiles/sway.sh /etc/profile.d/
 
 Install font of choice:
 
     sudo pacman -S --noconfirm ttf-hack
+
+TODO Decide on kitty vs alacritty
 
 Install `kitty`:
 
@@ -111,11 +110,26 @@ Link config:
 
     ln -sf ~/.dotfiles/alacritty.toml ~/.alacritty.toml
 
-## Firefox
-
 Install `firefox`:
 
     sudo pacman -S --noconfirm firefox
+
+Log out and in again, sway should launch automatically.
+
+## TODO
+
+Create symlinks:
+
+    ln -sf ~/.dotfiles/dircolors ~/.dircolors \
+        && ln -sr ~/.dotfiles/screenrc ~/.screenrc
+
+Enable `pkgfile-update.timer`:
+
+    sudo systemctl enable pkgfile-update.timer
+
+Try it out:
+
+    ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ~/bin/ding echo Ermahgerd!
 
 Login to `https://kagi.com/signin`. Right click address bar in Firefox and `Add
 "Kagi Search"`. Open `about:preferences#search` and select `Kagi`.
