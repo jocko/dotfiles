@@ -1,144 +1,84 @@
 # My dotfiles
 
-Tested on Ubuntu 24.04
+## Installing
 
 ## Bootstrap
 
-Make sure `apt` is up to date and that `git` is installed.
-
-    sudo apt update && sudo apt upgrade -y && sudo apt install -y git
-
-Make sure that you are satisfied with the hostname (it will be used for
-the SSH key):
-
-    hostname
-
-Or, set a new one:
-
-    sudo hostname piglet
-
-If necessary, generate a new SSH key (and add it to github):
-
-    ssh-keygen -t ed25519
-
 Clone the dotfiles repo:
 
-    git clone git@github.com:jocko/dotfiles.git ~/.dotfiles
+    git clone https://github.com/jocko/dotfiles.git ~/.dotfiles
 
-Since I might be using different emails across my computers, I don't want this
-config in my dotfiles. Instead, I set this system wide:
+Change directory to `~/.dotfiles` and do:
 
-    sudo git config --system user.email "<email>"
-
-When it comes to vim, there are a couple of options. Package `vim`
-works okay, but doesn't have `xterm_clipboard` (can be checked in vim
-by doing `:echo has('clipboard')`). Better option then is to install
-`vim-gtk3`.
-
-    sudo apt install -y vim-gtk3 screen
-
-Link the screen config:
-
-    ln -sr ~/.dotfiles/screenrc ~/.screenrc
-
-Link the vim config:
-
-    ln -sf ~/.dotfiles/vimrc ~/.vimrc
-
-Install Vundle:
-
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-Start `vim` and run `:PluginInstall`.
+    ./install-vim.sh
 
 Now, rest of the commands can be executed via slime from inside
-vim. Launch `screen -S vim` in a terminal and do `<C-c><C-c>` below:
+vim. Launch a `:term` and do `<C-c><C-c>` below:
 
     sudo pwd
+
+Make sure everything is up to date
+
+    sudo pacman -Syu --noconfirm
 
 Link bash and readline config:
 
     ln -sf ~/.dotfiles/bashrc ~/.bashrc && ln -sf ~/.dotfiles/inputrc ~/.inputrc
 
-Link the git config:
-
-    ln -sf ~/.dotfiles/gitconfig ~/.gitconfig \
-        && ln -sf ~/.dotfiles/gitignore ~/.gitignore
-
-Link custom vim `after`:
-
-    ln -sf ~/.dotfiles/vim/after ~/.vim/after
-
 Create dirs in home:
 
-    mkdir ~/bin ~/repos ~/src ~/lab
+    mkdir ~/bin ~/repos ~/src
 
 Install "essential" packages:
 
-    sudo apt install -y build-essential curl wget tree \
-        pulseaudio-utils atool xscreensaver
+    sudo pacman -S --noconfirm bash-completion wget tree atool screen pkgfile openssh
 
-Optionally, copy skeleton file(s):
+Link the screen config:
 
-    cat ~/.dotfiles/skel/bash_local
+    ln -sr ~/.dotfiles/screenrc ~/.screenrc
 
-    cp ~/.dotfiles/skel/bash_local ~/.bash_local \
-        && cat ~/.bash_local
-
-Optionally, symlink dircolors:
+Symlink dircolors:
 
     ln -sf ~/.dotfiles/dircolors ~/.dircolors
 
+Enable `pkgfile-update.timer':
+
+    sudo systemctl enable pkgfile-update.timer
+
 ## Window Manager
 
-Optionally, configue to install from i3's own repository.
+Install `sway`:
 
-Download keyring:
-
-    curl --silent https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/ \
-        | perl -lne 'print "curl -o sur5r-keyring.deb https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/$1" if />(sur5r-keyring_.*\.deb)/' \
-        | bash
-
-Install it:
-
-    sudo dpkg -i sur5r-keyring.deb && rm sur5r-keyring.deb
-
-Configure repo:
-
-    echo "deb [signed-by=/usr/share/keyrings/sur5r-keyring.gpg] http://debian.sur5r.net/i3/ $(lsb_release -cs) universe" \
-        | sudo tee /etc/apt/sources.list.d/sur5r-i3.list \
-        && sudo apt update
-
-Install `i3`:
-
-    sudo apt install -y i3
+    sudo pacman -S --noconfirm sway xdg-desktop-portal-wlr
 
 Link config:
 
-    mkdir -p ~/.config/i3 && ln -sf ~/.dotfiles/i3.config ~/.config/i3/config 
+    mkdir -p ~/.config/sway && ln -sf ~/.dotfiles/sway.config ~/.config/sway/config 
 
-Install `rofi` (dmenu replacement)
+Install `waybar`:
 
-    sudo apt install -y rofi
-
-Install `xkblayout-state`
-
-    sudo apt install -y libx11-dev
-
-    git clone git@github.com:nonpop/xkblayout-state.git ~/src/xkblayout-state
-
-    pushd ~/src/xkblayout-state && make && cp xkblayout-state ~/bin && popd
-
-Install `i3blocks`:
-
-    sudo apt install -y i3blocks fonts-font-awesome
+    sudo pacman -S --noconfirm waybar
 
 Link config:
 
-    ln -sf ~/.dotfiles/i3blocks.conf ~/.i3blocks.conf
+    mkdir -p ~/.config/waybar \
+        && ln -sf ~/.dotfiles/waybar.jsonc ~/.config/waybar/config.jsonc \
+        && ln -sf ~/.dotfiles/waybar.css ~/.config/waybar/style.css
 
-Link `dunst` config (`dunst` is recommended by `i3`, so it should already be
-installed):
+Install screenshot tools:
+
+    sudo pacman -S --noconfirm grim slurp swappy
+
+Link `swappy` config:
+
+    mkdir -p ~/.config/swappy \
+        && ln -sf ~/.dotfiles/swappy.config ~/.config/swappy/config
+
+Install `dunst`:
+
+    sudo pacman -S --noconfirm dunst
+
+Link `dunst` config:
 
     mkdir -p ~/.config/dunst && ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
 
@@ -146,62 +86,66 @@ Try it out:
 
     ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ~/bin/ding echo Ermahgerd!
 
-Link xscreensaver settings:
-
-    ln -sf ~/.dotfiles/xscreensaver  ~/.xscreensaver
-
 ## Terminal Emulator
 
 Install font of choice:
 
-    sudo apt install -y fonts-hack-ttf
+    sudo pacman -S --noconfirm ttf-hack
 
-Install `xfce4-terminal` and make it the default:
+Install `kitty`:
 
-    sudo apt install -y xfce4-terminal \
-        && sudo update-alternatives --config x-terminal-emulator
+    sudo pacman -S --noconfirm kitty
 
-Install color scheme:
+Link config:
 
-    mkdir -p ~/.local/share/xfce4/terminal/colorschemes \
-        && cp ~/.dotfiles/skel/xfce4-gruvbox-dark.theme \
-        ~/.local/share/xfce4/terminal/colorschemes/gruvbox-dark.theme
+    ln -sf ~/.dotfiles/current-theme.conf ~/.config/kitty/current-theme.conf \
+        && ln -sf ~/.dotfiles/kitty.conf ~/.config/kitty/kitty.conf
 
-In `xfce4-terminal`, right click and open `Preferences...`. Under the `General`
-tab. Set `Scrollbar is:` to `Disabled`. Uncheck `Show unsafe paste dialog`.
-Under the `Appearance` tab, set font to `Hack Regular 14`. Uncheck `Display
-menubar in new windows`. Under the `Colors` tab, load preset `gruvbox dark`.
+Install `alacritty`:
+
+    sudo pacman -S --noconfirm alacritty
+
+Link config:
+
+    ln -sf ~/.dotfiles/alacritty.toml ~/.alacritty.toml
 
 ## Firefox
 
-This installs a non-snap version of Firefox.
-
-Install keyring:
-
-    wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- \
-        | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
-
-Configure repo:
-
-    echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" \
-        | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
-
-Lower priority of snap package:
-
-    echo -e "Package: firefox*\nPin: release o=Ubuntu*\nPin-Priority: -1" \
-        | sudo tee /etc/apt/preferences.d/mozilla-firefox
-
-Uninstall snap package:
-
-    sudo apt update && sudo apt remove -y firefox
-
 Install `firefox`:
 
-    sudo apt install -y firefox
+    sudo pacman -S --noconfirm firefox
 
-Optionally, remove snap:
+Login to `https://kagi.com/signin`. Right click address bar in Firefox and `Add
+"Kagi Search"`. Open `about:preferences#search` and select `Kagi`.
 
-    sudo snap remove firefox
+## Git
+
+Make sure that you are satisfied with the hostname (it will be used for
+the SSH key):
+
+    hostnamectl hostname
+
+Or, set a new one:
+
+    sudo hostnamectl hostname piglet
+
+If necessary, generate a new SSH key (and add it to github):
+
+    ssh-keygen -t ed25519
+
+Since I might be using different emails across my computers, I don't want this
+config in my dotfiles. Instead, I set this system wide:
+
+    sudo git config --system user.email "<email>"
+
+Link the git config:
+
+    ln -sf ~/.dotfiles/gitconfig ~/.gitconfig \
+        && ln -sf ~/.dotfiles/gitignore ~/.gitignore
+
+Change origin of dotfiles repo:
+
+    git remote set-url origin git@github.com:jocko/dotfiles.git
 
 ## Ctags
 

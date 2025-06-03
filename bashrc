@@ -76,14 +76,10 @@ command -v direnv > /dev/null && eval "$(direnv hook bash)"
 command -v highlight > /dev/null && export LESSOPEN="| highlight %s --out-format ansi --force --no-trailing-nl"
 export LESS=" -R"
 
-# TODO Evaluate
-# bind '\C-w:unix-filename-rubout'
-
-# The idea here is to have this file contain stuff that is very specific
-# to a particular computer, or things that I simply don't want to put
-# under version control. That also means that this file typically should
-# not be symlinked. I have a template for it in `skel` dir that can be
-# used as a starter.
-if [ -f ~/.bash_local ]; then
-  . ~/.bash_local
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f “$rc” ]; then
+			. “$rc”
+		fi
+	done
 fi

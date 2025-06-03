@@ -1,4 +1,5 @@
 # This determines delay for normal mode after hitting esc
+# TODO Not used anymore?
 set keyseq-timeout 50
 
 # This allows us to re-bind C-w in bashrc

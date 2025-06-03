@@ -63,6 +63,22 @@ if !executable('ctags')
   let g:gutentags_dont_load = 1
 endif
 
+" Automatically reread files that have changed outside vim
+set autoread
+augroup auto_checktime
+  autocmd!
+  " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+  " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+          \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+augroup END
+" Fixes autoread for kitty, alacritty etc (taken from https://sw.kovidgoyal.net/kitty/faq)
+let &t_fe = "\e[?1004h"
+let &t_fd = "\e[?1004l"
+execute "set <FocusGained>=\<Esc>[I"
+execute "set <FocusLost>=\<Esc>[O"
+
+
 " Colorscheme overrides, need to appear before we source any
 " colorscheme. Since we do this with autocommands, it is possible to
 " try out new themes (e.g. :color gruvbox) and not have these overrides
@@ -76,16 +92,6 @@ if filereadable(expand("~/.vim/bundle/gruvbox/README.md"))
   set background=dark
   color gruvbox
 endif
-
-" Automatically reread files that have changed outside vim
-set autoread
-augroup auto_checktime
-  autocmd!
-  " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
-  " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
-  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
-          \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
-augroup END
 
 " Jump to the last known cursor position
 augroup lastplace
@@ -142,7 +148,7 @@ augroup END
 let g:http_client_focus_output_window = 0
 let g:http_client_result_vsplit = 0
 let g:http_client_preserve_responses = 1
-let g:slime_default_config = {"sessionname": "vim", "windowname": "0"}
+let g:slime_target = "vimterminal"
 let g:slime_python_ipython = 1
 " TODO pandoc not used?
 let g:pandoc#modules#disabled = ["folding"]
