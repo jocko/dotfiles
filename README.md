@@ -55,6 +55,8 @@ Link config:
 
     mkdir -p ~/.config/sway && ln -sf ~/.dotfiles/sway.config ~/.config/sway/config 
 
+TODO symlink ~/.dotfiles/sway.sh
+
 Install `waybar`:
 
     sudo pacman -S --noconfirm waybar
