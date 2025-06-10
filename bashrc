@@ -17,7 +17,6 @@ HISTCONTROL=ignoreboth
 # Will for example suggest --allow-empty when doing completion for git commit
 export GIT_COMPLETION_SHOW_ALL=1
 export GIT_PAGER="less -FX"
-export EDITOR="vim"
 
 # Force loading of git completion function
 if ! declare -f __git_complete > /dev/null; then
@@ -27,13 +26,10 @@ if ! declare -f __git_complete > /dev/null; then
 fi
 
 alias open='xdg-open "$@" 2> /dev/null'
-alias xclip='xclip -selection clipboard -r'
 alias b='bundle'
 alias grep="grep --color=auto"
-alias egrep="egrep --color=auto"
 alias ls="ls --color=auto"
 alias xx="atool -x"
-alias speedtest="speedtest --secure"
 
 # Set up git aliases and auto completion (if necessary)
 if declare -f __git_complete > /dev/null; then
@@ -64,9 +60,8 @@ PS1='\e[33m[\w]\e[0m\n-> $ '
 # Turns off terminal suspend feature (<C-s> which freezes everything)
 stty -ixon
 
-if [ -f ~/.dircolors ]; then
-  eval "$(dircolors ~/.dircolors)"
-fi
+[ -d $HOME/bin ] && export PATH="$HOME/bin:$PATH"
+[ -f ~/.dircolors ] && eval "$(dircolors ~/.dircolors)"
 
 [ -f /usr/local/share/chruby/chruby.sh ] && source /usr/local/share/chruby/chruby.sh
 [ -f /usr/local/share/chruby/auto.sh ] && source /usr/local/share/chruby/auto.sh
@@ -77,9 +72,9 @@ command -v highlight > /dev/null && export LESSOPEN="| highlight %s --out-format
 export LESS=" -R"
 
 if [ -d ~/.bashrc.d ]; then
-	for rc in ~/.bashrc.d/*; do
-		if [ -f “$rc” ]; then
-			. “$rc”
-		fi
-	done
+  for rc in ~/.bashrc.d/*; do
+    if [ -f "$rc" ]; then
+      . "$rc"
+    fi
+  done
 fi

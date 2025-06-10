@@ -240,30 +240,6 @@ Install it:
         && sudo make install \
         && popd
 
-## httpie
-
-    curl -SsL https://packages.httpie.io/deb/KEY.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/httpie-key.gpg
-
-    sudo curl -SsL -o /etc/apt/sources.list.d/httpie.list https://packages.httpie.io/deb/httpie.list
-
-    sudo apt update \
-        && sudo apt install -y httpie
-
-## ack
-
-Install:
-
-    sudo apt install -y ack
-
-Link config:
-
-    ln -sf ~/.dotfiles/ackrc ~/.ackrc
-
-## Git PPA
-
-Install latest stable Git version from PPA:
-
-    sudo add-apt-repository ppa:git-core/ppa && sudo apt install -y git
 
 ## SDKMAN
 

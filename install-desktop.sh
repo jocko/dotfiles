@@ -19,5 +19,5 @@ sudo pacman -S --noconfirm --needed dunst
 mkdir -p ~/.config/dunst
 ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
 
-sudo cp ~/.dotfiles/sway.sh /etc/profile.d/
+sudo cp ~/.dotfiles/profile.d/sway.sh /etc/profile.d/
 

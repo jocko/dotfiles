@@ -2,27 +2,26 @@
 
 set -xe
 
-sudo pacman -Syu --noconfirm
+# sudo pacman -Syu --noconfirm
 
-./install-vim.sh
+sudo pacman -S --noconfirm --needed bash-completion wget tree \
+  atool screen pkgfile openssh man-db httpie xorg-xwayland firefox \
+  bat vi ripgrep meld
 
 ln -sf ~/.dotfiles/bashrc ~/.bashrc
 ln -sf ~/.dotfiles/inputrc ~/.inputrc
-mkdir -p ~/bin ~/repos ~/src
-
-sudo pacman -S --noconfirm --needed bash-completion wget tree atool screen pkgfile openssh man-db
-
-./install-desktop.sh
-
-sudo pacman -S --noconfirm --needed ttf-hack alacritty
-ln -sf ~/.dotfiles/alacritty.toml ~/.alacritty.toml
-
-sudo pacman -S --noconfirm --needed firefox
-
 ln -sf ~/.dotfiles/dircolors ~/.dircolors
 ln -sf ~/.dotfiles/screenrc ~/.screenrc
+mkdir -p ~/bin ~/repos ~/src
+
+./install-vim.sh
+./install-desktop.sh
+./install-terminal.sh
+./install-aur-helper.sh
 
 sudo pkgfile --update
 sudo systemctl enable pkgfile-update.timer
 
-./install-yay.sh
+sudo ln -sf /usr/share/man/man1/gawk.1.gz /usr/share/man/man1/awk.1.gz
+
+# sudo sed -i 's/^#Color$/Color/' /etc/pacman.conf
