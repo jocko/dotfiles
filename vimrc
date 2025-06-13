@@ -239,12 +239,14 @@ autocmd FileType typescript,typescriptreact setlocal define=\\(const\\)
 " TODO Evaluate
 nnoremap gs :Git<cr>
 nnoremap gb :Git blame<cr>
-nnoremap g<Space> :Ack 
+nnoremap g<Space> :Ack! 
 nnoremap mm :Make<cr>
 " nnoremap <C-N> :cnext<cr>
 " nnoremap <C-P> :cprev<cr>
 nnoremap ]q :cnext<cr>
+nnoremap ]Q :clast<cr>
 nnoremap [q :cprev<cr>
+nnoremap [Q :cfirst<cr>
 iabbrev #b #!/usr/bin/env
 
 " TODO Clean up
@@ -284,3 +286,9 @@ augroup END
 "                  \   args: ['--stdio']
 "                  \ }])
 " endif
+
+" TODO Misc grep experimenting
+let g:ackprg = "rg --vimgrep"
+let g:ack_apply_qmappings = 0
+let g:ack_apply_lmappings = 0
+" let g:ack_qhandler = "botright copen | wincmd p"
