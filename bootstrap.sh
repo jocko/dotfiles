@@ -9,6 +9,8 @@ sudo pacman -S --noconfirm --needed bash-completion wget tree \
   bat vi ripgrep meld
 
 ln -sf ~/.dotfiles/bashrc ~/.bashrc
+mkdir -p ~/.bashrc.d
+cp -u ~/.dotfiles/bashrc.d/* ~/.bashrc.d/
 ln -sf ~/.dotfiles/inputrc ~/.inputrc
 ln -sf ~/.dotfiles/dircolors ~/.dircolors
 ln -sf ~/.dotfiles/screenrc ~/.screenrc
@@ -24,4 +26,6 @@ sudo systemctl enable pkgfile-update.timer
 
 sudo ln -sf /usr/share/man/man1/gawk.1.gz /usr/share/man/man1/awk.1.gz
 
-# sudo sed -i 's/^#Color$/Color/' /etc/pacman.conf
+sudo ex -sc '%s/^#Color/Color/ | x' /etc/pacman.conf
+
+systemctl --user enable ssh-agent.service

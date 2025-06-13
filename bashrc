@@ -63,9 +63,6 @@ stty -ixon
 [ -d $HOME/bin ] && export PATH="$HOME/bin:$PATH"
 [ -f ~/.dircolors ] && eval "$(dircolors ~/.dircolors)"
 
-[ -f /usr/local/share/chruby/chruby.sh ] && source /usr/local/share/chruby/chruby.sh
-[ -f /usr/local/share/chruby/auto.sh ] && source /usr/local/share/chruby/auto.sh
-
 command -v direnv > /dev/null && eval "$(direnv hook bash)"
 
 command -v highlight > /dev/null && export LESSOPEN="| highlight %s --out-format ansi --force --no-trailing-nl"
