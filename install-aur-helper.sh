@@ -4,14 +4,13 @@ set -xe
 
 sudo pacman -S --noconfirm --needed base-devel
 
-if ! command -v yay > /dev/null
-then
-  [ -d ~/src/yay ] || git clone https://aur.archlinux.org/yay.git ~/src/yay
-  cd ~/src/yay
-  makepkg -si --noconfirm
-fi
+# if ! command -v yay > /dev/null
+# then
+#   [ -d ~/src/yay ] || git clone https://aur.archlinux.org/yay.git ~/src/yay
+#   cd ~/src/yay
+#   makepkg -si --noconfirm
+# fi
 
-# TODO configure --bottomup
 if ! command -v paru > /dev/null
 then
   [ -d ~/src/paru ] || git clone https://aur.archlinux.org/paru.git ~/src/paru

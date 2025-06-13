@@ -14,12 +14,14 @@ cp -u ~/.dotfiles/bashrc.d/* ~/.bashrc.d/
 ln -sf ~/.dotfiles/inputrc ~/.inputrc
 ln -sf ~/.dotfiles/dircolors ~/.dircolors
 ln -sf ~/.dotfiles/screenrc ~/.screenrc
+ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+ln -sf ~/.dotfiles/gitignore ~/.gitignore
 mkdir -p ~/bin ~/repos ~/src
 
 ./install-vim.sh
 ./install-desktop.sh
 ./install-terminal.sh
-./install-aur-helper.sh
+./install-ctags.sh
 
 sudo pkgfile --update
 sudo systemctl enable pkgfile-update.timer

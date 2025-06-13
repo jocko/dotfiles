@@ -2,26 +2,22 @@
 
 ## Installing
 
-After booting into live environment, connect to Internet:
+After booting into live environment, connect to Internet by launching `iwctl`, then do:
 
-    iwctl ...
+    station wlan0 connect <SSID>
 
 Start installer:
 
     archinstall
 
-After install has finished and we have booted into the fresh system. Connect to
-Internet:
-
-    nmcli ...
+TODO
 
 ## Bootstrap
 
-TODO Increase sudo timeout
+After install has finished and we have booted into the fresh system. Connect to
+Internet:
 
-Install git:
-
-    sudo pacman -S git
+    nmcli d wifi connect <SSID> --ask
 
 Clone the dotfiles repo:
 
@@ -29,107 +25,13 @@ Clone the dotfiles repo:
 
 Change directory to `~/.dotfiles` and do:
 
-    ./install-vim.sh
+    ./bootstrap.sh
 
-Now, rest of the commands can be executed via slime from inside
-vim. Launch a `:term` and do `<C-c><C-c>` below:
+Install AUR helper:
 
-    sudo pwd
+    ./install-aur-helper.sh
 
-Link bash and readline config:
-
-    ln -sf ~/.dotfiles/bashrc ~/.bashrc && ln -sf ~/.dotfiles/inputrc ~/.inputrc
-
-Create dirs in home:
-
-    mkdir ~/bin ~/repos ~/src
-
-Install "essential" packages:
-
-    sudo pacman -S --noconfirm bash-completion wget tree atool screen pkgfile openssh
-
-Install `sway`:
-
-    sudo pacman -S --noconfirm sway xdg-desktop-portal-wlr wmenu
-
-Link config:
-
-    mkdir -p ~/.config/sway && ln -sf ~/.dotfiles/sway.config ~/.config/sway/config 
-
-Install `waybar`:
-
-    sudo pacman -S --noconfirm waybar
-
-Link config:
-
-    mkdir -p ~/.config/waybar \
-        && ln -sf ~/.dotfiles/waybar.jsonc ~/.config/waybar/config.jsonc \
-        && ln -sf ~/.dotfiles/waybar.css ~/.config/waybar/style.css
-
-Install screenshot tools:
-
-    sudo pacman -S --noconfirm grim slurp swappy
-
-Link `swappy` config:
-
-    mkdir -p ~/.config/swappy \
-        && ln -sf ~/.dotfiles/swappy.config ~/.config/swappy/config
-
-Install `dunst`:
-
-    sudo pacman -S --noconfirm dunst
-
-Link `dunst` config:
-
-    mkdir -p ~/.config/dunst && ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
-
-Configure automatic launch of sway when logging in on TTY1:
-
-    sudo cp ~/.dotfiles/sway.sh /etc/profile.d/
-
-Install font of choice:
-
-    sudo pacman -S --noconfirm ttf-hack
-
-TODO Decide on kitty vs alacritty
-
-Install `kitty`:
-
-    sudo pacman -S --noconfirm kitty
-
-Link config:
-
-    ln -sf ~/.dotfiles/current-theme.conf ~/.config/kitty/current-theme.conf \
-        && ln -sf ~/.dotfiles/kitty.conf ~/.config/kitty/kitty.conf
-
-Install `alacritty`:
-
-    sudo pacman -S --noconfirm alacritty
-
-Link config:
-
-    ln -sf ~/.dotfiles/alacritty.toml ~/.alacritty.toml
-
-Install `firefox`:
-
-    sudo pacman -S --noconfirm firefox
-
-Log out and in again, sway should launch automatically.
-
-## TODO
-
-Create symlinks:
-
-    ln -sf ~/.dotfiles/dircolors ~/.dircolors \
-        && ln -sr ~/.dotfiles/screenrc ~/.screenrc
-
-Enable `pkgfile-update.timer`:
-
-    sudo systemctl enable pkgfile-update.timer
-
-Try it out:
-
-    ln -sf ~/.dotfiles/scripts/ding ~/bin/ding && ~/bin/ding echo Ermahgerd!
+## Kagi
 
 Login to `https://kagi.com/signin`. Right click address bar in Firefox and `Add
 "Kagi Search"`. Open `about:preferences#search` and select `Kagi`.
@@ -154,39 +56,11 @@ config in my dotfiles. Instead, I set this system wide:
 
     sudo git config --system user.email "<email>"
 
-Link the git config:
-
-    ln -sf ~/.dotfiles/gitconfig ~/.gitconfig \
-        && ln -sf ~/.dotfiles/gitignore ~/.gitignore
+TODO email for dotfiles should always be my personal one
 
 Change origin of dotfiles repo:
 
     git remote set-url origin git@github.com:jocko/dotfiles.git
-
-## Ctags
-
-Choose either `exuberant-ctags` or `universal-ctags`. I'm currently using
-`universal-ctags`.
-
-### exuberant-ctags
-
-Install:
-
-    sudo apt install -y exuberant-ctags
-
-Link config:
-
-    ln -sf ~/.dotfiles/ctags ~/.ctags
-
-### universal-ctags
-
-Install:
-
-    sudo apt install -y universal-ctags && mkdir ~/.ctags.d/
-
-Link config:
-
-    ln -sf ~/.dotfiles/typescript.ctags ~/.ctags.d/typescript.ctags
 
 ## Python
 
