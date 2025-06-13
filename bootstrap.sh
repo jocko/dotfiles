@@ -6,7 +6,7 @@ set -xe
 
 sudo pacman -S --noconfirm --needed bash-completion wget tree \
   atool screen pkgfile openssh man-db httpie xorg-xwayland firefox \
-  bat vi ripgrep meld
+  bat vi ripgrep meld plocate
 
 ln -sf ~/.dotfiles/bashrc ~/.bashrc
 mkdir -p ~/.bashrc.d

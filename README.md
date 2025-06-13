@@ -62,58 +62,30 @@ Change origin of dotfiles repo:
 
     git remote set-url origin git@github.com:jocko/dotfiles.git
 
-## Python
-
-Install `python3` and make `python` point to it:
-
-    sudo apt install -y python3-pip python3-venv python-is-python3 python3-autopep8
-
-Optionally, install `pgcli`
-
-    sudo apt install -y libpq-dev && pip install --user pgcli
-
 ## Ruby
 
-Link `gem` config:
+Install chruby:
 
-    ln -sf ~/.dotfiles/gemrc ~/.gemrc
+    ~/.dotfiles/install-chruby.sh
 
-Download `ruby-install` (note: version is static):
+Installing older rubies require some tweaking.
 
-    wget -O ~/src/ruby-install.tar.gz https://github.com/postmodern/ruby-install/archive/v0.10.1.tar.gz \
-        && rm -rf ~/src/ruby-install \
-        && mkdir ~/src/ruby-install \
-        && tar -xzvf ~/src/ruby-install.tar.gz --strip-components=1 -C ~/src/ruby-install \
-        && rm ~/src/ruby-install.tar.gz
+Install gcc-14:
 
-Install it:
+    pacman -S --noconfirm gcc14
 
-    pushd ~/src/ruby-install/ \
-        && sudo make install \
-        && popd
+Ruby 3.1:
 
-Download latest ruby versions:
+    ruby-install ruby 3.1 -- --with-gcc=gcc-14
 
-    ruby-install --update
+Ruby 3.0:
 
-Install ruby 3.3 (note: might take a while):
+    ruby-install -M https://ftp.ruby-lang.org/pub/ruby ruby 3.0.7 -- --with-gcc=gcc-14
 
-    ruby-install ruby 3.3 && echo 3.3 > ~/.ruby-version
+Ruby 2.7:
 
-Download `chruby` (note: version is static):
-
-    wget -O ~/src/chruby.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz \
-        && rm -rf ~/src/chruby \
-        && mkdir ~/src/chruby \
-        && tar -xzvf ~/src/chruby.tar.gz --strip-components=1 -C ~/src/chruby \
-        && rm ~/src/chruby.tar.gz
-
-Install it:
-
-    pushd ~/src/chruby/ \
-        && sudo make install \
-        && popd
-
+    CPPFLAGS="-I/usr/include/openssl-1.1" LDFLAGS="-L/usr/lib/openssl-1.1" \
+        ruby-install -M https://ftp.ruby-lang.org/pub/ruby ruby 2.7.8 -- --with-gcc=gcc-14 
 
 ## SDKMAN
 
@@ -138,93 +110,6 @@ Install Fast Node Manager (`fnm`) without touching my dotfiles:
     fnm completions --shell bash | sudo tee /etc/bash_completion.d/fnm > /dev/null
 
     fnm install 22
-
-## Jetbrains Toolbox App
-
-Toolbox App is packaged as an AppImage, which requires FUSE:
-
-    sudo apt install -y libfuse2
-
-    curl -s  'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' \
-        | jq -r '.TBA[0].downloads.linux.link' \
-        | xargs wget -O /tmp/jetbrains-toolbox.tar.gz \
-        && tar -xzvf /tmp/jetbrains-toolbox.tar.gz --strip-components=1 -C /tmp \
-        && /tmp/jetbrains-toolbox \
-        && ln -sf ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox ~/bin/jetbrains-toolbox 
-
-## Desktop Utils
-
-Setup file manager of choice:
-
-    sudo apt install -y thunar \
-        && xdg-mime default thunar.desktop inode/directory
-
-In `Thunar`, open `Edit/Preferences`. Under `Display`, select `Remember view
-settings for each folder`.
-
-Hack for getting Firefox to respect my mime mapping above when opening downloads folder.
-
-    mkdir -p ~/.local/share/dbus-1/services \
-        && cp ~/.dotfiles/skel/org.freedesktop.FileManager1.service ~/.local/share/dbus-1/services/
-
-Setup Simple X Image Viewer:
-
-    sudo apt install -y sxiv \
-        && xdg-mime default sxiv.desktop image/gif \
-        && xdg-mime default sxiv.desktop image/jpeg \
-        && xdg-mime default sxiv.desktop image/jpg \
-        && xdg-mime default sxiv.desktop image/png
-
-Setup (PDF) document viewer:
-
-    sudo apt install -y zathura \
-        && xdg-mime default org.pwmt.zathura.desktop application/pdf
-
-Install screenshot tool:
-
-    sudo apt install -y ksnip
-
-Install graphical text editor:
-
-    sudo apt install -y mousepad \
-        && xdg-mime default org.xfce.mousepad.desktop text/plain
-
-## Miscellaneous
-
-### Set key repeat rate etc
-
-    sudo apt install inputplug
-
-    cp ~/.dotfiles/skel/xsessionrc ~/.xsessionrc \
-        && cat ~/.xsessionrc
-
-Note that `.xsessionrc` is a dotfile specific to Debian (and its derivatives).
-
-### Touchpad tapping
-
-TODO: find a better way to identify the touchpad
-
-List all input devices:
-
-    xinput
-
-Likely, it is the input named something with *Synaptics*
-
-    xinput list --name-only | grep -i touchpad
-
-If this is correct, test it out by doing:
-
-    xinput set-prop "$(xinput list --name-only | grep -i touchpad)" "libinput Tapping Enabled" 1
-
-Make it persistent:
-
-    echo xinput set-prop \""$(xinput list --name-only | grep -i synaptics)"\" \"libinput Tapping Enabled\" 1 \
-        >> ~/.xsessionrc
-
-### Kagi
-
-Login to `https://kagi.com/signin`. Right click address bar in Firefox and `Add
-"Kagi Search"`. Open `about:preferences#search` and select `Kagi`.
 
 ### Printing
 
@@ -267,43 +152,3 @@ TODO `hid_listen`
     wget -O ~/bin/hid_listen https://github.com/tmk/hid_listen/raw/master/binaries/hid_listen.linux \
         && chmod +x ~/bin/hid_listen
 
-### KiCad
-
-    sudo add-apt-repository ppa:kicad/kicad-8.0-releases \
-        && sudo apt install -y kicad
-
-### Docker
-
-TODO Untested
-
-Install keyring:
-
-    sudo curl https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-
-Configure repo:
-
-    echo "deb [signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
-        | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-Install `docker-ce`:
-
-    sudo apt update && sudo apt install -y docker-ce
-
-Add user to `docker` group:
-
-    sudo usermod -aG docker $USER
-
-### Everything else
-
-    sudo apt install -y apt-file diceware plocate htop meld highlight arandr \
-        net-tools
-
-    sudo apt install -y openscad
-
-### TODO ssh config
-
-Create versioned config file?
-
-Make the ssh client add keys to the running agent:
-
-    echo "AddKeysToAgent yes" >>  ~/.ssh/config
