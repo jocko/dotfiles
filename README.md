@@ -27,6 +27,8 @@ Change directory to `~/.dotfiles` and do:
 
     ./bootstrap.sh
 
+Log out, and in again. You should be dropped into sway.
+
 Install AUR helper:
 
     ./install-aur-helper.sh
@@ -72,7 +74,7 @@ Installing older rubies require some tweaking.
 
 Install gcc-14:
 
-    pacman -S --noconfirm gcc14
+    sudo pacman -S --noconfirm gcc14
 
 Ruby 3.1:
 
@@ -83,6 +85,8 @@ Ruby 3.0:
     ruby-install -M https://ftp.ruby-lang.org/pub/ruby ruby 3.0.7 -- --with-gcc=gcc-14
 
 Ruby 2.7:
+
+    sudo pacman -S --noconfirm openssl-1.1
 
     CPPFLAGS="-I/usr/include/openssl-1.1" LDFLAGS="-L/usr/lib/openssl-1.1" \
         ruby-install -M https://ftp.ruby-lang.org/pub/ruby ruby 2.7.8 -- --with-gcc=gcc-14 

@@ -2,7 +2,8 @@
 
 set -xe
 
-sudo pacman -S --noconfirm --needed sway xdg-desktop-portal-wlr wmenu otf-font-awesome
+sudo pacman -S --noconfirm --needed sway xdg-desktop-portal-wlr wmenu otf-font-awesome \
+  network-manager-applet
 mkdir -p ~/.config/sway
 ln -sf ~/.dotfiles/sway.config ~/.config/sway/config 
 
