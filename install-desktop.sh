@@ -4,6 +4,7 @@ set -xe
 
 sudo pacman -S --noconfirm --needed sway xdg-desktop-portal-wlr wmenu otf-font-awesome \
   network-manager-applet
+sudo pacman -S --noconfirm --needed pcmanfm gvfs
 mkdir -p ~/.config/sway
 ln -sf ~/.dotfiles/sway.config ~/.config/sway/config 
 
