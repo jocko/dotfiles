@@ -55,6 +55,12 @@ augroup auto_checktime
   autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
           \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
 augroup END
+" Fixes autoread for kitty, alacritty etc (taken from https://sw.kovidgoyal.net/kitty/faq)
+let &t_fe = "\e[?1004h"
+let &t_fd = "\e[?1004l"
+execute "set <FocusGained>=\<Esc>[I"
+execute "set <FocusLost>=\<Esc>[O"
+
 
 " Colorscheme overrides, need to appear before we source any
 " colorscheme. Since we do this with autocommands, it is possible to
