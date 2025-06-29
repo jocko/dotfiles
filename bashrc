@@ -10,7 +10,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   . /etc/bash_completion
 fi
 
-HISTSIZE=5000
 HISTFILESIZE=10000
 HISTCONTROL=ignoreboth
 
@@ -54,6 +53,7 @@ function my_prompt_command() {
   echo -en "\033]0;$(dirs)\a"
 }
 PROMPT_COMMAND=my_prompt_command
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 PS1='\e[33m[\w]\e[0m\n-> $ '
 
