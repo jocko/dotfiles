@@ -1,5 +1,6 @@
 TERM xterm-256color
 TERM alacritty
+TERM xterm-kitty
 
 NORMAL 00
 RESET 0
