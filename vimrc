@@ -61,6 +61,14 @@ let &t_fd = "\e[?1004l"
 execute "set <FocusGained>=\<Esc>[I"
 execute "set <FocusLost>=\<Esc>[O"
 
+let g:terminal_ansi_colors = [
+  \'#282828', '#CC241D', '#98971A', '#D79921',
+  \'#458588', '#B16286', '#689D6A', '#a89984',
+  \'#fb4934', '#b8bb26', '#fabd2f', '#83a598',
+  \'#d3869b', '#8ec07c', '#fe8019', '#FBF1C7' ]
+
+highlight Terminal guibg='#282828'
+highlight Terminal guifg='#ebdbb2'
 
 " Colorscheme overrides, need to appear before we source any
 " colorscheme. Since we do this with autocommands, it is possible to
