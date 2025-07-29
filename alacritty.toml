@@ -25,3 +25,13 @@ blue = "#83a598"
 magenta = "#d3869b"
 cyan = "#8ec07c"
 white = "#ebdbb2"
+
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+post_processing = true
+persist = false
+mouse.enabled = true
+mouse.mods = "Control"
+binding = { key = "O", mods = "Control|Shift" }
+regex = "(https://|http://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`\\\\]+"
