@@ -2,6 +2,9 @@
 
 set -xe
 
+sudo pacman -S --noconfirm --needed ttf-hack alacritty
+ln -sf ~/.dotfiles/alacritty.toml ~/.alacritty.toml
+
 sudo pacman -S --noconfirm --needed sway xdg-desktop-portal-wlr wmenu otf-font-awesome \
   network-manager-applet
 sudo pacman -S --noconfirm --needed pcmanfm gvfs
@@ -20,6 +23,4 @@ ln -sf ~/.dotfiles/swappy.config ~/.config/swappy/config
 sudo pacman -S --noconfirm --needed dunst
 mkdir -p ~/.config/dunst
 ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
-
-sudo cp -u ~/.dotfiles/profile.d/sway.sh /etc/profile.d/
 

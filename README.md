@@ -27,7 +27,19 @@ Change directory to `~/.dotfiles` and do:
 
     ./bootstrap.sh
 
-Log out, and in again. You should be dropped into sway.
+Install `sway`:
+
+    ./install-sway.sh
+
+Unless you are using a display manager, install `sway` auto start script:
+
+    sudo cp -u ~/.dotfiles/profile.d/sway.sh /etc/profile.d/
+
+Install Plasma:
+
+    ./install-kde-plasma.sh
+
+Log out.
 
 Install AUR helper:
 

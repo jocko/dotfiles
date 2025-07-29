@@ -19,8 +19,6 @@ ln -sf ~/.dotfiles/gitignore ~/.gitignore
 mkdir -p ~/bin ~/repos ~/src
 
 ./install-vim.sh
-./install-desktop.sh
-./install-terminal.sh
 ./install-ctags.sh
 
 sudo pkgfile --update
