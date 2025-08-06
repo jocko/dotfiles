@@ -6,7 +6,8 @@ set -xe
 
 sudo pacman -S --noconfirm --needed bash-completion wget tree \
   atool screen pkgfile openssh man-db httpie xorg-xwayland firefox \
-  bat vi ripgrep meld plocate jq brightnessctl
+  bat vi ripgrep meld plocate jq brightnessctl unzip pavucontrol \
+  direnv
 
 ln -sf ~/.dotfiles/bashrc ~/.bashrc
 mkdir -p ~/.bashrc.d

@@ -17,6 +17,8 @@ HISTCONTROL=ignoreboth
 export GIT_COMPLETION_SHOW_ALL=1
 export GIT_PAGER="less -FX"
 
+export EDITOR="vim"
+
 # Force loading of git completion function
 if ! declare -f __git_complete > /dev/null; then
   bash_completion=$(pkg-config --variable=completionsdir bash-completion 2>/dev/null) ||

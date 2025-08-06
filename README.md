@@ -103,6 +103,8 @@ Ruby 2.7:
     CPPFLAGS="-I/usr/include/openssl-1.1" LDFLAGS="-L/usr/lib/openssl-1.1" \
         ruby-install -M https://ftp.ruby-lang.org/pub/ruby ruby 2.7.8 -- --with-gcc=gcc-14 
 
+TODO Is --no-ri --no-rdoc needed for older rubies?
+
 ## SDKMAN
 
 Install SDKMAN (`sdk`) without touching my dotfiles:
@@ -123,9 +125,19 @@ Install Fast Node Manager (`fnm`) without touching my dotfiles:
 
     curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
-    fnm completions --shell bash | sudo tee /etc/bash_completion.d/fnm > /dev/null
+    ~/.local/share/fnm/fnm completions --shell bash | sudo tee /etc/bash_completion.d/fnm > /dev/null
 
-    fnm install 22
+    ~/.local/share/fnm/fnm install 22
+
+## pnpm
+
+Install `pnpm`:
+
+    sudo pacman -S --noconfirm pnpm
+
+Generate completions:
+
+    pnpm completion bash > ~/bashrc.d/pnpm.sh
 
 ### Printing
 
