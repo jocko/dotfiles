@@ -63,6 +63,7 @@ PS1='\e[33m[\w]\e[0m\n-> $ '
 stty -ixon
 
 [ -d $HOME/bin ] && export PATH="$HOME/bin:$PATH"
+[ -d $HOME/.local/bin ] && export PATH="$HOME/.local/bin:$PATH"
 [ -f ~/.dircolors ] && eval "$(dircolors ~/.dircolors)"
 
 command -v direnv > /dev/null && eval "$(direnv hook bash)"
