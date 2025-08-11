@@ -52,6 +52,8 @@ Login to `https://kagi.com/signin`. Right click address bar in Firefox and `Add
 
 ## Git
 
+TODO Import existing .ssh (create/extract from archive to preserve file permissions migh be best approach?)
+
 Make sure that you are satisfied with the hostname (it will be used for
 the SSH key):
 
@@ -73,6 +75,8 @@ config in my dotfiles. Instead, I set this system wide:
 TODO email for dotfiles should always be my personal one
 
 Change origin of dotfiles repo:
+
+    git config user.email "<email>"
 
     git remote set-url origin git@github.com:jocko/dotfiles.git
 
@@ -128,6 +132,10 @@ Install Fast Node Manager (`fnm`) without touching my dotfiles:
     ~/.local/share/fnm/fnm completions --shell bash | sudo tee /etc/bash_completion.d/fnm > /dev/null
 
     ~/.local/share/fnm/fnm install 22
+
+Set up TypeScript Language Server (needed for my Vim LSP integration):
+
+    npm install -g typescript-language-server typescript
 
 ## pnpm
 
