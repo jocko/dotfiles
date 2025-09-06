@@ -138,6 +138,7 @@ set list
 set listchars=tab:▸\ ,trail:·
 set path-=/usr/include
 set noshowcmd
+set nojoinspaces
 
 augroup trailing
   au!
