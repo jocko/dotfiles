@@ -1,0 +1,14 @@
+[general]
+# Mode at startup (viewer/slideshow/gallery)
+# mode = viewer
+# Window size (fullscreen/image, or absolute size)
+# size = 40,720
+# Sway/Hyprland only: Window position (auto or absolute coordinates, e.g. 10,20)
+# position = auto
+# Sway/Hyprland only: create floating window above the currently focused one
+# overlay = no
+# Use window decoration (yes/no)
+# decoration = yes
+
+[viewer]
+window = #000000dd

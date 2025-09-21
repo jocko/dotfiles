@@ -24,3 +24,6 @@ sudo pacman -S --noconfirm --needed dunst
 mkdir -p ~/.config/dunst
 ln -sf ~/.dotfiles/dunstrc ~/.config/dunst/dunstrc
 
+sudo pacman -S --noconfirm --needed swayimg
+mkdir -p ~/.config/swayimg
+ln -sf ~/.dotfiles/swayimg ~/.config/swayimg/config
