@@ -31,6 +31,7 @@ alias b='bundle'
 alias grep="grep --color=auto"
 alias ls="ls --color=auto"
 alias xx="atool -x"
+alias r="rails"
 
 # Set up git aliases and auto completion (if necessary)
 if declare -f __git_complete > /dev/null; then
