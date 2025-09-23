@@ -16,7 +16,7 @@ mkdir -p ~/.config/waybar
 ln -sf ~/.dotfiles/waybar.jsonc ~/.config/waybar/config.jsonc
 ln -sf ~/.dotfiles/waybar.css ~/.config/waybar/style.css
 
-sudo pacman -S --noconfirm --needed grim slurp swappy
+sudo pacman -S --noconfirm --needed grim slurp swappy wl-clipboard
 mkdir -p ~/.config/swappy
 ln -sf ~/.dotfiles/swappy.config ~/.config/swappy/config
 
