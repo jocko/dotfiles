@@ -154,8 +154,8 @@ let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['package.json', 'Gemfile']
 let g:gutentags_file_list_command = {
             \ 'markers': {
-            \ 'package.json': 'ack -f --no-filter -t ts -t js',
-            \ 'Gemfile': 'ack -f --no-filter -t ruby',
+            \ 'package.json': 'rg --files -t ts -t js',
+            \ 'Gemfile': 'rg --files -t ruby',
             \ },
             \ }
 let g:gutentags_ctags_exclude_wildignore = 0
