@@ -147,6 +147,12 @@ Generate completions:
 
     pnpm completion bash > ~/bashrc.d/pnpm.sh
 
+## awscli
+
+    sudo pacman -S --noconfirm aws-cli
+
+    paru -S aws-session-manager-plugin
+
 ### Printing
 
 Configure printers using CUPS. Navigate to
