@@ -17,6 +17,7 @@ ln -sf ~/.dotfiles/dircolors ~/.dircolors
 ln -sf ~/.dotfiles/screenrc ~/.screenrc
 ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/gitignore ~/.gitignore
+ln -sf ~/.dotfiles/irbrc ~/.irbrc
 mkdir -p ~/bin ~/repos ~/src
 
 ./install-vim.sh
