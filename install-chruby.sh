@@ -19,3 +19,6 @@ rm ~/src/chruby.tar.gz
 
 cd ~/src/chruby/
 sudo make install
+
+# Allows to do `use ruby` in .envrc to automatically chruby from .ruby-version file
+ln -sf ~/.dotfiles/direnvrc ~/.direnvrc
