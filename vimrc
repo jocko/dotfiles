@@ -110,7 +110,7 @@ set ttimeoutlen=100
 set hidden
 set laststatus=2
 set wildmenu
-set wildmode=noselect:full
+set wildmode=longest:full,full
 set wildignorecase
 set wildignore+=tags
 if v:version >= 900
