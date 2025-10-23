@@ -35,6 +35,7 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'tpope/vim-projectionist'
   Plugin 'yegappan/lsp'
   Plugin 'tpope/vim-dispatch'
+  Plugin 'slim-template/vim-slim'
 
   call vundle#end()
 endif
