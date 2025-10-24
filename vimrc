@@ -21,8 +21,10 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
 
   " Automatically add end statements. `end` after `def` in Ruby for example
   Plugin 'tpope/vim-endwise.git'
-  " Comment stuff out
-  Plugin 'tpope/vim-commentary'
+  if v:version < 901
+    " Comment stuff out
+    Plugin 'tpope/vim-commentary'
+  endif
   " Turn off syntax for large files
   Plugin 'fracpete/vim-large-files'
 
@@ -42,6 +44,10 @@ endif
 
 filetype plugin indent on
 syntax enable
+
+if v:version >= 901
+  packadd comment
+endif
 
 if !executable('ctags')
   let g:gutentags_dont_load = 1
