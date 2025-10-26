@@ -220,12 +220,14 @@ autocmd FileType gitcommit setlocal spell
 autocmd FileType openscad setlocal autoindent smartindent
 
 autocmd FileType ruby nnoremap <buffer> <LocalLeader>f :Neoformat rubocop<cr>
+autocmd FileType ruby compiler rubocop
 
 " TODO Evaluate
 nnoremap gs :Git<cr>
 nnoremap gb :Git blame<cr>
 nnoremap g<Space> :Ack! 
 nnoremap mm :Make<cr>
+nnoremap m<Space> :Make 
 " nnoremap <C-N> :cnext<cr>
 " nnoremap <C-P> :cprev<cr>
 nnoremap ]q :cnext<cr>
