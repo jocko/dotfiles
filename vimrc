@@ -279,3 +279,18 @@ let g:ackprg = "rg --vimgrep"
 let g:ack_apply_qmappings = 0
 let g:ack_apply_lmappings = 0
 " let g:ack_qhandler = "botright copen | wincmd p"
+
+" https://phelipetls.github.io/posts/code-formatting-vim/
+function! s:Format(...)
+  silent keepjumps normal! '[v']gq
+  if v:shell_error > 0
+    silent undo
+    echohl ErrorMsg
+    echomsg 'formatprg "' . &formatprg . '" exited with status ' . v:shell_error
+    echohl None
+  endif
+endfunction
+nmap <silent> gq :set operatorfunc=<SID>Format<CR>g@
+vmap <silent> gq :<C-U>set operatorfunc=<SID>Format<CR>gvg@
+
+autocmd FileType ruby setlocal formatprg=bin/rubocop\ --server\ --stdin\ %\ --fix-layout\ --stderr\ 2>/dev/null
