@@ -293,4 +293,4 @@ endfunction
 nmap <silent> gq :set operatorfunc=<SID>Format<CR>g@
 vmap <silent> gq :<C-U>set operatorfunc=<SID>Format<CR>gvg@
 
-autocmd FileType ruby setlocal formatprg=bin/rubocop\ --server\ --stdin\ %\ --fix-layout\ --stderr\ 2>/dev/null
+autocmd FileType ruby setlocal formatprg=rubocop\ --server\ --stdin\ %\ --fix-layout\ --stderr\ 2>/dev/null
