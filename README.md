@@ -82,6 +82,8 @@ Change origin of dotfiles repo:
 
 ## Ruby
 
+TODO Package ruby-erb needed for some rubies all of the sudden :/
+
 Install chruby:
 
     ~/.dotfiles/install-chruby.sh
