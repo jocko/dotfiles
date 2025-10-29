@@ -11,7 +11,7 @@ sudo pacman -S --noconfirm --needed bash-completion wget tree \
 
 ln -sf ~/.dotfiles/bashrc ~/.bashrc
 mkdir -p ~/.bashrc.d
-cp -u ~/.dotfiles/bashrc.d/* ~/.bashrc.d/
+ln -sf ~/.dotfiles/bashrc.d/* ~/.bashrc.d/
 ln -sf ~/.dotfiles/inputrc ~/.inputrc
 ln -sf ~/.dotfiles/dircolors ~/.dircolors
 ln -sf ~/.dotfiles/screenrc ~/.screenrc
