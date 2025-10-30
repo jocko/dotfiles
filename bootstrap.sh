@@ -7,7 +7,7 @@ set -xe
 sudo pacman -S --noconfirm --needed bash-completion wget tree \
   atool screen pkgfile openssh man-db httpie xorg-xwayland firefox \
   bat vi ripgrep meld plocate jq brightnessctl unzip pavucontrol \
-  direnv bc mise
+  direnv bc mise ruby-build
 
 ln -sf ~/.dotfiles/bashrc ~/.bashrc
 mkdir -p ~/.bashrc.d
@@ -18,6 +18,7 @@ ln -sf ~/.dotfiles/screenrc ~/.screenrc
 ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/gitignore ~/.gitignore
 ln -sf ~/.dotfiles/irbrc ~/.irbrc
+ln -sf ~/.dotfiles/gemrc ~/.gemrc
 mkdir -p ~/bin ~/repos ~/src
 
 ./install-vim.sh

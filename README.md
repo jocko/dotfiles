@@ -84,32 +84,18 @@ Change origin of dotfiles repo:
 
 TODO Package ruby-erb needed for some rubies all of the sudden :/
 
-Install chruby:
-
-    ~/.dotfiles/install-chruby.sh
-
-Installing older rubies require some tweaking.
-
-Install gcc-14:
+Older rubies (pre 3.2) can be built with gcc14. First, install gcc14:
 
     sudo pacman -S --noconfirm gcc14
 
-Ruby 3.1:
+And then, with `ruby-build`:
 
-    ruby-install ruby 3.1 -- --with-gcc=gcc-14
+    ruby-build --dir ruby-3.1.4 ~/.rubies -- CC=gcc-14
 
-Ruby 3.0:
+Or `mise`:
 
-    ruby-install -M https://ftp.ruby-lang.org/pub/ruby ruby 3.0.7 -- --with-gcc=gcc-14
-
-Ruby 2.7:
-
-    sudo pacman -S --noconfirm openssl-1.1
-
-    CPPFLAGS="-I/usr/include/openssl-1.1" LDFLAGS="-L/usr/lib/openssl-1.1" \
-        ruby-install -M https://ftp.ruby-lang.org/pub/ruby ruby 2.7.8 -- --with-gcc=gcc-14 
-
-TODO Is --no-ri --no-rdoc needed for older rubies?
+    mise settings --local set ruby.ruby_build_opts -- CC=gcc-14
+    mise use ruby@3.1.4
 
 ## awscli
 
