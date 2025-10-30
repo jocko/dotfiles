@@ -38,7 +38,6 @@ dev.yml
 .nvmrc
 vim/.netrwhist
 .ackrc
-.node-version
 .projections.json
 
 /ui/i18n/en.po.json
