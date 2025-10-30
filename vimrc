@@ -236,17 +236,15 @@ nnoremap [q :cprev<cr>
 nnoremap [Q :cfirst<cr>
 iabbrev #b #!/usr/bin/env
 
-" TODO Clean up
-" let tsLspCmd = expand('$FNM_MULTISHELL_PATH') . '/bin/typescript-language-server'
-let tsLspCmd = expand('$FNM_MULTISHELL_PATH') . '/bin/typescript-language-server'
-if executable(tsLspCmd)
+" npm install -g typescript-language-server typescript
+if executable('typescript-language-server')
   let lspOpts = #{autoComplete: v:false}
   autocmd User LspSetup call LspOptionsSet(lspOpts)
 
   let lspServers = [#{
     \	  name: 'tsserver',
     \	  filetype: ['typescript', 'typescriptreact',],
-    \	  path: tsLspCmd,
+    \	  path: 'typescript-language-server',
     \	  args: ['--stdio']
     \ }]
   autocmd User LspSetup call LspAddServer(lspServers)

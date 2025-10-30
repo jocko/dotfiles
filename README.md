@@ -111,44 +111,6 @@ Ruby 2.7:
 
 TODO Is --no-ri --no-rdoc needed for older rubies?
 
-## SDKMAN
-
-Install SDKMAN (`sdk`) without touching my dotfiles:
-
-    curl -s "https://get.sdkman.io?rcupdate=false" | bash \
-        && source ~/.bash_local
-
-    sdk install java
-
-    sdk install maven
-
-    sudo wget https://raw.github.com/juven/maven-bash-completion/master/bash_completion.bash \
-        --output-document /etc/bash_completion.d/mvn
-
-## Fast Node Manager (fnm)
-
-Install Fast Node Manager (`fnm`) without touching my dotfiles:
-
-    curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
-
-    ~/.local/share/fnm/fnm completions --shell bash | sudo tee /etc/bash_completion.d/fnm > /dev/null
-
-    ~/.local/share/fnm/fnm install 22
-
-Set up TypeScript Language Server (needed for my Vim LSP integration):
-
-    npm install -g typescript-language-server typescript
-
-## pnpm
-
-Install `pnpm`:
-
-    sudo pacman -S --noconfirm pnpm
-
-Generate completions:
-
-    pnpm completion bash > ~/bashrc.d/pnpm.sh
-
 ## awscli
 
     sudo pacman -S --noconfirm aws-cli
