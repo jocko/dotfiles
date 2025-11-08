@@ -226,7 +226,7 @@ autocmd FileType ruby compiler rubocop
 nnoremap gs :Git<cr>
 nnoremap gb :Git blame<cr>
 nnoremap g<Space> :Ack! 
-nnoremap mm :Make<cr>
+nnoremap mm :Make %<cr>
 nnoremap m<Space> :Make 
 " nnoremap <C-N> :cnext<cr>
 " nnoremap <C-P> :cprev<cr>
