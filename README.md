@@ -67,6 +67,11 @@ If necessary, generate a new SSH key (and add it to github):
 
     ssh-keygen -t ed25519
 
+If using non standard filename for SSH identity file. Need to specify this in `~/.ssh/config`, for example:
+
+    Host gitlab.com
+      IdentityFile ~/.ssh/id_gitlab
+
 Since I might be using different emails across my computers, I don't want this
 config in my dotfiles. Instead, I set this system wide:
 
@@ -83,7 +88,7 @@ Change origin of dotfiles repo:
 ## Ruby
 
 TODO Package ruby-erb needed for some rubies all of the sudden :/
-
+TODO gcc14 have been moved to aur, don't know if feasible to install
 Older rubies (pre 3.2) can be built with gcc14. First, install gcc14:
 
     sudo pacman -S --noconfirm gcc14
