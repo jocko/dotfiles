@@ -44,3 +44,7 @@ vim/.netrwhist
 /ui/i18n/sv.po.json
 
 dependency-reduced-pom.xml
+
+JOCKO.md
+jocko/
+.air.toml

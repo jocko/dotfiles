@@ -23,3 +23,4 @@ ln -sf ~/.dotfiles/swappy.config ~/.config/swappy/config
 sudo pacman -S --noconfirm --needed swayimg
 mkdir -p ~/.config/swayimg
 ln -sf ~/.dotfiles/swayimg ~/.config/swayimg/config
+xdg-mime default swayimg.desktop image/jpeg

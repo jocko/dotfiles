@@ -36,14 +36,21 @@ if filereadable(expand("~/.vim/bundle/Vundle.vim/.gitignore"))
   Plugin 'sbdchd/neoformat'
   Plugin 'tpope/vim-projectionist'
   Plugin 'yegappan/lsp'
-  Plugin 'tpope/vim-dispatch'
+  " Plugin 'tpope/vim-dispatch'
   Plugin 'slim-template/vim-slim'
+  Plugin 'danchoi/ri.vim'
+  " Plugin 'tomtom/quickfixsigns_vim'
+  Plugin 'bfrg/vim-qf-diagnostics'
+  Plugin 'fatih/vim-go'
+  Plugin 'Konfekt/vim-formatprgs'
 
   call vundle#end()
 endif
 
 filetype plugin indent on
 syntax enable
+
+let g:ri_no_mappings=1
 
 if v:version >= 901
   packadd comment
@@ -171,7 +178,7 @@ let g:gutentags_ctags_exclude += ['*.test.ts']
 let g:gutentags_ctags_extra_args = []
 let g:gutentags_ctags_extra_args += ['--TypeScript-kinds=-p']
 let LargeFile = 1024 * 1024 * 1
-let g:dispatch_no_maps = 1
+" let g:dispatch_no_maps = 1
 
 set undodir=~/.vim/undo
 if !isdirectory(expand(&undodir))
@@ -222,10 +229,26 @@ autocmd FileType openscad setlocal autoindent smartindent
 autocmd FileType ruby nnoremap <buffer> <LocalLeader>f :Neoformat rubocop<cr>
 autocmd FileType ruby compiler rubocop
 
-" TODO Evaluate
 nnoremap gs :Git<cr>
 nnoremap gb :Git blame<cr>
 nnoremap g<Space> :Ack! 
+
+function! JiraTicketFromGitBranch() abort
+  let l:dir = empty(expand('%:p')) ? getcwd() : expand('%:p:h')
+  let l:branch = systemlist('git -C ' . shellescape(l:dir) . ' symbolic-ref --quiet --short HEAD')
+
+  if v:shell_error != 0 || empty(l:branch)
+    return ''
+  endif
+
+  return matchstr(l:branch[0], '\v[A-Z][A-Z0-9]+-\d+')
+endfunction
+
+" inoremap <silent> <C-x>j <C-r>=JiraTicketFromGitBranch()<CR>
+autocmd FileType gitcommit inoremap <buffer> <silent> <C-x>j <C-r>=JiraTicketFromGitBranch()<CR>
+
+" nnoremap mm :Make %<cr>
+command! -nargs=+ -complete=file Make execute 'silent make! <args>' | cwindow | redraw!
 nnoremap mm :Make %<cr>
 nnoremap m<Space> :Make 
 " nnoremap <C-N> :cnext<cr>
@@ -288,7 +311,19 @@ function! s:Format(...)
     echohl None
   endif
 endfunction
-nmap <silent> gq :set operatorfunc=<SID>Format<CR>g@
-vmap <silent> gq :<C-U>set operatorfunc=<SID>Format<CR>gvg@
+" nmap <silent> gq :set operatorfunc=<SID>Format<CR>g@ vmap <silent> gq
+" :<C-U>set operatorfunc=<SID>Format<CR>gvg@
 
-autocmd FileType ruby setlocal formatprg=rubocop\ --server\ --stdin\ %\ --fix-layout\ --stderr\ 2>/dev/null
+" Hangs my terminal after a while
+" autocmd FileType ruby setlocal formatprg=rubocop\ --server\ --stdin\ %\ --fix-layout\ --stderr\ 2>/dev/null
+" autocmd FileType ruby setlocal formatprg=rubocop\ --stdin\ %\ --fix-layout\ --stderr\ 2>/dev/null
+" Throws away all leading indentation which makes it unusable for basically
+" anything other than formatting entire files
+" autocmd FileType ruby setlocal formatprg=rubyfmt\ --stdin-filepath\ %
+
+nmap gh <plug>(qf-diagnostics-popup-quickfix)
+augroup qf-diagnostics-user
+  autocmd!
+  autocmd QuickfixCmdPost  make  DiagnosticsPlace
+  autocmd QuickfixCmdPost lmake LDiagnosticsPlace
+augroup END

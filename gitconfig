@@ -20,3 +20,5 @@
   tool = meld
 [merge]
   tool = meld
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com/

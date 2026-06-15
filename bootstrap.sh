@@ -19,6 +19,7 @@ ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/gitignore ~/.gitignore
 ln -sf ~/.dotfiles/irbrc ~/.irbrc
 ln -sf ~/.dotfiles/gemrc ~/.gemrc
+ln -sf ~/.dotfiles/rgignore ~/.rgignore
 mkdir -p ~/bin ~/repos ~/src
 
 ./install-vim.sh
@@ -29,6 +30,6 @@ sudo systemctl enable pkgfile-update.timer
 
 sudo ln -sf /usr/share/man/man1/gawk.1.gz /usr/share/man/man1/awk.1.gz
 
-sudo ex -sc '%s/^#Color/Color/ | x' /etc/pacman.conf
+sudo ex -sc '%s/^#Color/Color/e' -c x /etc/pacman.conf
 
 systemctl --user enable ssh-agent.service

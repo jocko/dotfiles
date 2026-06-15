@@ -26,6 +26,12 @@ magenta = "#d3869b"
 cyan = "#8ec07c"
 white = "#ebdbb2"
 
+# Added by claude to allow for inserting newlines via Return+Shift
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
+
 [[hints.enabled]]
 command = "xdg-open"
 hyperlinks = true
