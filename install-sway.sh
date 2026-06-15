@@ -24,3 +24,6 @@ sudo pacman -S --noconfirm --needed swayimg
 mkdir -p ~/.config/swayimg
 ln -sf ~/.dotfiles/swayimg ~/.config/swayimg/config
 xdg-mime default swayimg.desktop image/jpeg
+
+mkdir -p ~/.config/wireplumber
+ln -sf --no-dereference ~/.dotfiles/wireplumber.conf.d ~/.config/wireplumber/wireplumber.conf.d
