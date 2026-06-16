@@ -248,8 +248,11 @@ endfunction
 autocmd FileType gitcommit inoremap <buffer> <silent> <C-x>j <C-r>=JiraTicketFromGitBranch()<CR>
 
 " nnoremap mm :Make %<cr>
-command! -nargs=+ -complete=file Make execute 'silent make! <args>' | cwindow | redraw!
-nnoremap mm :Make %<cr>
+" TODO This <q-args> thing coupled with the %:S in the actual mapping is
+" supposed to handle case where file path contains characters such as '(' or '['
+" command! -nargs=+ -complete=file Make execute 'silent make! <args>' | cwindow | redraw!
+command! -nargs=+ -complete=file Make execute 'silent make! ' . <q-args> | cwindow | redraw!
+nnoremap mm :Make %:S<cr>
 nnoremap m<Space> :Make 
 " nnoremap <C-N> :cnext<cr>
 " nnoremap <C-P> :cprev<cr>
