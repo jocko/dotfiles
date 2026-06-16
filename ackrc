@@ -1,8 +1,0 @@
---type-add=js:ext:jsx
---type-add=slim:ext:slim
---ignore-file=is:tags
---ignore-file=is:package-lock.json
---ignore-file=ext:mp3
---ignore-file=ext:ipynb
---ignore-directory=is:.venv
---ignore-directory=is:.next

@@ -1,6 +1,0 @@
-#!/bin/sh
-#url="https://lite.duckduckgo.com/lite?kd=-1&kp=-1&q=$(urlencode "$*")"
-#exec lynx "$url"
-url="http://duckduckgo.com/?q=$(urlencode "$*")"
-# firefox -new-tab "$url" 2> /dev/null
-xdg-open "$url" 2> /dev/null

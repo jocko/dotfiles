@@ -1,9 +1,0 @@
---langdef=TypeScript
---langmap=TypeScript:.ts.tsx
---regex-typescript=/^[ \t]*export[ \t]+const[ \t]+([a-zA-Z0-9_$]+)/\1/C,constant/
---regex-typescript=/^[ \t]*const[ \t]+([a-zA-Z0-9_$]+)[ \t]*(:.+)?=/\1/v,variable/
---regex-typescript=/^[ \t]*const[ \t]+\[[ \t]*([a-zA-Z0-9_$]+).*\][ \t]*=/\1/v,variable/
---regex-typescript=/^[ \t]*const[ \t]+\[[ \t]*([a-zA-Z0-9_$]+),[ \t]*([a-zA-Z0-9_$]+).*\][ \t]*=/\2/v,variable/
---regex-typescript=/^[ \t]*(export)?[ \t]*enum[ \t]+([a-zA-Z0-9_]+)/\2/e,enums/
---regex-typescript=/^[ \t]*([A-Za-z0-9_$]+)\(.*\)[ \t]*[{]/\1/m,method/
-
